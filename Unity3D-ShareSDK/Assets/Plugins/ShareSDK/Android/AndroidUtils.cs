@@ -42,7 +42,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void Authorize(int platform, AuthResultEvent resultHandler) 
+		public override void Authorize(int platform, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Authorize" );
 			authHandler = resultHandler;
@@ -69,7 +69,7 @@ namespace cn.sharesdk.unity3d
 			return false;
 		}
 
-		public override void ShowUser(int platform, GetUserInfoResultEvent resultHandler) 
+		public override void ShowUser(int platform, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  ShowUser" );
 			showUserHandler = resultHandler;
@@ -79,7 +79,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void Share(int platform, Hashtable content, ShareResultEvent resultHandler) 
+		public override void Share(int platform, Hashtable content, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Share" );
 			shareHandler = resultHandler;
@@ -90,12 +90,12 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void OnekeyShare(Hashtable content, ShareResultEvent resultHandler) 
+		public override void OnekeyShare(Hashtable content, EventResultListener resultHandler) 
 		{
 			OnekeyShare(0, content, resultHandler);
 		}
 
-		public override void OnekeyShare(int platform, Hashtable content, ShareResultEvent resultHandler) 
+		public override void OnekeyShare(int platform, Hashtable content, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  OnekeyShare" );
 			shareHandler = resultHandler;
@@ -106,13 +106,23 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 		
-		public override void GetFriendList(int platform, int count, int page, GetFriendsResultEvent resultHandler) 
+		public override void GetFriendList(int platform, int count, int page, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  GetFriendList" );
 			getFriendsHandler = resultHandler;
 			if (ssdk != null) 
 			{
 				ssdk.CallStatic("getFriendList", platform, count, page);
+			}
+		}
+
+		public override void FollowFriend(int platform, String account, EventResultListener resultHandler)
+		{
+			Debug.Log("AndroidUtils  ===>>>  FollowFriend" );
+			followFriendHandler = resultHandler;
+			if (ssdk != null) 
+			{
+				ssdk.CallStatic("followFriend", platform, account);
 			}
 		}
 

@@ -16,6 +16,7 @@ public class Demo : MonoBehaviour {
 		ssdk.shareHandler = ShareResultHandler;
 		ssdk.showUserHandler = GetUserInfoResultHandler;
 		ssdk.getFriendsHandler = GetFriendsResultHandler;
+		ssdk.followFriendHandler = FollowFriendResultHandler;
 	}
 
 	// Update is called once per frame
@@ -66,6 +67,7 @@ public class Demo : MonoBehaviour {
 			content["url"] = "http://sharesdk.cn";
 			content["type"] = Convert.ToString((int)ContentType.News);
 			content["siteUrl"] = "http://sharesdk.cn";
+			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 			//用sharesdk提供的onekeyshare的有界面的快捷分享，包括九宫格和skybule风格
@@ -84,6 +86,7 @@ public class Demo : MonoBehaviour {
 			content["type"] = Convert.ToString((int)ContentType.News);
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["site"] = "ShareSDK";
+			content["shareTheme"] = "skyblue";//ShareTheme has only two value which are skyblue and classic
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 			//用九宫格的，指定平台分享
 			ssdk.ShowShareView (PlatformType.SinaWeibo, content);
@@ -111,7 +114,7 @@ public class Demo : MonoBehaviour {
 		{
 			//获取新浪微博好友，第一页，每页15条数据
 			print ("Click Btn Of Get Friends SinaWeibo");
-			ssdk.GetFriends (PlatformType.SinaWeibo, 15, 0);
+			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
 		}
 
 		btnTop += btnHeight + 20 * scale;
@@ -123,15 +126,22 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Disable SSO WhenAuthorize "))
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Close SSO Auth"))
 		{
 			ssdk.DisableSSOWhenAuthorize (true);			
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "remove Authorize "))
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Remove Authorize "))
 		{
 			ssdk.CancelAuthorie (PlatformType.SinaWeibo);			
+		}
+
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Follow Friend "))
+		{
+			//关注新浪微博
+			ssdk.FollowFriend (PlatformType.SinaWeibo, "3189087725");			
 		}
 
 	}
@@ -140,7 +150,7 @@ public class Demo : MonoBehaviour {
 	{
 		if (state == ResponseState.Success)
 		{
-			print ("success !");
+			print ("authorize success !");
 		}
 		else if (state == ResponseState.Fail)
 		{
@@ -156,7 +166,7 @@ public class Demo : MonoBehaviour {
 	{
 		if (state == ResponseState.Success)
 		{
-			print ("get user result :");
+			print ("get user info result :");
 			print (MiniJSON.jsonEncode(result));
 		}
 		else if (state == ResponseState.Fail)
@@ -189,8 +199,8 @@ public class Demo : MonoBehaviour {
 	void GetFriendsResultHandler (ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
-		{
-			print ("share result :");
+		{			
+			print ("get friend list result :");
 			print (MiniJSON.jsonEncode(result));
 		}
 		else if (state == ResponseState.Fail)
@@ -203,4 +213,19 @@ public class Demo : MonoBehaviour {
 		}
 	}
 
+	void FollowFriendResultHandler (ResponseState state, PlatformType type, Hashtable result)
+	{
+		if (state == ResponseState.Success)
+		{
+			print ("Follow friend successfully !");
+		}
+		else if (state == ResponseState.Fail)
+		{
+			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+		}
+		else if (state == ResponseState.Cancel) 
+		{
+			print ("cancel !");
+		}
+	}
 }

@@ -13,24 +13,9 @@ using System.Collections;
 namespace cn.sharesdk.unity3d
 {
 	/// <summary>
-	/// Auth result event.
+	/// Event result listener.
 	/// </summary>
-	public delegate void AuthResultEvent (ResponseState state, PlatformType type, Hashtable result);
-			
-	/// <summary>
-	/// Get user info result event.
-	/// </summary>
-	public delegate void GetUserInfoResultEvent (ResponseState state, PlatformType type, Hashtable result);
-
-	/// <summary>
-	/// Share result event.
-	/// </summary>
-	public delegate void ShareResultEvent (ResponseState state, PlatformType type, Hashtable result);
-			
-	/// <summary>
-	/// Get friends result event.
-	/// </summary>
-	public delegate void GetFriendsResultEvent (ResponseState state, PlatformType type, Hashtable error);
+	public delegate void EventResultListener (ResponseState state, PlatformType type, Hashtable error);
 
 }
 

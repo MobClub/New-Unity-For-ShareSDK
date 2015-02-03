@@ -21,10 +21,11 @@ namespace cn.sharesdk.unity3d
 		#endif
 		private ShareSDKUtilsInterface shareSDKUtils;
 
-		public AuthResultEvent authHandler;
-		public ShareResultEvent shareHandler;
-		public GetUserInfoResultEvent showUserHandler;
-		public GetFriendsResultEvent getFriendsHandler;
+		public EventResultListener authHandler;
+		public EventResultListener shareHandler;
+		public EventResultListener showUserHandler;
+		public EventResultListener getFriendsHandler;
+		public EventResultListener followFriendHandler;
 
 		void Awake()
 		{			
@@ -196,9 +197,19 @@ namespace cn.sharesdk.unity3d
 		/// <param name="type">Type.</param>
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
-		public void GetFriends (PlatformType type, int count, int page)
+		public void GetFriendList (PlatformType type, int count, int page)
 		{
 			shareSDKUtils.GetFriendList ((int)type, count, page, getFriendsHandler);
+		}
+
+		/// <summary>
+		/// Follows the friend.
+		/// </summary>
+		/// <param name="type">Type.</param>
+		/// <param name="account">Account.</param>
+		public void FollowFriend (PlatformType type, String account)
+		{
+			shareSDKUtils.FollowFriend ((int)type, account, followFriendHandler);
 		}
 
 		/// <summary>

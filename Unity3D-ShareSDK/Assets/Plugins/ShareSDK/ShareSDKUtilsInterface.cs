@@ -11,10 +11,11 @@ using System;
 using System.Collections;
 namespace cn.sharesdk.unity3d{
 	public abstract class ShareSDKUtilsInterface{
-		protected AuthResultEvent authHandler;
-		protected GetUserInfoResultEvent showUserHandler;
-		protected ShareResultEvent shareHandler;
-		protected GetFriendsResultEvent getFriendsHandler;
+		protected EventResultListener authHandler;
+		protected EventResultListener showUserHandler;
+		protected EventResultListener shareHandler;
+		protected EventResultListener getFriendsHandler;
+		protected EventResultListener followFriendHandler;
 
 		/// <summary>
 		/// Inits the SDK.
@@ -25,7 +26,7 @@ namespace cn.sharesdk.unity3d{
 		/// Inits the SDK.
 		/// </summary>
 		/// <param name="appKey">Appkey.</param>
-		public abstract void InitSDK (string appKey);
+		public abstract void InitSDK (String appKey);
 		
 		/// <summary>
 		/// Sets the platform config.
@@ -39,7 +40,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void Authorize (int platform, AuthResultEvent resultHandler);
+		public abstract void Authorize (int platform, EventResultListener resultHandler);
 		
 		/// <summary>
 		/// Removes the account of the specified platform.
@@ -58,7 +59,7 @@ namespace cn.sharesdk.unity3d{
 		/// Request the user info of the specified platform.
 		/// </summary>
 		/// <param name="platform">Platform.</param>
-		public abstract void ShowUser (int platform, GetUserInfoResultEvent resultHandler);
+		public abstract void ShowUser (int platform, EventResultListener resultHandler);
 		
 		/// <summary>
 		/// Share the content to the specified platform.
@@ -66,14 +67,14 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void Share (int platform, Hashtable content, ShareResultEvent resultHandler);
+		public abstract void Share (int platform, Hashtable content, EventResultListener resultHandler);
 		
 		/// <summary>
 		/// GUI share.
 		/// </summary>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void OnekeyShare (Hashtable content, ShareResultEvent resultHandler);
+		public abstract void OnekeyShare (Hashtable content, EventResultListener resultHandler);
 		
 		/// <summary>
 		/// OGUI share to the specified platform. 
@@ -81,7 +82,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void OnekeyShare (int platform, Hashtable content, ShareResultEvent resultHandler);
+		public abstract void OnekeyShare (int platform, Hashtable content, EventResultListener resultHandler);
 
 		/// <summary>
 		/// Gets the friend list.
@@ -90,7 +91,15 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void GetFriendList (int platform, int count, int page, GetFriendsResultEvent resultHandler);
+		public abstract void GetFriendList (int platform, int count, int page, EventResultListener resultHandler);
+		
+		
+		/// <summary>
+		/// Follows the friend.
+		/// </summary>
+		/// <param name="platform">Platform.</param>
+		/// <param name="account">Account.</param>
+		public abstract void FollowFriend(int platform, String account, EventResultListener followFriendHandler);
 
 		/// <summary>
 		/// Gets the auth info.
@@ -108,7 +117,7 @@ namespace cn.sharesdk.unity3d{
 		/// Java callback.
 		/// </summary>
 		/// <param name="message">Message.</param>
-		public abstract void OnActionCallback (string message);
+		public abstract void OnActionCallback (String message);
 		
 		/// <summary>
 		/// Raises the error event.

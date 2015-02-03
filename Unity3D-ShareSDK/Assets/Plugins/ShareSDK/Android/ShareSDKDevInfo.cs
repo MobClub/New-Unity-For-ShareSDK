@@ -49,7 +49,7 @@ namespace cn.sharesdk.unity3d
 
 	public class DevInfo 
 	{	
-		public bool Enable = false;
+		public bool Enable = true;
 	}
 
 	[Serializable]

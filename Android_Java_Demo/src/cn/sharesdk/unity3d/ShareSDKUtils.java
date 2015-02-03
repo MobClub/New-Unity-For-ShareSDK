@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.utils.UIHandler;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
 import com.unity3d.player.UnityPlayer;
 
@@ -30,6 +32,7 @@ public class ShareSDKUtils {
 	private static final int MSG_SHARE = 4;
 	private static final int MSG_ONEKEY_SAHRE = 5;
 	private static final int MSG_GET_FRIENDLIST = 6;
+	private static final int MSG_FOLLOW_FRIEND = 7;
 	
 	private static Context context;
 	private static Callback uiCallback;
@@ -164,6 +167,18 @@ public class ShareSDKUtils {
 		msg.setData(data);
 		UIHandler.sendMessage(msg, uiCallback);
 	}
+	
+	public static void followFriend(int platform, String account) {
+		if (DEBUG) {
+			System.out.println("ShareSDKUtils.followFriend");
+		}
+		
+		Message msg = new Message();
+		msg.what = MSG_FOLLOW_FRIEND;
+		msg.arg1 = platform;
+		msg.obj = account;
+		UIHandler.sendMessage(msg, uiCallback);
+	}
 
 	public static String getAuthInfo(int platform) {
 		if (DEBUG) {
@@ -277,6 +292,16 @@ public class ShareSDKUtils {
 				if (map.containsKey("siteUrl")) {
 					oks.setSiteUrl(String.valueOf(map.get("siteUrl")));
 				}
+				String theme = "classic";
+				if(map.containsKey("shareTheme")){
+					theme = String.valueOf(map.get("shareTheme"));
+					Log.i("share theme ===>>>>", theme);
+				}
+				if(OnekeyShareTheme.SKYBLUE.toString().toLowerCase().equals(theme)){
+					oks.setTheme(OnekeyShareTheme.SKYBLUE);
+				} else{
+					oks.setTheme(OnekeyShareTheme.CLASSIC);
+				}
 				if(disableSSO){
 					oks.disableSSOWhenAuthorize();
 				}
@@ -293,6 +318,16 @@ public class ShareSDKUtils {
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				plat.listFriend(count, page, null);
+			}
+			break;
+			case MSG_FOLLOW_FRIEND:{
+				int platform = msg.arg1;
+				String account = (String) msg.obj;
+				String name = ShareSDK.platformIdToName(platform);
+				Platform plat = ShareSDK.getPlatform(context, name);
+				plat.setPlatformActionListener(paListener);
+				plat.SSOSetting(disableSSO);
+				plat.followFriend(account);
 			}
 			break;
 		}
@@ -398,6 +433,7 @@ public class ShareSDKUtils {
 			int shareType = iosTypeToAndroidType(Integer.parseInt(type));
 			map.put("shareType", shareType);
 		}
+		map.put("shareTheme", content.get("shareTheme"));
 		map.put("filePath", content.get("file"));
 		map.put("siteUrl", content.get("siteUrl"));
 		map.put("site", content.get("site"));
