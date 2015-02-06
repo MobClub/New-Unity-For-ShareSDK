@@ -103,7 +103,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatSession;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public string ShareByAppClient = "true";
+		public string BypassApproval = "true";
 	}
 
 	[Serializable]
@@ -113,7 +113,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatTimeline;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public string ShareByAppClient = "true";
+		public string BypassApproval = "true";
 	}
 
 	[Serializable]
