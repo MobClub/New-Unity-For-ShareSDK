@@ -218,6 +218,7 @@ public class ShareSDKUtils {
 				} else {
 					ShareSDK.initSDK(context);
 				}
+				ShareSDK.closeDebug();
 			}
 			break;
 			case MSG_AUTHORIZE: {
