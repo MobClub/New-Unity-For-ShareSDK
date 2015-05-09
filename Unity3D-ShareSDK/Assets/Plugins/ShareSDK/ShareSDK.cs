@@ -141,7 +141,7 @@ namespace cn.sharesdk.unity3d
 		}
 		
 		/// <summary>
-		/// Shows the share menu.
+		/// Shows the share menu of using onekeyshare.
 		/// </summary>
 		/// <param name='types'>
 		/// Types.
@@ -158,7 +158,7 @@ namespace cn.sharesdk.unity3d
 		}
 		
 		/// <summary>
-		/// Shows the share view.
+		/// Shows the share view of using onekeyshare.
 		/// </summary>
 		/// <param name='type'>
 		/// Type.
@@ -170,8 +170,9 @@ namespace cn.sharesdk.unity3d
 		/// Callback.
 		/// </param>
 		public void ShowShareView (PlatformType type, Hashtable content)
-		{
-			shareSDKUtils.OnekeyShare((int)type, content, shareHandler);
+		{			
+			Debug.Log("ShareSDK  ===>>>  ShowShareView" );
+			shareSDKUtils.OnekeyShare((int) type, content, shareHandler);
 		}
 		
 		/// <summary>

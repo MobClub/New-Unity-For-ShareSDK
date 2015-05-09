@@ -70,7 +70,7 @@ public class Demo : MonoBehaviour {
 			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
-			//用sharesdk提供的onekeyshare的有界面的快捷分享，包括九宫格和skybule风格
+			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
 			ssdk.ShowShareMenu (content);
 		}
 		
@@ -88,8 +88,9 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["shareTheme"] = "skyblue";//ShareTheme has only two value which are skyblue and classic
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
-			//用九宫格的，指定平台分享
+			//用sharesdk提供的onekeyshare库，用skyblue的theme，指定平台分享
 			ssdk.ShowShareView (PlatformType.SinaWeibo, content);
+			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
 		}
 		
 		btnTop += btnHeight + 20 * scale;

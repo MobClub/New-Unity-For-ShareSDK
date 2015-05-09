@@ -5,21 +5,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import m.framework.utils.Hashon;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.framework.utils.UIHandler;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
+import com.mob.tools.utils.Hashon;
+import com.mob.tools.utils.UIHandler;
 import com.unity3d.player.UnityPlayer;
 
 public class ShareSDKUtils {
@@ -269,40 +268,34 @@ public class ShareSDKUtils {
 					}
 				}
 				if (map.containsKey("text")) {
-					oks.setText(String.valueOf(map.get("text")));
+					oks.setText((String)map.get("text"));
 				}
 				if (map.containsKey("imagePath")) {
-					oks.setImagePath(String.valueOf(map.get("imagePath")));
+					oks.setImagePath((String)map.get("imagePath"));
 				}
 				if (map.containsKey("imageUrl")) {
-					oks.setImageUrl(String.valueOf(map.get("imageUrl")));
+					oks.setImageUrl((String)map.get("imageUrl"));
 				}
 				if (map.containsKey("title")) {
-					oks.setTitle(String.valueOf(map.get("title")));
+					oks.setTitle((String)map.get("title"));
 				}
 				if (map.containsKey("comment")) {
-					oks.setComment(String.valueOf(map.get("comment")));
+					oks.setComment((String)map.get("comment"));
 				}
 				if (map.containsKey("url")) {
-					oks.setUrl(String.valueOf(map.get("url")));
-					oks.setTitleUrl(String.valueOf(map.get("url")));
+					oks.setUrl((String)map.get("url"));
+					oks.setTitleUrl((String)map.get("url"));
 				}
 				if (map.containsKey("site")) {
-					oks.setSite(String.valueOf(map.get("site")));
+					oks.setSite((String)map.get("site"));
 				}
 				if (map.containsKey("siteUrl")) {
-					oks.setSiteUrl(String.valueOf(map.get("siteUrl")));
+					oks.setSiteUrl((String)map.get("siteUrl"));
 				}
-				String theme = "classic";
-				if(map.containsKey("shareTheme")){
-					theme = String.valueOf(map.get("shareTheme"));
-					Log.i("share theme ===>>>>", theme);
-				}
+				String theme = (String)map.get("shareTheme");
 				if(OnekeyShareTheme.SKYBLUE.toString().toLowerCase().equals(theme)){
 					oks.setTheme(OnekeyShareTheme.SKYBLUE);
-				} else{
-					oks.setTheme(OnekeyShareTheme.CLASSIC);
-				}
+				} 
 				if(disableSSO){
 					oks.disableSSOWhenAuthorize();
 				}
@@ -419,7 +412,7 @@ public class ShareSDKUtils {
 	private static HashMap<String, Object> CSMapToJavaMap(HashMap<String, Object> content) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("text", content.get("content"));
-		String image = String.valueOf(content.get("image"));
+		String image = (String)content.get("image");
 		if (!TextUtils.isEmpty(image) && image.startsWith("/")) {
 			map.put("imagePath", image);
 		} else if(!TextUtils.isEmpty(image)){
@@ -440,6 +433,7 @@ public class ShareSDKUtils {
 		map.put("site", content.get("site"));
 		map.put("musicUrl", content.get("musicUrl"));
 		map.put("extInfo", content.get("extInfo"));
+		
 		return map;
 	}
 	

@@ -26,7 +26,7 @@ namespace cn.sharesdk.unity3d
 
 		public override void InitSDK(string appKey) 
 		{
-			Debug.Log("AndroidUtils  ===>>>  InitSDK" + appKey);
+			Debug.Log("AndroidUtils InitSDK ===>>> " + appKey);
 			if (ssdk != null) {
 				ssdk.CallStatic("initSDK", appKey);
 			}
@@ -97,7 +97,7 @@ namespace cn.sharesdk.unity3d
 
 		public override void OnekeyShare(int platform, Hashtable content, EventResultListener resultHandler) 
 		{
-			Debug.Log("AndroidUtils  ===>>>  OnekeyShare" );
+			Debug.Log("AndroidUtils  ===>>>  OnekeyShare platform ===" + platform );
 			shareHandler = resultHandler;
 			String json = MiniJSON.jsonEncode(content);
 			if (ssdk != null) 
