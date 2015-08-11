@@ -79,7 +79,7 @@
         SortId="3"
         AppId="100371282"
         AppKey="aed9b0303e3ed1e27bae87c33761161d"
-        ShareByAppClient="true"
+        ShareByAppClient="false"
         Enable="true" />
     
     <!-- 
@@ -137,11 +137,11 @@
     <Twitter
         Id="9"
         SortId="9"
-        ConsumerKey="mnTGqtXk0TYMXYTN7qUxg"
-        ConsumerSecret="ROkFqr8c3m1HXqS3rm3TJ0WkAJuwBOSaWhPbZ9Ojuc"
-        CallbackUrl="http://www.sharesdk.cn"
+        ConsumerKey="LRBM0H75rWrU9gNHvlEAA2aOy"
+        ConsumerSecret="gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G"
+        CallbackUrl="http://mob.com"
         Enable="true" />
-
+    
     <Renren
         Id="10"
         SortId="10"
@@ -171,9 +171,9 @@
     <Douban
         Id="16"
         SortId="16"
-        ApiKey="02e2cbe5ca06de5908a863b15e149b0b"
-        Secret="9f1e7b4f71304f2f"
-        RedirectUri="http://www.sharesdk.cn"
+        ApiKey="031a96a3aa8b28af094fc3eaffa17a0d"
+        Secret="2e675e730571b75d"
+        RedirectUri="http://mob.com"
         Enable="true" />
     
     <YouDao
@@ -258,8 +258,9 @@
 	<Dropbox
         Id="26"
         SortId="26"
-        AppKey="7janx53ilz11gbs"
-		AppSecret="c1hpx5fz6tzkm32"
+        AppKey="i5vw2mex1zcgjcj" 
+		AppSecret="3i9xifsgb4omr0s"
+		RedirectUri="https://www.sharesdk.cn"
         Enable="true" />
         
     <VKontakte 
@@ -318,11 +319,13 @@
 	<KakaoTalk
 	    Id="33"
         SortId="33"
+        AppKey="48d3f524e4a636b08d81b3ceb50f1003"
         Enable="true" />
 	
 	<KakaoStory
 	    Id="34"
         SortId="34"
+        AppKey="48d3f524e4a636b08d81b3ceb50f1003"
         Enable="true" />
 
     <WhatsApp
@@ -333,7 +336,7 @@
     <Bluetooth
         Id="36"
         SortId="36"
-        Enable="true" />
+        Enable="false" />
 
     <Pocket
         Id="37"
@@ -356,4 +359,9 @@
         RedirectUrl="http://mob.com"
         Enable="true" />
     
+     <Alipay
+        Id="52"
+        SortId="52"  
+        AppId="2015072400185895"
+        Enable="true"/>
 </DevInfor>

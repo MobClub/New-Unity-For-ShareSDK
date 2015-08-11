@@ -14,7 +14,7 @@ namespace cn.sharesdk.unity3d
 	public class ShareSDK : MonoBehaviour 
 	{
 
-		public string appkey = "api20";
+		public string appkey = "androidv1101";
 		#if UNITY_ANDROID
 		public DevInfoSet devInfo;
 		#elif UNITY_IPHONE
