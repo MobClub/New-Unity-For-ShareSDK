@@ -25,7 +25,7 @@ public class ShareSDKUtils {
 	private static boolean DEBUG = true;
 	private static boolean disableSSO = false; 
 	
-	private static final int MSG_INITSDK = 1;
+	//private static final int MSG_INITSDK = 1;
 	private static final int MSG_AUTHORIZE = 2;
 	private static final int MSG_SHOW_USER = 3;
 	private static final int MSG_SHARE = 4;
@@ -72,25 +72,27 @@ public class ShareSDKUtils {
 		}
 	}
 	
-	public static void initSDK(String appKey) {
+	@SuppressWarnings("unchecked")
+	public static void initSDKAndSetPlatfromConfig(String appKey, String configs) {
 		if (DEBUG) {
-			System.out.println("ShareSDKUtils.initSDK");
+			System.out.println("initSDK appkey ==>>" + appKey);
 		}
+		if (!TextUtils.isEmpty(appKey)) {
+			ShareSDK.initSDK(context, appKey);
+		} else {
+			ShareSDK.initSDK(context);
+		}
+		ShareSDK.closeDebug();
 		
-		Message msg = new Message();
-		msg.what = MSG_INITSDK;
-		msg.obj = appKey;
-		UIHandler.sendMessage(msg, uiCallback);
-	}
-	
-	public static void setPlatformConfig(int platform, String configs) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.setPlatformConfig");
 		}
 		Hashon hashon = new Hashon();
 		HashMap<String, Object> devInfo = hashon.fromJson(configs);
-		String p = ShareSDK.platformIdToName(platform);
-		ShareSDK.setPlatformDevInfo(p, devInfo);
+		for(Entry<String, Object> entry: devInfo.entrySet()){
+			String p = ShareSDK.platformIdToName(Integer.parseInt(entry.getKey()));
+			ShareSDK.setPlatformDevInfo(p, (HashMap<String, Object>)entry.getValue());
+		}
 	}
 	
 	public static void authorize(int platform) {
@@ -112,13 +114,22 @@ public class ShareSDKUtils {
 		plat.removeAccount(true);
 	}
 	
-	public static boolean isValid(int platform) {
+	public static boolean isAuthValid(int platform) {
 		if (DEBUG) {
-			System.out.println("ShareSDKUtils.isValid");
+			System.out.println("ShareSDKUtils.isAuthValid");
 		}
 		String name = ShareSDK.platformIdToName(platform);
 		Platform plat = ShareSDK.getPlatform(context, name);
-		return plat.isValid();
+		return plat.isAuthValid();
+	}
+	
+	public static boolean isClientValid(int platform) {
+		if (DEBUG) {
+			System.out.println("ShareSDKUtils.isClientValid");
+		}
+		String name = ShareSDK.platformIdToName(platform);
+		Platform plat = ShareSDK.getPlatform(context, name);
+		return plat.isClientValid();
 	}
 	
 	public static void showUser(int platform) {
@@ -131,7 +142,7 @@ public class ShareSDKUtils {
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 	
-	public static void share(int platform, String content) {
+	public static void shareContent(int platform, String content) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.share");
 		}
@@ -196,6 +207,7 @@ public class ShareSDKUtils {
 			map.put("gender", plat.getDb().getUserGender());
 			map.put("userIcon", plat.getDb().getUserIcon());
 			map.put("userID", plat.getDb().getUserId());
+			map.put("openID", plat.getDb().get("openid"));
 			map.put("userName", plat.getDb().getUserName());
 		}
 		return hashon.fromHashMap(map);
@@ -206,20 +218,7 @@ public class ShareSDKUtils {
 	}
 	
 	public static boolean handleMessage(Message msg) {
-		switch (msg.what) {
-			case MSG_INITSDK: {
-				if (DEBUG) {
-					System.out.println("handleMessage MSG_INITSDK appkey ==>>" + (String) msg.obj);
-				}
-				if (msg.obj != null) {
-					String appKey = (String) msg.obj;
-					ShareSDK.initSDK(context, appKey);
-				} else {
-					ShareSDK.initSDK(context);
-				}
-				ShareSDK.closeDebug();
-			}
-			break;
+		switch (msg.what) {			
 			case MSG_AUTHORIZE: {
 				int platform = msg.arg1;
 				String name = ShareSDK.platformIdToName(platform);
@@ -263,8 +262,12 @@ public class ShareSDKUtils {
 				oks.disableSSOWhenAuthorize();
 				if (platform > 0) {
 					String name = ShareSDK.platformIdToName(platform);
+					if (DEBUG) {
+						System.out.println("ShareSDKUtils Onekeyshare shareView platform name ==>> " + name);
+					}
 					if(!TextUtils.isEmpty(name)){
 						oks.setPlatform(name);
+						oks.setSilent(false);
 					}
 				}
 				if (map.containsKey("text")) {
