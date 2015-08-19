@@ -17,13 +17,13 @@ namespace cn.sharesdk.unity3d
 	{
 		Text = 0, 				//Text
 		Image = 1,				//Image 
-		News = 2,				//News 
+		News = 2,				//News,webpage 
 		Music = 3,				//Music 
 		Video = 4,				//Video 
 		App = 5, 				//App
-		NonGif = 6,				//Non Gif Image 
-		Gif = 7,				//Gif Image 
-		File = 8				//File
+		Gif = 6,				//Gif Image 
+		File = 7,				//File
+		Auto = 8				//Auto
 	};
 
 }

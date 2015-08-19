@@ -71,7 +71,7 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
-			ssdk.ShowShareMenu (content);
+			ssdk.ShowShareMenu (null, content, 100, 100, MenuArrowDirection.Up);
 		}
 		
 		btnTop += btnHeight + 20 * scale;
@@ -86,10 +86,11 @@ public class Demo : MonoBehaviour {
 			content["type"] = Convert.ToString((int)ContentType.News);
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["site"] = "ShareSDK";
-			content["shareTheme"] = "skyblue";//ShareTheme has only two value which are skyblue and classic
+			//content["shareTheme"] = "skyblue";//ShareTheme has only two value which are skyblue and classic
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
+
 			//用sharesdk提供的onekeyshare库，用skyblue的theme，指定平台分享
-			ssdk.ShowShareView (PlatformType.SinaWeibo, content);
+			ssdk.ShowShareView (PlatformType.TencentWeibo, content);
 			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
 		}
 		
@@ -107,7 +108,7 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 
-			ssdk.ShareContent (PlatformType.SinaWeibo, content);
+			ssdk.ShareContentWithAPI (PlatformType.SinaWeibo, content);
 		}
 
 		btnTop += btnHeight + 20 * scale;
@@ -129,13 +130,13 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Close SSO Auth"))
 		{
-			ssdk.DisableSSOWhenAuthorize (true);			
+			ssdk.CloseSSOWhenAuthorize (true);			
 		}
 
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Remove Authorize "))
 		{
-			ssdk.CancelAuthorie (PlatformType.SinaWeibo);			
+			ssdk.CancelAuthorize (PlatformType.SinaWeibo);			
 		}
 
 		btnTop += btnHeight + 20 * scale;

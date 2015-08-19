@@ -15,10 +15,7 @@ namespace cn.sharesdk.unity3d
 	{
 
 		public string appkey = "androidv1101";
-		#if UNITY_ANDROID
 		public DevInfoSet devInfo;
-		#elif UNITY_IPHONE
-		#endif
 		private ShareSDKUtilsInterface shareSDKUtils;
 
 		public EventResultListener authHandler;
@@ -28,33 +25,28 @@ namespace cn.sharesdk.unity3d
 		public EventResultListener followFriendHandler;
 
 		void Awake()
-		{			
-			#if UNITY_IPHONE			
-			#elif UNITY_ANDROID
-			shareSDKUtils = new AndroidUtils(gameObject);
-			shareSDKUtils.InitSDK(appkey);
-
+		{				
 			print("ShareSDK Awake");
 			Type type = devInfo.GetType();
-			FieldInfo[] fields = type.GetFields();
-			foreach (FieldInfo field in fields) 
+			Hashtable platformConfigs = new Hashtable();
+			FieldInfo[] devInfoFields = type.GetFields();
+			foreach (FieldInfo devInfoField in devInfoFields) 
 			{	
-				DevInfo info = (DevInfo) field.GetValue(devInfo);
-				SetPlatfromDevInfo(info);
+				DevInfo info = (DevInfo) devInfoField.GetValue(devInfo);
+				int platformId = (int) info.GetType().GetField("type").GetValue(info);
+				FieldInfo[] fields = info.GetType().GetFields();
+				Hashtable table = new Hashtable();
+				foreach (FieldInfo field in fields) 
+				{
+					table.Add(field.Name, field.GetValue(info));
+				}
+				platformConfigs.Add(platformId, table);
 			}
+			#if UNITY_ANDROID
+			shareSDKUtils = new AndroidUtils(gameObject);
+			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey, platformConfigs);			
+			#elif UNITY_IPHONE
 			#endif
-		}
-
-		private void SetPlatfromDevInfo(DevInfo info)
-		{
-			int platformId = (int) info.GetType().GetField("type").GetValue(info);
-			FieldInfo[] fields = info.GetType().GetFields();
-			Hashtable table = new Hashtable();
-			foreach (FieldInfo field in fields) 
-			{
-				table.Add(field.Name, field.GetValue(info));
-			}
-			shareSDKUtils.SetPlatformConfig(platformId, table);
 		}
 		
 		/// <summary>
@@ -65,7 +57,10 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		private void _Callback (string data)
 		{
-			shareSDKUtils.OnActionCallback(data);
+			#if UNITY_ANDROID
+			shareSDKUtils.OnActionCallback(data);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 
 		/// <summary>
@@ -77,10 +72,13 @@ namespace cn.sharesdk.unity3d
 		/// <param name='configInfo'>
 		/// Config info.
 		/// </param>
-		public void SetPlatformConfig (PlatformType type, Hashtable configInfo)
-		{
+		public void RigisterAppAndSetPlatformConfig (String appKey, Hashtable configInfo)
+		{			
 			// if you don't add ShareSDK.xml in your assets folder, use the following line
-			shareSDKUtils.SetPlatformConfig((int)type, configInfo);
+			#if UNITY_ANDROID
+			shareSDKUtils.RigisterAppAndSetPlatformConfig (appKey, configInfo);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 		
 		/// <summary>
@@ -95,10 +93,12 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Result handler.
 		/// </param>
-		public void Authorize (PlatformType type)
+		public void Authorize (PlatformType platform)
 		{
-			print("authorize ===>>>" + (shareSDKUtils == null));
-			shareSDKUtils.Authorize((int) type, authHandler);
+			#if UNITY_ANDROID
+			shareSDKUtils.Authorize(platform, authHandler);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 		
 		/// <summary>
@@ -107,9 +107,12 @@ namespace cn.sharesdk.unity3d
 		/// <param name='type'>
 		/// Type.
 		/// </param>
-		public void CancelAuthorie (PlatformType type)
+		public void CancelAuthorize (PlatformType platform)
 		{
-			shareSDKUtils.RemoveAccount((int) type);
+			#if UNITY_ANDROID
+			shareSDKUtils.CancelAuthorize(platform);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 		
 		/// <summary>
@@ -121,9 +124,20 @@ namespace cn.sharesdk.unity3d
 		/// <param name='type'>
 		/// Type.
 		/// </param>
-		public bool HasAuthorized (PlatformType type)
+		public bool IsAuthorizedValid (PlatformType platform)
 		{
-			return shareSDKUtils.IsValid((int) type);
+			#if UNITY_ANDROID
+			return shareSDKUtils.IsAuthorizedValid(platform);			
+			#elif UNITY_IPHONE
+			#endif
+		}
+
+		public bool isClientValid (PlatformType platform)
+		{
+			#if UNITY_ANDROID
+			return shareSDKUtils.isClientValid(platform);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 		
 		/// <summary>
@@ -135,11 +149,54 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void GetUserInfo (PlatformType type)
+		public void GetUserInfo (PlatformType platform)
 		{
-			shareSDKUtils.ShowUser((int) type, showUserHandler);
+			#if UNITY_ANDROID
+			shareSDKUtils.GetUserInfo(platform, showUserHandler);			
+			#elif UNITY_IPHONE
+			#endif
 		}
-		
+
+		/// <summary>
+		/// Shares the content.
+		/// </summary>
+		/// <param name='type'>
+		/// Type.
+		/// </param>
+		/// <param name='content'>
+		/// Content.
+		/// </param>
+		/// <param name='resultHandler'>
+		/// Callback.
+		/// </param>
+		public void ShareContentWithAPI(PlatformType platform, Hashtable content)
+		{
+			#if UNITY_ANDROID
+			shareSDKUtils.ShareContentWithAPI(platform, content, shareHandler);			
+			#elif UNITY_IPHONE
+			#endif
+		}
+
+		/// <summary>
+		/// Shares the content.
+		/// </summary>
+		/// <param name='type'>
+		/// Type.
+		/// </param>
+		/// <param name='content'>
+		/// Content.
+		/// </param>
+		/// <param name='resultHandler'>
+		/// Callback.
+		/// </param>
+		public void ShareContentWithAPI(PlatformType[] platforms, Hashtable content)
+		{
+			#if UNITY_ANDROID
+			shareSDKUtils.ShareContentWithAPI(platforms, content, shareHandler);			
+			#elif UNITY_IPHONE
+			#endif
+		}
+				
 		/// <summary>
 		/// Shows the share menu of using onekeyshare.
 		/// </summary>
@@ -152,9 +209,12 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareMenu (Hashtable content)
+		public void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, MenuArrowDirection direction)
 		{
-			shareSDKUtils.OnekeyShare(content, shareHandler);
+			#if UNITY_ANDROID
+			shareSDKUtils.ShowShareMenu(platforms, content, x, y, direction, shareHandler);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 		
 		/// <summary>
@@ -169,27 +229,13 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareView (PlatformType type, Hashtable content)
+		public void ShowShareView (PlatformType platform, Hashtable content)
 		{			
-			Debug.Log("ShareSDK  ===>>>  ShowShareView" );
-			shareSDKUtils.OnekeyShare((int) type, content, shareHandler);
-		}
-		
-		/// <summary>
-		/// Shares the content.
-		/// </summary>
-		/// <param name='type'>
-		/// Type.
-		/// </param>
-		/// <param name='content'>
-		/// Content.
-		/// </param>
-		/// <param name='resultHandler'>
-		/// Callback.
-		/// </param>
-		public void ShareContent (PlatformType type, Hashtable content)
-		{
-			shareSDKUtils.Share((int) type, content, shareHandler);
+			#if UNITY_ANDROID
+			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
+			shareSDKUtils.ShowShareView(platform, content, shareHandler);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 
 		/// <summary>
@@ -198,9 +244,12 @@ namespace cn.sharesdk.unity3d
 		/// <param name="type">Type.</param>
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
-		public void GetFriendList (PlatformType type, int count, int page)
+		public void GetFriendList (PlatformType platform, int count, int page)
 		{
-			shareSDKUtils.GetFriendList ((int)type, count, page, getFriendsHandler);
+			#if UNITY_ANDROID
+			shareSDKUtils.GetFriendList (platform, count, page, getFriendsHandler);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 
 		/// <summary>
@@ -208,26 +257,35 @@ namespace cn.sharesdk.unity3d
 		/// </summary>
 		/// <param name="type">Type.</param>
 		/// <param name="account">Account.</param>
-		public void FollowFriend (PlatformType type, String account)
+		public void FollowFriend (PlatformType platform, String account)
 		{
-			shareSDKUtils.FollowFriend ((int)type, account, followFriendHandler);
+			#if UNITY_ANDROID
+			shareSDKUtils.FollowFriend (platform, account, followFriendHandler);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 
 		/// <summary>
 		/// Gets the auth info.
 		/// </summary>
 		/// <param name="type">Type.</param>
-		public Hashtable GetAuthInfo (PlatformType type)
+		public Hashtable GetAuthInfo (PlatformType platform)
 		{
-			return shareSDKUtils.GetAuthInfo ((int)type);
+			#if UNITY_ANDROID
+			return shareSDKUtils.GetAuthInfo (platform);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 
 		/// <summary>
-		/// Disables the SSO when authorize.
+		/// Close the SSO when authorize.
 		/// </summary>
 		/// <param name="open">If set to <c>true</c> open.</param>
-		public void DisableSSOWhenAuthorize(Boolean open){
-			shareSDKUtils.DisableSSOWhenAuthorize (open);
+		public void CloseSSOWhenAuthorize(Boolean open){
+			#if UNITY_ANDROID
+			shareSDKUtils.CloseSSOWhenAuthorize (open);			
+			#elif UNITY_IPHONE
+			#endif
 		}
 
 	}

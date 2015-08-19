@@ -15,6 +15,7 @@ namespace cn.sharesdk.unity3d
 	/// </summary>
 	public enum PlatformType
 	{
+		Unknown = 0,
 		SinaWeibo = 1,			//Sina Weibo         
 		TencentWeibo = 2,		//Tencent Weibo          
 		DouBan = 5,				//Dou Ban           
@@ -56,7 +57,10 @@ namespace cn.sharesdk.unity3d
 		KakaoStory = 45,        //KakaoStory 
 		FacebookMessenger = 46, //FacebookMessenger
 		Bluetooth = 48,         //Bluetooth
-		Any = 99 				//Any Platform 
+		Alipay = 50,            //Alipay
+		WechatPlatform = 997,   //Wechat Series
+		QQPlatform = 998,		//QQ Series
+		Any = 999 				//Any Platform  
 	}
 
 }

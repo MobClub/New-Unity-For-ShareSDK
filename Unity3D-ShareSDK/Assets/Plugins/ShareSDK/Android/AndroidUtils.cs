@@ -8,7 +8,7 @@ namespace cn.sharesdk.unity3d
 	{
 		private AndroidJavaClass ssdk;
 
-		public AndroidUtils(GameObject go) 
+		public AndroidUtils (GameObject go) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  AndroidUtils" );
 			try{
@@ -19,125 +19,130 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void InitSDK() 
-		{
-			InitSDK(null);
-		}
-
-		public override void InitSDK(string appKey) 
-		{
-			Debug.Log("AndroidUtils InitSDK ===>>> " + appKey);
-			if (ssdk != null) {
-				ssdk.CallStatic("initSDK", appKey);
-			}
-		}
-
-		public override void SetPlatformConfig(int platform, Hashtable configs) 
+		public override void RigisterAppAndSetPlatformConfig (String appKey, Hashtable configs) 
 		{
 			String json = MiniJSON.jsonEncode(configs);
 			Debug.Log("AndroidUtils  ===>>>  SetPlatformConfig === " + json);
 			if (ssdk != null) 
 			{			
-				ssdk.CallStatic("setPlatformConfig", platform, json);
+				ssdk.CallStatic("initSDKAndSetPlatfromConfig", appKey, json);
 			}
 		}
 
-		public override void Authorize(int platform, EventResultListener resultHandler) 
+		public override void Authorize (PlatformType platform, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Authorize" );
 			authHandler = resultHandler;
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("authorize", platform);
+				ssdk.CallStatic("authorize", (int)platform);
 			}
 		}
 
-		public override void RemoveAccount(int platform) 
+		public override void CancelAuthorize (PlatformType platform) 
 		{
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("removeAccount", platform);
+				ssdk.CallStatic("removeAccount", (int)platform);
 			}
 		}
 
-		public override bool IsValid(int platform) 
+		public override bool IsAuthorizedValid (PlatformType platform) 
 		{
 			if (ssdk != null) 
 			{
-				return ssdk.CallStatic<bool>("isValid", platform);
+				return ssdk.CallStatic<bool>("isAuthValid", (int)platform);
 			}
 			return false;
 		}
 
-		public override void ShowUser(int platform, EventResultListener resultHandler) 
+		public override bool isClientValid (PlatformType platform) 
+		{
+			if (ssdk != null) 
+			{
+				return ssdk.CallStatic<bool>("isClientValid", (int)platform);
+			}
+			return false;
+		}
+
+		public override void GetUserInfo (PlatformType platform, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  ShowUser" );
 			showUserHandler = resultHandler;
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("showUser", platform);
+				ssdk.CallStatic("showUser", (int)platform);
 			}
 		}
 
-		public override void Share(int platform, Hashtable content, EventResultListener resultHandler) 
+		public override void ShareContentWithAPI (PlatformType platform, Hashtable content, EventResultListener resultHandler) 
+		{
+			Debug.Log("AndroidUtils  ===>>>  ShareContent to one platform" );
+			ShareContentWithAPI (new PlatformType[]{ platform }, content, resultHandler);
+		}
+
+		public override void ShareContentWithAPI (PlatformType[] platforms, Hashtable content, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Share" );
 			shareHandler = resultHandler;
 			String json = MiniJSON.jsonEncode(content);
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("share", platform, json);
+				foreach (PlatformType platform in platforms)
+				{
+					ssdk.CallStatic("shareContent", (int)platform, json);
+				}
 			}
 		}
 
-		public override void OnekeyShare(Hashtable content, EventResultListener resultHandler) 
+		public override void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, MenuArrowDirection direction, EventResultListener resultHandler) 
 		{
-			OnekeyShare(0, content, resultHandler);
+			ShowShareView(0, content, resultHandler);
 		}
 
-		public override void OnekeyShare(int platform, Hashtable content, EventResultListener resultHandler) 
+		public override void ShowShareView (PlatformType platform, Hashtable content, EventResultListener resultHandler) 
 		{
-			Debug.Log("AndroidUtils  ===>>>  OnekeyShare platform ===" + platform );
+			Debug.Log("AndroidUtils  ===>>>  OnekeyShare platform ===" + (int)platform );
 			shareHandler = resultHandler;
 			String json = MiniJSON.jsonEncode(content);
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("onekeyShare", platform, json);
+				ssdk.CallStatic("onekeyShare", (int)platform, json);
 			}
 		}
 		
-		public override void GetFriendList(int platform, int count, int page, EventResultListener resultHandler) 
+		public override void GetFriendList (PlatformType platform, int count, int page, EventResultListener resultHandler) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  GetFriendList" );
 			getFriendsHandler = resultHandler;
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("getFriendList", platform, count, page);
+				ssdk.CallStatic("getFriendList", (int)platform, count, page);
 			}
 		}
 
-		public override void FollowFriend(int platform, String account, EventResultListener resultHandler)
+		public override void FollowFriend (PlatformType platform, String account, EventResultListener resultHandler)
 		{
 			Debug.Log("AndroidUtils  ===>>>  FollowFriend" );
 			followFriendHandler = resultHandler;
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("followFriend", platform, account);
+				ssdk.CallStatic("followFriend", (int)platform, account);
 			}
 		}
 
-		public override Hashtable GetAuthInfo(int platform) 
+		public override Hashtable GetAuthInfo (PlatformType platform) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  GetAuthInfo" );
 			if (ssdk != null) 
 			{
-				String result = ssdk.CallStatic<String>("getAuthInfo", platform);
+				String result = ssdk.CallStatic<String>("getAuthInfo", (int)platform);
 				return (Hashtable) MiniJSON.jsonDecode(result);
 			}
 			return new Hashtable ();
 		}
 
-		public override void DisableSSOWhenAuthorize(Boolean open)
+		public override void CloseSSOWhenAuthorize (Boolean open)
 		{
 			Debug.Log("AndroidUtils  ===>>>  DisableSSOWhenAuthorize" );
 			if (ssdk != null) 
@@ -146,7 +151,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void OnActionCallback(string message) 
+		public override void OnActionCallback (string message) 
 		{
 			if (message == null) 
 			{
@@ -160,7 +165,7 @@ namespace cn.sharesdk.unity3d
 			}
 
 			int status = Convert.ToInt32(res["status"]);
-			int platform = Convert.ToInt32(res["platform"]);
+			PlatformType platform = (PlatformType)Convert.ToInt32(res["platform"]);
 			int action = Convert.ToInt32(res["action"]);
 			// Success = 1, Fail = 2, Cancel = 3
 			switch(status) 
@@ -187,7 +192,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void OnError(int platform, int action, Hashtable throwable) 
+		public override void OnError (PlatformType platform, int action, Hashtable throwable) 
 		{
 			switch (action) 
 			{
@@ -195,7 +200,7 @@ namespace cn.sharesdk.unity3d
 				{ // 1 == Platform.ACTION_AUTHORIZING
 					if (authHandler != null) 
 					{
-						authHandler(ResponseState.Fail, (PlatformType) platform, throwable);
+						authHandler(ResponseState.Fail, platform, throwable);
 					}
 					break;
 				} 
@@ -203,7 +208,7 @@ namespace cn.sharesdk.unity3d
 				{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
 					if (getFriendsHandler != null) 
 					{
-						getFriendsHandler(ResponseState.Fail, (PlatformType) platform, throwable);
+						getFriendsHandler(ResponseState.Fail, platform, throwable);
 					}
 					break;
 				}
@@ -211,7 +216,7 @@ namespace cn.sharesdk.unity3d
 				{ // 8 == Platform.ACTION_USER_INFOR
 					if (showUserHandler != null) 
 					{
-						showUserHandler(ResponseState.Fail, (PlatformType) platform, throwable);
+						showUserHandler(ResponseState.Fail, platform, throwable);
 					}
 					break;
 				} 
@@ -219,14 +224,14 @@ namespace cn.sharesdk.unity3d
 				{ // 9 == Platform.ACTION_SHARE
 					if (shareHandler != null) 
 					{
-						shareHandler(ResponseState.Fail, (PlatformType) platform, throwable);
+						shareHandler(ResponseState.Fail, platform, throwable);
 					}
 					break;
 				} 
 			}
 		}
 
-		public override void OnComplete(int platform, int action, Hashtable res) 
+		public override void OnComplete (PlatformType platform, int action, Hashtable res) 
 		{
 			switch (action) 
 			{
@@ -234,7 +239,7 @@ namespace cn.sharesdk.unity3d
 				{ // 1 == Platform.ACTION_AUTHORIZING
 					if (authHandler != null) 
 					{
-						authHandler(ResponseState.Success, (PlatformType) platform, null);
+						authHandler(ResponseState.Success, platform, null);
 					}
 					break;
 				} 
@@ -242,7 +247,7 @@ namespace cn.sharesdk.unity3d
 				{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
 					if (getFriendsHandler != null) 
 					{
-						getFriendsHandler(ResponseState.Success, (PlatformType) platform, res);
+						getFriendsHandler(ResponseState.Success, platform, res);
 					}
 					break;
 				}
@@ -250,7 +255,7 @@ namespace cn.sharesdk.unity3d
 				{ // 8 == Platform.ACTION_USER_INFOR
 					if (showUserHandler != null) 
 					{
-						showUserHandler(ResponseState.Success, (PlatformType) platform, res);
+						showUserHandler(ResponseState.Success, platform, res);
 					}
 					break;
 				} 
@@ -258,14 +263,14 @@ namespace cn.sharesdk.unity3d
 				{ // 9 == Platform.ACTION_SHARE
 					if (shareHandler != null) 
 					{
-						shareHandler(ResponseState.Success, (PlatformType) platform, res);
+						shareHandler(ResponseState.Success, platform, res);
 					}
 					break;
 				}
 			}
 		}
 
-		public override void OnCancel(int platform, int action) 
+		public override void OnCancel (PlatformType platform, int action) 
 		{
 			switch (action) 
 			{
@@ -273,7 +278,7 @@ namespace cn.sharesdk.unity3d
 				{ // 1 == Platform.ACTION_AUTHORIZING
 					if (authHandler != null) 
 					{
-						authHandler(ResponseState.Cancel, (PlatformType) platform, null);
+						authHandler(ResponseState.Cancel, platform, null);
 					}
 					break;
 				} 
@@ -281,7 +286,7 @@ namespace cn.sharesdk.unity3d
 				{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
 					if (getFriendsHandler != null) 
 					{
-						getFriendsHandler(ResponseState.Cancel, (PlatformType) platform, null);
+						getFriendsHandler(ResponseState.Cancel, platform, null);
 					}
 					break;
 				}
@@ -289,7 +294,7 @@ namespace cn.sharesdk.unity3d
 				{ // 8 == Platform.ACTION_USER_INFOR
 					if (showUserHandler != null) 
 					{
-						showUserHandler(ResponseState.Cancel, (PlatformType) platform, null);
+						showUserHandler(ResponseState.Cancel, platform, null);
 					}
 					break;
 				} 
@@ -297,7 +302,7 @@ namespace cn.sharesdk.unity3d
 				{ // 9 == Platform.ACTION_SHARE
 					if (shareHandler != null) 
 					{
-						shareHandler(ResponseState.Cancel, (PlatformType) platform, null);
+						shareHandler(ResponseState.Cancel, platform, null);
 					}
 					break;
 				}
@@ -305,5 +310,4 @@ namespace cn.sharesdk.unity3d
 		}
 
 	}
-
 }
