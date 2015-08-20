@@ -78,7 +78,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, MenuArrowDirection direction, EventResultListener resultHandler);
+		public abstract void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, EventResultListener resultHandler);
 		
 		/// <summary>
 		/// OGUI share to the specified platform. 

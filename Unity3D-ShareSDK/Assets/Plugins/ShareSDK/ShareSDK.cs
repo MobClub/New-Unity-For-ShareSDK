@@ -209,10 +209,10 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, MenuArrowDirection direction)
+		public void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y)
 		{
 			#if UNITY_ANDROID
-			shareSDKUtils.ShowShareMenu(platforms, content, x, y, direction, shareHandler);			
+			shareSDKUtils.ShowShareMenu(platforms, content, x, y, shareHandler);			
 			#elif UNITY_IPHONE
 			#endif
 		}

@@ -95,7 +95,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, MenuArrowDirection direction, EventResultListener resultHandler) 
+		public override void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, EventResultListener resultHandler) 
 		{
 			ShowShareView(0, content, resultHandler);
 		}

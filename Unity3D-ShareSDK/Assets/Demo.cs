@@ -71,9 +71,9 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
-			ssdk.ShowShareMenu (null, content, 100, 100, MenuArrowDirection.Up);
+			ssdk.ShowShareMenu (null, content, 100, 100);
 		}
-		
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share View"))
 		{
@@ -85,15 +85,13 @@ public class Demo : MonoBehaviour {
 			content["url"] = "http://sharesdk.cn";
 			content["type"] = Convert.ToString((int)ContentType.News);
 			content["siteUrl"] = "http://sharesdk.cn";
+			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";
-			//content["shareTheme"] = "skyblue";//ShareTheme has only two value which are skyblue and classic
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
-
-			//用sharesdk提供的onekeyshare库，用skyblue的theme，指定平台分享
+			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
 			ssdk.ShowShareView (PlatformType.TencentWeibo, content);
-			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
 		}
-		
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Content"))
 		{
