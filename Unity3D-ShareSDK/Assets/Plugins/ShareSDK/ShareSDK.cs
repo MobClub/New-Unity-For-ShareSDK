@@ -132,10 +132,10 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 
-		public bool isClientValid (PlatformType platform)
+		public bool IsClientValid (PlatformType platform)
 		{
 			#if UNITY_ANDROID
-			return shareSDKUtils.isClientValid(platform);			
+			return shareSDKUtils.IsClientValid(platform);			
 			#elif UNITY_IPHONE
 			#endif
 		}

@@ -56,7 +56,7 @@ namespace cn.sharesdk.unity3d
 			return false;
 		}
 
-		public override bool isClientValid (PlatformType platform) 
+		public override bool IsClientValid (PlatformType platform) 
 		{
 			if (ssdk != null) 
 			{

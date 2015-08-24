@@ -49,7 +49,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <returns><c>true</c>, if valid was install, <c>false</c> otherwise.</returns>
 		/// <param name="platform">Platform.</param>
-		public abstract bool isClientValid (PlatformType platform);
+		public abstract bool IsClientValid (PlatformType platform);
 
 		/// <summary>
 		/// Request the user info of the specified platform.
