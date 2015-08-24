@@ -1,6 +1,6 @@
 # New-Unity-For-ShareSDK
 =======================================
-New sample of ShareSDK for Unity, only has android so far.
+There is only android codes in the new sample of ShareSDK for Unity so far.
 =======================================
 
 # ShareSDK for Android
