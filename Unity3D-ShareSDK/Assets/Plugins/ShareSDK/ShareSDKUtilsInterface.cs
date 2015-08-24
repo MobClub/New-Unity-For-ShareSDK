@@ -11,11 +11,6 @@ using System;
 using System.Collections;
 namespace cn.sharesdk.unity3d{
 	public abstract class ShareSDKUtilsInterface{
-		protected EventResultListener authHandler;
-		protected EventResultListener showUserHandler;
-		protected EventResultListener shareHandler;
-		protected EventResultListener getFriendsHandler;
-		protected EventResultListener followFriendHandler;
 
 		/// <summary>
 		/// Sets the platform config.
@@ -29,7 +24,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void Authorize (PlatformType platform, EventResultListener resultHandler);
+		public abstract void Authorize (PlatformType platform);
 		
 		/// <summary>
 		/// Removes the account of the specified platform.
@@ -55,7 +50,7 @@ namespace cn.sharesdk.unity3d{
 		/// Request the user info of the specified platform.
 		/// </summary>
 		/// <param name="platform">Platform.</param>
-		public abstract void GetUserInfo (PlatformType platform, EventResultListener resultHandler);
+		public abstract void GetUserInfo (PlatformType platform);
 
 		/// <summary>
 		/// Share the content to the specified platform with api.
@@ -63,7 +58,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShareContentWithAPI (PlatformType platform, Hashtable content, EventResultListener resultHandler);
+		public abstract void ShareContentWithAPI (PlatformType platform, Hashtable content);
 
 		/// <summary>
 		/// Share the content to the specified platform with api.
@@ -71,14 +66,14 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShareContentWithAPI (PlatformType[] platforms, Hashtable content, EventResultListener resultHandler);
+		public abstract void ShareContentWithAPI (PlatformType[] platforms, Hashtable content);
 		
 		/// <summary>
 		/// GUI share.
 		/// </summary>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y, EventResultListener resultHandler);
+		public abstract void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y);
 		
 		/// <summary>
 		/// OGUI share to the specified platform. 
@@ -86,7 +81,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShowShareView (PlatformType platform, Hashtable content, EventResultListener resultHandler);
+		public abstract void ShowShareView (PlatformType platform, Hashtable content);
 
 		/// <summary>
 		/// Gets the friend list.
@@ -95,7 +90,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void GetFriendList (PlatformType platform, int count, int page, EventResultListener resultHandler);
+		public abstract void GetFriendList (PlatformType platform, int count, int page);
 		
 		
 		/// <summary>
@@ -103,7 +98,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="account">Account.</param>
-		public abstract void FollowFriend (PlatformType platform, String account, EventResultListener followFriendHandler);
+		public abstract void FollowFriend (PlatformType platform, String account);
 
 		/// <summary>
 		/// Gets the auth info.
@@ -116,35 +111,6 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="disable">If set to <c>true</c> disable.</param>
 		public abstract void CloseSSOWhenAuthorize (Boolean open);
-
-		/// <summary>
-		/// Java callback.
-		/// </summary>
-		/// <param name="message">Message.</param>
-		public abstract void OnActionCallback (String message);
-		
-		/// <summary>
-		/// Raises the error event.
-		/// </summary>
-		/// <param name="platform">Platform.</param>
-		/// <param name="action">Action.</param>
-		/// <param name="throwable">Throwable.</param>
-		public abstract void OnError (PlatformType platform, int action, Hashtable throwable);
-		
-		/// <summary>
-		/// Raises the success event.
-		/// </summary>
-		/// <param name="platform">Platform.</param>
-		/// <param name="action">Action.</param>
-		/// <param name="res">Res.</param>
-		public abstract void OnComplete (PlatformType platform, int action, Hashtable res);
-		
-		/// <summary>
-		/// Raises the cancel event.
-		/// </summary>
-		/// <param name="platform">Platform.</param>
-		/// <param name="action">Action.</param>
-		public abstract void OnCancel (PlatformType platform, int action);
 
 	}
 }

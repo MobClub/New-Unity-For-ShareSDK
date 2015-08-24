@@ -44,9 +44,9 @@ namespace cn.sharesdk.unity3d
 			}
 			#if UNITY_ANDROID
 			shareSDKUtils = new AndroidUtils(gameObject);
-			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey, platformConfigs);			
 			#elif UNITY_IPHONE
 			#endif
+			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey, platformConfigs);
 		}
 		
 		/// <summary>
@@ -57,10 +57,177 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		private void _Callback (string data)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.OnActionCallback(data);			
-			#elif UNITY_IPHONE
-			#endif
+			if (data == null) 
+			{
+				return;
+			}
+			
+			Hashtable res = (Hashtable) MiniJSON.jsonDecode(data);
+			if (res == null || res.Count <= 0) 
+			{
+				return;
+			}
+			
+			int status = Convert.ToInt32(res["status"]);
+			PlatformType platform = (PlatformType)Convert.ToInt32(res["platform"]);
+			int action = Convert.ToInt32(res["action"]);
+			// Success = 1, Fail = 2, Cancel = 3
+			switch(status) 
+			{
+			case 1: 
+			{
+				Console.WriteLine(data);
+				Hashtable resp = (Hashtable) res["res"];
+				OnComplete(platform, action, resp);
+				break;
+			} 
+			case 2: 
+			{
+				Console.WriteLine(data);
+				Hashtable throwable = (Hashtable) res["res"];
+				OnError(platform, action, throwable);
+				break;
+			} 
+			case 3: 
+			{
+				OnCancel(platform, action);
+				break;
+			} 
+			}
+		}
+
+		/// <summary>
+		/// Raises the error event.
+		/// </summary>
+		/// <param name="platform">Platform.</param>
+		/// <param name="action">Action.</param>
+		/// <param name="throwable">Throwable.</param>
+		public void OnError (PlatformType platform, int action, Hashtable throwable) 
+		{
+			switch (action) 
+			{
+			case 1: 
+			{ // 1 == Platform.ACTION_AUTHORIZING
+				if (authHandler != null) 
+				{
+					authHandler(ResponseState.Fail, platform, throwable);
+				}
+				break;
+			} 
+			case 2:
+			{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
+				if (getFriendsHandler != null) 
+				{
+					getFriendsHandler(ResponseState.Fail, platform, throwable);
+				}
+				break;
+			}
+			case 8: 
+			{ // 8 == Platform.ACTION_USER_INFOR
+				if (showUserHandler != null) 
+				{
+					showUserHandler(ResponseState.Fail, platform, throwable);
+				}
+				break;
+			} 
+			case 9: 
+			{ // 9 == Platform.ACTION_SHARE
+				if (shareHandler != null) 
+				{
+					shareHandler(ResponseState.Fail, platform, throwable);
+				}
+				break;
+			} 
+			}
+		}
+
+		/// <summary>
+		/// Raises the success event.
+		/// </summary>
+		/// <param name="platform">Platform.</param>
+		/// <param name="action">Action.</param>
+		/// <param name="res">Res.</param>
+		public void OnComplete (PlatformType platform, int action, Hashtable res) 
+		{
+			switch (action) 
+			{
+			case 1: 
+			{ // 1 == Platform.ACTION_AUTHORIZING
+				if (authHandler != null) 
+				{
+					authHandler(ResponseState.Success, platform, null);
+				}
+				break;
+			} 
+			case 2:
+			{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
+				if (getFriendsHandler != null) 
+				{
+					getFriendsHandler(ResponseState.Success, platform, res);
+				}
+				break;
+			}
+			case 8: 
+			{ // 8 == Platform.ACTION_USER_INFOR
+				if (showUserHandler != null) 
+				{
+					showUserHandler(ResponseState.Success, platform, res);
+				}
+				break;
+			} 
+			case 9: 
+			{ // 9 == Platform.ACTION_SHARE
+				if (shareHandler != null) 
+				{
+					shareHandler(ResponseState.Success, platform, res);
+				}
+				break;
+			}
+			}
+		}
+
+		/// <summary>
+		/// Raises the cancel event.
+		/// </summary>
+		/// <param name="platform">Platform.</param>
+		/// <param name="action">Action.</param>
+		public void OnCancel (PlatformType platform, int action) 
+		{
+			switch (action) 
+			{
+			case 1: 
+			{ // 1 == Platform.ACTION_AUTHORIZING
+				if (authHandler != null) 
+				{
+					authHandler(ResponseState.Cancel, platform, null);
+				}
+				break;
+			} 
+			case 2:
+			{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
+				if (getFriendsHandler != null) 
+				{
+					getFriendsHandler(ResponseState.Cancel, platform, null);
+				}
+				break;
+			}
+			case 8: 
+			{ // 8 == Platform.ACTION_USER_INFOR
+				if (showUserHandler != null) 
+				{
+					showUserHandler(ResponseState.Cancel, platform, null);
+				}
+				break;
+			} 
+			case 9: 
+			{ // 9 == Platform.ACTION_SHARE
+				if (shareHandler != null) 
+				{
+					shareHandler(ResponseState.Cancel, platform, null);
+				}
+				break;
+			}
+			}
 		}
 
 		/// <summary>
@@ -75,10 +242,7 @@ namespace cn.sharesdk.unity3d
 		public void RigisterAppAndSetPlatformConfig (String appKey, Hashtable configInfo)
 		{			
 			// if you don't add ShareSDK.xml in your assets folder, use the following line
-			#if UNITY_ANDROID
 			shareSDKUtils.RigisterAppAndSetPlatformConfig (appKey, configInfo);			
-			#elif UNITY_IPHONE
-			#endif
 		}
 		
 		/// <summary>
@@ -95,10 +259,7 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void Authorize (PlatformType platform)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.Authorize(platform, authHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.Authorize(platform);			
 		}
 		
 		/// <summary>
@@ -109,10 +270,7 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void CancelAuthorize (PlatformType platform)
 		{
-			#if UNITY_ANDROID
 			shareSDKUtils.CancelAuthorize(platform);			
-			#elif UNITY_IPHONE
-			#endif
 		}
 		
 		/// <summary>
@@ -126,18 +284,12 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public bool IsAuthorizedValid (PlatformType platform)
 		{
-			#if UNITY_ANDROID
 			return shareSDKUtils.IsAuthorizedValid(platform);			
-			#elif UNITY_IPHONE
-			#endif
 		}
 
 		public bool IsClientValid (PlatformType platform)
 		{
-			#if UNITY_ANDROID
 			return shareSDKUtils.IsClientValid(platform);			
-			#elif UNITY_IPHONE
-			#endif
 		}
 		
 		/// <summary>
@@ -151,10 +303,7 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void GetUserInfo (PlatformType platform)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.GetUserInfo(platform, showUserHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.GetUserInfo(platform);			
 		}
 
 		/// <summary>
@@ -171,10 +320,7 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void ShareContentWithAPI(PlatformType platform, Hashtable content)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.ShareContentWithAPI(platform, content, shareHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.ShareContentWithAPI(platform, content);			
 		}
 
 		/// <summary>
@@ -191,10 +337,7 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void ShareContentWithAPI(PlatformType[] platforms, Hashtable content)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.ShareContentWithAPI(platforms, content, shareHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.ShareContentWithAPI(platforms, content);			
 		}
 				
 		/// <summary>
@@ -211,10 +354,7 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.ShowShareMenu(platforms, content, x, y, shareHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.ShowShareMenu(platforms, content, x, y);			
 		}
 		
 		/// <summary>
@@ -231,11 +371,8 @@ namespace cn.sharesdk.unity3d
 		/// </param>
 		public void ShowShareView (PlatformType platform, Hashtable content)
 		{			
-			#if UNITY_ANDROID
 			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
-			shareSDKUtils.ShowShareView(platform, content, shareHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.ShowShareView(platform, content);			
 		}
 
 		/// <summary>
@@ -246,10 +383,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name="page">Page.</param>
 		public void GetFriendList (PlatformType platform, int count, int page)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.GetFriendList (platform, count, page, getFriendsHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.GetFriendList (platform, count, page);			
 		}
 
 		/// <summary>
@@ -259,10 +393,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name="account">Account.</param>
 		public void FollowFriend (PlatformType platform, String account)
 		{
-			#if UNITY_ANDROID
-			shareSDKUtils.FollowFriend (platform, account, followFriendHandler);			
-			#elif UNITY_IPHONE
-			#endif
+			shareSDKUtils.FollowFriend (platform, account);			
 		}
 
 		/// <summary>
@@ -271,10 +402,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name="type">Type.</param>
 		public Hashtable GetAuthInfo (PlatformType platform)
 		{
-			#if UNITY_ANDROID
 			return shareSDKUtils.GetAuthInfo (platform);			
-			#elif UNITY_IPHONE
-			#endif
 		}
 
 		/// <summary>
@@ -282,11 +410,13 @@ namespace cn.sharesdk.unity3d
 		/// </summary>
 		/// <param name="open">If set to <c>true</c> open.</param>
 		public void CloseSSOWhenAuthorize(Boolean open){
-			#if UNITY_ANDROID
 			shareSDKUtils.CloseSSOWhenAuthorize (open);			
-			#elif UNITY_IPHONE
-			#endif
 		}
+
+		/// <summary>
+		/// Event result listener.
+		/// </summary>
+		public delegate void EventResultListener (ResponseState state, PlatformType type, Hashtable data);
 
 	}
 }
