@@ -204,7 +204,7 @@ public class ShareSDKUtils {
 			map.put("expiresTime", plat.getDb().getExpiresTime());
 			map.put("token", plat.getDb().getToken());
 			map.put("tokenSecret", plat.getDb().getTokenSecret());
-			map.put("gender", plat.getDb().getUserGender());
+			map.put("userGender", plat.getDb().getUserGender());
 			map.put("userIcon", plat.getDb().getUserIcon());
 			map.put("userID", plat.getDb().getUserId());
 			map.put("openID", plat.getDb().get("openid"));
@@ -259,7 +259,6 @@ public class ShareSDKUtils {
 				Hashon hashon = new Hashon();
 				HashMap<String, Object> map = CSMapToJavaMap(hashon.fromJson(content));
 				OnekeyShare oks = new OnekeyShare();
-				oks.disableSSOWhenAuthorize();
 				if (platform > 0) {
 					String name = ShareSDK.platformIdToName(platform);
 					if (DEBUG) {
