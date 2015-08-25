@@ -74,25 +74,25 @@ namespace cn.sharesdk.unity3d
 			// Success = 1, Fail = 2, Cancel = 3
 			switch(status) 
 			{
-			case 1: 
-			{
-				Console.WriteLine(data);
-				Hashtable resp = (Hashtable) res["res"];
-				OnComplete(platform, action, resp);
-				break;
-			} 
-			case 2: 
-			{
-				Console.WriteLine(data);
-				Hashtable throwable = (Hashtable) res["res"];
-				OnError(platform, action, throwable);
-				break;
-			} 
-			case 3: 
-			{
-				OnCancel(platform, action);
-				break;
-			} 
+				case 1: 
+				{
+					Console.WriteLine(data);
+					Hashtable resp = (Hashtable) res["res"];
+					OnComplete(platform, action, resp);
+					break;
+				} 
+				case 2: 
+				{
+					Console.WriteLine(data);
+					Hashtable throwable = (Hashtable) res["res"];
+					OnError(platform, action, throwable);
+					break;
+				} 
+				case 3: 
+				{
+					OnCancel(platform, action);
+					break;
+				} 
 			}
 		}
 
@@ -119,6 +119,14 @@ namespace cn.sharesdk.unity3d
 				if (getFriendsHandler != null) 
 				{
 					getFriendsHandler(ResponseState.Fail, platform, throwable);
+				}
+				break;
+			}
+			case 6:
+			{ //6 == Platform.ACTION_FOLLOWING_USER
+				if (followFriendHandler != null) 
+				{
+					followFriendHandler(ResponseState.Fail, platform, throwable);
 				}
 				break;
 			}
@@ -167,6 +175,14 @@ namespace cn.sharesdk.unity3d
 				}
 				break;
 			}
+			case 6:
+			{ //6 == Platform.ACTION_FOLLOWING_USER
+				if (followFriendHandler != null) 
+				{
+					followFriendHandler(ResponseState.Fail, platform, res);
+				}
+				break;
+			}
 			case 8: 
 			{ // 8 == Platform.ACTION_USER_INFOR
 				if (showUserHandler != null) 
@@ -208,6 +224,14 @@ namespace cn.sharesdk.unity3d
 				if (getFriendsHandler != null) 
 				{
 					getFriendsHandler(ResponseState.Cancel, platform, null);
+				}
+				break;
+			}
+			case 6:
+			{ //6 == Platform.ACTION_FOLLOWING_USER
+				if (followFriendHandler != null) 
+				{
+					followFriendHandler(ResponseState.Fail, platform, null);
 				}
 				break;
 			}
