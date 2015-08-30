@@ -13,8 +13,7 @@ namespace cn.sharesdk.unity3d
 	/// </summary>
 	public class ShareSDK : MonoBehaviour 
 	{
-
-		public string appkey = "androidv1101";
+		public AppKey appkey;
 		public DevInfoSet devInfo;
 		private ShareSDKUtilsInterface shareSDKUtils;
 
@@ -46,7 +45,8 @@ namespace cn.sharesdk.unity3d
 			shareSDKUtils = new AndroidUtils(gameObject);
 			#elif UNITY_IPHONE
 			#endif
-			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey, platformConfigs);
+			appkey = new AppKey ();
+			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey.appKey, platformConfigs);
 		}
 		
 		/// <summary>
@@ -342,9 +342,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public void ShareContentWithAPI(PlatformType platform, Hashtable content)
+		public void ShareContent(PlatformType platform, Hashtable content)
 		{
-			shareSDKUtils.ShareContentWithAPI(platform, content);			
+			shareSDKUtils.ShareContent(platform, content);			
 		}
 
 		/// <summary>
@@ -359,9 +359,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public void ShareContentWithAPI(PlatformType[] platforms, Hashtable content)
+		public void ShareContent(PlatformType[] platforms, Hashtable content)
 		{
-			shareSDKUtils.ShareContentWithAPI(platforms, content);			
+			shareSDKUtils.ShareContent(platforms, content);			
 		}
 				
 		/// <summary>
@@ -415,9 +415,9 @@ namespace cn.sharesdk.unity3d
 		/// </summary>
 		/// <param name="type">Type.</param>
 		/// <param name="account">Account.</param>
-		public void FollowFriend (PlatformType platform, String account)
+		public void AddFriend (PlatformType platform, String account)
 		{
-			shareSDKUtils.FollowFriend (platform, account);			
+			shareSDKUtils.AddFriend (platform, account);			
 		}
 
 		/// <summary>

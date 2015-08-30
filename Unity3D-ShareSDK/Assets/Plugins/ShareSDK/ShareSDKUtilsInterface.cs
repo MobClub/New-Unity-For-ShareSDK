@@ -58,7 +58,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShareContentWithAPI (PlatformType platform, Hashtable content);
+		public abstract void ShareContent (PlatformType platform, Hashtable content);
 
 		/// <summary>
 		/// Share the content to the specified platform with api.
@@ -66,7 +66,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShareContentWithAPI (PlatformType[] platforms, Hashtable content);
+		public abstract void ShareContent (PlatformType[] platforms, Hashtable content);
 		
 		/// <summary>
 		/// GUI share.
@@ -98,7 +98,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="account">Account.</param>
-		public abstract void FollowFriend (PlatformType platform, String account);
+		public abstract void AddFriend (PlatformType platform, String account);
 
 		/// <summary>
 		/// Gets the auth info.

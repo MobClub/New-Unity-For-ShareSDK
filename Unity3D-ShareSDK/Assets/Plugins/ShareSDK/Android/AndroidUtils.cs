@@ -73,13 +73,13 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void ShareContentWithAPI (PlatformType platform, Hashtable content) 
+		public override void ShareContent (PlatformType platform, Hashtable content) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  ShareContent to one platform" );
-			ShareContentWithAPI (new PlatformType[]{ platform }, content);
+			ShareContent (new PlatformType[]{ platform }, content);
 		}
 
-		public override void ShareContentWithAPI (PlatformType[] platforms, Hashtable content) 
+		public override void ShareContent (PlatformType[] platforms, Hashtable content) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Share" );
 			String json = MiniJSON.jsonEncode(content);
@@ -116,7 +116,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void FollowFriend (PlatformType platform, String account)
+		public override void AddFriend (PlatformType platform, String account)
 		{
 			Debug.Log("AndroidUtils  ===>>>  FollowFriend" );
 			if (ssdk != null) 

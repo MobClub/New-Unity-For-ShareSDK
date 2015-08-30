@@ -106,7 +106,7 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 
-			ssdk.ShareContentWithAPI (PlatformType.SinaWeibo, content);
+			ssdk.ShareContent (PlatformType.SinaWeibo, content);
 		}
 
 		btnTop += btnHeight + 20 * scale;
@@ -138,10 +138,10 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Follow Friend "))
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Add Friend "))
 		{
 			//关注新浪微博
-			ssdk.FollowFriend (PlatformType.SinaWeibo, "3189087725");			
+			ssdk.AddFriend (PlatformType.SinaWeibo, "3189087725");			
 		}
 
 	}

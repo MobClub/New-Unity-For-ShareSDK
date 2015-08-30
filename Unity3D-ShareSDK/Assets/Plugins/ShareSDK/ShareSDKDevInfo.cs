@@ -4,7 +4,12 @@ using System;
 
 namespace cn.sharesdk.unity3d 
 {
-	
+	[Serializable]
+	public class AppKey 
+	{
+		public string appKey = "androidv1101";
+	}
+
 	[Serializable]
 	public class DevInfoSet
 	{
