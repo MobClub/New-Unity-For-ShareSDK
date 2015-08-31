@@ -69,6 +69,7 @@ namespace cn.sharesdk.unity3d
 			}
 			
 			int status = Convert.ToInt32(res["status"]);
+			int reqID = Convert.ToInt32(res["reqID"]);
 			PlatformType platform = (PlatformType)Convert.ToInt32(res["platform"]);
 			int action = Convert.ToInt32(res["action"]);
 			// Success = 1, Fail = 2, Cancel = 3
@@ -78,19 +79,19 @@ namespace cn.sharesdk.unity3d
 				{
 					Console.WriteLine(data);
 					Hashtable resp = (Hashtable) res["res"];
-					OnComplete(platform, action, resp);
+					OnComplete(reqID, platform, action, resp);
 					break;
 				} 
 				case 2: 
 				{
 					Console.WriteLine(data);
 					Hashtable throwable = (Hashtable) res["res"];
-					OnError(platform, action, throwable);
+					OnError(reqID, platform, action, throwable);
 					break;
 				} 
 				case 3: 
 				{
-					OnCancel(platform, action);
+					OnCancel(reqID, platform, action);
 					break;
 				} 
 			}
@@ -102,7 +103,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name="platform">Platform.</param>
 		/// <param name="action">Action.</param>
 		/// <param name="throwable">Throwable.</param>
-		public void OnError (PlatformType platform, int action, Hashtable throwable) 
+		public void OnError (int reqID, PlatformType platform, int action, Hashtable throwable) 
 		{
 			switch (action) 
 			{
@@ -110,7 +111,7 @@ namespace cn.sharesdk.unity3d
 			{ // 1 == Platform.ACTION_AUTHORIZING
 				if (authHandler != null) 
 				{
-					authHandler(ResponseState.Fail, platform, throwable);
+					authHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
 			} 
@@ -118,7 +119,7 @@ namespace cn.sharesdk.unity3d
 			{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
 				if (getFriendsHandler != null) 
 				{
-					getFriendsHandler(ResponseState.Fail, platform, throwable);
+					getFriendsHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
 			}
@@ -126,7 +127,7 @@ namespace cn.sharesdk.unity3d
 			{ //6 == Platform.ACTION_FOLLOWING_USER
 				if (followFriendHandler != null) 
 				{
-					followFriendHandler(ResponseState.Fail, platform, throwable);
+					followFriendHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
 			}
@@ -134,7 +135,7 @@ namespace cn.sharesdk.unity3d
 			{ // 8 == Platform.ACTION_USER_INFOR
 				if (showUserHandler != null) 
 				{
-					showUserHandler(ResponseState.Fail, platform, throwable);
+					showUserHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
 			} 
@@ -142,7 +143,7 @@ namespace cn.sharesdk.unity3d
 			{ // 9 == Platform.ACTION_SHARE
 				if (shareHandler != null) 
 				{
-					shareHandler(ResponseState.Fail, platform, throwable);
+					shareHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
 			} 
@@ -155,7 +156,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name="platform">Platform.</param>
 		/// <param name="action">Action.</param>
 		/// <param name="res">Res.</param>
-		public void OnComplete (PlatformType platform, int action, Hashtable res) 
+		public void OnComplete (int reqID, PlatformType platform, int action, Hashtable res) 
 		{
 			switch (action) 
 			{
@@ -163,7 +164,7 @@ namespace cn.sharesdk.unity3d
 			{ // 1 == Platform.ACTION_AUTHORIZING
 				if (authHandler != null) 
 				{
-					authHandler(ResponseState.Success, platform, null);
+					authHandler(reqID, ResponseState.Success, platform, null);
 				}
 				break;
 			} 
@@ -171,7 +172,7 @@ namespace cn.sharesdk.unity3d
 			{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
 				if (getFriendsHandler != null) 
 				{
-					getFriendsHandler(ResponseState.Success, platform, res);
+					getFriendsHandler(reqID, ResponseState.Success, platform, res);
 				}
 				break;
 			}
@@ -179,7 +180,7 @@ namespace cn.sharesdk.unity3d
 			{ //6 == Platform.ACTION_FOLLOWING_USER
 				if (followFriendHandler != null) 
 				{
-					followFriendHandler(ResponseState.Fail, platform, res);
+					followFriendHandler(reqID, ResponseState.Success, platform, res);
 				}
 				break;
 			}
@@ -187,7 +188,7 @@ namespace cn.sharesdk.unity3d
 			{ // 8 == Platform.ACTION_USER_INFOR
 				if (showUserHandler != null) 
 				{
-					showUserHandler(ResponseState.Success, platform, res);
+					showUserHandler(reqID, ResponseState.Success, platform, res);
 				}
 				break;
 			} 
@@ -195,7 +196,7 @@ namespace cn.sharesdk.unity3d
 			{ // 9 == Platform.ACTION_SHARE
 				if (shareHandler != null) 
 				{
-					shareHandler(ResponseState.Success, platform, res);
+					shareHandler(reqID, ResponseState.Success, platform, res);
 				}
 				break;
 			}
@@ -207,7 +208,7 @@ namespace cn.sharesdk.unity3d
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="action">Action.</param>
-		public void OnCancel (PlatformType platform, int action) 
+		public void OnCancel (int reqID, PlatformType platform, int action) 
 		{
 			switch (action) 
 			{
@@ -215,7 +216,7 @@ namespace cn.sharesdk.unity3d
 			{ // 1 == Platform.ACTION_AUTHORIZING
 				if (authHandler != null) 
 				{
-					authHandler(ResponseState.Cancel, platform, null);
+					authHandler(reqID, ResponseState.Cancel, platform, null);
 				}
 				break;
 			} 
@@ -223,7 +224,7 @@ namespace cn.sharesdk.unity3d
 			{ //2 == Platform.ACTION_GETTING_FRIEND_LIST
 				if (getFriendsHandler != null) 
 				{
-					getFriendsHandler(ResponseState.Cancel, platform, null);
+					getFriendsHandler(reqID, ResponseState.Cancel, platform, null);
 				}
 				break;
 			}
@@ -231,7 +232,7 @@ namespace cn.sharesdk.unity3d
 			{ //6 == Platform.ACTION_FOLLOWING_USER
 				if (followFriendHandler != null) 
 				{
-					followFriendHandler(ResponseState.Fail, platform, null);
+					followFriendHandler(reqID, ResponseState.Cancel, platform, null);
 				}
 				break;
 			}
@@ -239,7 +240,7 @@ namespace cn.sharesdk.unity3d
 			{ // 8 == Platform.ACTION_USER_INFOR
 				if (showUserHandler != null) 
 				{
-					showUserHandler(ResponseState.Cancel, platform, null);
+					showUserHandler(reqID, ResponseState.Cancel, platform, null);
 				}
 				break;
 			} 
@@ -247,7 +248,7 @@ namespace cn.sharesdk.unity3d
 			{ // 9 == Platform.ACTION_SHARE
 				if (shareHandler != null) 
 				{
-					shareHandler(ResponseState.Cancel, platform, null);
+					shareHandler(reqID, ResponseState.Cancel, platform, null);
 				}
 				break;
 			}
@@ -281,9 +282,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Result handler.
 		/// </param>
-		public void Authorize (PlatformType platform)
+		public void Authorize (int reqID, PlatformType platform)
 		{
-			shareSDKUtils.Authorize(platform);			
+			shareSDKUtils.Authorize(reqID, platform);			
 		}
 		
 		/// <summary>
@@ -325,9 +326,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void GetUserInfo (PlatformType platform)
+		public void GetUserInfo (int reqID, PlatformType platform)
 		{
-			shareSDKUtils.GetUserInfo(platform);			
+			shareSDKUtils.GetUserInfo(reqID, platform);			
 		}
 
 		/// <summary>
@@ -342,9 +343,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public void ShareContent(PlatformType platform, Hashtable content)
+		public void ShareContent(int reqID, PlatformType platform, Hashtable content)
 		{
-			shareSDKUtils.ShareContent(platform, content);			
+			shareSDKUtils.ShareContent(reqID, platform, content);			
 		}
 
 		/// <summary>
@@ -359,9 +360,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public void ShareContent(PlatformType[] platforms, Hashtable content)
+		public void ShareContent(int reqID, PlatformType[] platforms, Hashtable content)
 		{
-			shareSDKUtils.ShareContent(platforms, content);			
+			shareSDKUtils.ShareContent(reqID, platforms, content);			
 		}
 				
 		/// <summary>
@@ -376,9 +377,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y)
+		public void ShowShareMenu (int reqID, PlatformType[] platforms, Hashtable content, int x, int y)
 		{
-			shareSDKUtils.ShowShareMenu(platforms, content, x, y);			
+			shareSDKUtils.ShowShareMenu(reqID, platforms, content, x, y);			
 		}
 		
 		/// <summary>
@@ -393,10 +394,10 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareView (PlatformType platform, Hashtable content)
+		public void ShowShareView (int reqID, PlatformType platform, Hashtable content)
 		{			
 			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
-			shareSDKUtils.ShowShareView(platform, content);			
+			shareSDKUtils.ShowShareView(reqID, platform, content);			
 		}
 
 		/// <summary>
@@ -405,9 +406,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name="type">Type.</param>
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
-		public void GetFriendList (PlatformType platform, int count, int page)
+		public void GetFriendList (int reqID, PlatformType platform, int count, int page)
 		{
-			shareSDKUtils.GetFriendList (platform, count, page);			
+			shareSDKUtils.GetFriendList (reqID, platform, count, page);			
 		}
 
 		/// <summary>
@@ -415,9 +416,9 @@ namespace cn.sharesdk.unity3d
 		/// </summary>
 		/// <param name="type">Type.</param>
 		/// <param name="account">Account.</param>
-		public void AddFriend (PlatformType platform, String account)
+		public void AddFriend (int reqID, PlatformType platform, String account)
 		{
-			shareSDKUtils.AddFriend (platform, account);			
+			shareSDKUtils.AddFriend (reqID, platform, account);			
 		}
 
 		/// <summary>
@@ -440,7 +441,7 @@ namespace cn.sharesdk.unity3d
 		/// <summary>
 		/// Event result listener.
 		/// </summary>
-		public delegate void EventResultListener (ResponseState state, PlatformType type, Hashtable data);
+		public delegate void EventResultListener (int reqID, ResponseState state, PlatformType type, Hashtable data);
 
 	}
 }

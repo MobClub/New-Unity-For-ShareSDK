@@ -24,7 +24,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void Authorize (PlatformType platform);
+		public abstract void Authorize (int reqID, PlatformType platform);
 		
 		/// <summary>
 		/// Removes the account of the specified platform.
@@ -50,7 +50,7 @@ namespace cn.sharesdk.unity3d{
 		/// Request the user info of the specified platform.
 		/// </summary>
 		/// <param name="platform">Platform.</param>
-		public abstract void GetUserInfo (PlatformType platform);
+		public abstract void GetUserInfo (int reqID, PlatformType platform);
 
 		/// <summary>
 		/// Share the content to the specified platform with api.
@@ -58,7 +58,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShareContent (PlatformType platform, Hashtable content);
+		public abstract void ShareContent (int reqID, PlatformType platform, Hashtable content);
 
 		/// <summary>
 		/// Share the content to the specified platform with api.
@@ -66,14 +66,14 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShareContent (PlatformType[] platforms, Hashtable content);
+		public abstract void ShareContent (int reqID, PlatformType[] platforms, Hashtable content);
 		
 		/// <summary>
 		/// GUI share.
 		/// </summary>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y);
+		public abstract void ShowShareMenu (int reqID, PlatformType[] platforms, Hashtable content, int x, int y);
 		
 		/// <summary>
 		/// OGUI share to the specified platform. 
@@ -81,7 +81,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="platform">Platform.</param>
 		/// <param name="content">Content.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void ShowShareView (PlatformType platform, Hashtable content);
+		public abstract void ShowShareView (int reqID, PlatformType platform, Hashtable content);
 
 		/// <summary>
 		/// Gets the friend list.
@@ -90,7 +90,7 @@ namespace cn.sharesdk.unity3d{
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
 		/// <param name="resultHandler">Result handler.</param>
-		public abstract void GetFriendList (PlatformType platform, int count, int page);
+		public abstract void GetFriendList (int reqID, PlatformType platform, int count, int page);
 		
 		
 		/// <summary>
@@ -98,7 +98,7 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		/// <param name="platform">Platform.</param>
 		/// <param name="account">Account.</param>
-		public abstract void AddFriend (PlatformType platform, String account);
+		public abstract void AddFriend (int reqID, PlatformType platform, String account);
 
 		/// <summary>
 		/// Gets the auth info.

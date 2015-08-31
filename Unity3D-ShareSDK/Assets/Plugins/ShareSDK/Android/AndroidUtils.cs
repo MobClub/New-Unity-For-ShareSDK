@@ -29,12 +29,12 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override void Authorize (PlatformType platform) 
+		public override void Authorize (int reqID, PlatformType platform) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Authorize" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("authorize", (int)platform);
+				ssdk.CallStatic("authorize", reqID, (int)platform);
 			}
 		}
 
@@ -64,22 +64,22 @@ namespace cn.sharesdk.unity3d
 			return false;
 		}
 
-		public override void GetUserInfo (PlatformType platform) 
+		public override void GetUserInfo (int reqID, PlatformType platform) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  ShowUser" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("showUser", (int)platform);
+				ssdk.CallStatic("showUser", reqID, (int)platform);
 			}
 		}
 
-		public override void ShareContent (PlatformType platform, Hashtable content) 
+		public override void ShareContent (int reqID, PlatformType platform, Hashtable content) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  ShareContent to one platform" );
-			ShareContent (new PlatformType[]{ platform }, content);
+			ShareContent (reqID, new PlatformType[]{ platform }, content);
 		}
 
-		public override void ShareContent (PlatformType[] platforms, Hashtable content) 
+		public override void ShareContent (int reqID, PlatformType[] platforms, Hashtable content) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  Share" );
 			String json = MiniJSON.jsonEncode(content);
@@ -87,41 +87,41 @@ namespace cn.sharesdk.unity3d
 			{
 				foreach (PlatformType platform in platforms)
 				{
-					ssdk.CallStatic("shareContent", (int)platform, json);
+					ssdk.CallStatic("shareContent", reqID, (int)platform, json);
 				}
 			}
 		}
 
-		public override void ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y) 
+		public override void ShowShareMenu (int reqID, PlatformType[] platforms, Hashtable content, int x, int y) 
 		{
-			ShowShareView(0, content);
+			ShowShareView(reqID, 0, content);
 		}
 
-		public override void ShowShareView (PlatformType platform, Hashtable content) 
+		public override void ShowShareView (int reqID, PlatformType platform, Hashtable content) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  OnekeyShare platform ===" + (int)platform );
 			String json = MiniJSON.jsonEncode(content);
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("onekeyShare", (int)platform, json);
+				ssdk.CallStatic("onekeyShare", reqID, (int)platform, json);
 			}
 		}
 		
-		public override void GetFriendList (PlatformType platform, int count, int page) 
+		public override void GetFriendList (int reqID, PlatformType platform, int count, int page) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  GetFriendList" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("getFriendList", (int)platform, count, page);
+				ssdk.CallStatic("getFriendList", reqID, (int)platform, count, page);
 			}
 		}
 
-		public override void AddFriend (PlatformType platform, String account)
+		public override void AddFriend (int reqID, PlatformType platform, String account)
 		{
 			Debug.Log("AndroidUtils  ===>>>  FollowFriend" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("followFriend", (int)platform, account);
+				ssdk.CallStatic("followFriend", reqID, (int)platform, account);
 			}
 		}
 
