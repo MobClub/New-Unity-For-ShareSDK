@@ -1,7 +1,6 @@
 package cn.sharesdk.unity3d;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -12,7 +11,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
-import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
@@ -35,7 +33,8 @@ public class ShareSDKUtils {
 	
 	private static Context context;
 	private static Callback uiCallback;
-	private static PlatformActionListener paListener;
+	private static String u3dGameObject;
+	private static String u3dCallback;
 	
 	public static void prepare(final String gameObject,final String callback) {
 		if (DEBUG) {
@@ -51,25 +50,15 @@ public class ShareSDKUtils {
 				}
 			};
 		}
-		if (paListener == null) {
-			paListener = new PlatformActionListener() {
-				public void onError(Platform platform, int action, Throwable t) {
-					String resp = javaActionResToCS(platform, action, t);
-					UnityPlayer.UnitySendMessage(gameObject, callback, resp);
-				}
-				
-				public void onComplete(Platform platform, int action,
-						HashMap<String, Object> res) {
-					String resp = javaActionResToCS(platform, action, res);
-					UnityPlayer.UnitySendMessage(gameObject, callback, resp);
-				}
-				
-				public void onCancel(Platform platform, int action) {
-					String resp = javaActionResToCS(platform, action);
-					UnityPlayer.UnitySendMessage(gameObject, callback, resp);
-				}
-			};
+		
+		if(!TextUtils.isEmpty(gameObject)) {
+			u3dGameObject = gameObject;
 		}
+		
+		if(!TextUtils.isEmpty(callback)) {
+			u3dCallback = callback;
+		}
+	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -95,13 +84,14 @@ public class ShareSDKUtils {
 		}
 	}
 	
-	public static void authorize(int platform) {
+	public static void authorize(int reqID, int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.authorize");
 		}
 		Message msg = new Message();
 		msg.what = MSG_AUTHORIZE;
 		msg.arg1 = platform;
+		msg.arg2 = reqID;
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 	
@@ -132,17 +122,18 @@ public class ShareSDKUtils {
 		return plat.isClientValid();
 	}
 	
-	public static void showUser(int platform) {
+	public static void showUser(int reqID, int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.showUser");
 		}
 		Message msg = new Message();
 		msg.what = MSG_SHOW_USER;
 		msg.arg1 = platform;
+		msg.arg2 = reqID;
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 	
-	public static void shareContent(int platform, String content) {
+	public static void shareContent(int reqID, int platform, String content) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.share");
 		}
@@ -150,10 +141,11 @@ public class ShareSDKUtils {
 		msg.what = MSG_SHARE;
 		msg.arg1 = platform;
 		msg.obj = content;
+		msg.arg2 = reqID;
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 	
-	public static void onekeyShare(int platform, String content) {
+	public static void onekeyShare(int reqID, int platform, String content) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.OnekeyShare");
 		}
@@ -161,16 +153,18 @@ public class ShareSDKUtils {
 		msg.what = MSG_ONEKEY_SAHRE;
 		msg.arg1 = platform;
 		msg.obj = content;
+		msg.arg2 = reqID;
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 
-	public static void getFriendList(int platform, int count, int page) {
+	public static void getFriendList(int reqID, int platform, int count, int page) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.getFriendList");
 		}
 		Message msg = new Message();
 		msg.what = MSG_GET_FRIENDLIST;
 		msg.arg1 = platform;
+		msg.arg2 = reqID;
 		Bundle data = new Bundle();
 		data.putInt("page", page);
 		data.putInt("count", count);
@@ -178,7 +172,7 @@ public class ShareSDKUtils {
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 	
-	public static void followFriend(int platform, String account) {
+	public static void followFriend(int reqID, int platform, String account) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.followFriend");
 		}
@@ -187,6 +181,7 @@ public class ShareSDKUtils {
 		msg.what = MSG_FOLLOW_FRIEND;
 		msg.arg1 = platform;
 		msg.obj = account;
+		msg.arg2 = reqID; 
 		UIHandler.sendMessage(msg, uiCallback);
 	}
 
@@ -221,6 +216,8 @@ public class ShareSDKUtils {
 		switch (msg.what) {			
 			case MSG_AUTHORIZE: {
 				int platform = msg.arg1;
+				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
+				paListener.setReqID(msg.arg2);
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(context, name);
 				plat.setPlatformActionListener(paListener);
@@ -230,6 +227,8 @@ public class ShareSDKUtils {
 			break;
 			case MSG_SHOW_USER: {
 				int platform = msg.arg1;
+				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
+				paListener.setReqID(msg.arg2);
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(context, name);
 				plat.setPlatformActionListener(paListener);
@@ -239,6 +238,8 @@ public class ShareSDKUtils {
 			break;
 			case MSG_SHARE: {
 				int platform = msg.arg1;
+				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
+				paListener.setReqID(msg.arg2);
 				String content = (String) msg.obj;
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(context, name);
@@ -255,6 +256,8 @@ public class ShareSDKUtils {
 			break;
 			case MSG_ONEKEY_SAHRE: {
 				int platform = msg.arg1;
+				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
+				paListener.setReqID(msg.arg2);
 				String content = (String) msg.obj;
 				Hashon hashon = new Hashon();
 				HashMap<String, Object> map = CSMapToJavaMap(hashon.fromJson(content));
@@ -307,6 +310,8 @@ public class ShareSDKUtils {
 			break;
 			case MSG_GET_FRIENDLIST:{
 				int platform = msg.arg1;
+				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
+				paListener.setReqID(msg.arg2);
 				int page = msg.getData().getInt("page");
 				int count = msg.getData().getInt("count");
 				String name = ShareSDK.platformIdToName(platform);
@@ -318,6 +323,8 @@ public class ShareSDKUtils {
 			break;
 			case MSG_FOLLOW_FRIEND:{
 				int platform = msg.arg1;
+				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
+				paListener.setReqID(msg.arg2);
 				String account = (String) msg.obj;
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(context, name);
@@ -330,59 +337,6 @@ public class ShareSDKUtils {
 		return false;
 	}
 	
-	// ==================== java tools =====================
-	
-	private static String javaActionResToCS(Platform platform, int action, Throwable t) {
-		int platformId = ShareSDK.platformNameToId(platform.getName());
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("platform", platformId);
-		map.put("action", action);
-		map.put("status", 2); // Success = 1, Fail = 2, Cancel = 3
-		map.put("res", throwableToMap(t));
-		Hashon hashon = new Hashon();
-		return hashon.fromHashMap(map);
-	}
-	
-	private static String javaActionResToCS(Platform platform, int action, HashMap<String, Object> res) {
-		int platformId = ShareSDK.platformNameToId(platform.getName());
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("platform", platformId);
-		map.put("action", action);
-		map.put("status", 1); // Success = 1, Fail = 2, Cancel = 3
-		map.put("res", res);
-		Hashon hashon = new Hashon();
-		return hashon.fromHashMap(map);
-	}
-	
-	private static String javaActionResToCS(Platform platform, int action) {
-		int platformId = ShareSDK.platformNameToId(platform.getName());
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("platform", platformId);
-		map.put("action", action);
-		map.put("status", 3); // Success = 1, Fail = 2, Cancel = 3
-		Hashon hashon = new Hashon();
-		return hashon.fromHashMap(map);
-	}
-	
-	private static HashMap<String, Object> throwableToMap(Throwable t) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("msg", t.getMessage());
-		ArrayList<HashMap<String, Object>> traces = new ArrayList<HashMap<String, Object>>();
-		for (StackTraceElement trace : t.getStackTrace()) {
-			HashMap<String, Object> element = new HashMap<String, Object>();
-			element.put("cls", trace.getClassName());
-			element.put("method", trace.getMethodName());
-			element.put("file", trace.getFileName());
-			element.put("line", trace.getLineNumber());
-			traces.add(element);
-		}
-		map.put("stack", traces);
-		Throwable cause = t.getCause();
-		if (cause != null) {
-			map.put("cause", throwableToMap(cause));
-		}
-		return map;
-	}
 	
 	private static ShareParams hashmapToShareParams(Platform plat, 
 			HashMap<String, Object> content) throws Throwable {
