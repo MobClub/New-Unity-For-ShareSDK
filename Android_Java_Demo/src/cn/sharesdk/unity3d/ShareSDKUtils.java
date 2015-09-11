@@ -200,10 +200,10 @@ public class ShareSDKUtils {
 			map.put("token", plat.getDb().getToken());
 			map.put("tokenSecret", plat.getDb().getTokenSecret());
 			map.put("userGender", plat.getDb().getUserGender());
-			map.put("userIcon", plat.getDb().getUserIcon());
 			map.put("userID", plat.getDb().getUserId());
 			map.put("openID", plat.getDb().get("openid"));
 			map.put("userName", plat.getDb().getUserName());
+			map.put("userIcon", plat.getDb().getUserIcon());
 		}
 		return hashon.fromHashMap(map);
 	}
