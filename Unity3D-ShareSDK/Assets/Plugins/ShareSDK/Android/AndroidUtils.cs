@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace cn.sharesdk.unity3d
 {
+	#if UNITY_ANDROID
 	public class AndroidUtils : ShareSDKUtilsInterface
 	{
-		private AndroidJavaClass ssdk;
+		private AndroidJavaObject ssdk;
 
 		public AndroidUtils (GameObject go) 
 		{
 			Debug.Log("AndroidUtils  ===>>>  AndroidUtils" );
 			try{
-				ssdk = new AndroidJavaClass("cn.sharesdk.unity3d.ShareSDKUtils");
-				ssdk.CallStatic("prepare", go.name, "_Callback");
+				ssdk = new AndroidJavaObject("cn.sharesdk.unity3d.ShareSDKUtils", go.name, "_Callback");
 			} catch(Exception e) {
 				Console.WriteLine("{0} Exception caught.", e);
 			}
@@ -25,7 +25,7 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  SetPlatformConfig === " + json);
 			if (ssdk != null) 
 			{			
-				ssdk.CallStatic("initSDKAndSetPlatfromConfig", appKey, json);
+				ssdk.Call("initSDKAndSetPlatfromConfig", appKey, json);
 			}
 		}
 
@@ -34,7 +34,7 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  Authorize" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("authorize", reqID, (int)platform);
+				ssdk.Call("authorize", reqID, (int)platform);
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace cn.sharesdk.unity3d
 		{
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("removeAccount", (int)platform);
+				ssdk.Call("removeAccount", (int)platform);
 			}
 		}
 
@@ -50,7 +50,7 @@ namespace cn.sharesdk.unity3d
 		{
 			if (ssdk != null) 
 			{
-				return ssdk.CallStatic<bool>("isAuthValid", (int)platform);
+				return ssdk.Call<bool>("isAuthValid", (int)platform);
 			}
 			return false;
 		}
@@ -59,7 +59,7 @@ namespace cn.sharesdk.unity3d
 		{
 			if (ssdk != null) 
 			{
-				return ssdk.CallStatic<bool>("isClientValid", (int)platform);
+				return ssdk.Call<bool>("isClientValid", (int)platform);
 			}
 			return false;
 		}
@@ -69,7 +69,7 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  ShowUser" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("showUser", reqID, (int)platform);
+				ssdk.Call("showUser", reqID, (int)platform);
 			}
 		}
 
@@ -87,7 +87,7 @@ namespace cn.sharesdk.unity3d
 			{
 				foreach (PlatformType platform in platforms)
 				{
-					ssdk.CallStatic("shareContent", reqID, (int)platform, json);
+					ssdk.Call("shareContent", reqID, (int)platform, json);
 				}
 			}
 		}
@@ -103,7 +103,7 @@ namespace cn.sharesdk.unity3d
 			String json = MiniJSON.jsonEncode(content);
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("onekeyShare", reqID, (int)platform, json);
+				ssdk.Call("onekeyShare", reqID, (int)platform, json);
 			}
 		}
 		
@@ -112,7 +112,7 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  GetFriendList" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("getFriendList", reqID, (int)platform, count, page);
+				ssdk.Call("getFriendList", reqID, (int)platform, count, page);
 			}
 		}
 
@@ -121,7 +121,7 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  FollowFriend" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("followFriend", reqID, (int)platform, account);
+				ssdk.Call("followFriend", reqID, (int)platform, account);
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  GetAuthInfo" );
 			if (ssdk != null) 
 			{
-				String result = ssdk.CallStatic<String>("getAuthInfo", (int)platform);
+				String result = ssdk.Call<String>("getAuthInfo", (int)platform);
 				return (Hashtable) MiniJSON.jsonDecode(result);
 			}
 			return new Hashtable ();
@@ -141,9 +141,10 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("AndroidUtils  ===>>>  DisableSSOWhenAuthorize" );
 			if (ssdk != null) 
 			{
-				ssdk.CallStatic("disableSSOWhenAuthorize", open);
+				ssdk.Call("disableSSOWhenAuthorize", open);
 			}
 		}
 
 	}
+	#endif
 }
