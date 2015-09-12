@@ -19,7 +19,7 @@ import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.UIHandler;
 import com.unity3d.player.UnityPlayer;
 
-public class ShareSDKUtils {
+public class ShareSDKUtils implements Callback{
 	private static boolean DEBUG = true;
 	private static boolean disableSSO = false; 
 	
@@ -32,37 +32,28 @@ public class ShareSDKUtils {
 	private static final int MSG_FOLLOW_FRIEND = 7;
 	
 	private static Context context;
-	private static Callback uiCallback;
 	private static String u3dGameObject;
 	private static String u3dCallback;
-	
-	public static void prepare(final String gameObject,final String callback) {
+		
+	public ShareSDKUtils(final String gameObject,final String callback) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.prepare");
 		}
 		if (context == null) {
 			context = UnityPlayer.currentActivity.getApplicationContext();
 		}
-		if (uiCallback == null) {
-			uiCallback = new Callback() {
-				public boolean handleMessage(Message msg) {
-					return ShareSDKUtils.handleMessage(msg);
-				}
-			};
-		}
-		
+				
 		if(!TextUtils.isEmpty(gameObject)) {
 			u3dGameObject = gameObject;
 		}
 		
 		if(!TextUtils.isEmpty(callback)) {
 			u3dCallback = callback;
-		}
-	
+		}	
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void initSDKAndSetPlatfromConfig(String appKey, String configs) {
+	public void initSDKAndSetPlatfromConfig(String appKey, String configs) {
 		if (DEBUG) {
 			System.out.println("initSDK appkey ==>>" + appKey);
 		}
@@ -84,7 +75,7 @@ public class ShareSDKUtils {
 		}
 	}
 	
-	public static void authorize(int reqID, int platform) {
+	public void authorize(int reqID, int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.authorize");
 		}
@@ -92,10 +83,10 @@ public class ShareSDKUtils {
 		msg.what = MSG_AUTHORIZE;
 		msg.arg1 = platform;
 		msg.arg2 = reqID;
-		UIHandler.sendMessage(msg, uiCallback);
+		UIHandler.sendMessage(msg, this);
 	}
 	
-	public static void removeAccount(int platform) {
+	public void removeAccount(int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.removeAccount");
 		}
@@ -104,7 +95,7 @@ public class ShareSDKUtils {
 		plat.removeAccount(true);
 	}
 	
-	public static boolean isAuthValid(int platform) {
+	public boolean isAuthValid(int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.isAuthValid");
 		}
@@ -113,7 +104,7 @@ public class ShareSDKUtils {
 		return plat.isAuthValid();
 	}
 	
-	public static boolean isClientValid(int platform) {
+	public boolean isClientValid(int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.isClientValid");
 		}
@@ -122,7 +113,7 @@ public class ShareSDKUtils {
 		return plat.isClientValid();
 	}
 	
-	public static void showUser(int reqID, int platform) {
+	public void showUser(int reqID, int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.showUser");
 		}
@@ -130,10 +121,10 @@ public class ShareSDKUtils {
 		msg.what = MSG_SHOW_USER;
 		msg.arg1 = platform;
 		msg.arg2 = reqID;
-		UIHandler.sendMessage(msg, uiCallback);
+		UIHandler.sendMessage(msg, this);
 	}
 	
-	public static void shareContent(int reqID, int platform, String content) {
+	public void shareContent(int reqID, int platform, String content) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.share");
 		}
@@ -142,10 +133,10 @@ public class ShareSDKUtils {
 		msg.arg1 = platform;
 		msg.obj = content;
 		msg.arg2 = reqID;
-		UIHandler.sendMessage(msg, uiCallback);
+		UIHandler.sendMessage(msg, this);
 	}
 	
-	public static void onekeyShare(int reqID, int platform, String content) {
+	public void onekeyShare(int reqID, int platform, String content) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.OnekeyShare");
 		}
@@ -154,10 +145,10 @@ public class ShareSDKUtils {
 		msg.arg1 = platform;
 		msg.obj = content;
 		msg.arg2 = reqID;
-		UIHandler.sendMessage(msg, uiCallback);
+		UIHandler.sendMessage(msg, this);
 	}
 
-	public static void getFriendList(int reqID, int platform, int count, int page) {
+	public void getFriendList(int reqID, int platform, int count, int page) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.getFriendList");
 		}
@@ -169,10 +160,10 @@ public class ShareSDKUtils {
 		data.putInt("page", page);
 		data.putInt("count", count);
 		msg.setData(data);
-		UIHandler.sendMessage(msg, uiCallback);
+		UIHandler.sendMessage(msg, this);
 	}
 	
-	public static void followFriend(int reqID, int platform, String account) {
+	public void followFriend(int reqID, int platform, String account) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.followFriend");
 		}
@@ -182,10 +173,10 @@ public class ShareSDKUtils {
 		msg.arg1 = platform;
 		msg.obj = account;
 		msg.arg2 = reqID; 
-		UIHandler.sendMessage(msg, uiCallback);
+		UIHandler.sendMessage(msg, this);
 	}
 
-	public static String getAuthInfo(int platform) {
+	public String getAuthInfo(int platform) {
 		if (DEBUG) {
 			System.out.println("ShareSDKUtils.getAuthInfo");
 		}
@@ -208,11 +199,11 @@ public class ShareSDKUtils {
 		return hashon.fromHashMap(map);
 	}
 	
-	public static void disableSSOWhenAuthorize(boolean open){
+	public void disableSSOWhenAuthorize(boolean open){
 		disableSSO = open;
 	}
 	
-	public static boolean handleMessage(Message msg) {
+	public boolean handleMessage(Message msg) {
 		switch (msg.what) {			
 			case MSG_AUTHORIZE: {
 				int platform = msg.arg1;
@@ -338,7 +329,7 @@ public class ShareSDKUtils {
 	}
 	
 	
-	private static ShareParams hashmapToShareParams(Platform plat, 
+	private ShareParams hashmapToShareParams(Platform plat, 
 			HashMap<String, Object> content) throws Throwable {
 		String className = plat.getClass().getName() + "$ShareParams";
 		Class<?> cls = Class.forName(className);
@@ -365,7 +356,7 @@ public class ShareSDKUtils {
 		return (Platform.ShareParams) sp;
 	}
 	
-	private static HashMap<String, Object> CSMapToJavaMap(HashMap<String, Object> content) {
+	private HashMap<String, Object> CSMapToJavaMap(HashMap<String, Object> content) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("text", content.get("content"));
 		String image = (String)content.get("image");
@@ -393,7 +384,7 @@ public class ShareSDKUtils {
 		return map;
 	}
 	
-	private static int iosTypeToAndroidType(int type) {
+	private int iosTypeToAndroidType(int type) {
 		switch (type) {
 			case 1: return Platform.SHARE_IMAGE;
 			case 2: return Platform.SHARE_WEBPAGE;
