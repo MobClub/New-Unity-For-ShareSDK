@@ -44,6 +44,7 @@ namespace cn.sharesdk.unity3d
 			#if UNITY_ANDROID
 			shareSDKUtils = new AndroidUtils(gameObject);
 			#elif UNITY_IPHONE
+			shareSDKUtils = new iOSUtils(gameObject);
 			#endif
 			appkey = new AppKey ();
 			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey.appKey, platformConfigs);

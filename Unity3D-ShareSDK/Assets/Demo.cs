@@ -49,6 +49,7 @@ public class Demo : MonoBehaviour {
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Authorize"))
 		{
 			print(ssdk == null);
+
 			ssdk.Authorize(reqID, PlatformType.SinaWeibo);
 		}
 		
@@ -63,18 +64,40 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share Menu"))
 		{
+
 			Hashtable content = new Hashtable();
 			content["content"] = "this is a test string.";
-			content["image"] = "http://img.baidu.com/img/image/zhenrenmeinv0207.jpg";
+			content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
 			content["type"] = ContentType.News;
+			#if UNITY_IPHONE
+			//iOS分享图文类型为Image,分享链接类型为WebPage/News
+			content["type"] = ContentType.Image;
+			#endif
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
+
+			#if UNITY_IPHONE
+			//仅支持iOS,定制新浪的分享内容Example,各平台所支持的字段请参考文档
+			Hashtable sinaContent = new Hashtable();
+			sinaContent["content"] = "the sina custom content string";
+			sinaContent["title"] = "the sina title";
+			//string path = Application.dataPath+"/Raw"+"/ShareSDK.jpg";
+			string path = "http://img.baidu.com/img/image/zhenrenmeinv0207.jpg";
+			sinaContent["image"] = path;
+			sinaContent["url"] = "http://sharesdk.cn";
+			sinaContent["type"] = ContentType.Image;
+			sinaContent["lat"] = "33.33";
+			sinaContent["lng"] = "99.99";
+			sinaContent["objID"] = @"sinaID";
+			content.Add((int)PlatformType.SinaWeibo,sinaContent);
+			#endif
+
 			ssdk.ShowShareMenu (reqID, null, content, 100, 100);
 		}
 		
@@ -84,7 +107,7 @@ public class Demo : MonoBehaviour {
 		{
 			Hashtable content = new Hashtable();
 			content["content"] = "this is a test string.";
-			content["image"] = "http://img.baidu.com/img/image/zhenrenmeinv0207.jpg";
+			content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
@@ -103,7 +126,7 @@ public class Demo : MonoBehaviour {
 		{
 			Hashtable content = new Hashtable();
 			content["content"] = "this is a test string.";
-			content["image"] = "http://img.baidu.com/img/image/zhenrenmeinv0207.jpg";
+			content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
