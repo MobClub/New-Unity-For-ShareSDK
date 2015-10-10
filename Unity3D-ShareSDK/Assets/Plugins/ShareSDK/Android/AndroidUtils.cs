@@ -22,7 +22,7 @@ namespace cn.sharesdk.unity3d
 		public override void RigisterAppAndSetPlatformConfig (String appKey, Hashtable configs) 
 		{
 			String json = MiniJSON.jsonEncode(configs);
-			Debug.Log("AndroidUtils  ===>>>  SetPlatformConfig === " + json);
+			Debug.Log("AndroidUtils  ===>>>  SetPlatformConfig === " + appKey + "===" + json);
 			if (ssdk != null) 
 			{			
 				ssdk.Call("initSDKAndSetPlatfromConfig", appKey, json);

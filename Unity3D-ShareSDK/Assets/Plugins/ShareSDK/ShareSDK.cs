@@ -41,13 +41,15 @@ namespace cn.sharesdk.unity3d
 				}
 				platformConfigs.Add(platformId, table);
 			}
+
+			string appKey = (string)appkey.GetType().GetField("appKey").GetValue(appkey);
+
 			#if UNITY_ANDROID
 			shareSDKUtils = new AndroidUtils(gameObject);
 			#elif UNITY_IPHONE
 			shareSDKUtils = new iOSUtils(gameObject);
 			#endif
-			appkey = new AppKey ();
-			shareSDKUtils.RigisterAppAndSetPlatformConfig(appkey.appKey, platformConfigs);
+			shareSDKUtils.RigisterAppAndSetPlatformConfig(appKey, platformConfigs);
 		}
 		
 		/// <summary>
