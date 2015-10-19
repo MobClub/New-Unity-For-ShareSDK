@@ -23,7 +23,7 @@ public class ShareSDKUtils implements Callback{
 	private static boolean DEBUG = true;
 	private static boolean disableSSO = false; 
 	
-	//private static final int MSG_INITSDK = 1;
+	private static final int MSG_INITSDK = 1;
 	private static final int MSG_AUTHORIZE = 2;
 	private static final int MSG_SHOW_USER = 3;
 	private static final int MSG_SHARE = 4;
@@ -52,26 +52,22 @@ public class ShareSDKUtils implements Callback{
 		}	
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void initSDKAndSetPlatfromConfig(String appKey, String configs) {
 		if (DEBUG) {
 			System.out.println("initSDK appkey ==>>" + appKey);
+			System.out.println("initSDK configs ==>>" + configs);
 		}
 		if (!TextUtils.isEmpty(appKey)) {
 			ShareSDK.initSDK(context, appKey);
 		} else {
 			ShareSDK.initSDK(context);
 		}
-		ShareSDK.closeDebug();
 		
-		if (DEBUG) {
-			System.out.println("ShareSDKUtils.setPlatformConfig");
-		}
-		Hashon hashon = new Hashon();
-		HashMap<String, Object> devInfo = hashon.fromJson(configs);
-		for(Entry<String, Object> entry: devInfo.entrySet()){
-			String p = ShareSDK.platformIdToName(Integer.parseInt(entry.getKey()));
-			ShareSDK.setPlatformDevInfo(p, (HashMap<String, Object>)entry.getValue());
+		if (!TextUtils.isEmpty(configs)) {
+			Message msg = new Message();
+			msg.what = MSG_INITSDK;
+			msg.obj = configs;
+			UIHandler.sendMessageDelayed(msg, 1000, this);
 		}
 	}
 	
@@ -203,8 +199,23 @@ public class ShareSDKUtils implements Callback{
 		disableSSO = open;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {			
+			case MSG_INITSDK: {
+				if (DEBUG) {
+					System.out.println("ShareSDKUtils.setPlatformConfig");
+				}
+				String configs = (String) msg.obj;
+				Hashon hashon = new Hashon();
+				HashMap<String, Object> devInfo = hashon.fromJson(configs);
+				for(Entry<String, Object> entry: devInfo.entrySet()){
+					String p = ShareSDK.platformIdToName(Integer.parseInt(entry.getKey()));
+					//System.out.println(p + " ==>>" + new Hashon().fromHashMap((HashMap<String, Object>)entry.getValue()));
+					ShareSDK.setPlatformDevInfo(p, (HashMap<String, Object>)entry.getValue());
+				}
+			}
+			break;
 			case MSG_AUTHORIZE: {
 				int platform = msg.arg1;
 				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);

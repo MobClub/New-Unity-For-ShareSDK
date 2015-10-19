@@ -433,21 +433,21 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 				Bitmap viewToShare = (Bitmap) data.get("viewToShare");
 				if (viewToShare != null && !viewToShare.isRecycled()) {
 					shareType = Platform.SHARE_IMAGE;
-					if (data.containsKey("url") && !TextUtils.isEmpty(data.get("url").toString())) {
+					if (data.containsKey("url") && !TextUtils.isEmpty((String) data.get("url"))) {
 						shareType = Platform.SHARE_WEBPAGE;
-						if (data.containsKey("musicUrl") && !TextUtils.isEmpty(data.get("musicUrl").toString())) {
+						if (data.containsKey("musicUrl") && !TextUtils.isEmpty((String) data.get("musicUrl"))) {
 							shareType = Platform.SHARE_MUSIC;
 						}
 					}
 				} else {
 					Object imageUrl = data.get("imageUrl");
-					if (imageUrl != null && !TextUtils.isEmpty(String.valueOf(imageUrl))) {
+					if (imageUrl != null && !TextUtils.isEmpty((String)imageUrl)) {
 						shareType = Platform.SHARE_IMAGE;
 						if (String.valueOf(imageUrl).endsWith(".gif")) {
 							shareType = Platform.SHARE_EMOJI;
-						} else if (data.containsKey("url") && !TextUtils.isEmpty(data.get("url").toString())) {
+						} else if (data.containsKey("url") && !TextUtils.isEmpty((String) data.get("url"))) {
 							shareType = Platform.SHARE_WEBPAGE;
-							if (data.containsKey("musicUrl") && !TextUtils.isEmpty(data.get("musicUrl").toString())) {
+							if (data.containsKey("musicUrl") && !TextUtils.isEmpty((String) data.get("musicUrl"))) {
 								shareType = Platform.SHARE_MUSIC;
 							}
 						}
