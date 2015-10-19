@@ -26,7 +26,6 @@ namespace cn.sharesdk.unity3d
 		public Twitter twitter;
 		public Email email;
 		public ShortMessage shortMessage;
-		public Copy copy;
 		public Douban douban;
 		public Renren renren;
 		public GooglePlus googlePlus;
@@ -57,6 +56,8 @@ namespace cn.sharesdk.unity3d
 		public Bluetooth bluetooth;
 		public Instapaper instapaper;
 		public FacebookMessenger facebookMessenger;
+		#elif UNITY_IPHONE		
+		public Copy copy;
 		#endif
 	}
 
@@ -159,7 +160,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatTimeline;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public string BypassApproval = "true";
+		public string BypassApproval = "false";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChatTimeline;
 		public string app_id = "wx4868b35061f87885";
@@ -205,9 +206,9 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "9";
 		public const int type = (int) PlatformType.Twitter;
-		public string ConsumerKey = "mnTGqtXk0TYMXYTN7qUxg";
-		public string ConsumerSecret = "ROkFqr8c3m1HXqS3rm3TJ0WkAJuwBOSaWhPbZ9Ojuc";
-		public string CallbackUrl = "http://www.sharesdk.cn";
+		public string ConsumerKey = "LRBM0H75rWrU9gNHvlEAA2aOy";
+		public string ConsumerSecret = "gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G";
+		public string CallbackUrl = "http://mob.com";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Twitter;
 		public string app_key = "LRBM0H75rWrU9gNHvlEAA2aOy";
@@ -222,15 +223,15 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "10";
 		public const int type = (int) PlatformType.Renren;
-		public string AppId="226427";
-		public string ApiKey="fc5b8aed373c4c27a05b712acba0f8c3";
-		public string SecretKey="f29df781abdd4f49beca5a2194676ca4";
+		public string AppId = "226427";
+		public string ApiKey = "fc5b8aed373c4c27a05b712acba0f8c3";
+		public string SecretKey = "f29df781abdd4f49beca5a2194676ca4";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Renren;
 		public string app_id = "226427";
 		public string app_key = "fc5b8aed373c4c27a05b712acba0f8c3";
 		public string app_secret = "f29df781abdd4f49beca5a2194676ca4";
-		public int auth_type = (int)AuthType.BOTH;
+		public int auth_type = (int) AuthType.BOTH;
 		#endif
 	}
 
@@ -240,14 +241,14 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "11";
 		public const int type = (int) PlatformType.Kaixin;
-		public string AppKey="358443394194887cee81ff5890870c7c";
-		public string AppSecret="da32179d859c016169f66d90b6db2a23";
-		public string RedirectUri="http://www.sharesdk.cn";
+		public string AppKey = "358443394194887cee81ff5890870c7c";
+		public string AppSecret = "da32179d859c016169f66d90b6db2a23";
+		public string RedirectUri = "http://www.sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Kaixin;
-		public string api_key="358443394194887cee81ff5890870c7c";
-		public string app_secret="da32179d859c016169f66d90b6db2a23";
-		public string redirect_uri="http://www.sharesdk.cn";
+		public string api_key = "358443394194887cee81ff5890870c7c";
+		public string app_secret = "da32179d859c016169f66d90b6db2a23";
+		public string redirect_uri = "http://www.sharesdk.cn";
 		#endif
 	}
 
@@ -258,7 +259,7 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "12";
 		public const int type = (int) PlatformType.Mail;
 		#elif UNITY_IPHONE
-		public const int type = (int)PlatformType.Mail;
+		public const int type = (int) PlatformType.Mail;
 		#endif
 	}
 
@@ -279,14 +280,14 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "14";
 		public const int type = (int) PlatformType.DouBan;
-		public string ApiKey="02e2cbe5ca06de5908a863b15e149b0b";
-		public string Secret="9f1e7b4f71304f2f";
-		public string RedirectUri="http://www.sharesdk.cn";
+		public string ApiKey = "02e2cbe5ca06de5908a863b15e149b0b";
+		public string Secret = "9f1e7b4f71304f2f";
+		public string RedirectUri = "http://www.sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.DouBan;
-		public string api_key="02e2cbe5ca06de5908a863b15e149b0b";
-		public string app_secret="9f1e7b4f71304f2f";
-		public string redirect_uri="http://www.sharesdk.cn";
+		public string api_key = "02e2cbe5ca06de5908a863b15e149b0b";
+		public string app_secret = "9f1e7b4f71304f2f";
+		public string redirect_uri = "http://www.sharesdk.cn";
 		#endif
 	}
 
@@ -296,16 +297,16 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "15";
 		public const int type = (int) PlatformType.YouDaoNote;
-		public string HostType="product";
-		public string ConsumerKey="dcde25dca105bcc36884ed4534dab940";
-		public string ConsumerSecret="d98217b4020e7f1874263795f44838fe";
-		public string RedirectUri="http://www.sharesdk.cn/";
+		public string HostType = "product";
+		public string ConsumerKey = "dcde25dca105bcc36884ed4534dab940";
+		public string ConsumerSecret = "d98217b4020e7f1874263795f44838fe";
+		public string RedirectUri = "http://www.sharesdk.cn/";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YouDaoNote;
-		public string HostType="product";
-		public string ConsumerKey="dcde25dca105bcc36884ed4534dab940";
-		public string ConsumerSecret="d98217b4020e7f1874263795f44838fe";
-		public string RedirectUri="http://www.sharesdk.cn/";
+		public string HostType = "product";
+		public string ConsumerKey = "dcde25dca105bcc36884ed4534dab940";
+		public string ConsumerSecret = "d98217b4020e7f1874263795f44838fe";
+		public string RedirectUri = "http://www.sharesdk.cn/";
 		#endif
 	}
 
@@ -315,14 +316,14 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "16";
 		public const int type = (int) PlatformType.SohuKan;
-		public string AppKey="e16680a815134504b746c86e08a19db0";
-		public string AppSecret="b8eec53707c3976efc91614dd16ef81c";
-		public string RedirectUri="http://sharesdk.cn";
+		public string AppKey = "e16680a815134504b746c86e08a19db0";
+		public string AppSecret = "b8eec53707c3976efc91614dd16ef81c";
+		public string RedirectUri = "http://sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SohuKan;
-		public string AppKey="e16680a815134504b746c86e08a19db0";
-		public string AppSecret="b8eec53707c3976efc91614dd16ef81c";
-		public string RedirectUri="http://sharesdk.cn";
+		public string AppKey = "e16680a815134504b746c86e08a19db0";
+		public string AppSecret = "b8eec53707c3976efc91614dd16ef81c";
+		public string RedirectUri = "http://sharesdk.cn";
 		#endif
 	}
 
@@ -341,15 +342,15 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "17";
 		public const int type = (int) PlatformType.Evernote;
 		public enum HostType{sandbox = 1, china = 2, product = 3}
-		public string ConsumerKey="sharesdk-7807";
-		public string ConsumerSecret="d05bf86993836004";
-		public string ShareByAppClient="false";
+		public string ConsumerKey = "sharesdk-7807";
+		public string ConsumerSecret = "d05bf86993836004";
+		public string ShareByAppClient = "false";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Evernote;
 		public enum HostType{sandbox = 1, china = 2, product = 3}
-		public string ConsumerKey="sharesdk-7807";
-		public string ConsumerSecret="d05bf86993836004";
-		public string ShareByAppClient="false";
+		public string ConsumerKey = "sharesdk-7807";
+		public string ConsumerSecret = "d05bf86993836004";
+		public string ShareByAppClient = "false";
 		#endif
 	}
 
@@ -359,9 +360,9 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "18";
 		public const int type = (int) PlatformType.LinkedIn;
-		public string ApiKey="ejo5ibkye3vo";
-		public string SecretKey="cC7B2jpxITqPLZ5M";
-		public string RedirectUrl="http://sharesdk.cn";
+		public string ApiKey = "ejo5ibkye3vo";
+		public string SecretKey = "cC7B2jpxITqPLZ5M";
+		public string RedirectUrl = "http://sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.LinkedIn;
 		public string api_key = "ejo5ibkye3vo";
@@ -391,9 +392,9 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "20";
 		public const int type = (int) PlatformType.Foursquare;
-		public string ClientID="G0ZI20FM30SJAJTX2RIBGD05QV1NE2KVIM2SPXML2XUJNXEU";
-		public string ClientSecret="3XHQNSMMHIFBYOLWEPONNV4DOTCDBQH0AEMVGCBG0MZ32XNU";
-		public string RedirectUrl="http://www.sharesdk.cn";
+		public string ClientID = "G0ZI20FM30SJAJTX2RIBGD05QV1NE2KVIM2SPXML2XUJNXEU";
+		public string ClientSecret = "3XHQNSMMHIFBYOLWEPONNV4DOTCDBQH0AEMVGCBG0MZ32XNU";
+		public string RedirectUrl = "http://www.sharesdk.cn";
 		#elif UNITY_IPHONE
 		//iOS do not support this platform
 		#endif
@@ -405,10 +406,10 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "21";
 		public const int type = (int) PlatformType.Pinterest;
-		public string ClientId="1432928";
+		public string ClientId = "1432928";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Pinterest;
-		public string ClientId="1432928";
+		public string ClientId = "1432928";
 		#endif
 	}
 
@@ -418,13 +419,13 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "22";
 		public const int type = (int) PlatformType.Flickr;
-		public string ApiKey="33d833ee6b6fca49943363282dd313dd";
-		public string ApiSecret="3a2c5b42a8fbb8bb";
+		public string ApiKey = "33d833ee6b6fca49943363282dd313dd";
+		public string ApiSecret = "3a2c5b42a8fbb8bb";
 		public string RedirectUri = "http://www.sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Flickr;
-		public string ApiKey="33d833ee6b6fca49943363282dd313dd";
-		public string ApiSecret="3a2c5b42a8fbb8bb";
+		public string ApiKey = "33d833ee6b6fca49943363282dd313dd";
+		public string ApiSecret = "3a2c5b42a8fbb8bb";
 		public string RedirectUri = "http://www.sharesdk.cn";
 		#endif
 	}
@@ -435,14 +436,14 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "23";
 		public const int type = (int) PlatformType.Tumblr;
-		public string OAuthConsumerKey="2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM";
-		public string SecretKey="3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo";
-		public string CallbackUrl="http://sharesdk.cn";
+		public string OAuthConsumerKey = "2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM";
+		public string SecretKey = "3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo";
+		public string CallbackUrl = "http://sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Tumblr;
-		public string consumer_key="2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM";
-		public string secret_key="3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo";
-		public string callback_url="http://sharesdk.cn";
+		public string consumer_key = "2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM";
+		public string secret_key = "3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo";
+		public string callback_url = "http://sharesdk.cn";
 		#endif
 	}
 
@@ -452,12 +453,12 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "24";
 		public const int type = (int) PlatformType.Dropbox;
-		public string AppKey="7janx53ilz11gbs";
-		public string AppSecret="c1hpx5fz6tzkm32";
+		public string AppKey = "7janx53ilz11gbs";
+		public string AppSecret = "c1hpx5fz6tzkm32";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Dropbox;
-		public string AppKey="7janx53ilz11gbs";
-		public string AppSecret="c1hpx5fz6tzkm32";
+		public string AppKey = "7janx53ilz11gbs";
+		public string AppSecret = "c1hpx5fz6tzkm32";
 		#endif
 	}
 	
@@ -480,9 +481,9 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "26";
 		public const int type = (int) PlatformType.Instagram;
-		public string ClientId="ff68e3216b4f4f989121aa1c2962d058";
-		public string ClientSecret="1b2e82f110264869b3505c3fe34e31a1";
-		public string RedirectUri="http://sharesdk.cn";
+		public string ClientId = "ff68e3216b4f4f989121aa1c2962d058";
+		public string ClientSecret = "1b2e82f110264869b3505c3fe34e31a1";
+		public string RedirectUri = "http://sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Instagram;
 		public string client_id = "ff68e3216b4f4f989121aa1c2962d058";
@@ -505,12 +506,12 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "27";
 		public const int type = (int) PlatformType.YiXinSession;
-		public string AppId="yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval="true";
+		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string BypassApproval = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinSession;
-		public string AppId="yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval="true";
+		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string BypassApproval = "true";
 		#endif
 	}
 
@@ -520,12 +521,12 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "28";
 		public const int type = (int) PlatformType.YiXinTimeline;
-		public string AppId="yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval="true";
+		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string BypassApproval = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinTimeline;
-		public string AppId="yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval="true";
+		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string BypassApproval = "true";
 		#endif
 	}
 
@@ -535,13 +536,13 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "29";
 		public const int type = (int) PlatformType.MingDao;
-		public string AppKey="EEEE9578D1D431D3215D8C21BF5357E3";
-		public string AppSecret="5EDE59F37B3EFA8F65EEFB9976A4E933";
+		public string AppKey = "EEEE9578D1D431D3215D8C21BF5357E3";
+		public string AppSecret = "5EDE59F37B3EFA8F65EEFB9976A4E933";
 		public string RedirectUri = "http://sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.MingDao;
-		public string AppKey="EEEE9578D1D431D3215D8C21BF5357E3";
-		public string AppSecret="5EDE59F37B3EFA8F65EEFB9976A4E933";
+		public string AppKey = "EEEE9578D1D431D3215D8C21BF5357E3";
+		public string AppSecret = "5EDE59F37B3EFA8F65EEFB9976A4E933";
 		public string RedirectUri = "http://sharesdk.cn";
 		#endif
 	}
@@ -612,7 +613,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Pocket;
 		public string consumer_key = "11496-de7c8c5eb25b2c9fcdc2b627";
 		public string redirect_uri = "pocketapp1234";
-		public int auth_type = (int)AuthType.BOTH;
+		public int auth_type = (int) AuthType.BOTH;
 		#endif
 	}
 
@@ -622,11 +623,11 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "36";
 		public const int type = (int) PlatformType.Instapaper;
-		public string ConsumerKey="4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
+		public string ConsumerKey = "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
 		public string ConsumerSecret = "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Instapaper;
-		public string ConsumerKey="4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
+		public string ConsumerKey = "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
 		public string ConsumerSecret = "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe";
 		#endif
 	}
@@ -637,14 +638,14 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "37";
 		public const int type = (int) PlatformType.FacebookMessenger;
-		public string ConsumerKey="107704292745179";
-		public string ConsumerSecret="38053202e1a5fe26c80c753071f0b573";
-		public string RedirectUrl="http://mob.com";
+		public string ConsumerKey = "107704292745179";
+		public string ConsumerSecret = "38053202e1a5fe26c80c753071f0b573";
+		public string RedirectUrl = "http://mob.com";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.FacebookMessenger;
-		public string ConsumerKey="107704292745179";
-		public string ConsumerSecret="38053202e1a5fe26c80c753071f0b573";
-		public string RedirectUrl="http://mob.com";
+		public string ConsumerKey = "107704292745179";
+		public string ConsumerSecret = "38053202e1a5fe26c80c753071f0b573";
+		public string RedirectUrl = "http://mob.com";
 		#endif
 	}
 

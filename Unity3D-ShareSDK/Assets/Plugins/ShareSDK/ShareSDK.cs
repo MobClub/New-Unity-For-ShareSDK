@@ -37,7 +37,13 @@ namespace cn.sharesdk.unity3d
 				Hashtable table = new Hashtable();
 				foreach (FieldInfo field in fields) 
 				{
-					table.Add(field.Name, field.GetValue(info));
+					if ("type".EndsWith(field.Name)) {
+						continue;
+					} else if ("Enable".EndsWith(field.Name)) {
+						table.Add(field.Name, Convert.ToString(field.GetValue(info)).ToLower());
+					} else {
+						table.Add(field.Name, Convert.ToString(field.GetValue(info)));
+					}
 				}
 				platformConfigs.Add(platformId, table);
 			}
