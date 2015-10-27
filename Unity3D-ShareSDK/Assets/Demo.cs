@@ -71,11 +71,8 @@ public class Demo : MonoBehaviour {
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
-			content["type"] = ContentType.News;
-			#if UNITY_IPHONE
-			//iOS分享图文类型为Image,分享链接类型为WebPage/News
-			content["type"] = ContentType.Image;
-			#endif
+			//type只对微信分享有效,分享图片Image,分享链接类型为WebPage/News
+			content["type"] = ContentType.Video;
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";
@@ -91,6 +88,7 @@ public class Demo : MonoBehaviour {
 			string path = "http://img.baidu.com/img/image/zhenrenmeinv0207.jpg";
 			sinaContent["image"] = path;
 			sinaContent["url"] = "http://sharesdk.cn";
+			//iOS分享图文类型为Image,分享链接类型为WebPage/News
 			sinaContent["type"] = ContentType.Image;
 			sinaContent["lat"] = "33.33";
 			sinaContent["lng"] = "99.99";
@@ -130,7 +128,7 @@ public class Demo : MonoBehaviour {
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
-			content["type"] = ContentType.News;
+			content["type"] = ContentType.Image;
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
