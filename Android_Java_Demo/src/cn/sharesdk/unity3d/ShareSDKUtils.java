@@ -249,6 +249,9 @@ public class ShareSDKUtils implements Callback{
 				plat.SSOSetting(disableSSO);
 				try {
 					Hashon hashon = new Hashon();
+					if (DEBUG) {
+						System.out.println("share content ==>>" + content);
+					}
 					ShareParams sp = hashmapToShareParams(plat, hashon.fromJson(content));
 					plat.share(sp);
 				} catch (Throwable t) {
@@ -262,6 +265,9 @@ public class ShareSDKUtils implements Callback{
 				paListener.setReqID(msg.arg2);
 				String content = (String) msg.obj;
 				Hashon hashon = new Hashon();
+				if (DEBUG) {
+					System.out.println("onekeyshare  ==>>" + content);
+				}
 				HashMap<String, Object> map = CSMapToJavaMap(hashon.fromJson(content));
 				OnekeyShare oks = new OnekeyShare();
 				if (platform > 0) {
@@ -298,6 +304,14 @@ public class ShareSDKUtils implements Callback{
 				}
 				if (map.containsKey("siteUrl")) {
 					oks.setSiteUrl((String)map.get("siteUrl"));
+				}
+				if (map.containsKey("musicUrl")) {
+					oks.setSiteUrl((String)map.get("musicUrl"));
+				}
+				if (map.containsKey("shareType")) {
+					if ("4".equals(String.valueOf(map.get("shareType")))) {
+						oks.shareVideoToWechat();
+					}
 				}
 				String theme = (String)map.get("shareTheme");
 				if(OnekeyShareTheme.SKYBLUE.toString().toLowerCase().equals(theme)){
@@ -381,6 +395,9 @@ public class ShareSDKUtils implements Callback{
 		map.put("url", content.get("url"));
 		map.put("titleUrl", content.get("url"));
 		String type = (String) content.get("type");
+		if (DEBUG) {
+			System.out.println("share content type==>>" + type);
+		}
 		if (type != null) {
 			int shareType = iosTypeToAndroidType(Integer.parseInt(type));
 			map.put("shareType", shareType);

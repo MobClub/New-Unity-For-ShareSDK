@@ -48,6 +48,7 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 	private ShareContentCustomizeCallback customizeCallback;
 	private boolean dialogMode = false;
 	private boolean disableSSO;
+	private boolean shareVideo;
 	private HashMap<String, String> hiddenPlatforms;
 	private View bgView;
 	private OnekeyShareTheme theme;
@@ -272,6 +273,11 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 		disableSSO = true;
 	}
 
+ 	/** sharing video to wechat */
+ 	public void shareVideoToWechat() {
+ 		shareVideo = true;
+	}
+ 	
 	/** set the display mode of editpage to be the dialog mode */
 	public void setDialogMode() {
 		dialogMode = true;
@@ -425,7 +431,9 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 					shareType = Platform.SHARE_EMOJI;
 				} else if (data.containsKey("url") && !TextUtils.isEmpty(data.get("url").toString())) {
 					shareType = Platform.SHARE_WEBPAGE;
-					if (data.containsKey("musicUrl") && !TextUtils.isEmpty(data.get("musicUrl").toString())) {
+					if (shareVideo) {
+						shareType = Platform.SHARE_VIDEO;
+					} else if (data.containsKey("musicUrl") && !TextUtils.isEmpty(data.get("musicUrl").toString())) {
 						shareType = Platform.SHARE_MUSIC;
 					}
 				}
@@ -435,7 +443,9 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 					shareType = Platform.SHARE_IMAGE;
 					if (data.containsKey("url") && !TextUtils.isEmpty((String) data.get("url"))) {
 						shareType = Platform.SHARE_WEBPAGE;
-						if (data.containsKey("musicUrl") && !TextUtils.isEmpty((String) data.get("musicUrl"))) {
+						if (shareVideo) {
+							shareType = Platform.SHARE_VIDEO;
+						} else if (data.containsKey("musicUrl") && !TextUtils.isEmpty((String) data.get("musicUrl"))) {
 							shareType = Platform.SHARE_MUSIC;
 						}
 					}
@@ -447,7 +457,9 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 							shareType = Platform.SHARE_EMOJI;
 						} else if (data.containsKey("url") && !TextUtils.isEmpty((String) data.get("url"))) {
 							shareType = Platform.SHARE_WEBPAGE;
-							if (data.containsKey("musicUrl") && !TextUtils.isEmpty((String) data.get("musicUrl"))) {
+							if (shareVideo) {
+								shareType = Platform.SHARE_VIDEO;
+							} else if (data.containsKey("musicUrl") && !TextUtils.isEmpty((String) data.get("musicUrl"))) {
 								shareType = Platform.SHARE_MUSIC;
 							}
 						}
