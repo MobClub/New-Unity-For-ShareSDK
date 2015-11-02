@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_5;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,22 +39,23 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\ShareSDK\Android\AndroidUtils.cs" />
-     <Compile Include="Assets\Plugins\ShareSDK\Android\ShareSDKDevInfo.cs" />
+     <Compile Include="Assets\Plugins\ShareSDK\AuthType.cs" />
      <Compile Include="Assets\Plugins\ShareSDK\ContentType.cs" />
-     <Compile Include="Assets\Plugins\ShareSDK\EventType.cs" />
      <Compile Include="Assets\Plugins\ShareSDK\MiniJSON.cs" />
      <Compile Include="Assets\Plugins\ShareSDK\PlatformType.cs" />
      <Compile Include="Assets\Plugins\ShareSDK\ResponseState.cs" />
      <Compile Include="Assets\Plugins\ShareSDK\ShareSDK.cs" />
+     <Compile Include="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs" />
      <Compile Include="Assets\Plugins\ShareSDK\ShareSDKUtilsInterface.cs" />
+     <Compile Include="Assets\Plugins\ShareSDK\iOS\iOSUtils.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\skyblue_platform_list_item.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_share_platform_list.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
@@ -63,18 +64,20 @@
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_share_platform_list_item.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\skyblue_platform_list_selector.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_recomm_friends_share_msg.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\skyblue_platform_list_item_selected.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_editpage_inc_image_layout.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_share_actionbar.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\classic_platform_corners_bg.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_editpage.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_recomm_def_app_image.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\oks_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\assets\ShareSDK.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_editpage_at_layout.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\instapaper_strings.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.5/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

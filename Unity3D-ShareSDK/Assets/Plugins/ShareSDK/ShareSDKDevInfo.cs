@@ -34,25 +34,27 @@ namespace cn.sharesdk.unity3d
 		public Instagram instagram;
 		public LinkedIn linkedIn;
 		public Tumblr tumblr;
+		public YouDao youDao;
+		public Flickr flickr;
+		public Evernote evernote;
+		public EvernoteInternational evernoteInternational;
+		public WhatsApp whatsApp;
+		public Line line;
 
 		#if UNITY_ANDROID
 		//more platforms on iOS is coming soon ....
 		
-		public YouDao youDao;
+
 		public SohuSuishenkan sohukan;
-		public Evernote evernote;
 		public FourSquare fourSquare;
 		public Pinterest pinterest;
-		public Flickr flickr;
 		public Dropbox dropbox;
 		public VKontakte vkontakte;
 		public Yixin yixin;
 		public YixinMoments yixinMoments;
 		public Mingdao mingdao;
-		public Line line;
 		public KakaoTalk kakaoTalk;
 		public KakaoStory kakaoStory;
-		public WhatsApp whatsApp;
 		public Bluetooth bluetooth;
 		public Instapaper instapaper;
 		public FacebookMessenger facebookMessenger;
@@ -303,10 +305,9 @@ namespace cn.sharesdk.unity3d
 		public string RedirectUri = "http://www.sharesdk.cn/";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YouDaoNote;
-		public string HostType = "product";
-		public string ConsumerKey = "dcde25dca105bcc36884ed4534dab940";
-		public string ConsumerSecret = "d98217b4020e7f1874263795f44838fe";
-		public string RedirectUri = "http://www.sharesdk.cn/";
+		public string consumer_key = "dcde25dca105bcc36884ed4534dab940";
+		public string secret_key = "d98217b4020e7f1874263795f44838fe";
+		public string callback_url = "http://www.sharesdk.cn/";
 		#endif
 	}
 
@@ -327,14 +328,22 @@ namespace cn.sharesdk.unity3d
 		#endif
 	}
 
-	// 
-	//	在中国大陆，印象笔记有两个服务器，一个是沙箱（sandbox），一个是生产服务器（china）。
+	// 		安卓描述:   
+	//		在中国大陆，印象笔记有两个服务器，一个是沙箱（sandbox），一个是生产服务器（china）。
 	//		一般你注册应用，它会先让你使用sandbox，当你完成测试以后，可以到
 	//		http://dev.yinxiang.com/support/上激活你的ConsumerKey，激活成功后，修改HostType
 	//		为china就好了。至于如果您申请的是国际版的印象笔记（Evernote），则其生产服务器类型为
 	//		“product”。
 	//		如果目标设备上已经安装了印象笔记客户端，ShareSDK允许应用调用本地API来完成分享，但
 	//		是需要将应用信息中的“ShareByAppClient”设置为true，此字段默认值为false。
+	//      
+
+	//      iOS描述:
+	//		配置好consumerKey 和 secret, 如果为沙箱模式，请对参数isSandBox传入非0值，否则传入0.
+
+	//在以下的配置里，安卓请任意选择 Evernote还是 EvernoteInternational都可以配置。
+	//iOS则需要区分，国内版为Evernote，国际版EvernoteInternational。
+
 	[Serializable]
 	public class Evernote : DevInfo 
 	{
@@ -347,12 +356,30 @@ namespace cn.sharesdk.unity3d
 		public string ShareByAppClient = "false";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Evernote;
+		public string consumer_key = "sharesdk-7807";
+		public string secret_key = "d05bf86993836004";
+		public int isSandBox = 1; //"0" mean NO with SandBox, !0 mean YES with SandBox
+		#endif
+	}
+
+	[Serializable]
+	public class EvernoteInternational : DevInfo
+	{
+		#if UNITY_ANDROID
+		public string SortId = "17";
+		public const int type = (int) PlatformType.Evernote;
 		public enum HostType{sandbox = 1, china = 2, product = 3}
 		public string ConsumerKey = "sharesdk-7807";
 		public string ConsumerSecret = "d05bf86993836004";
 		public string ShareByAppClient = "false";
+		#elif UNITY_IPHONE
+		public const int type = (int)PlatformType.EvernoteInternational;  
+		public string consumer_key = "sharesdk-7807";
+		public string secret_key = "d05bf86993836004";
+		public int isSandBox = 0; //"0" mean NO with SandBox, !0 mean YES with SandBox
 		#endif
 	}
+
 
 	[Serializable]
 	public class LinkedIn : DevInfo 
@@ -424,9 +451,8 @@ namespace cn.sharesdk.unity3d
 		public string RedirectUri = "http://www.sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Flickr;
-		public string ApiKey = "33d833ee6b6fca49943363282dd313dd";
-		public string ApiSecret = "3a2c5b42a8fbb8bb";
-		public string RedirectUri = "http://www.sharesdk.cn";
+		public string api_key = "33d833ee6b6fca49943363282dd313dd";
+		public string api_secret = "3a2c5b42a8fbb8bb";
 		#endif
 	}
 
@@ -627,7 +653,7 @@ namespace cn.sharesdk.unity3d
 		public string ConsumerSecret = "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Instapaper;
-		public string ConsumerKey = "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
+		public string consumer_key = "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
 		public string ConsumerSecret = "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe";
 		#endif
 	}
