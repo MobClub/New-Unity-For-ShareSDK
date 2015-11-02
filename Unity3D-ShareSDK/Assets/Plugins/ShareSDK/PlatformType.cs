@@ -57,7 +57,8 @@ namespace cn.sharesdk.unity3d
 		KakaoStory = 45,        //KakaoStory 
 		FacebookMessenger = 46, //FacebookMessenger
 		Bluetooth = 48,         //Bluetooth
-		Alipay = 50,            //Alipay
+		Alipay = 50,
+		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series
 		QQPlatform = 998,		//QQ Series
 		Any = 999 				//Any Platform  
