@@ -2502,7 +2502,7 @@ extern "C" {
             shareParams = __getShareParamsWithString(contentStr);
         }
         
-        [ShareSDK share:SSDKPlatformTypeGooglePlus
+        [ShareSDK share:platType
              parameters:shareParams
          onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
              
