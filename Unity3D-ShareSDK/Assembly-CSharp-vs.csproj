@@ -55,12 +55,14 @@
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_share_platform_list_item.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\skyblue_platform_list_selector.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_recomm_friends_share_msg.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\skyblue_platform_list_item_selected.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_editpage_inc_image_layout.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_share_actionbar.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\classic_platform_corners_bg.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_editpage.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_recomm_def_app_image.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\oks_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\assets\ShareSDK.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\layout\skyblue_editpage_at_layout.xml" />
