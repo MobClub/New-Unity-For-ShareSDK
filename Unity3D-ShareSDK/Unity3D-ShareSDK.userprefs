@@ -1,4 +1,5 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Demo.cs">
     <Files>
@@ -6,6 +7,12 @@
       <File FileName="Assets\Demo.cs" Line="75" Column="17" />
       <File FileName="Assets\Plugins\ShareSDK\Android\AndroidUtils.cs" Line="106" Column="55" />
       <File FileName="Assets\Plugins\ShareSDK\ContentType.cs" Line="24" Column="26" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Demo.cs">
+    <Files>
+      <File FileName="Assets/Demo.cs" Line="125" Column="40" />
+>>>>>>> 35c35ee0490f0fe025f014987eddb5d2d4a16867
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

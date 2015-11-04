@@ -209,53 +209,74 @@ extern "C" {
         NSData* emoData = nil;
         SSDKContentType type = SSDKContentTypeText;
         
-        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+        {
             text = [value objectForKey:@"content"];
         }
-        if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+        {
             title = [value objectForKey:@"title"];
         }
-        if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+        {
             url = [value objectForKey:@"url"];
         }
-        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
+        {
             
             NSString* imgPath = [value objectForKey:@"thumbImg"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                    options:MOBFRegexOptionsNoOptions
+                                    inRange:NSMakeRange(0, 10)
+                                 withString:imgPath])
             {
                 thumbImg = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }else
+            }
+            else
             {
                 UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                thumbImg = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                thumbImg = [[SSDKImage alloc] initWithImage:localImg
+                                                     format:SSDKImageFormatJpeg
+                                                   settings:nil];
             }
         }
-        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+        {
             
             NSString* imgPath = [value objectForKey:@"image"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                    options:MOBFRegexOptionsNoOptions
+                                    inRange:NSMakeRange(0, 10)
+                                 withString:imgPath])
             {
                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
             }else
             {
                 UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                image = [[SSDKImage alloc] initWithImage:localImg
+                                                  format:SSDKImageFormatJpeg
+                                                settings:nil];
             }
             
         }
-        if ([[value objectForKey:@"musicFileUrl"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"musicFileUrl"] isKindOfClass:[NSString class]])
+        {
             musicFileUrl = [value objectForKey:@"musicFileUrl"];
         }
-        if ([[value objectForKey:@"extInfo"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"extInfo"] isKindOfClass:[NSString class]])
+        {
             extInfo = [value objectForKey:@"extInfo"];
         }
-        if ([[value objectForKey:@"fileData"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"fileData"] isKindOfClass:[NSString class]])
+        {
             fileData = [NSData dataWithContentsOfFile:[value objectForKey:@"fileData"]];
         }
-        if ([[value objectForKey:@"emoticonData"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"emoticonData"] isKindOfClass:[NSString class]])
+        {
             emoData = [NSData dataWithContentsOfFile:[value objectForKey:@"emoticonData"]];
         }
-        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+        {
             type = [[value objectForKey:@"type"] integerValue];
         }
         [params SSDKSetupWeChatParamsByText:text
@@ -281,41 +302,58 @@ extern "C" {
         SSDKImage* image = nil;
         SSDKContentType type = SSDKContentTypeText;
         
-        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+        {
             text = [value objectForKey:@"content"];
         }
-        if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+        {
             title = [value objectForKey:@"title"];
         }
-        if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+        {
             url = [value objectForKey:@"url"];
         }
-        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
+        {
             
             NSString* imgPath = [value objectForKey:@"thumbImg"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                    options:MOBFRegexOptionsNoOptions
+                                    inRange:NSMakeRange(0, 10)
+                                 withString:imgPath])
             {
                 thumbImg = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
             }else
             {
                 UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                thumbImg = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                thumbImg = [[SSDKImage alloc] initWithImage:localImg
+                                                     format:SSDKImageFormatJpeg
+                                                   settings:nil];
             }
         }
-        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+        {
             
             NSString* imgPath = [value objectForKey:@"image"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                    options:MOBFRegexOptionsNoOptions
+                                    inRange:NSMakeRange(0, 10)
+                                 withString:imgPath])
             {
                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }else
+            }
+            else
             {
                 UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                image = [[SSDKImage alloc] initWithImage:localImg
+                                                  format:SSDKImageFormatJpeg
+                                                settings:nil];
             }
             
         }
-        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+        {
             type = [[value objectForKey:@"type"] integerValue];
         }
         [params SSDKSetupQQParamsByText:text
@@ -340,7 +378,8 @@ extern "C" {
         
         NSDictionary* shareParamsDic = [MOBFJson objectFromJSONString:dataStr];
         
-        if (shareParamsDic) {
+        if (shareParamsDic)
+        {
             
             if ([[shareParamsDic objectForKey:@"content"] isKindOfClass:[NSString class]])
             {
@@ -352,14 +391,19 @@ extern "C" {
             {
                 SSDKImage* image = nil;
                 NSString* imgPath = img;
-                if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                        options:MOBFRegexOptionsNoOptions
+                                        inRange:NSMakeRange(0, 10)
+                                     withString:imgPath])
                 {
                     image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                 }
                 else
                 {
                     UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                    image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                    image = [[SSDKImage alloc] initWithImage:localImg
+                                                      format:SSDKImageFormatJpeg
+                                                    settings:nil];
                 }
                 
                 [imageArray addObject:image];
@@ -374,14 +418,19 @@ extern "C" {
                     
                     SSDKImage* image = nil;
                     
-                    if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:path])
+                    if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                            options:MOBFRegexOptionsNoOptions
+                                            inRange:NSMakeRange(0, 10)
+                                         withString:path])
                     {
                         image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
                     }
                     else
                     {
                         UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                        image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                        image = [[SSDKImage alloc] initWithImage:localImg
+                                                          format:SSDKImageFormatJpeg
+                                                        settings:nil];
                     }
                     
                     [imageArray addObject:image];
@@ -439,14 +488,19 @@ extern "C" {
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
                         NSString* imgPath =  [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }
                         else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
 
                         }
 
@@ -500,18 +554,24 @@ extern "C" {
                     {
                         NSString* imgPath =  [value objectForKey:@"image"];
                         SSDKImage* image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }
                         else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc]initWithImage:localImg
+                                                             format:SSDKImageFormatJpeg
+                                                           settings:nil];
                         }
                         [images addObject:image];
                         
-                    }else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
                     {
                         
                         NSArray* paths = [value objectForKey:@"image"];
@@ -520,14 +580,19 @@ extern "C" {
                         {
                             
                             SSDKImage* image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:path])
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
                             {
                                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
                             }
                             else
                             {
                                 UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
                             }
 
                             [images addObject:image];
@@ -571,30 +636,40 @@ extern "C" {
                     {
                         text = [value objectForKey:@"content"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                        
                         }
                         
                     }
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]])
+                    {
                         urlDesc = [value objectForKey:@"urlDesc"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    {
                         type = [[value objectForKey:@"type"] integerValue];
                     }
                    [params SSDKSetupDouBanParamsByText:text
@@ -649,16 +724,23 @@ extern "C" {
                     {
                         text = [value objectForKey:@"content"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         
                     }
@@ -670,7 +752,8 @@ extern "C" {
                     {
                         albumId = [value objectForKey:@"albumId"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    {
                         type = [[value objectForKey:@"type"] integerValue];
                     }
                     [params SSDKSetupRenRenParamsByText:text
@@ -693,13 +776,19 @@ extern "C" {
                     {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                     }
                     SSDKContentType type = SSDKContentTypeText;
@@ -723,13 +812,19 @@ extern "C" {
                     {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         
                     }
@@ -738,7 +833,9 @@ extern "C" {
                         type = [[value objectForKey:@"type"] integerValue];
                     }
                     
-                    [params SSDKSetupFacebookParamsByText:text image:image type:type];
+                    [params SSDKSetupFacebookParamsByText:text
+                                                    image:image
+                                                     type:type];
                 }
                 //Twitter
                 value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTwitter]];
@@ -758,18 +855,24 @@ extern "C" {
                     {
                         NSString* imgPath =  [value objectForKey:@"image"];
                         SSDKImage* image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }
                         else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         [images addObject:image];
                         
-                    }else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
                     {
                         
                         NSArray* paths = [value objectForKey:@"image"];
@@ -778,14 +881,19 @@ extern "C" {
                         {
                             
                             SSDKImage* image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:path])
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
                             {
                                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
                             }
                             else
                             {
                                 UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
                             }
                             
                             [images addObject:image];
@@ -828,13 +936,19 @@ extern "C" {
                     {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         
                     }
@@ -877,28 +991,36 @@ extern "C" {
                     SSDKContentType type = SSDKContentTypeText;
                     
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
                         text = [value objectForKey:@"content"];
                     }
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
                         title = [value objectForKey:@"title"];
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
                         NSString* imgPath =  [value objectForKey:@"image"];
                         SSDKImage* image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }
                         else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         [images addObject:image];
                         
-                    }else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
                     {
                         
                         NSArray* paths = [value objectForKey:@"image"];
@@ -907,14 +1029,19 @@ extern "C" {
                         {
                             
                             SSDKImage* image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:path])
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
                             {
                                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
                             }
                             else
                             {
                                 UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
                             }
                             
                             [images addObject:image];
@@ -998,28 +1125,36 @@ extern "C" {
                     NSMutableArray* recipients = [NSMutableArray array];
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
                         text = [value objectForKey:@"content"];
                     }
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
                         title = [value objectForKey:@"title"];
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
                         NSString* imgPath =  [value objectForKey:@"image"];
                         SSDKImage* image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }
                         else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         [images addObject:image];
                         
-                    }else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
                     {
                         
                         NSArray* paths = [value objectForKey:@"image"];
@@ -1028,14 +1163,19 @@ extern "C" {
                         {
                             
                             SSDKImage* image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:path])
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
                             {
                                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
                             }
                             else
                             {
                                 UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
                             }
                             
                             [images addObject:image];
@@ -1099,18 +1239,24 @@ extern "C" {
                     {
                         NSString* imgPath =  [value objectForKey:@"image"];
                         SSDKImage* image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
                         }
                         else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                         [images addObject:image];
                         
-                    }else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
                     {
                         
                         NSArray* paths = [value objectForKey:@"image"];
@@ -1119,14 +1265,19 @@ extern "C" {
                         {
                             
                             SSDKImage* image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:path])
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
                             {
                                 image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
                             }
                             else
                             {
                                 UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
                             }
                             
                             [images addObject:image];
@@ -1181,6 +1332,475 @@ extern "C" {
                                                   tags:tags
                                                tweetId:tweetId];
                 }
+                
+                //YouDaoNote
+                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYouDaoNote]];
+                
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString *text  = nil;
+                    NSString *title = nil;
+                    NSMutableArray *images = [NSMutableArray array];
+                    NSString *source = nil;
+                    NSString *author = nil;
+                    NSString *notebook = nil;
+                    
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"content"];
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
+                        NSString *imgPath =  [value objectForKey:@"image"];
+                        SSDKImage *image = nil;
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
+                        {
+                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
+                        {
+                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
+                        }
+                        [images addObject:image];
+                        
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    {
+                        
+                        NSArray* paths = [value objectForKey:@"image"];
+                        
+                        for (NSString* path in paths)
+                        {
+                            
+                            SSDKImage* image = nil;
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
+                            {
+                                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
+                            }
+                            else
+                            {
+                                UIImage* localImg = [UIImage imageWithContentsOfFile:path];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
+                            }
+                            
+                            [images addObject:image];
+                            
+                        }
+                    }
+                    if ([[value objectForKey:@"source"] isKindOfClass:[NSString class]])
+                    {
+                        source = [value objectForKey:@"source"];
+                    }
+                    if ([[value objectForKey:@"author"] isKindOfClass:[NSString class]])
+                    {
+                        author = [value objectForKey:@"author"];
+                    }
+                    if ([[value objectForKey:@"notebook"] isKindOfClass:[NSString class]])
+                    {
+                        notebook = [value objectForKey:@"notebook"];
+                    }
+                    
+                    [params SSDKSetupYouDaoNoteParamsByText:text
+                                                     images:images
+                                                      title:title
+                                                     source:source
+                                                     author:author
+                                                   notebook:notebook];
+                }
+                
+                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFlickr]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString* text = nil;
+                    SSDKImage* image = nil;
+                    NSString* title = nil;
+                    NSMutableArray* tags = [NSMutableArray array];
+                    BOOL isPublic;
+                    BOOL isFriend;
+                    BOOL isFamliy;
+                    NSInteger safetyLevel;
+                    NSInteger contentType;
+                    NSInteger hidden;
+                    
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"content"];
+                    }
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
+                        
+                        NSString* imgPath = [value objectForKey:@"image"];
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
+                        {
+                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
+                        {
+                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                            image = [[SSDKImage alloc]initWithImage:localImg
+                                                             format:SSDKImageFormatJpeg
+                                                           settings:nil];
+                        }
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    id tagValue = [value objectForKey:@"tags"];
+                    if ([tagValue isKindOfClass:[NSString class]])
+                    {
+                        [tags addObject:tagValue];
+                    }
+                    else if ([tagValue isKindOfClass:[NSArray class]])
+                    {
+                        tags = [tagValue mutableCopy];
+                    }
+                    if ([[value objectForKey:@"isPublic"] boolValue])
+                    {
+                        isPublic = YES;
+                    }
+                    if ([[value objectForKey:@"isFriend"] boolValue])
+                    {
+                        isFriend = YES;
+                    }
+                    if ([[value objectForKey:@"isFamliy"] boolValue])
+                    {
+                        isFamliy = YES;
+                    }
+                    if ([[value objectForKey:@"safetyLevel"] integerValue])
+                    {
+                        safetyLevel = [[value objectForKey:@"safetyLevel"] integerValue];
+                    }
+                    if ([[value objectForKey:@"contentType"] integerValue])
+                    {
+                        contentType = [[value objectForKey:@"contentType"] integerValue];
+                    }
+                    if ([[value objectForKey:@"hidden"] integerValue])
+                    {
+                        hidden = [[value objectForKey:@"hidden"] integerValue];
+                    }
+     
+                    [params SSDKSetupFlickrParamsByText:text
+                                                  image:image
+                                                  title:title
+                                                   tags:tags
+                                               isPublic:isPublic
+                                               isFriend:isFriend
+                                               isFamily:isFamliy
+                                            safetyLevel:safetyLevel
+                                            contentType:contentType
+                                                 hidden:hidden];
+                }
+                
+                //Line
+                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLine]];
+                if (value)
+                {
+                    NSString *text = nil;
+                    SSDKImage* image = nil;
+                    SSDKContentType type = SSDKContentTypeText;
+                    
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"content"];
+                    }
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
+                        
+                        NSString* imgPath = [value objectForKey:@"image"];
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
+                        {
+                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
+                        {
+                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                            image = [[SSDKImage alloc]initWithImage:localImg
+                                                             format:SSDKImageFormatJpeg
+                                                           settings:nil];
+                        }
+                    }
+                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    {
+                        type = [[value objectForKey:@"type"] integerValue];
+                    }
+                    [params SSDKSetupLineParamsByText:text
+                                                image:image
+                                                 type:type];
+                }
+                
+                //whatsApp
+                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWhatsApp]];
+                if (value)
+                {
+                    NSString *text = nil;
+                    SSDKImage* image = nil;
+                    NSString *audioPath = nil;
+                    NSString *videoPath = nil;
+                    CGFloat menuX;
+                    CGFloat menuY;
+                    SSDKContentType type = SSDKContentTypeText;
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"content"];
+                    }
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
+                        
+                        NSString* imgPath = [value objectForKey:@"image"];
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
+                        {
+                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
+                        {
+                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                            image = [[SSDKImage alloc]initWithImage:localImg
+                                                             format:SSDKImageFormatJpeg
+                                                           settings:nil];
+                        }
+                    }
+                    if ([[value objectForKey:@"audioPath"] isKindOfClass:[NSString class]])
+                    {
+                        audioPath = [value objectForKey:@"audioPath"];
+                    }
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        videoPath = [value objectForKey:@"videoPath"];
+                    }
+                    if ([[value objectForKey:@"menuX"] isKindOfClass:[NSString class]])
+                    {
+                        menuX = [[value objectForKey:@"menuX"] floatValue];
+                    }
+                    if ([[value objectForKey:@"menuY"] isKindOfClass:[NSString class]])
+                    {
+                        menuX = [[value objectForKey:@"menuY"] floatValue];
+                    }
+                    CGPoint point = CGPointMake(menuX, menuY);
+                    
+                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    {
+                        type = [[value objectForKey:@"type"] integerValue];
+                    }
+                    
+                    [params SSDKSetupWhatsAppParamsByText:text
+                                                    image:image
+                                                    audio:audioPath
+                                                    video:videoPath
+                                         menuDisplayPoint:point
+                                                     type:type];
+                    
+                }
+     
+                //YinXiang
+                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYinXiang]];
+                if (value)
+                {
+                    NSString *text  = nil;
+                    NSString *title = nil;
+                    NSMutableArray *images = [NSMutableArray array];
+                    NSMutableArray* tags = [NSMutableArray array];
+                    NSString *notebook = nil;
+                    SSDKPlatformType platformType = SSDKPlatformTypeYinXiang;
+                    
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"content"];
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
+                        NSString* imgPath =  [value objectForKey:@"image"];
+                        SSDKImage* image = nil;
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
+                        {
+                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
+                        {
+                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
+                        }
+                        [images addObject:image];
+                        
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    {
+                        
+                        NSArray* paths = [value objectForKey:@"image"];
+                        for (NSString* path in paths)
+                        {
+                            SSDKImage* image = nil;
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
+                            {
+                                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
+                            }
+                            else
+                            {
+                                UIImage* localImg = [UIImage imageWithContentsOfFile:path];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
+                            }
+                            
+                            [images addObject:image];
+                        }
+                    }
+                    if ([[value objectForKey:@"notebook"] isKindOfClass:[NSString class]])
+                    {
+                        notebook = [value objectForKey:@"notebook"];
+                    }
+                    id tagValue = [value objectForKey:@"tags"];
+                    if ([tagValue isKindOfClass:[NSString class]])
+                    {
+                        [tags addObject:tagValue];
+                    }
+                    else if ([tagValue isKindOfClass:[NSArray class]])
+                    {
+                        tags = [tagValue mutableCopy];
+                    }
+                    
+                    if ([[value objectForKey:@"platformType"] isKindOfClass:[NSString class]])
+                    {
+                        platformType = [[value objectForKey:@"platformType"] integerValue];
+                    }
+                    [params SSDKSetupEvernoteParamsByText:text
+                                                   images:images
+                                                    title:title
+                                                 notebook:notebook
+                                                     tags:tags
+                                             platformType:platformType];
+                }
+                
+                //Evernote
+                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeEvernote]];
+                if (value)
+                {
+                    NSString *text  = nil;
+                    NSString *title = nil;
+                    NSMutableArray *images = [NSMutableArray array];
+                    NSMutableArray* tags = [NSMutableArray array];
+                    NSString *notebook = nil;
+                    SSDKPlatformType platformType = SSDKPlatformTypeEvernote;
+                    
+                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"content"];
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
+                        NSString* imgPath =  [value objectForKey:@"image"];
+                        SSDKImage* image = nil;
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
+                        {
+                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
+                        {
+                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
+                        }
+                        [images addObject:image];
+                        
+                    }
+                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    {
+                        
+                        NSArray* paths = [value objectForKey:@"image"];
+                        
+                        for (NSString* path in paths)
+                        {
+                            
+                            SSDKImage* image = nil;
+                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                    options:MOBFRegexOptionsNoOptions
+                                                    inRange:NSMakeRange(0, 10)
+                                                 withString:path])
+                            {
+                                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
+                            }
+                            else
+                            {
+                                UIImage* localImg = [UIImage imageWithContentsOfFile:path];
+                                image = [[SSDKImage alloc] initWithImage:localImg
+                                                                  format:SSDKImageFormatJpeg
+                                                                settings:nil];
+                            }
+                            
+                            [images addObject:image];
+                            
+                        }
+                    }
+                    if ([[value objectForKey:@"notebook"] isKindOfClass:[NSString class]])
+                    {
+                        notebook = [value objectForKey:@"notebook"];
+                    }
+                    id tagValue = [value objectForKey:@"tags"];
+                    if ([tagValue isKindOfClass:[NSString class]])
+                    {
+                        [tags addObject:tagValue];
+                    }
+                    else if ([tagValue isKindOfClass:[NSArray class]])
+                    {
+                        tags = [tagValue mutableCopy];
+                    }
+                    
+                    if ([[value objectForKey:@"platformType"] isKindOfClass:[NSString class]])
+                    {
+                        platformType = [[value objectForKey:@"platformType"] integerValue];
+                    }
+                    [params SSDKSetupEvernoteParamsByText:text
+                                                   images:images
+                                                    title:title
+                                                 notebook:notebook
+                                                     tags:tags
+                                             platformType:platformType];
+                }
+
                 //Instagram
                 value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstagram]];
                 if ([value isKindOfClass:[NSDictionary class]])
@@ -1193,13 +1813,19 @@ extern "C" {
                     {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
                             image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                         }
                     }
                     if ([[value objectForKey:@"menuX"] isKindOfClass:[NSString class]])
@@ -1230,33 +1856,44 @@ extern "C" {
                     {
                         text = [value objectForKey:@"content"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10) withString:imgPath])
                         {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                            image = [[SSDKImage alloc] initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                             
                         }
                         
                     }
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]])
+                    {
                         urlDesc = [value objectForKey:@"urlDesc"];
                     }
-                    if ([[value objectForKey:@"visibility"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"visibility"] isKindOfClass:[NSString class]])
+                    {
                         visibility = [value objectForKey:@"visibility"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    {
                         type = [[value objectForKey:@"type"] integerValue];
                     }
 
@@ -1283,30 +1920,41 @@ extern "C" {
                     {
                         text = [value objectForKey:@"content"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    {
                         
                         NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*" options:MOBFRegexOptionsNoOptions inRange:NSMakeRange(0, 10) withString:imgPath])
+                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                                options:MOBFRegexOptionsNoOptions
+                                                inRange:NSMakeRange(0, 10)
+                                             withString:imgPath])
                         {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
+                            image = [[SSDKImage alloc] initWithURL:[NSURL URLWithString:imgPath]];
+                        }
+                        else
                         {
                             UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg format:SSDKImageFormatJpeg settings:nil];
+                            image = [[SSDKImage alloc] initWithImage:localImg
+                                                              format:SSDKImageFormatJpeg
+                                                            settings:nil];
                             
                         }
                         
                     }
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"blogName"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"blogName"] isKindOfClass:[NSString class]])
+                    {
                         blogName = [value objectForKey:@"blogName"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]]) {
+                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    {
                         type = [[value objectForKey:@"type"] integerValue];
                     }
                    [params SSDKSetupTumblrParamsByText:text
@@ -1335,331 +1983,378 @@ extern "C" {
         }
         NSArray* activePlatforms = [platformsDic allKeys];
         
-        [ShareSDK registerApp:appKeyStr activePlatforms:activePlatforms onImport:^(SSDKPlatformType platformType) {
-            switch (platformType)
-            {
-                    
-                case SSDKPlatformTypeSinaWeibo:
+        [ShareSDK registerApp:appKeyStr
+              activePlatforms:activePlatforms
+                     onImport:^(SSDKPlatformType platformType) {
+                         switch (platformType)
+                         {
+                                 
+                             case SSDKPlatformTypeSinaWeibo:
 #ifdef __SHARESDK_SINA_WEIBO__
-                    [ShareSDKConnector connectWeibo:[WeiboSDK class]];
+                                 [ShareSDKConnector connectWeibo:[WeiboSDK class]];
 #endif
-                    break;
-                    
-                case SSDKPlatformTypeQQ:
+                                 break;
+                                 
+                             case SSDKPlatformTypeQQ:
 #ifdef __SHARESDK_QQ__
-                    [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
 #endif
-                    break;
-                    
-                case SSDKPlatformTypeWechat:
+                                 break;
+                                 
+                             case SSDKPlatformTypeWechat:
 #ifdef __SHARESDK_WECHAT__
-                    [ShareSDKConnector connectWeChat:[WXApi class]];
+                                 [ShareSDKConnector connectWeChat:[WXApi class]];
 #endif
-                    break;
-                case SSDKPlatformTypeRenren:
+                                 break;
+                             case SSDKPlatformTypeRenren:
 #ifdef __SHARESDK_RENREN__
-                    [ShareSDKConnector connectRenren:[RennClient class]];
+                                 [ShareSDKConnector connectRenren:[RennClient class]];
 #endif
-                    break;
-                case SSDKPlatformTypeGooglePlus:
+                                 break;
+                             case SSDKPlatformTypeGooglePlus:
 #ifdef __SHARESDK_GOOGLE_PLUS__
-                    [ShareSDKConnector connectGooglePlus:[GPPSignIn class]
-                                              shareClass:[GPPShare class]];
+                                 [ShareSDKConnector connectGooglePlus:[GPPSignIn class]
+                                                           shareClass:[GPPShare class]];
 #endif
-                    break;
-                default:
-                    break;
-            }
-        } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
-            
-            NSString* appId = nil;
-            NSString* appKey = nil;
-            NSString* appSecret = nil;
-            NSString* redirectUri = nil;
-            NSString* authType = nil;
-            NSMutableDictionary* confDic = [NSMutableDictionary dictionary];
-            
-            switch (platformType)
-            {
-                case SSDKPlatformTypeSinaWeibo:
-                {
-                    
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSinaWeibo]];
-                    appKey = [confDic objectForKey:@"app_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    NSInteger sinaAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
-                    switch (sinaAuthType)
-                    {
-                        case 1:
-                            authType = SSDKAuthTypeBoth;
-                            break;
-                        case 2:
-                            authType = SSDKAuthTypeSSO;
-                            break;
-                        case 3:
-                            authType = SSDKAuthTypeWeb;
-                            break;
-                        default:
-                            break;
-                    }
-                    [appInfo SSDKSetupSinaWeiboByAppKey:appKey
-                                              appSecret:appSecret
-                                            redirectUri:redirectUri
-                                               authType:authType];
-                    break;
-                }
-                case SSDKPlatformTypeTencentWeibo:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]];
-                    appKey = [confDic objectForKey:@"app_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    [appInfo SSDKSetupTencentWeiboByAppKey:appKey
-                                                 appSecret:appSecret
-                                               redirectUri:redirectUri];
-                    break;
-                }
-                case SSDKPlatformTypeDouBan:
-                {
-                    confDic =[platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDouBan]];
-                    appKey = [confDic objectForKey:@"api_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    
-                    [appInfo SSDKSetupDouBanByApiKey:appKey
-                                              secret:appSecret
-                                         redirectUri:redirectUri];
-                    break;
-                }
-                case SSDKPlatformTypeQQ:
-                {
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]];
-                        
-                    }
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQZone]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQZone]];
-                    }
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeQQ]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeQQ]];
-                    }
-                    appId = [confDic objectForKey:@"app_id"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    NSInteger qqAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
-                    switch (qqAuthType)
-                {
-                    case 1:
-                        authType = SSDKAuthTypeBoth;
-                        break;
-                    case 2:
-                        authType = SSDKAuthTypeSSO;
-                        break;
-                    case 3:
-                        authType = SSDKAuthTypeWeb;
-                        break;
-                    default:
-                        break;
-                }
-                    
-                    [appInfo SSDKSetupQQByAppId:appId
-                                         appKey:appSecret
-                                       authType:authType];
-                    break;
-                }
-                case SSDKPlatformTypeRenren:
-                {
-                    confDic =[platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeRenren]];
-                    appId = [confDic objectForKey:@"app_id"];
-                    appKey = [confDic objectForKey:@"app_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    NSInteger renrenAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
-                    switch (renrenAuthType)
-                {
-                    case 1:
-                        authType = SSDKAuthTypeBoth;
-                        break;
-                    case 2:
-                        authType = SSDKAuthTypeSSO;
-                        break;
-                    case 3:
-                        authType = SSDKAuthTypeWeb;
-                        break;
-                    default:
-                        break;
-                }
-                    [appInfo SSDKSetupRenRenByAppId:appId
-                                             appKey:appKey
-                                          secretKey:appSecret
-                                           authType:authType];
-                    break;
-                }                    
-                case SSDKPlatformTypeKaixin:
-                {
-                    confDic =[platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKaixin]];
-                    appKey = [confDic objectForKey:@"api_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    [appInfo SSDKSetupKaiXinByApiKey:appKey
-                                           secretKey:appSecret
-                                         redirectUri:redirectUri];
-                    break;
-                }
-                case SSDKPlatformTypeFacebook:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFacebook]];
-                    appKey = [confDic objectForKey:@"app_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    NSInteger facebookAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
-                    switch (facebookAuthType)
-                {
-                    case 1:
-                        authType = SSDKAuthTypeBoth;
-                        break;
-                    case 2:
-                        authType = SSDKAuthTypeSSO;
-                        break;
-                    case 3:
-                        authType = SSDKAuthTypeWeb;
-                        break;
-                    default:
-                        break;
-                }
-                    [appInfo SSDKSetupFacebookByAppKey:appKey
-                                             appSecret:appSecret
-                                              authType:authType];
-                    break;
-                }
-                case SSDKPlatformTypeTwitter:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTwitter]];
-                    appKey = [confDic objectForKey:@"app_key"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    [appInfo SSDKSetupTwitterByConsumerKey:appKey
-                                            consumerSecret:appSecret
-                                               redirectUri:redirectUri];
-                    break;
-                }
-                case SSDKPlatformTypeGooglePlus:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeGooglePlus]];
-                    appId = [confDic objectForKey:@"client_id"];
-                    appKey = [confDic objectForKey:@"client_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    NSInteger googlePlusAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
-                    switch (googlePlusAuthType)
-                {
-                    case 1:
-                        authType = SSDKAuthTypeBoth;
-                        break;
-                    case 2:
-                        authType = SSDKAuthTypeSSO;
-                        break;
-                    case 3:
-                        authType = SSDKAuthTypeWeb;
-                        break;
-                    default:
-                        break;
-                }
-               
-                    [appInfo SSDKSetupGooglePlusByClientID:appId
-                                              clientSecret:appKey
-                                               redirectUri:redirectUri
-                                                  authType:authType];
-                    break;
-                }
-                case SSDKPlatformTypeWechat:
-                {
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatSession]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatSession]];
+                                 break;
+                             default:
+                                 break;
+                         }
+                     } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+                         
+                         NSString* appId = nil;
+                         NSString* appKey = nil;
+                         NSString* appSecret = nil;
+                         NSString* redirectUri = nil;
+                         NSString* authType = nil;
+                         NSMutableDictionary* confDic = [NSMutableDictionary dictionary];
+                         
+                         switch (platformType)
+                         {
+                             case SSDKPlatformTypeSinaWeibo:
+                             {
+                                 
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSinaWeibo]];
+                                 appKey = [confDic objectForKey:@"app_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 NSInteger sinaAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
+                                 switch (sinaAuthType)
+                                 {
+                                     case 1:
+                                         authType = SSDKAuthTypeBoth;
+                                         break;
+                                     case 2:
+                                         authType = SSDKAuthTypeSSO;
+                                         break;
+                                     case 3:
+                                         authType = SSDKAuthTypeWeb;
+                                         break;
+                                     default:
+                                         break;
+                                 }
+                                 [appInfo SSDKSetupSinaWeiboByAppKey:appKey
+                                                           appSecret:appSecret
+                                                         redirectUri:redirectUri
+                                                            authType:authType];
+                                 break;
+                             }
+                             case SSDKPlatformTypeTencentWeibo:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]];
+                                 appKey = [confDic objectForKey:@"app_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 [appInfo SSDKSetupTencentWeiboByAppKey:appKey
+                                                              appSecret:appSecret
+                                                            redirectUri:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeDouBan:
+                             {
+                                 confDic =[platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDouBan]];
+                                 appKey = [confDic objectForKey:@"api_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 
+                                 [appInfo SSDKSetupDouBanByApiKey:appKey
+                                                           secret:appSecret
+                                                      redirectUri:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeQQ:
+                             {
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]];
+                                     
+                                 }
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQZone]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQZone]];
+                                 }
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeQQ]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeQQ]];
+                                 }
+                                 appId = [confDic objectForKey:@"app_id"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 NSInteger qqAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
+                                 switch (qqAuthType)
+                                 {
+                                     case 1:
+                                         authType = SSDKAuthTypeBoth;
+                                         break;
+                                     case 2:
+                                         authType = SSDKAuthTypeSSO;
+                                         break;
+                                     case 3:
+                                         authType = SSDKAuthTypeWeb;
+                                         break;
+                                     default:
+                                         break;
+                                 }
+                                 
+                                 [appInfo SSDKSetupQQByAppId:appId
+                                                      appKey:appSecret
+                                                    authType:authType];
+                                 break;
+                             }
+                             case SSDKPlatformTypeRenren:
+                             {
+                                 confDic =[platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeRenren]];
+                                 appId = [confDic objectForKey:@"app_id"];
+                                 appKey = [confDic objectForKey:@"app_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 NSInteger renrenAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
+                                 switch (renrenAuthType)
+                                 {
+                                     case 1:
+                                         authType = SSDKAuthTypeBoth;
+                                         break;
+                                     case 2:
+                                         authType = SSDKAuthTypeSSO;
+                                         break;
+                                     case 3:
+                                         authType = SSDKAuthTypeWeb;
+                                         break;
+                                     default:
+                                         break;
+                                 }
+                                 [appInfo SSDKSetupRenRenByAppId:appId
+                                                          appKey:appKey
+                                                       secretKey:appSecret
+                                                        authType:authType];
+                                 break;
+                             }
+                             case SSDKPlatformTypeKaixin:
+                             {
+                                 confDic =[platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKaixin]];
+                                 appKey = [confDic objectForKey:@"api_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 [appInfo SSDKSetupKaiXinByApiKey:appKey
+                                                        secretKey:appSecret
+                                                      redirectUri:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeFacebook:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFacebook]];
+                                 appKey = [confDic objectForKey:@"app_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 NSInteger facebookAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
+                                 switch (facebookAuthType)
+                                 {
+                                     case 1:
+                                         authType = SSDKAuthTypeBoth;
+                                         break;
+                                     case 2:
+                                         authType = SSDKAuthTypeSSO;
+                                         break;
+                                     case 3:
+                                         authType = SSDKAuthTypeWeb;
+                                         break;
+                                     default:
+                                         break;
+                                 }
+                                 [appInfo SSDKSetupFacebookByApiKey:appKey
+                                                          appSecret:appSecret
+                                                           authType:authType];
+                                 break;
+                             }
+                             case SSDKPlatformTypeTwitter:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTwitter]];
+                                 appKey = [confDic objectForKey:@"app_key"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 [appInfo SSDKSetupTwitterByConsumerKey:appKey
+                                                         consumerSecret:appSecret
+                                                            redirectUri:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeGooglePlus:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeGooglePlus]];
+                                 appId = [confDic objectForKey:@"client_id"];
+                                 appKey = [confDic objectForKey:@"client_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 NSInteger googlePlusAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
+                                 switch (googlePlusAuthType)
+                                 {
+                                     case 1:
+                                         authType = SSDKAuthTypeBoth;
+                                         break;
+                                     case 2:
+                                         authType = SSDKAuthTypeSSO;
+                                         break;
+                                     case 3:
+                                         authType = SSDKAuthTypeWeb;
+                                         break;
+                                     default:
+                                         break;
+                                 }
+                                 
+                                 [appInfo SSDKSetupGooglePlusByClientID:appId
+                                                           clientSecret:appKey
+                                                            redirectUri:redirectUri
+                                                               authType:authType];
+                                 break;
+                             }
+                             case SSDKPlatformTypeWechat:
+                             {
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatSession]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatSession]];
+                                     
+                                 }
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatTimeline]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatTimeline]];
+                                 }
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatFav]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatFav]];
+                                 }
+                                 if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWechat]])
+                                 {
+                                     confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWechat]];
+                                 }
+                                 appId = [confDic objectForKey:@"app_id"];
+                                 appSecret = [confDic objectForKey:@"app_secret"];
+                                 [appInfo SSDKSetupWeChatByAppId:appId
+                                                       appSecret:appSecret];
+                                 break;
+                             }
+                             case SSDKPlatformTypePocket:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypePocket]];
+                                 appKey = [confDic objectForKey:@"consumer_key"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 NSInteger pocketAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
+                                 switch (pocketAuthType)
+                                 {
+                                     case 1:
+                                         authType = SSDKAuthTypeBoth;
+                                         break;
+                                     case 2:
+                                         authType = SSDKAuthTypeSSO;
+                                         break;
+                                     case 3:
+                                         authType = SSDKAuthTypeWeb;
+                                         break;
+                                     default:
+                                         break;
+                                 }
+                                 [appInfo SSDKSetupPocketByConsumerKey:appKey
+                                                           redirectUri:redirectUri
+                                                              authType:authType];
+                                 break;
+                             }
+                             case SSDKPlatformTypeYouDaoNote:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYouDaoNote]];
+                                 appKey = [confDic objectForKey:@"consumer_key"];
+                                 appSecret = [confDic objectForKey:@"secret_key"];
+                                 redirectUri = [confDic objectForKey:@"callback_url"];
+                                 [appInfo SSDKSetupYouDaoNoteByConsumerKey:appKey
+                                                            consumerSecret:appSecret
+                                                             oauthCallback:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeFlickr:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFlickr]];
+                                 appKey = [confDic objectForKey:@"api_key"];
+                                 appSecret = [confDic objectForKey:@"api_secret"];
+                                 [appInfo SSDKSetupFlickrByApiKey:appKey
+                                                        apiSecret:appSecret];
+                                 break;
+                             }
+                             case SSDKPlatformTypeYinXiang:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYinXiang]];
+                                 
+                                 appKey = [confDic objectForKey:@"consumer_key"];
+                                 appSecret = [confDic objectForKey:@"secret_key"];
+                                 BOOL sandBox = [[confDic objectForKey:@"isSandBox"] boolValue];
+                                 [appInfo SSDKSetupEvernoteByConsumerKey:appKey
+                                                          consumerSecret:appSecret
+                                                                 sandbox:sandBox];
+                                 break;
+                             }
+                             case SSDKPlatformTypeEvernote:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeEvernote]];
+                                 appKey = [confDic objectForKey:@"consumer_key"];
+                                 appSecret = [confDic objectForKey:@"secret_key"];
+                                 BOOL sandBox  = [[confDic objectForKey:@"isSandBox"] boolValue];
+                                 [appInfo SSDKSetupEvernoteByConsumerKey:appKey
+                                                          consumerSecret:appSecret
+                                                                 sandbox:sandBox];
+                                 break;
+                             }
+                             case SSDKPlatformTypeInstagram:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstagram]];
+                                 appId = [confDic objectForKey:@"client_id"];
+                                 appSecret = [confDic objectForKey:@"client_secret"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 [appInfo SSDKSetupInstagramByClientID:appId
+                                                          clientSecret:appSecret
+                                                           redirectUri:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeLinkedIn:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLinkedIn]];
+                                 appKey = [confDic objectForKey:@"api_key"];
+                                 appSecret = [confDic objectForKey:@"secret_key"];
+                                 redirectUri = [confDic objectForKey:@"redirect_uri"];
+                                 [appInfo SSDKSetupLinkedInByApiKey:appKey
+                                                          secretKey:appSecret
+                                                        redirectUrl:redirectUri];
+                                 break;
+                             }
+                             case SSDKPlatformTypeTumblr:
+                             {
+                                 confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTumblr]];
+                                 appKey = [confDic objectForKey:@"consumer_key"];
+                                 appSecret = [confDic objectForKey:@"secret_key"];
+                                 redirectUri = [confDic objectForKey:@"callback_url"];
+                                 [appInfo SSDKSetupTumblrByConsumerKey:appKey
+                                                        consumerSecret:appSecret
+                                                           callbackUrl:redirectUri];
+                                 break;
+                             }
+                                 //待续...
+                             default:
+                                 break;
+                         }
+                     }];
+
         
-                    }
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatTimeline]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatTimeline]];
-                    }
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatFav]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatFav]];
-                    }
-                    if ([activePlatforms containsObject:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWechat]])
-                    {
-                        confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWechat]];
-                    }
-                    appId = [confDic objectForKey:@"app_id"];
-                    appSecret = [confDic objectForKey:@"app_secret"];
-                    [appInfo SSDKSetupWeChatByAppId:appId
-                                          appSecret:appSecret];
-                    break;
-                }
-                case SSDKPlatformTypePocket:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypePocket]];
-                    appKey = [confDic objectForKey:@"consumer_key"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    NSInteger pocketAuthType = [[confDic objectForKey:@"auth_type"] integerValue];
-                    switch (pocketAuthType)
-                    {
-                        case 1:
-                            authType = SSDKAuthTypeBoth;
-                            break;
-                        case 2:
-                            authType = SSDKAuthTypeSSO;
-                            break;
-                        case 3:
-                            authType = SSDKAuthTypeWeb;
-                            break;
-                        default:
-                            break;
-                    }
-                    [appInfo SSDKSetupPocketByConsumerKey:appKey
-                                              redirectUri:redirectUri
-                                                 authType:authType];
-                    break;
-                }
-                case SSDKPlatformTypeInstagram:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstagram]];
-                    appId = [confDic objectForKey:@"client_id"];
-                    appSecret = [confDic objectForKey:@"client_secret"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    [appInfo SSDKSetupInstagramByClientID:appId
-                                             clientSecret:appSecret
-                                              redirectUri:redirectUri];
-                    break;
-                }
-                case SSDKPlatformTypeLinkedIn:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLinkedIn]];
-                    appKey = [confDic objectForKey:@"api_key"];
-                    appSecret = [confDic objectForKey:@"secret_key"];
-                    redirectUri = [confDic objectForKey:@"redirect_uri"];
-                    [appInfo SSDKSetupLinkedInByApiKey:appKey
-                                             secretKey:appSecret
-                                           redirectUrl:redirectUri];
-                    break;
-                }
-                case SSDKPlatformTypeTumblr:
-                {
-                    confDic = [platformsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTumblr]];
-                    appKey = [confDic objectForKey:@"consumer_key"];
-                    appSecret = [confDic objectForKey:@"secret_key"];
-                    redirectUri = [confDic objectForKey:@"callback_url"];
-                    [appInfo SSDKSetupTumblrByConsumerKey:appKey
-                                           consumerSecret:appSecret
-                                              callbackUrl:redirectUri];
-                    break;
-                }
-                //待续...
-                default:
-                    break;
-            }
-        }];
     }
     
     
@@ -1672,53 +2367,55 @@ extern "C" {
             observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
         }
         
-        [ShareSDK authorize:platType settings:nil onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-            [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"action"];
-            [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-            [resultDict setObject:[NSNumber numberWithInteger:platType] forKey:@"platform"];
-            [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
-            
-            if (state == SSDKResponseStateFail && error)
-            {
-                NSMutableDictionary* errorDict = [NSMutableDictionary dictionary];
-                [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                if ([[error userInfo] objectForKey:@"error_message"])
-                {
-                    if ([[error userInfo] objectForKey:@"error_message"])
-                    {
-                        [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
-
-                    }
-                }
-                else if ([[error userInfo] objectForKey:@"user_data"])
-                {
-                    NSDictionary* error_data = [[error userInfo] objectForKey:@"user_data"];
-                    if ([error_data objectForKey:@"error"])
-                    {
-                        [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
-                    }
-                    if ([error_data objectForKey:@"error_code"])
-                    {
-                        [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
-                    }
-                }
-                
-                [resultDict setObject:errorDict forKey:@"res"];
-
-            }
-            if (state == SSDKResponseStateSuccess)
-            {
-                if ([user rawData])
-                {
-                    [resultDict setObject:[user rawData] forKey:@"res"];
-                }
-            }
-            
-            NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
-            UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
-       
-        }];
+        [ShareSDK authorize:platType
+                   settings:nil
+             onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+                 NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+                 [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"action"];
+                 [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+                 [resultDict setObject:[NSNumber numberWithInteger:platType] forKey:@"platform"];
+                 [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+                 
+                 if (state == SSDKResponseStateFail && error)
+                 {
+                     NSMutableDictionary* errorDict = [NSMutableDictionary dictionary];
+                     [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                     if ([[error userInfo] objectForKey:@"error_message"])
+                     {
+                         if ([[error userInfo] objectForKey:@"error_message"])
+                         {
+                             [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
+                             
+                         }
+                     }
+                     else if ([[error userInfo] objectForKey:@"user_data"])
+                     {
+                         NSDictionary* error_data = [[error userInfo] objectForKey:@"user_data"];
+                         if ([error_data objectForKey:@"error"])
+                         {
+                             [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
+                         }
+                         if ([error_data objectForKey:@"error_code"])
+                         {
+                             [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
+                         }
+                     }
+                     
+                     [resultDict setObject:errorDict forKey:@"res"];
+                     
+                 }
+                 if (state == SSDKResponseStateSuccess)
+                 {
+                     if ([user rawData])
+                     {
+                         [resultDict setObject:[user rawData] forKey:@"res"];
+                     }
+                 }
+                 
+                 NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+                 UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+                 
+             }];
     }
     
     void __iosShareSDKCancelAuthorize (int platType)
@@ -1782,7 +2479,8 @@ extern "C" {
                 
                 [resultDict setObject:errorDict forKey:@"res"];
             }
-            if (state == SSDKResponseStateSuccess && user) {
+            if (state == SSDKResponseStateSuccess && user)
+            {
                 [resultDict setObject:[user rawData] forKey:@"res"];
             }
             
@@ -1804,7 +2502,7 @@ extern "C" {
             shareParams = __getShareParamsWithString(contentStr);
         }
         
-        [ShareSDK share:SSDKPlatformTypeGooglePlus
+        [ShareSDK share:platType
              parameters:shareParams
          onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
              
@@ -2091,7 +2789,8 @@ extern "C" {
 
                   }
                   
-                  if (state == SSDKResponseStateSuccess) {
+                  if (state == SSDKResponseStateSuccess)
+                  {
                       
                       if ([contentEntity rawData])
                       {
@@ -2223,7 +2922,8 @@ extern "C" {
             
             [resultDict setObject:[NSNumber numberWithBool:[credential available]] forKey:@"available"];
       
-        }else
+        }
+        else
         {
             [resultDict setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
             [resultDict setObject:@"Invalid Authorization" forKey:@"error"];
@@ -2246,52 +2946,55 @@ extern "C" {
             user.nickname = [NSString stringWithCString:account encoding:NSUTF8StringEncoding];
         }
         
-        [ShareSDK addFriend:shareType user:user onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-            [resultDict setObject:[NSNumber numberWithInteger:6] forKey:@"action"];
-            [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-            [resultDict setObject:[NSNumber numberWithInteger:shareType] forKey:@"platform"];
-            [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
-            
-            if (state == SSDKResponseStateFail && error)
-            {
-                NSMutableDictionary* errorDict = [NSMutableDictionary dictionary];
-                [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                if ([[error userInfo] objectForKey:@"error_message"])
-                {
-                    if ([[error userInfo] objectForKey:@"error_message"])
-                    {
-                        [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
-                        
-                    }
-                }
-                else if ([[error userInfo] objectForKey:@"user_data"])
-                {
-                    NSDictionary* error_data = [[error userInfo] objectForKey:@"user_data"];
-                    if ([error_data objectForKey:@"error"])
-                    {
-                        [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
-                    }
-                    if ([error_data objectForKey:@"error_code"])
-                    {
-                        [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
-                    }
-                }
-
-                
-                [resultDict setObject:errorDict forKey:@"res"];
-
-            }
-            
-            if (state == SSDKResponseStateSuccess)
-            {
-                NSDictionary *userRawdata = [NSDictionary dictionaryWithDictionary:[user rawData]];
-                [resultDict setObject:userRawdata forKey:@"res"];
-            }
-            NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
-            UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
-
-        }];
+        [ShareSDK addFriend:shareType
+                       user:user
+             onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+                 NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+                 [resultDict setObject:[NSNumber numberWithInteger:6] forKey:@"action"];
+                 [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+                 [resultDict setObject:[NSNumber numberWithInteger:shareType] forKey:@"platform"];
+                 [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+                 
+                 if (state == SSDKResponseStateFail && error)
+                 {
+                     NSMutableDictionary* errorDict = [NSMutableDictionary dictionary];
+                     [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                     if ([[error userInfo] objectForKey:@"error_message"])
+                     {
+                         if ([[error userInfo] objectForKey:@"error_message"])
+                         {
+                             [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
+                             
+                         }
+                     }
+                     else if ([[error userInfo] objectForKey:@"user_data"])
+                     {
+                         NSDictionary* error_data = [[error userInfo] objectForKey:@"user_data"];
+                         if ([error_data objectForKey:@"error"])
+                         {
+                             [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
+                         }
+                         if ([error_data objectForKey:@"error_code"])
+                         {
+                             [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]]
+                                           forKey:@"error_code"];
+                         }
+                     }
+                     
+                     
+                     [resultDict setObject:errorDict forKey:@"res"];
+                     
+                 }
+                 
+                 if (state == SSDKResponseStateSuccess)
+                 {
+                     NSDictionary *userRawdata = [NSDictionary dictionaryWithDictionary:[user rawData]];
+                     [resultDict setObject:userRawdata forKey:@"res"];
+                 }
+                 NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+                 UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+                 
+             }];
     }
     
     
