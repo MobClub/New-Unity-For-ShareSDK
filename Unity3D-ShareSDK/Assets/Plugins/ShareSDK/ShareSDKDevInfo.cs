@@ -117,7 +117,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QQ;
 		public string app_id = "100371282";
 		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
-		public int authType = (int)AuthType.SSO;
+		public int authType = (int)AuthType.BOTH;
 		#endif
 	}
 
@@ -134,7 +134,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QZone;
 		public string app_id = "100371282";
 		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
-		public int auth_type = (int)AuthType.SSO;
+		public int auth_type = (int)AuthType.BOTH;
 		#endif
 	}
 
@@ -198,7 +198,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Facebook;
 		public string app_key = "107704292745179";
 		public string app_secret = "38053202e1a5fe26c80c753071f0b573";
-		public int auth_type = (int)AuthType.SSO;
+		public int auth_type = (int)AuthType.BOTH;
 		#endif
 	}
 
