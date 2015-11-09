@@ -8,7 +8,7 @@ public class Demo : MonoBehaviour {
 
 	private int reqID = 0;
 	public GUISkin demoSkin;
-	private ShareSDK ssdk;
+	public ShareSDK ssdk;
 	// Use this for initialization
 	void Start ()
 	{	

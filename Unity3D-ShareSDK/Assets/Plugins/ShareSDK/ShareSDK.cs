@@ -15,7 +15,7 @@ namespace cn.sharesdk.unity3d
 	{
 		public AppKey appkey;
 		public DevInfoSet devInfo;
-		private ShareSDKUtilsInterface shareSDKUtils;
+		public ShareSDKUtilsInterface shareSDKUtils;
 
 		public EventResultListener authHandler;
 		public EventResultListener shareHandler;

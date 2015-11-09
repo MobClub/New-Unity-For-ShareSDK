@@ -8,7 +8,7 @@ namespace cn.sharesdk.unity3d
 	public class AppKey 
 	{
 		//配置ShareSDK AppKey
-		public string appKey = "a5d9150e8348";
+		public string appKey = "androidv1101";
 	}
 
 	[Serializable]
@@ -37,14 +37,11 @@ namespace cn.sharesdk.unity3d
 		public YouDao youDao;
 		public Flickr flickr;
 		public Evernote evernote;
-		public EvernoteInternational evernoteInternational;
 		public WhatsApp whatsApp;
 		public Line line;
 
 		#if UNITY_ANDROID
 		//more platforms on iOS is coming soon ....
-		
-
 		public SohuSuishenkan sohukan;
 		public FourSquare fourSquare;
 		public Pinterest pinterest;
@@ -60,6 +57,7 @@ namespace cn.sharesdk.unity3d
 		public FacebookMessenger facebookMessenger;
 		#elif UNITY_IPHONE		
 		public Copy copy;
+		public EvernoteInternational evernoteInternational;
 		#endif
 	}
 
@@ -365,14 +363,7 @@ namespace cn.sharesdk.unity3d
 	[Serializable]
 	public class EvernoteInternational : DevInfo
 	{
-		#if UNITY_ANDROID
-		public string SortId = "17";
-		public const int type = (int) PlatformType.Evernote;
-		public enum HostType{sandbox = 1, china = 2, product = 3}
-		public string ConsumerKey = "sharesdk-7807";
-		public string ConsumerSecret = "d05bf86993836004";
-		public string ShareByAppClient = "false";
-		#elif UNITY_IPHONE
+		#if UNITY_IPHONE
 		public const int type = (int)PlatformType.EvernoteInternational;  
 		public string consumer_key = "sharesdk-7807";
 		public string secret_key = "d05bf86993836004";
