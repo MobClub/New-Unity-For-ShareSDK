@@ -52,6 +52,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
+			<!-- 新浪回调 -->
+			<intent-filter>
+				<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
         </activity>
         
         <!-- 微信分享回调 -->
@@ -67,18 +72,13 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:launchMode="singleTop" />
-		 
-        <!-- 调用新浪原生SDK，需要注册的回调activity -->
+            android:launchMode="singleTop" />		 
+        <!-- 支付宝分享回调 -->
         <activity
-            android:name="cn.sharesdk.sina.weibo.SinaActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-            <intent-filter>
-				<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-				<category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
-        </activity>
-        
+            android:name=".apshare.ShareEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"/>  
     </application>
 
 </manifest>
