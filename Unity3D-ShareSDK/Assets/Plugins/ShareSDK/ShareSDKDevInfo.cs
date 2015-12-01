@@ -8,7 +8,12 @@ namespace cn.sharesdk.unity3d
 	public class AppKey 
 	{
 		//配置ShareSDK AppKey
+		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
+		#if UNITY_ANDROID
 		public string appKey = "androidv1101";
+		#elif UNITY_IPHONE
+		public string appKey = "iosv1101";
+		#endif
 	}
 
 	[Serializable]
@@ -17,11 +22,6 @@ namespace cn.sharesdk.unity3d
 	{
 		public SinaWeiboDevInfo sinaweibo;
 		public TencentWeiboDevInfo tencentweibo;
-		public QQ qq;
-		public QZone qzone;
-		public Wechat wechat;
-		public WechatMoments wechatMoments;
-		public WechatFavorite wechatFavorite;
 		public Facebook facebook;
 		public Twitter twitter;
 		public Email email;
@@ -39,25 +39,34 @@ namespace cn.sharesdk.unity3d
 		public Evernote evernote;
 		public WhatsApp whatsApp;
 		public Line line;
+		public Dropbox dropbox;
+		public VKontakte vkontakte;
+		public Pinterest pinterest;
+		public Mingdao mingdao;
 
 		#if UNITY_ANDROID
 		//more platforms on iOS is coming soon ....
 		public SohuSuishenkan sohukan;
 		public FourSquare fourSquare;
-		public Pinterest pinterest;
-		public Dropbox dropbox;
-		public VKontakte vkontakte;
 		public Yixin yixin;
 		public YixinMoments yixinMoments;
-		public Mingdao mingdao;
-		public KakaoTalk kakaoTalk;
-		public KakaoStory kakaoStory;
 		public Bluetooth bluetooth;
 		public Instapaper instapaper;
 		public FacebookMessenger facebookMessenger;
+
+		public KakaoTalk kakaoTalk;
+		public KakaoStory kakaoStory;
+		public QQ qq;
+		public QZone qzone;
+		public Wechat wechat;
+		public WechatMoments wechatMoments;
+		public WechatFavorite wechatFavorite;
 		#elif UNITY_IPHONE		
 		public Copy copy;
 		public EvernoteInternational evernoteInternational;
+		public WechatSeries wechatSeries;		//iOS端微信系列, iOS若配置微信信息请在该类中配置
+		public QQSeries qqSeries;				//iOS端QQ系列,  iOS若配置QQ(or Qzone)信息请在该类中配置
+		public KakaoSeries kakaoStory;			//iOS端Kakao系列,  iOS若配置Kakao(Talk or Story)信息请在该类中配置
 		#endif
 	}
 
@@ -81,7 +90,7 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "568898243";
 		public string app_secret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string redirect_uri = "http://www.sharesdk.cn";
-		public int auth_type = (int)AuthType.BOTH;
+		public string auth_type = "both";	//can pass "both","sso",or "web"  
 		#endif
 	}
 
@@ -101,7 +110,21 @@ namespace cn.sharesdk.unity3d
 		public string redirect_uri = "http://sharesdk.cn";
 		#endif
 	}
-	
+
+	[Serializable]
+	public class QQSeries : DevInfo 
+	{	
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "QQ" and  class "QZone"
+		//对于安卓端，请在类QQ或QZone中配置相关信息↑	
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.QQPlatform;
+		public string app_id = "100371282";
+		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
+		#endif
+	}
+
 	[Serializable]
 	public class QQ : DevInfo 
 	{
@@ -112,10 +135,8 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
 		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.QQ;
-		public string app_id = "100371282";
-		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
-		public int authType = (int)AuthType.BOTH;
+		//for iOS,please set the configuration in class "QQSeries"
+		//对于iOS端，请在 类QQSeries中配置相关信息↑
 		#endif
 	}
 
@@ -129,13 +150,24 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
 		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.QZone;
-		public string app_id = "100371282";
-		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
-		public int auth_type = (int)AuthType.BOTH;
+		//for iOS,please set the configuration in class "QQSeries"
+		//对于iOS端，请在 类QQSeries中配置相关信息↑
 		#endif
 	}
-
+	
+	[Serializable]
+	public class WechatSeries : DevInfo 
+	{	
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "Wechat" ,class "WechatMoments" or class "WechatFavorite"
+		//对于安卓端，请在类Wechat,WechatMoments或WechatFavorite中配置相关信息↑	
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.WechatPlatform;
+		public string app_id = "wx4868b35061f87885";
+		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		#endif
+	}
+	
 	[Serializable]
 	public class Wechat : DevInfo 
 	{	
@@ -146,9 +178,8 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string BypassApproval = "true";
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.WeChatSession;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		//for iOS,please set the configuration in class "WechatSeries"
+		//对于iOS端，请在 类WechatSeries中配置相关信息↑
 		#endif
 	}
 
@@ -162,9 +193,8 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string BypassApproval = "false";
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.WeChatTimeline;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		//for iOS,please set the configuration in class "WechatSeries"
+		//对于iOS端，请在 类WechatSeries中配置相关信息↑
 		#endif
 	}
 
@@ -177,9 +207,8 @@ namespace cn.sharesdk.unity3d
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.WeChatFav;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		//for iOS,please set the configuration in class "WechatSeries"
+		//对于iOS端，请在 类WechatSeries中配置相关信息↑
 		#endif
 	}
 
@@ -194,9 +223,9 @@ namespace cn.sharesdk.unity3d
 		public string RedirectUrl = "http://mob.com/";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Facebook;
-		public string app_key = "107704292745179";
+		public string api_key = "107704292745179";
 		public string app_secret = "38053202e1a5fe26c80c753071f0b573";
-		public int auth_type = (int)AuthType.BOTH;
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -211,8 +240,8 @@ namespace cn.sharesdk.unity3d
 		public string CallbackUrl = "http://mob.com";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Twitter;
-		public string app_key = "LRBM0H75rWrU9gNHvlEAA2aOy";
-		public string app_secret = "gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G";
+		public string consumer_key = "LRBM0H75rWrU9gNHvlEAA2aOy";
+		public string consumer_secret = "gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G";
 		public string redirect_uri = "http://mob.com";
 		#endif
 	}
@@ -230,8 +259,8 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Renren;
 		public string app_id = "226427";
 		public string app_key = "fc5b8aed373c4c27a05b712acba0f8c3";
-		public string app_secret = "f29df781abdd4f49beca5a2194676ca4";
-		public int auth_type = (int) AuthType.BOTH;
+		public string secret_key = "f29df781abdd4f49beca5a2194676ca4";
+		public string auth_type =  "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -247,7 +276,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Kaixin;
 		public string api_key = "358443394194887cee81ff5890870c7c";
-		public string app_secret = "da32179d859c016169f66d90b6db2a23";
+		public string secret_key = "da32179d859c016169f66d90b6db2a23";
 		public string redirect_uri = "http://www.sharesdk.cn";
 		#endif
 	}
@@ -286,7 +315,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.DouBan;
 		public string api_key = "02e2cbe5ca06de5908a863b15e149b0b";
-		public string app_secret = "9f1e7b4f71304f2f";
+		public string secret = "9f1e7b4f71304f2f";
 		public string redirect_uri = "http://www.sharesdk.cn";
 		#endif
 	}
@@ -304,8 +333,8 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YouDaoNote;
 		public string consumer_key = "dcde25dca105bcc36884ed4534dab940";
-		public string secret_key = "d98217b4020e7f1874263795f44838fe";
-		public string callback_url = "http://www.sharesdk.cn/";
+		public string consumer_secret = "d98217b4020e7f1874263795f44838fe";
+		public string oauth_callback = "http://www.sharesdk.cn/";
 		#endif
 	}
 
@@ -355,7 +384,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Evernote;
 		public string consumer_key = "sharesdk-7807";
-		public string secret_key = "d05bf86993836004";
+		public string consumer_secret = "d05bf86993836004";
 		public int isSandBox = 1; //"0" mean NO with SandBox, !0 mean YES with SandBox
 		#endif
 	}
@@ -363,10 +392,12 @@ namespace cn.sharesdk.unity3d
 	[Serializable]
 	public class EvernoteInternational : DevInfo
 	{
-		#if UNITY_IPHONE
+		#if UNITY_ANDROID
+		//ANDROID do not support this platform
+		#elif UNITY_IPHONE
 		public const int type = (int)PlatformType.EvernoteInternational;  
 		public string consumer_key = "sharesdk-7807";
-		public string secret_key = "d05bf86993836004";
+		public string consumer_secret = "d05bf86993836004";
 		public int isSandBox = 0; //"0" mean NO with SandBox, !0 mean YES with SandBox
 		#endif
 	}
@@ -400,7 +431,7 @@ namespace cn.sharesdk.unity3d
 		public string client_id = "232554794995.apps.googleusercontent.com";
 		public string client_secret = "PEdFgtrMw97aCvf0joQj7EMk";
 		public string redirect_uri = "http://localhost";
-		public int auth_type = (int)AuthType.BOTH;
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -427,7 +458,7 @@ namespace cn.sharesdk.unity3d
 		public string ClientId = "1432928";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Pinterest;
-		public string ClientId = "1432928";
+		public string client_id = "1432928";
 		#endif
 	}
 
@@ -459,7 +490,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Tumblr;
 		public string consumer_key = "2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM";
-		public string secret_key = "3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo";
+		public string consumer_secret = "3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo";
 		public string callback_url = "http://sharesdk.cn";
 		#endif
 	}
@@ -474,8 +505,9 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "c1hpx5fz6tzkm32";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Dropbox;
-		public string AppKey = "7janx53ilz11gbs";
-		public string AppSecret = "c1hpx5fz6tzkm32";
+		public string app_key = "i5vw2mex1zcgjcj";
+		public string app_secret = "3i9xifsgb4omr0s";
+		public string oauth_callback = "https://www.sharesdk.cn";
 		#endif
 	}
 	
@@ -488,7 +520,8 @@ namespace cn.sharesdk.unity3d
 		public string ApplicationId = "3921561";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.VKontakte;
-		public string ApplicationId = "3921561";
+		public string application_id = "3921561";
+		public string secret_key = "6Qf883ukLDyz4OBepYF1";
 		#endif
 	}
 
@@ -558,9 +591,9 @@ namespace cn.sharesdk.unity3d
 		public string RedirectUri = "http://sharesdk.cn";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.MingDao;
-		public string AppKey = "EEEE9578D1D431D3215D8C21BF5357E3";
-		public string AppSecret = "5EDE59F37B3EFA8F65EEFB9976A4E933";
-		public string RedirectUri = "http://sharesdk.cn";
+		public string app_key = "EEEE9578D1D431D3215D8C21BF5357E3";
+		public string app_secret = "5EDE59F37B3EFA8F65EEFB9976A4E933";
+		public string redirect_uri = "http://sharesdk.cn";
 		#endif
 	}
 
@@ -574,7 +607,22 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Line;
 		#endif
 	}
-	
+
+	[Serializable]
+	public class KakaoSeries : DevInfo 
+	{
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "KakaoTalk" and  class "KakaoStory"
+		//对于安卓端，请在类KakaoTalk或KakaoStory中配置相关信息
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.KakaoPlatform;
+		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
+		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string redirect_uri = "http://www.mob.com/oauth";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
+		#endif
+	}
+
 	[Serializable]
 	public class KakaoTalk : DevInfo 
 	{
@@ -582,7 +630,8 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "31";
 		public const int type = (int) PlatformType.KakaoTalk;
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.KakaoTalk;
+		//for ios,please set the configuraion in class "KakaoSeries"
+		//对于iOS端，请在 类KakaoSeries中配置相关信息↑
 		#endif
 	}
 	
@@ -593,7 +642,8 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "32";
 		public const int type = (int) PlatformType.KakaoStory;
 		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.KakaoStory;
+		//for ios,please set the configuraion in class "KakaoSeries"
+		//对于iOS端，请在 类KakaoSeries中配置相关信息↑
 		#endif
 	}
 	
@@ -630,7 +680,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Pocket;
 		public string consumer_key = "11496-de7c8c5eb25b2c9fcdc2b627";
 		public string redirect_uri = "pocketapp1234";
-		public int auth_type = (int) AuthType.BOTH;
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 

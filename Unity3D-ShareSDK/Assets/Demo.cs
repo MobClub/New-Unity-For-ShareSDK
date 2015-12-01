@@ -72,7 +72,7 @@ public class Demo : MonoBehaviour {
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
 			//type只对微信分享有效,分享图片Image,分享链接类型为WebPage/News
-			content["type"] = ContentType.Video;
+			content["type"] = ContentType.Image;
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";
@@ -212,7 +212,7 @@ public class Demo : MonoBehaviour {
 	{
 		if (state == ResponseState.Success)
 		{
-			print ("share result :");
+			print ("share successfully - share result :");
 			print (MiniJSON.jsonEncode(result));
 		}
 		else if (state == ResponseState.Fail)

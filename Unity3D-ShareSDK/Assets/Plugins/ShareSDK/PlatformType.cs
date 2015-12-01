@@ -58,10 +58,16 @@ namespace cn.sharesdk.unity3d
 		FacebookMessenger = 46, //FacebookMessenger
 		Bluetooth = 48,         //Bluetooth
 		Alipay = 50,
+
+		//valid only in iOS
+		#if UNITY_IPHONE		
+		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series
 		QQPlatform = 998,		//QQ Series
 		Any = 999 				//Any Platform  
+		#endif
+
 	}
 
 }

@@ -12,9 +12,7 @@ namespace cn.sharesdk.unity3d
 {
 	public enum AuthType
 	{
-		BOTH = 1,
-		SSO = 2,
-		WEB = 3,
+
 	}
 }
 
