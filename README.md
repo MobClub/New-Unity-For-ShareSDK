@@ -1,15 +1,15 @@
 New-Unity-For-ShareSDK
 =======================================
-#This is the new version and new sample of ShareSDK for Unity3D.
-- supported original ShareSDK version:
+### This is the new version and new sample of ShareSDK for Unity3D.
+**supported original ShareSDK version:**
 - Android - V2.6.5
 - iOS - V3.1.4
 - 中文文档请查看[简洁版unity3d快速集成](http://wiki.mob.com/%E7%AE%80%E6%B4%81%E7%89%88unity3d%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3/)
 
 
-###### The notes for fast integration of Unity3D
+**The notes for fast integration of Unity3D**
 
-###Integration of general part
+### *Integration of general part*
 
 - Step 1 : Download Unity3D tools of ShareSDK
 
@@ -27,20 +27,20 @@ App Key on first line is appkey from ShareSDK. You could get that from our websi
 You could also set the social platforms’ information in file “ShareSDKDevInfo.cs”. The effect are the same.
 
 i.Set your own ShareSDK Appkey
-public class AppKey 
-{
-//set ShareSDK AppKey
-public string appKey = "a5d9150e8348";
-}
+        public class AppKey 
+        {
+        //set ShareSDK AppKey
+        public string appKey = "a5d9150e8348";
+        }
 
 ii.Choose the platforms based on your needs
-public class DevInfoSet
-{
-public SinaWeiboDevInfo sinaweibo;
-public TencentWeiboDevInfo tencentweibo;
-public QQ qq;
-public QZone qzone;
-}
+        public class DevInfoSet
+        {
+        public SinaWeiboDevInfo sinaweibo;
+        public TencentWeiboDevInfo tencentweibo;
+        public QQ qq;
+        public QZone qzone;
+        }
 
 iii.Set the platforms’ information (you could directly edit the string value )
 
@@ -64,13 +64,13 @@ iii.Set the platforms’ information (you could directly edit the string value )
 
 - Step 3 : Sharing and Authorization
 
-Please import Name Space first
+Please import Name Space first :
 
-using cn.sharesdk.unity3d;
+        using cn.sharesdk.unity3d;
 
-private ShareSDK ssdk;
+        private ShareSDK ssdk;
 
-###About Sharing
+#### About Sharing
 i.Customize the sharing information :
 
         Hashtable content = new Hashtable();
@@ -106,66 +106,69 @@ and Defination of callback:
 
 iii. Transfer contents to Sharing interface :
 
-ssdk.ShowShareMenu (reqID, null, content, 100, 100);
+        ssdk.ShowShareMenu (reqID, null, content, 100, 100);
 
-###About Authorization
+#### About Authorization
 
 i. Set the auth call back :
 
-ssdk.authHandler = AuthResultHandler;
+        ssdk.authHandler = AuthResultHandler;
 
 and defination for callback:
 
-void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
-{
-if (state == ResponseState.Success)
-{
-print ("authorize success !");
-}
-else if (state == ResponseState.Fail)
-{
-print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-}
-else if (state == ResponseState.Cancel) 
-{
-print ("cancel !");
-}
-}
+        void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
+        {
+        if (state == ResponseState.Success)
+        {
+        print ("authorize success !");
+        }
+        else if (state == ResponseState.Fail)
+        {
+        print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+        }
+        else if (state == ResponseState.Cancel) 
+        {
+        print ("cancel !");
+        }
+        }
 
 ii. now you can make an Authorization:
 
-ssdk.Authorize(reqID, PlatformType.SinaWeibo);
+        ssdk.Authorize(reqID, PlatformType.SinaWeibo);
 
-###About Get User's information
+#### About Get User's information
 
 i. Set the get user's info' call back :
 
-sdk.showUserHandler = GetUserInfoResultHandler;
+        sdk.showUserHandler = GetUserInfoResultHandler;
 
 and defination for callback:
-Defination of callback
-void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
-{
-if (state == ResponseState.Success)
-{
-print ("get user info result :");
-print (MiniJSON.jsonEncode(result));
-}
-else if (state == ResponseState.Fail)
-{
-print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-}
-else if (state == ResponseState.Cancel) 
-{
-print ("cancel !");
-}
-}
+        void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+        {
+        if (state == ResponseState.Success)
+        {
+        print ("get user info result :");
+        print (MiniJSON.jsonEncode(result));
+        }
+        else if (state == ResponseState.Fail)
+        {
+        print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+        }
+        else if (state == ResponseState.Cancel) 
+        {
+        print ("cancel !");
+        }
+        }
 
 ii. now you can get the user's info:
 
-ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);'
+        ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);'
+
+### *Integration for iOS* (if you don't need iOS ,please ingore this)
 
 
+
+### *Integration for Android* (if you don't need Android ,please ingore this)
 
 
 
