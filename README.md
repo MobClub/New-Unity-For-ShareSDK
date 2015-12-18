@@ -11,18 +11,19 @@ New-Unity-For-ShareSDK
 
 ### *Integration of general part*
 
-- Step 1 : Download Unity3D tools of ShareSDK
+###### Step 1 : Download Unity3D tools of ShareSDK
 
 Open Github and download New-Unity-For-ShareSDK section. Copy ”Unity3dDemo/Assets/Plugins”catalogue to Assets catalogue, or double click “sharesdk-unity3d-plugin.unitypackage” to import relative documents.
 Please notice that this operation could cover your original existed documents!
 
-- Step 2 : Add ShareSDK script and set the platforms’ information
+###### Step 2 : Add ShareSDK script and set the platforms’ information
+
 Need to add ShareSDK to GameObject(Like Main Camera). Click”Add Component” from the right-hand side bar, and choose ShareSDK to be added.
-![github](http://wiki.mob.com/wp-content/uploads/2015/09/step1.jpg “github”)
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/step1.jpg)
 After that, it will show the social platforms’ information and which one is avaliable for use. You could click here to edit the information based on your needs. Please make sure the compiler environment is Android or iOS, cause they are totally different.
 
 App Key on first line is appkey from ShareSDK. You could get that from our website when you register an account. 
-![github](http://wiki.mob.com/wp-content/uploads/2015/09/step2.jpg “github”)
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/step2.jpg)
 
 You could also set the social platforms’ information in file “ShareSDKDevInfo.cs”. The effect are the same.
 
@@ -62,7 +63,7 @@ iii.Set the platforms’ information (you could directly edit the string value )
         #endif
         }
 
-- Step 3 : Sharing and Authorization
+###### Step 3 : Sharing and Authorization
 
 Please import Name Space first :
 
@@ -166,6 +167,9 @@ ii. now you can get the user's info:
 
 ### *Integration for iOS* (if you don't need iOS ,please ingore this)
 
+**Edit document ”ShareSDKUnity3DBridge.m”**
+
+For those who need to use Single sign on (QQ Zone, RenRen, Tencent Weibo) or the platforms have to be shared by client-side (Wechat, Yinxin, Pinterest, Google+, QQ), please make sure whether the macro is define. If you want to integrate wechat, then you need to open_ SHARESDK_WECHAT_. Same as other platforms.
 
 
 ### *Integration for Android* (if you don't need Android ,please ingore this)
