@@ -166,7 +166,7 @@ and defination for callback:
 
 ii. now you can get the user's info:
 
-        ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);'
+        ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);
 
 ### *Integration for iOS* (if you don't need iOS ,please ignore this)
 
