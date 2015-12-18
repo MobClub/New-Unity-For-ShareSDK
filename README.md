@@ -1,5 +1,4 @@
-New-Unity-For-ShareSDK
-=======================================
+# New-Unity-For-ShareSDK
 ### This is the new version and new sample of ShareSDK for Unity3D.
 **supported original ShareSDK version:**
 - Android - V2.6.5
@@ -173,12 +172,101 @@ ii. now you can get the user's info:
 **Edit document ”ShareSDKUnity3DBridge.m”**
 
 For those who need to use Single sign on (QQ Zone, RenRen, Tencent Weibo) or the platforms have to be shared by client-side (Wechat, Yinxin, Pinterest, Google+, QQ), please make sure whether the macro is define. If you want to integrate wechat, then you need to open_ SHARESDK_WECHAT_. Same as other platforms.
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/mm.jpg)
+
+You could export XCode project after editing complete
+
+***Noticed: The next steps need to be done after exporting XCode project***
+
+
+Import ShareSDK iOS version to the project.
+Log in Mob website to download the latest version of ShareSDK.If you have not download, please click here to download.(Notes: You could choose the platforms to use or download the whole offical demo.) If you download the demo, it will apears after you unzip it:
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/SDK1.jpg)
+
+Drag file”libraries” to Xcode project from Untiy3D:
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/SDK2.jpg)
+
+Choose “Create groups”, check the project.Check “Copy item if needed”, and you could copy the folder to Xcode projects. (If you don’t check “copy if needed”, it means just refer the file but copy), and click Finish, you could add ShareSDK to Xcode project:
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/SDK3.jpg)
+
+After import ShareSDK to Xcode Project, please add relevant dependent libraries.
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/SDK4.jpg)
+
+Basic:
+- libicucore.dylib
+- libz.dylib
+- libstdc++.dylib
+- JavaScriptCore.framework
+
+for Sina SDK(optional,if need Sina):
+- ImageIO.framework
+- AdSupport.framework
+- libsqlite3.dylib
+
+for QQ SDK(optional,if need QQ or QZone):
+- libsqlite3.dylib
+
+for Wechat(optional,if need Wechat):
+- libsqlite3.dylib
+
+for Google＋SDK(optional,if need Google+):
+- CoreMotion.framework
+- CoreLocation.framework
+- MediaPlayer.framework
+- AssetsLibrary.framework
+- AddressBook.framework
+
+**Add URL scheme**
+
+For those who need client side sharing platforms and Single sign on authorization platforms, need add an URL Scheme. Client side sharing please refer to the demo of [ShareSDK For iOS(v3.x)](https://github.com/MobClub/ShareSDK).
 
 
 ### *Integration for Android* (if you don't need Android ,please ingore this)
 
 
+###### Step 1 : 
+
+Download”New-Unity-For-ShareSDK”project, and copy” Unity3D-ShareSDK/Assets/plugins” catalogue to Assets catalogue in your project. Or doule click “sharesdk-unity3d-plugin.unitypackage” and import relative documents, Whle you doing that, ShareSDK has been integrated successfully in your project.
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/F8EBCCEA-A5F9-42A5-9129-FAFE7FD1324E.png)
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/E2190F1F-5F64-47F4-A747-1B481B63025F.png)
 
 
+
+###### Step 2 : 
+
+Set “AndroidManifest.xml” document and add relative configuration imformation.
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/04930835-7D1F-45C6-A898-DA9797175F82.png)
+
+
+###### Step 3 : 
+
+After above, you can share,auth or get user's' info. You can refer to Unity3D-ShareSDK/Assets/Demo.cs and see how to user it.
+Before that ,you must handle cs file Unity3D-ShareSDK/Assets/Plugins/ShareSDK/ShareSDK.cs with you project,and set the platforms configuration.
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/CFB71BF8-2371-46F3-A88D-BC0F644C103D.png)
+
+Then you could call the code, like open the sharing interface:
+
+
+
+###### Step 4 : 
+
+While runing the Demo, you need to add Demo.cs and ShareSDK.cs together
+
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/5C02A01B-E641-45BE-9BB5-769BC72AE527.png)
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+**Finally, if you have any other questions, please do not be hesitate to contact us:**
+
+- Customer Service QQ : 4006852216
+
+- or Skype:amber
 
 More information About ShareSDK, please visit our website [Mob.com](http://www.mob.com)
