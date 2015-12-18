@@ -28,6 +28,7 @@ App Key on first line is appkey from ShareSDK. You could get that from our websi
 You could also set the social platforms’ information in file “ShareSDKDevInfo.cs”. The effect are the same.
 
 i.Set your own ShareSDK Appkey
+
         public class AppKey 
         {
         //set ShareSDK AppKey
@@ -35,6 +36,7 @@ i.Set your own ShareSDK Appkey
         }
 
 ii.Choose the platforms based on your needs
+
         public class DevInfoSet
         {
         public SinaWeiboDevInfo sinaweibo;
@@ -144,6 +146,7 @@ i. Set the get user's info' call back :
         sdk.showUserHandler = GetUserInfoResultHandler;
 
 and defination for callback:
+
         void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
         {
         if (state == ResponseState.Success)
