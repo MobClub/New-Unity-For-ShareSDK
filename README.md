@@ -1,7 +1,12 @@
-# New-Unity-For-ShareSDK
+New-Unity-For-ShareSDK
 =======================================
-There is only android codes in the new sample of ShareSDK for Unity so far.
-=======================================
+This is the new version and new sample of ShareSDK for Unity3D.
+---------------------------------------------------------------
+supported original ShareSDK version:
+---------------------------------------------------------------
+### Android - V2.6.5
+### iOS - V3.1.4
+
 
 # ShareSDK for Android
 - website -- http://www.mob.com
