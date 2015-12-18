@@ -5,8 +5,9 @@
 - iOS - V3.1.4
 - 中文文档请查看[简洁版unity3d快速集成](http://wiki.mob.com/%E7%AE%80%E6%B4%81%E7%89%88unity3d%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3/)
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-**The notes for fast integration of Unity3D**
+##The notes for fast integration of Unity3D##
 
 ### *Integration of general part*
 
@@ -167,7 +168,7 @@ ii. now you can get the user's info:
 
         ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);'
 
-### *Integration for iOS* (if you don't need iOS ,please ingore this)
+### *Integration for iOS* (if you don't need iOS ,please ignore this)
 
 **Edit document ”ShareSDKUnity3DBridge.m”**
 
@@ -224,7 +225,7 @@ for Google＋SDK(optional,if need Google+):
 For those who need client side sharing platforms and Single sign on authorization platforms, need add an URL Scheme. Client side sharing please refer to the demo of [ShareSDK For iOS(v3.x)](https://github.com/MobClub/ShareSDK).
 
 
-### *Integration for Android* (if you don't need Android ,please ingore this)
+### *Integration for Android* (if you don't need Android ,please ignore this)
 
 
 ###### Step 1 : 
