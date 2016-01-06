@@ -411,9 +411,14 @@ extern "C" {
                                                     settings:nil];
                 }
                 
-                [imageArray addObject:image];
-              
-                
+                if (image)
+                {
+                    [imageArray addObject:image];
+                }
+                else
+                {
+                    NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                }
             }
             else if([img isKindOfClass:[NSArray class]])
             {
@@ -438,8 +443,14 @@ extern "C" {
                                                         settings:nil];
                     }
                     
-                    [imageArray addObject:image];
-                    
+                    if (image)
+                    {
+                        [imageArray addObject:image];
+                    }
+                    else
+                    {
+                        NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                    }
                 }
             }
             
@@ -573,7 +584,15 @@ extern "C" {
                                                              format:SSDKImageFormatJpeg
                                                            settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -599,9 +618,15 @@ extern "C" {
                                                                   format:SSDKImageFormatJpeg
                                                                 settings:nil];
                             }
-
-                            [images addObject:image];
                             
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
                         }
                     }
                     
@@ -874,7 +899,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -901,8 +934,15 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
-                            
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
+
                         }
                     }
                     
@@ -1022,8 +1062,16 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
                         
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
+
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
                     {
@@ -1049,7 +1097,14 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
                             
                         }
                     }
@@ -1156,7 +1211,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -1183,7 +1246,14 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
                             
                         }
                     }
@@ -1258,7 +1328,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -1285,7 +1363,14 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
                             
                         }
                     }
@@ -1376,7 +1461,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -1403,7 +1496,14 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
                             
                         }
                     }
@@ -1612,7 +1712,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -1637,7 +1745,15 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
+
                         }
                     }
                     if ([[value objectForKey:@"groupId"] isKindOfClass:[NSString class]])
@@ -1879,7 +1995,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -1904,7 +2028,15 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
+
                         }
                     }
                     
@@ -2086,7 +2218,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -2111,7 +2251,15 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
+
                         }
                     }
                     if ([[value objectForKey:@"notebook"] isKindOfClass:[NSString class]])
@@ -2177,7 +2325,15 @@ extern "C" {
                                                               format:SSDKImageFormatJpeg
                                                             settings:nil];
                         }
-                        [images addObject:image];
+                        
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                        else
+                        {
+                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                        }
                         
                     }
                     else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
@@ -2204,7 +2360,14 @@ extern "C" {
                                                                 settings:nil];
                             }
                             
-                            [images addObject:image];
+                            if (image)
+                            {
+                                [images addObject:image];
+                            }
+                            else
+                            {
+                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                            }
                             
                         }
                     }
