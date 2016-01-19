@@ -71,7 +71,7 @@ public class Demo : MonoBehaviour {
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
-			//type只对微信分享有效,分享图片Image,分享链接类型为WebPage/News
+			//type只对微信分享有效,分享图片Image,分享链接类型为WebPage
 			content["type"] = ContentType.Image;
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
@@ -109,7 +109,7 @@ public class Demo : MonoBehaviour {
 			content["title"] = "test title";
 			content["description"] = "test description";
 			content["url"] = "http://sharesdk.cn";
-			content["type"] = ContentType.News;
+			content["type"] = ContentType.Webpage;
 			content["siteUrl"] = "http://sharesdk.cn";
 			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
 			content["site"] = "ShareSDK";

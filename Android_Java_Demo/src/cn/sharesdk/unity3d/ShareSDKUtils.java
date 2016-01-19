@@ -309,7 +309,7 @@ public class ShareSDKUtils implements Callback{
 					oks.setSiteUrl((String)map.get("musicUrl"));
 				}
 				if (map.containsKey("shareType")) {
-					if ("4".equals(String.valueOf(map.get("shareType")))) {
+					if ("6".equals(String.valueOf(map.get("shareType")))) {
 						oks.shareVideoToWechat();
 					}
 				}

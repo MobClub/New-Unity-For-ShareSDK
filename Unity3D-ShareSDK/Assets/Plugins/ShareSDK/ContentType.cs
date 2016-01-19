@@ -18,12 +18,10 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID	
 		public const String Text = "0"; 				//Text
 		public const String Image = "1";				//Image 
-		public const String News = "2";					//News,webpage 
 		public const String Webpage = "2";				//News,webpage 
 		public const String Music = "3";				//Music 
 		public const String Video = "4";				//Video 
 		public const String App = "5"; 					//App
-		public const String Gif = "6";					//Gif Image 
 		public const String Emoji = "6";				//Gif Image 
 		public const String File = "7";					//File
 		public const String Auto = "8";	

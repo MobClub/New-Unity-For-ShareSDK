@@ -58,9 +58,9 @@ namespace cn.sharesdk.unity3d
 		public KakaoStory kakaoStory;
 		public QQ qq;
 		public QZone qzone;
-		public Wechat wechat;
-		public WechatMoments wechatMoments;
-		public WechatFavorite wechatFavorite;
+		public WeChat wechat;
+		public WeChatMoments wechatMoments;
+		public WeChatFavorites wechatFavorites;
 		#elif UNITY_IPHONE		
 		public Copy copy;
 		public EvernoteInternational evernoteInternational;
@@ -169,11 +169,11 @@ namespace cn.sharesdk.unity3d
 	}
 	
 	[Serializable]
-	public class Wechat : DevInfo 
+	public class WeChat : DevInfo 
 	{	
 		#if UNITY_ANDROID
 		public string SortId = "5";
-		public const int type = (int) PlatformType.WeChatSession;
+		public const int type = (int) PlatformType.WeChat;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string BypassApproval = "true";
@@ -184,11 +184,11 @@ namespace cn.sharesdk.unity3d
 	}
 
 	[Serializable]
-	public class WechatMoments : DevInfo 
+	public class WeChatMoments : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "6";
-		public const int type = (int) PlatformType.WeChatTimeline;
+		public const int type = (int) PlatformType.WeChatMoments;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string BypassApproval = "false";
@@ -199,11 +199,11 @@ namespace cn.sharesdk.unity3d
 	}
 
 	[Serializable]
-	public class WechatFavorite : DevInfo 
+	public class WeChatFavorites : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "7";
-		public const int type = (int) PlatformType.WeChatFav;
+		public const int type = (int) PlatformType.WeChatFavorites;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		#elif UNITY_IPHONE

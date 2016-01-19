@@ -35,8 +35,8 @@ namespace cn.sharesdk.unity3d
 		SMS = 19,				//SMS           
 		Print = 20, 			//Print       
 		Copy = 21,				//Copy             
-		WeChatSession = 22,		//WeChat Session    
-		WeChatTimeline = 23,	//WeChat Timeline   
+		WeChat = 22,		    //WeChat Friends    
+		WeChatMoments = 23,	    //WeChat WechatMoments   
 		QQ = 24,				//QQ              
 		Instapaper = 25,		//Instapaper       
 		Pocket = 26,			//Pocket           
@@ -46,7 +46,7 @@ namespace cn.sharesdk.unity3d
 		Flickr = 34,			//Flickr          
 		Dropbox = 35,			//Dropbox          
 		VKontakte = 36,			//VKontakte       
-		WeChatFav = 37,			//WeChat Favorited        
+		WeChatFavorites = 37,			//WeChat Favorited        
 		YiXinSession = 38, 		//YiXin Session   
 		YiXinTimeline = 39,		//YiXin Timeline   
 		YiXinFav = 40,			//YiXin Favorited  
