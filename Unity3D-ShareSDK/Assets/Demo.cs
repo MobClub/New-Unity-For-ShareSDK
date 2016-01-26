@@ -6,7 +6,6 @@ using cn.sharesdk.unity3d;
 
 public class Demo : MonoBehaviour {
 
-	private int reqID = 0;
 	public GUISkin demoSkin;
 	public ShareSDK ssdk;
 	// Use this for initialization
@@ -44,23 +43,20 @@ public class Demo : MonoBehaviour {
 		float btnHeight = 45 * scale;
 		float btnTop = 20 * scale;
 		GUI.skin.button.fontSize = Convert.ToInt32(16 * scale);
-		
-		reqID += 1;
+
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Authorize"))
 		{
 			print(ssdk == null);
 
-			ssdk.Authorize(reqID, PlatformType.SinaWeibo);
+			ssdk.Authorize(PlatformType.SinaWeibo);
 		}
-		
-		reqID += 1;
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Get User Info"))
 		{
-			ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);
+			ssdk.GetUserInfo(PlatformType.SinaWeibo);
 		}
-		
-		reqID += 1;
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share Menu"))
 		{
@@ -96,10 +92,9 @@ public class Demo : MonoBehaviour {
 			content.Add((int)PlatformType.SinaWeibo,sinaContent);
 			#endif
 
-			ssdk.ShowShareMenu (reqID, null, content, 100, 100);
+			ssdk.ShowShareMenu (null, content, 100, 100);
 		}
-		
-		reqID += 1;
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share View"))
 		{
@@ -115,10 +110,9 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
-			ssdk.ShowShareView (reqID, PlatformType.TencentWeibo, content);
+			ssdk.ShowShareView (PlatformType.TencentWeibo, content);
 		}
-		
-		reqID += 1;
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Content"))
 		{
@@ -133,16 +127,15 @@ public class Demo : MonoBehaviour {
 			content["site"] = "ShareSDK";
 			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 
-			ssdk.ShareContent (reqID, PlatformType.SinaWeibo, content);
+			ssdk.ShareContent (PlatformType.SinaWeibo, content);
 		}
-		
-		reqID += 1;
+
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
 		{
 			//获取新浪微博好友，第一页，每页15条数据
 			print ("Click Btn Of Get Friends SinaWeibo");
-			ssdk.GetFriendList (reqID, PlatformType.SinaWeibo, 15, 0);
+			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
 		}
 
 		btnTop += btnHeight + 20 * scale;
@@ -165,12 +158,11 @@ public class Demo : MonoBehaviour {
 			ssdk.CancelAuthorize (PlatformType.SinaWeibo);			
 		}
 
-		reqID += 1;
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Add Friend "))
 		{
 			//关注新浪微博
-			ssdk.AddFriend (reqID, PlatformType.SinaWeibo, "3189087725");			
+			ssdk.AddFriend (PlatformType.SinaWeibo, "3189087725");			
 		}
 
 	}

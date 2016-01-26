@@ -110,7 +110,7 @@ namespace cn.sharesdk.unity3d{
 		/// the setting of SSO
 		/// </summary>
 		/// <param name="disable">If set to <c>true</c> disable.</param>
-		public abstract void CloseSSOWhenAuthorize (Boolean open);
+		public abstract void CloseSSOWhenAuthorize (Boolean close);
 
 	}
 }

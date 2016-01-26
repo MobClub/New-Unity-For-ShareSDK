@@ -14,30 +14,16 @@ namespace cn.sharesdk.unity3d
 	/// Content type.
 	/// </summary>
 	public class ContentType
-	{
-		#if UNITY_ANDROID	
-		public const String Text = "0"; 				//Text
-		public const String Image = "1";				//Image 
-		public const String Webpage = "2";				//News,webpage 
-		public const String Music = "3";				//Music 
-		public const String Video = "4";				//Video 
-		public const String App = "5"; 					//App
-		public const String Emoji = "6";				//Gif Image 
-		public const String File = "7";					//File
-		public const String Auto = "8";	
-		#elif UNITY_IPHONE	      
+	{	      		
 		public const String Auto = "0";					//Auto			自动
-		public const String Text = "1"; 				//Text			文字分享
-		public const String Image = "2";				//Image 		图文分享
-		public const String Webpage = "3";				//News,webpage 	链接分享
-		public const String News = "3";					//News,webpage 	链接分享
-		public const String App = "4"; 					//App			应用分享
-		public const String Music = "5";				//Music			音乐分享
-		public const String Video = "6";				//Video			视频分享
-		public const String File = "4";					//File			附件分享
-		public const String Emoji = "2";				//Gif Image  	表情/GIF分享
-		public const String Gif = "2";					//Gif Image		表情/GIF分享
-		#endif
+		public const String Text = "1"; 				//文字分享
+		public const String Image = "2";				//图文分享
+		public const String Webpage = "4";				//链接分享
+		public const String Music = "5";				//音乐分享 
+		public const String Video = "6";				//视频分享 
+		public const String App = "7"; 					//应用分享
+		public const String File = "8";					//附件分享
+		public const String Emoji = "9";				//表情分享
 	}
 
 }

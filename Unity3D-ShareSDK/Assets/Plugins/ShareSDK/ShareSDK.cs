@@ -13,6 +13,7 @@ namespace cn.sharesdk.unity3d
 	/// </summary>
 	public class ShareSDK : MonoBehaviour 
 	{
+		public int reqID;
 		public AppKey appkey;
 		public DevInfoSet devInfo;
 		public ShareSDKUtilsInterface shareSDKUtils;
@@ -291,9 +292,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Result handler.
 		/// </param>
-		public void Authorize (int reqID, PlatformType platform)
+		public int Authorize (PlatformType platform)
 		{
+			reqID ++;
 			shareSDKUtils.Authorize(reqID, platform);			
+			return reqID;
 		}
 		
 		/// <summary>
@@ -335,9 +338,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void GetUserInfo (int reqID, PlatformType platform)
+		public int GetUserInfo (PlatformType platform)
 		{
+			reqID ++;
 			shareSDKUtils.GetUserInfo(reqID, platform);			
+			return reqID;
 		}
 
 		/// <summary>
@@ -352,9 +357,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public void ShareContent(int reqID, PlatformType platform, Hashtable content)
+		public int ShareContent(PlatformType platform, Hashtable content)
 		{
+			reqID ++;
 			shareSDKUtils.ShareContent(reqID, platform, content);			
+			return reqID;
 		}
 
 		/// <summary>
@@ -369,9 +376,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public void ShareContent(int reqID, PlatformType[] platforms, Hashtable content)
+		public int ShareContent(PlatformType[] platforms, Hashtable content)
 		{
+			reqID ++;
 			shareSDKUtils.ShareContent(reqID, platforms, content);			
+			return reqID;
 		}
 				
 		/// <summary>
@@ -386,9 +395,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareMenu (int reqID, PlatformType[] platforms, Hashtable content, int x, int y)
+		public int ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y)
 		{
+			reqID ++;
 			shareSDKUtils.ShowShareMenu(reqID, platforms, content, x, y);			
+			return reqID;
 		}
 		
 		/// <summary>
@@ -403,10 +414,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public void ShowShareView (int reqID, PlatformType platform, Hashtable content)
+		public int ShowShareView (PlatformType platform, Hashtable content)
 		{			
-			Debug.Log("Demo  ===>>>  ssdk.ShowShareView" );
-			shareSDKUtils.ShowShareView(reqID, platform, content);			
+			reqID ++;
+			shareSDKUtils.ShowShareView(reqID, platform, content);		
+			return reqID;
 		}
 
 		/// <summary>
@@ -415,9 +427,11 @@ namespace cn.sharesdk.unity3d
 		/// <param name="type">Type.</param>
 		/// <param name="count">Count.</param>
 		/// <param name="page">Page.</param>
-		public void GetFriendList (int reqID, PlatformType platform, int count, int page)
+		public int GetFriendList (PlatformType platform, int count, int page)
 		{
+			reqID ++;
 			shareSDKUtils.GetFriendList (reqID, platform, count, page);			
+			return reqID;
 		}
 
 		/// <summary>
@@ -425,9 +439,11 @@ namespace cn.sharesdk.unity3d
 		/// </summary>
 		/// <param name="type">Type.</param>
 		/// <param name="account">Account.</param>
-		public void AddFriend (int reqID, PlatformType platform, String account)
+		public int AddFriend (PlatformType platform, String account)
 		{
+			reqID ++;
 			shareSDKUtils.AddFriend (reqID, platform, account);			
+			return reqID;
 		}
 
 		/// <summary>
