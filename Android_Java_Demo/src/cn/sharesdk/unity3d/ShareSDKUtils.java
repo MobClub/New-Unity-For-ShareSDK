@@ -399,7 +399,8 @@ public class ShareSDKUtils implements Callback{
 			System.out.println("share content type==>>" + type);
 		}
 		if (type != null) {
-			int shareType = iosTypeToAndroidType(Integer.parseInt(type));
+			int shareType = Integer.parseInt(type) ;
+			shareType = shareType == 0 ? 1 :shareType;//ios的自动类型，改成Text
 			map.put("shareType", shareType);
 		}
 		map.put("shareTheme", content.get("shareTheme"));
@@ -410,20 +411,6 @@ public class ShareSDKUtils implements Callback{
 		map.put("extInfo", content.get("extInfo"));
 		
 		return map;
-	}
-	
-	private int iosTypeToAndroidType(int type) {
-		switch (type) {
-			case 1: return Platform.SHARE_IMAGE;
-			case 2: return Platform.SHARE_WEBPAGE;
-			case 3: return Platform.SHARE_MUSIC;
-			case 4: return Platform.SHARE_VIDEO;
-			case 5: return Platform.SHARE_APPS;
-			case 6: 
-			case 7: return Platform.SHARE_EMOJI;
-			case 8: return Platform.SHARE_FILE;
-		}
-        return Platform.SHARE_TEXT;
 	}
 	
 }
