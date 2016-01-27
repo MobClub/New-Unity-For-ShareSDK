@@ -15,7 +15,7 @@ namespace cn.sharesdk.unity3d
 	/// </summary>
 	public class ContentType
 	{	      		
-		public const String Auto = "0";					//Auto			自动
+		public const String Auto = "0";					//自动(iOS为自动，安卓仅为Text)
 		public const String Text = "1"; 				//文字分享
 		public const String Image = "2";				//图文分享
 		public const String Webpage = "4";				//链接分享

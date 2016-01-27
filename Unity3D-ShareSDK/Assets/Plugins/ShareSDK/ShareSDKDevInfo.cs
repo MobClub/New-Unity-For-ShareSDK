@@ -43,31 +43,32 @@ namespace cn.sharesdk.unity3d
 		public VKontakte vkontakte;
 		public Pinterest pinterest;
 		public Mingdao mingdao;
-
-		#if UNITY_ANDROID
-		//more platforms on iOS is coming soon ....
-		public SohuSuishenkan sohukan;
-		public FourSquare fourSquare;
-		public Yixin yixin;
-		public YixinMoments yixinMoments;
-		public Bluetooth bluetooth;
-		public Instapaper instapaper;
-		public FacebookMessenger facebookMessenger;
-
 		public KakaoTalk kakaoTalk;
 		public KakaoStory kakaoStory;
 		public QQ qq;
 		public QZone qzone;
 		public WeChat wechat;
-		public WeChatMoments wechatMoments;
+		public WeChatMoments wechatMoments; 
 		public WeChatFavorites wechatFavorites;
+		public Yixin yixin;
+		public YixinMoments yixinMoments;
+		public FacebookMessenger facebookMessenger;
+		public Instapaper instapaper;
+
+		#if UNITY_ANDROID
+		public FourSquare fourSquare;
+		public Bluetooth bluetooth;
 		#elif UNITY_IPHONE		
 		public Copy copy;
-		public EvernoteInternational evernoteInternational;
-		public WechatSeries wechatSeries;		//iOS端微信系列, iOS若配置微信信息请在该类中配置
-		public QQSeries qqSeries;				//iOS端QQ系列,  iOS若配置QQ(or Qzone)信息请在该类中配置
-		public KakaoSeries kakaoStory;			//iOS端Kakao系列,  iOS若配置Kakao(Talk or Story)信息请在该类中配置
+		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
+		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
+		public WechatSeries wechatSeries;						//iOS端微信系列, 可直接配置微信三个子平台 		[仅支持iOS端]
+		public QQSeries qqSeries;								//iOS端QQ系列,  可直接配置QQ系列两个子平台		[仅支持iOS端]
+		public KakaoSeries kakaoSeries;							//iOS端Kakao系列, 可直接配置Kakao系列两个子平台	[仅支持iOS端]
+		public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置												 
+		//安卓配置印象笔记国内与国际版直接在Evernote中配置														
 		#endif
+
 	}
 
 	public class DevInfo 
@@ -112,20 +113,6 @@ namespace cn.sharesdk.unity3d
 	}
 
 	[Serializable]
-	public class QQSeries : DevInfo 
-	{	
-		#if UNITY_ANDROID
-		//for android,please set the configuraion in class "QQ" and  class "QZone"
-		//对于安卓端，请在类QQ或QZone中配置相关信息↑	
-		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.QQPlatform;
-		public string app_id = "100371282";
-		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
-		#endif
-	}
-
-	[Serializable]
 	public class QQ : DevInfo 
 	{
 		#if UNITY_ANDROID
@@ -135,8 +122,10 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
 		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
-		//for iOS,please set the configuration in class "QQSeries"
-		//对于iOS端，请在 类QQSeries中配置相关信息↑
+		public const int type = (int) PlatformType.QQ;
+		public string app_id = "100371282";
+		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -150,23 +139,14 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
 		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
-		//for iOS,please set the configuration in class "QQSeries"
-		//对于iOS端，请在 类QQSeries中配置相关信息↑
+		public const int type = (int) PlatformType.QZone;
+		public string app_id = "100371282";
+		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 	
-	[Serializable]
-	public class WechatSeries : DevInfo 
-	{	
-		#if UNITY_ANDROID
-		//for android,please set the configuraion in class "Wechat" ,class "WechatMoments" or class "WechatFavorite"
-		//对于安卓端，请在类Wechat,WechatMoments或WechatFavorite中配置相关信息↑	
-		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.WechatPlatform;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
-		#endif
-	}
+
 	
 	[Serializable]
 	public class WeChat : DevInfo 
@@ -178,8 +158,9 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string BypassApproval = "true";
 		#elif UNITY_IPHONE
-		//for iOS,please set the configuration in class "WechatSeries"
-		//对于iOS端，请在 类WechatSeries中配置相关信息↑
+		public const int type = (int) PlatformType.WeChat;
+		public string app_id = "wx4868b35061f87885";
+		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
 		#endif
 	}
 
@@ -193,8 +174,9 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string BypassApproval = "false";
 		#elif UNITY_IPHONE
-		//for iOS,please set the configuration in class "WechatSeries"
-		//对于iOS端，请在 类WechatSeries中配置相关信息↑
+		public const int type = (int) PlatformType.WeChatMoments;
+		public string app_id = "wx4868b35061f87885";
+		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
 		#endif
 	}
 
@@ -207,8 +189,9 @@ namespace cn.sharesdk.unity3d
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		#elif UNITY_IPHONE
-		//for iOS,please set the configuration in class "WechatSeries"
-		//对于iOS端，请在 类WechatSeries中配置相关信息↑
+		public const int type = (int) PlatformType.WeChatFavorites;
+		public string app_id = "wx4868b35061f87885";
+		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
 		#endif
 	}
 
@@ -338,23 +321,6 @@ namespace cn.sharesdk.unity3d
 		#endif
 	}
 
-	[Serializable]
-	public class SohuSuishenkan : DevInfo 
-	{
-		#if UNITY_ANDROID
-		public string SortId = "16";
-		public const int type = (int) PlatformType.SohuKan;
-		public string AppKey = "e16680a815134504b746c86e08a19db0";
-		public string AppSecret = "b8eec53707c3976efc91614dd16ef81c";
-		public string RedirectUri = "http://sharesdk.cn";
-		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.SohuKan;
-		public string AppKey = "e16680a815134504b746c86e08a19db0";
-		public string AppSecret = "b8eec53707c3976efc91614dd16ef81c";
-		public string RedirectUri = "http://sharesdk.cn";
-		#endif
-	}
-
 	// 		安卓描述:   
 	//		在中国大陆，印象笔记有两个服务器，一个是沙箱（sandbox），一个是生产服务器（china）。
 	//		一般你注册应用，它会先让你使用sandbox，当你完成测试以后，可以到
@@ -368,7 +334,7 @@ namespace cn.sharesdk.unity3d
 	//      iOS描述:
 	//		配置好consumerKey 和 secret, 如果为沙箱模式，请对参数isSandBox传入非0值，否则传入0.
 
-	//在以下的配置里，安卓请任意选择 Evernote还是 EvernoteInternational都可以配置。
+	//在以下的配置里，安卓请选择Evernote配置。
 	//iOS则需要区分，国内版为Evernote，国际版EvernoteInternational。
 
 	[Serializable]
@@ -560,8 +526,10 @@ namespace cn.sharesdk.unity3d
 		public string BypassApproval = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinSession;
-		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval = "true";
+		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string app_secret = "1a5bd421ae089c3";
+		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -575,8 +543,10 @@ namespace cn.sharesdk.unity3d
 		public string BypassApproval = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinTimeline;
-		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval = "true";
+		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string app_secret = "1a5bd421ae089c3";
+		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -609,29 +579,17 @@ namespace cn.sharesdk.unity3d
 	}
 
 	[Serializable]
-	public class KakaoSeries : DevInfo 
-	{
-		#if UNITY_ANDROID
-		//for android,please set the configuraion in class "KakaoTalk" and  class "KakaoStory"
-		//对于安卓端，请在类KakaoTalk或KakaoStory中配置相关信息
-		#elif UNITY_IPHONE
-		public const int type = (int) PlatformType.KakaoPlatform;
-		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
-		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
-		public string redirect_uri = "http://www.mob.com/oauth";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
-		#endif
-	}
-
-	[Serializable]
 	public class KakaoTalk : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "31";
 		public const int type = (int) PlatformType.KakaoTalk;
 		#elif UNITY_IPHONE
-		//for ios,please set the configuraion in class "KakaoSeries"
-		//对于iOS端，请在 类KakaoSeries中配置相关信息↑
+		public const int type = (int) PlatformType.KakaoTalk;
+		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
+		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string redirect_uri = "http://www.mob.com/oauth";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 	
@@ -642,8 +600,11 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "32";
 		public const int type = (int) PlatformType.KakaoStory;
 		#elif UNITY_IPHONE
-		//for ios,please set the configuraion in class "KakaoSeries"
-		//对于iOS端，请在 类KakaoSeries中配置相关信息↑
+		public const int type = (int) PlatformType.KakaoStory;
+		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
+		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string redirect_uri = "http://www.mob.com/oauth";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 	
@@ -695,7 +656,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Instapaper;
 		public string consumer_key = "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA";
-		public string ConsumerSecret = "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe";
+		public string consumer_secret = "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe";
 		#endif
 	}
 
@@ -710,9 +671,6 @@ namespace cn.sharesdk.unity3d
 		public string RedirectUrl = "http://mob.com";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.FacebookMessenger;
-		public string ConsumerKey = "107704292745179";
-		public string ConsumerSecret = "38053202e1a5fe26c80c753071f0b573";
-		public string RedirectUrl = "http://mob.com";
 		#endif
 	}
 
@@ -726,4 +684,77 @@ namespace cn.sharesdk.unity3d
 		#endif
 	}
 
+	[Serializable]
+	public class YixinSeries : DevInfo 
+	{
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "Yixin" or class "YixinMoments" 
+		(Android do not support YixinFavorites)
+			//对于安卓端，Yixin或YixinMoments中配置相关信息(安卓端不支持易信收藏YixinFavorites)
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.YixinPlatform;
+		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string app_secret = "1a5bd421ae089c3";
+		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
+		#endif
+	}
+
+	[Serializable]
+	public class YixinFavorites : DevInfo 
+	{
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "Yixin" or class "YixinMoments" 
+		(Android do not support YixinFavorites)
+		//对于安卓端，Yixin或YixinMoments中配置相关信息(安卓端不支持易信收藏YixinFavorites)
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.YiXinFav;
+		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
+		public string app_secret = "1a5bd421ae089c3";
+		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
+		#endif
+	}
+
+	[Serializable]
+	public class WechatSeries : DevInfo 
+	{	
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "Wechat" ,class "WechatMoments" or class "WechatFavorite"
+		//对于安卓端，请在类Wechat,WechatMoments或WechatFavorite中配置相关信息↑	
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.WechatPlatform;
+		public string app_id = "wx4868b35061f87885";
+		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		#endif
+	}
+
+	[Serializable]
+	public class QQSeries : DevInfo 
+	{	
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "QQ" and  class "QZone"
+		//对于安卓端，请在类QQ或QZone中配置相关信息↑	
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.QQPlatform;
+		public string app_id = "100371282";
+		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
+		#endif
+	}
+
+	[Serializable]
+	public class KakaoSeries : DevInfo 
+	{
+		#if UNITY_ANDROID
+		//for android,please set the configuraion in class "KakaoTalk" and  class "KakaoStory"
+		//对于安卓端，请在类KakaoTalk或KakaoStory中配置相关信息
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.KakaoPlatform;
+		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
+		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string redirect_uri = "http://www.mob.com/oauth";
+		public string auth_type = "both";   //can pass "both","sso",or "web" 
+		#endif
+	}
 }
