@@ -689,7 +689,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		//for android,please set the configuraion in class "Yixin" or class "YixinMoments" 
-		(Android do not support YixinFavorites)
+		//(Android do not support YixinFavorites)
 			//对于安卓端，Yixin或YixinMoments中配置相关信息(安卓端不支持易信收藏YixinFavorites)
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YixinPlatform;
@@ -705,7 +705,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		//for android,please set the configuraion in class "Yixin" or class "YixinMoments" 
-		(Android do not support YixinFavorites)
+		//(Android do not support YixinFavorites)
 		//对于安卓端，Yixin或YixinMoments中配置相关信息(安卓端不支持易信收藏YixinFavorites)
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinFav;

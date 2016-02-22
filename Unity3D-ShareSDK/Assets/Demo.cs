@@ -175,7 +175,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
+			#if UNITY_ANDROID
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+			#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+			#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -192,7 +196,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
+			#if UNITY_ANDROID
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+			#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+			#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -209,7 +217,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
+			#if UNITY_ANDROID
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+			#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+			#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -226,7 +238,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
+			#if UNITY_ANDROID
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+			#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+			#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -242,7 +258,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
+			#if UNITY_ANDROID
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+			#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+			#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
