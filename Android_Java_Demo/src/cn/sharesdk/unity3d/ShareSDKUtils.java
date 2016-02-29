@@ -1,6 +1,5 @@
 package cn.sharesdk.unity3d;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -252,7 +251,8 @@ public class ShareSDKUtils implements Callback{
 					if (DEBUG) {
 						System.out.println("share content ==>>" + content);
 					}
-					ShareParams sp = hashmapToShareParams(plat, hashon.fromJson(content));
+					HashMap<String, Object> data = CSMapToJavaMap(hashon.fromJson(content));
+					ShareParams sp = new ShareParams(data);
 					plat.share(sp);
 				} catch (Throwable t) {
 					paListener.onError(plat, Platform.ACTION_SHARE, t);
@@ -351,34 +351,6 @@ public class ShareSDKUtils implements Callback{
 			break;
 		}
 		return false;
-	}
-	
-	
-	private ShareParams hashmapToShareParams(Platform plat, 
-			HashMap<String, Object> content) throws Throwable {
-		String className = plat.getClass().getName() + "$ShareParams";
-		Class<?> cls = Class.forName(className);
-		if (cls == null) {
-			return null;
-		}
-		
-		Object sp = cls.newInstance();
-		if (sp == null) {
-			return null;
-		}
-		
-		HashMap<String, Object> data = CSMapToJavaMap(content);
-		for (Entry<String, Object> ent : data.entrySet()) {
-			try {
-				Field fld = cls.getField(ent.getKey());
-				if (fld != null) {
-					fld.setAccessible(true);
-					fld.set(sp, ent.getValue());
-				}
-			} catch(Throwable t) {}
-		}
-		
-		return (Platform.ShareParams) sp;
 	}
 	
 	private HashMap<String, Object> CSMapToJavaMap(HashMap<String, Object> content) {
