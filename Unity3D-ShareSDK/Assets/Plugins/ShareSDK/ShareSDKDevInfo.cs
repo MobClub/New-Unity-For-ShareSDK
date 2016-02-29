@@ -124,7 +124,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQ;
 		public string app_id = "100371282";
-		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
@@ -141,7 +141,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QZone;
 		public string app_id = "100371282";
-		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
@@ -738,7 +738,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQPlatform;
 		public string app_id = "100371282";
-		public string app_secret = "aed9b0303e3ed1e27bae87c33761161d";
+		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
