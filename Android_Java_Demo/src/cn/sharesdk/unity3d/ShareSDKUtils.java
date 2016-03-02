@@ -12,7 +12,6 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
 import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.UIHandler;
@@ -310,13 +309,12 @@ public class ShareSDKUtils implements Callback{
 				}
 				if (map.containsKey("shareType")) {
 					if ("6".equals(String.valueOf(map.get("shareType")))) {
-						oks.shareVideoToWechat();
+						if (map.containsKey("url")) {
+							oks.setVideoUrl((String)map.get("url"));
+						}
 					}
 				}
-				String theme = (String)map.get("shareTheme");
-				if(OnekeyShareTheme.SKYBLUE.toString().toLowerCase().equals(theme)){
-					oks.setTheme(OnekeyShareTheme.SKYBLUE);
-				} 
+				
 				if(disableSSO){
 					oks.disableSSOWhenAuthorize();
 				}
