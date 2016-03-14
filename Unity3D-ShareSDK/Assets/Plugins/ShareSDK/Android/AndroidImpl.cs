@@ -152,45 +152,6 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		
-		private Hashtable ParseShareParams(Hashtable content) {
-			Hashtable map = new Hashtable();
-
-			if (content.ContainsKey("type")) {
-				int type = (int)content["type"];
-				type = (type == 0 ? 1 : type);//ios的自动类型，改成Text
-				map["shareType"] = type;
-			} else if (content.ContainsKey("shareType")) {
-				int type = (int)content["shareType"];
-				type = (type == 0 ? 1 : type);//ios的自动类型，改成Text
-				map["shareType"] = type;
-			}
-
-			String image = (String)content["image"];
-			if (image.StartsWith("/")) {
-				map["imagePath"] = image;
-			} else if(image.StartsWith("http")){
-				map["imageUrl"] = image;
-			}
-
-			String text = (String)content ["content"];
-			if (text != null) {
-				map["text"] = text;
-			}
-			map["title"] = (String)content["title"];
-			map["comment"] = (String)content["description"];
-			map["url"] = (String)content["url"];
-			map["titleUrl"] = (String)content["url"];
-			map["filePath"] = (String)content["file"];
-			map["siteUrl"] = (String)content["siteUrl"];
-			map["site"] = (String)content["site"];
-			map["musicUrl"] = (String)content["musicUrl"];
-			map["extInfo"] = (String)content["extInfo"];
-			String json = MiniJSON.jsonEncode (map);
-			Debug.Log("ParseShareParams  ===>>> " + json );
-			return map;
-		}
-
 	}
 	#endif
 }

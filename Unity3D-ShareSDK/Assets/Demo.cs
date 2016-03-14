@@ -72,6 +72,12 @@ public class Demo : MonoBehaviour {
 			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
 			content.SetShareType(ContentType.Image);
 
+			//不同平台分享不同内容
+			ShareContent customizeShareParams = new ShareContent();
+			customizeShareParams.SetText("Sina share content");
+			customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
+
+			content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
 			#if UNITY_IPHONE
 			//仅支持iOS,定制新浪的分享内容Example,各平台所支持的字段请参考文档
 			Hashtable sinaContent = new Hashtable();

@@ -20,6 +20,7 @@ namespace cn.sharesdk.unity3d
 	public class ShareContent
 	{	      		
 		Hashtable shareParams = new Hashtable();
+		Hashtable customizeShareParams = new Hashtable();
 
 		public void SetTitle(String title) {
 			shareParams["title"] = title;
@@ -88,13 +89,24 @@ namespace cn.sharesdk.unity3d
 			shareParams["longitude"] = longitude;
 		}
 
+		//不同平台分享不同内容
+		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
+			customizeShareParams [(int)platform] = content.GetShareParamsStr();
+		}
+
 		public String GetShareParamsStr() {
+			if (customizeShareParams.Count > 0) {
+				shareParams["customizeShareParams"] = customizeShareParams;
+			}
 			String jsonStr = MiniJSON.jsonEncode (shareParams);
 			Debug.Log("ParseShareParams  ===>>> " + jsonStr );
 			return jsonStr;
 		}
 
 		public Hashtable GetShareParams() {
+			if (customizeShareParams.Count > 0) {
+				shareParams["customizeShareParams"] = customizeShareParams;
+			}
 			String jsonStr = MiniJSON.jsonEncode (shareParams);
 			Debug.Log("ParseShareParams  ===>>> " + jsonStr );
 			return shareParams;

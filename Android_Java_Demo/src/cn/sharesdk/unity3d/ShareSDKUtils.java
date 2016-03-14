@@ -12,6 +12,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 
 import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.UIHandler;
@@ -242,12 +243,12 @@ public class ShareSDKUtils implements Callback{
 			}
 			break;
 			case MSG_SHARE: {
-				int platform = msg.arg1;
+				int platformID = msg.arg1;
 				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
 				paListener.setReqID(msg.arg2);
 				String content = (String) msg.obj;
-				String name = ShareSDK.platformIdToName(platform);
-				Platform plat = ShareSDK.getPlatform(context, name);
+				String pName = ShareSDK.platformIdToName(platformID);
+				Platform plat = ShareSDK.getPlatform(context, pName);
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				try {
@@ -257,6 +258,23 @@ public class ShareSDKUtils implements Callback{
 					}
 					HashMap<String, Object> data = hashon.fromJson(content);
 					ShareParams sp = new ShareParams(data);
+					//不同平台，分享不同内容
+					if (data.containsKey("customizeShareParams")) {
+						final HashMap<String, String> customizeSP = (HashMap<String, String>) data.get("customizeShareParams");
+						if (customizeSP.size() > 0) {
+							String pID = String.valueOf(platformID);
+							if (customizeSP.containsKey(pID)) {
+								String cSP = customizeSP.get(pID);
+								if (DEBUG) {
+									System.out.println("share content ==>>" + cSP);
+								}
+								data = hashon.fromJson(cSP);
+								for (String key : data.keySet()) {
+									sp.set(key, data.get(key));
+								}
+							}								
+						}
+					}
 					plat.share(sp);
 				} catch (Throwable t) {
 					paListener.onError(plat, Platform.ACTION_SHARE, t);
@@ -317,6 +335,28 @@ public class ShareSDKUtils implements Callback{
 						if (map.containsKey("url")) {
 							oks.setVideoUrl((String)map.get("url"));
 						}
+					}
+				}
+				//不同平台，分享不同内容
+				if (map.containsKey("customizeShareParams")) {
+					final HashMap<String, String> customizeSP = (HashMap<String, String>) map.get("customizeShareParams");
+					if (customizeSP.size() > 0) {
+						oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+							public void onShare(Platform platform, ShareParams paramsToShare) {
+								String platformID = String.valueOf(ShareSDK.platformNameToId(platform.getName()));
+								if (customizeSP.containsKey(platformID)) {
+									Hashon hashon = new Hashon();
+									String content = customizeSP.get(platformID);
+									if (DEBUG) {
+										System.out.println("share content ==>>" + content);
+									}
+									HashMap<String, Object> data = hashon.fromJson(content);
+									for (String key : data.keySet()) {
+										paramsToShare.set(key, data.get(key));
+									}
+								}
+							}
+						});
 					}
 				}
 				
