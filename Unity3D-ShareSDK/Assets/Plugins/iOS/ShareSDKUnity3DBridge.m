@@ -238,8 +238,8 @@ extern "C" {
         NSString* text = nil;
         NSString* title = nil;
         NSString* url = nil;
-        SSDKImage* thumbImg = nil;
-        SSDKImage* image = nil;
+        NSString* thumbImg = nil;
+        NSString* image = nil;
         NSString* musicFileUrl = nil;
         NSString* extInfo = nil;
         NSData* fileData = nil;
@@ -260,41 +260,11 @@ extern "C" {
         }
         if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
         {
-            
-            NSString* imgPath = [value objectForKey:@"thumbImg"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                    options:MOBFRegexOptionsNoOptions
-                                    inRange:NSMakeRange(0, imgPath.length)
-                                 withString:imgPath])
-            {
-                thumbImg = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }
-            else
-            {
-                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                thumbImg = [[SSDKImage alloc] initWithImage:localImg
-                                                     format:SSDKImageFormatJpeg
-                                                   settings:nil];
-            }
+            thumbImg = [value objectForKey:@"thumbImg"];
         }
         if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
         {
-            
-            NSString* imgPath = [value objectForKey:@"image"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                    options:MOBFRegexOptionsNoOptions
-                                    inRange:NSMakeRange(0, imgPath.length)
-                                 withString:imgPath])
-            {
-                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }else
-            {
-                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                image = [[SSDKImage alloc] initWithImage:localImg
-                                                  format:SSDKImageFormatJpeg
-                                                settings:nil];
-            }
-            
+            image = [value objectForKey:@"image"];
         }
         if ([[value objectForKey:@"musicFileUrl"] isKindOfClass:[NSString class]])
         {
@@ -335,8 +305,8 @@ extern "C" {
         NSString* text = nil;
         NSString* title = nil;
         NSString* url = nil;
-        SSDKImage* thumbImg = nil;
-        SSDKImage* image = nil;
+        NSString* thumbImg = nil;
+        NSString* image = nil;
         SSDKContentType type = SSDKContentTypeText;
         
         if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -353,41 +323,11 @@ extern "C" {
         }
         if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
         {
-            
-            NSString* imgPath = [value objectForKey:@"thumbImg"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                    options:MOBFRegexOptionsNoOptions
-                                    inRange:NSMakeRange(0, imgPath.length)
-                                 withString:imgPath])
-            {
-                thumbImg = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }else
-            {
-                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                thumbImg = [[SSDKImage alloc] initWithImage:localImg
-                                                     format:SSDKImageFormatJpeg
-                                                   settings:nil];
-            }
+            thumbImg = [value objectForKey:@"thumbImg"];
         }
         if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
         {
-            
-            NSString* imgPath = [value objectForKey:@"image"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                    options:MOBFRegexOptionsNoOptions
-                                    inRange:NSMakeRange(0, imgPath.length)
-                                 withString:imgPath])
-            {
-                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }
-            else
-            {
-                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                image = [[SSDKImage alloc] initWithImage:localImg
-                                                  format:SSDKImageFormatJpeg
-                                                settings:nil];
-            }
-            
+            image = [value objectForKey:@"image"];
         }
         if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
         {
@@ -409,8 +349,8 @@ extern "C" {
         NSString *text = nil;
         NSString *title = nil;
         NSString *url = nil;
-        SSDKImage *thumbImg = nil;
-        SSDKImage *image = nil;
+        NSString *thumbImg = nil;
+        NSString *image = nil;
         NSString *musicFileURL = nil;
         NSString *extInfo = nil;
         NSString *fileDataPath = nil;
@@ -432,42 +372,11 @@ extern "C" {
         }
         if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
         {
-            
-            NSString* imgPath = [value objectForKey:@"thumbImg"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                    options:MOBFRegexOptionsNoOptions
-                                    inRange:NSMakeRange(0, imgPath.length)
-                                 withString:imgPath])
-            {
-                thumbImg = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }
-            else
-            {
-                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                thumbImg = [[SSDKImage alloc] initWithImage:localImg
-                                                     format:SSDKImageFormatJpeg
-                                                   settings:nil];
-            }
+            thumbImg = [value objectForKey:@"thumbImg"];
         }
         if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
         {
-            
-            NSString* imgPath = [value objectForKey:@"image"];
-            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                    options:MOBFRegexOptionsNoOptions
-                                    inRange:NSMakeRange(0, imgPath.length)
-                                 withString:imgPath])
-            {
-                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-            }
-            else
-            {
-                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                image = [[SSDKImage alloc] initWithImage:localImg
-                                                  format:SSDKImageFormatJpeg
-                                                settings:nil];
-            }
-            
+            image = [value objectForKey:@"image"];
         }
         if ([[value objectForKey:@"musicFileURL"] isKindOfClass:[NSString class]])
         {
@@ -532,8 +441,8 @@ extern "C" {
             id img = [shareParamsDic objectForKey:@"image"];
             if ([img isKindOfClass:[NSString class]])
             {
-                SSDKImage* image = nil;
                 NSString* imgPath = img;
+                SSDKImage* image = nil;
                 if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                         options:MOBFRegexOptionsNoOptions
                                         inRange:NSMakeRange(0, imgPath.length)
@@ -551,7 +460,8 @@ extern "C" {
                 
                 if (image)
                 {
-                    [imageArray addObject:image];
+                   
+                    [imageArray addObject:imgPath];
                 }
                 else
                 {
@@ -583,7 +493,7 @@ extern "C" {
                     
                     if (image)
                     {
-                        [imageArray addObject:image];
+                        [imageArray addObject:path];
                     }
                     else
                     {
@@ -623,13 +533,13 @@ extern "C" {
                 id value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSinaWeibo]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    NSString* text = nil;
-                    NSString* title = nil;
-                    SSDKImage* image = nil;
-                    NSString* url = nil;
+                    NSString *text = nil;
+                    NSString *title = nil;
+                    NSString *image = nil;
+                    NSString *url = nil;
                     double lat;
                     double lng;
-                    NSString* objID = nil;
+                    NSString *objID = nil;
                     SSDKContentType type = SSDKContentTypeWebPage;
                     
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -642,23 +552,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                            
-                        }
-                        
+                        image =  [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
@@ -695,7 +589,7 @@ extern "C" {
                 value  = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    NSString* text = nil;
+                    NSString *text = nil;
                     NSMutableArray* images = [NSMutableArray array];
                     double lat;
                     double lng;
@@ -726,7 +620,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -760,7 +654,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -794,11 +688,11 @@ extern "C" {
                 value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDouBan]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    NSString* text = nil;
-                    SSDKImage* image = nil;
-                    NSString* title = nil;
-                    NSString* url = nil;
-                    NSString* urlDesc = nil;
+                    NSString *text = nil;
+                    NSString *image = nil;
+                    NSString *title = nil;
+                    NSString *url = nil;
+                    NSString *urlDesc = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -807,23 +701,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                            
-                        }
-                        
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -884,7 +762,7 @@ extern "C" {
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
-                    SSDKImage* image = nil;
+                    NSString* image = nil;
                     NSString* url = nil;
                     NSString* albumId = nil;
                     SSDKContentType type = SSDKContentTypeImage;
@@ -895,23 +773,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                        }
-                        
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
@@ -936,29 +798,14 @@ extern "C" {
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
-                    SSDKImage* image = nil;
+                    NSString* image = nil;
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
                     {
                         text = [value objectForKey:@"content"];
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
                     SSDKContentType type = SSDKContentTypeText;
                     [params SSDKSetupKaiXinParamsByText:text
@@ -970,7 +817,7 @@ extern "C" {
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
-                    SSDKImage* image = nil;
+                    NSString* image = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -979,23 +826,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                        }
-                        
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
                     {
@@ -1041,7 +872,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -1075,7 +906,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -1146,7 +977,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -1178,7 +1009,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -1245,28 +1076,13 @@ extern "C" {
                 value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstagram]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    SSDKImage* image = nil;
+                    NSString *image = nil;
                     CGFloat menuX;
                     CGFloat menuY;
                     
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"menuX"] isKindOfClass:[NSString class]])
                     {
@@ -1280,16 +1096,17 @@ extern "C" {
                     CGPoint point = CGPointMake(menuX, menuY);
                     [params SSDKSetupInstagramByImage:image menuDisplayPoint:point];
                 }
+                
                 //LinkedIn
                 value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLinkedIn]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    NSString* text = nil;
-                    SSDKImage* image = nil;
-                    NSString* title = nil;
-                    NSString* url = nil;
-                    NSString* urlDesc = nil;
-                    NSString* visibility = nil;
+                    NSString *text = nil;
+                    NSString *image = nil;
+                    NSString *title = nil;
+                    NSString *url = nil;
+                    NSString *urlDesc = nil;
+                    NSString *visibility = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -1298,24 +1115,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc] initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                            
-                        }
-                        
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -1351,11 +1151,11 @@ extern "C" {
                 value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTumblr]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    NSString* text = nil;
-                    SSDKImage* image = nil;
-                    NSString* title = nil;
-                    NSString* url = nil;
-                    NSString* blogName = nil;
+                    NSString *text = nil;
+                    NSString *image = nil;
+                    NSString *title = nil;
+                    NSString *url = nil;
+                    NSString *blogName = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -1364,24 +1164,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc] initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                            
-                        }
-                        
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -1451,7 +1234,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -1485,7 +1268,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -1601,7 +1384,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -1635,7 +1418,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -1722,7 +1505,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -1756,7 +1539,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -1905,7 +1688,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -1939,7 +1722,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -1974,7 +1757,7 @@ extern "C" {
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
-                    SSDKImage* image = nil;
+                    NSString* image = nil;
                     NSString* title = nil;
                     NSMutableArray* tags = [NSMutableArray array];
                     BOOL isPublic;
@@ -1990,22 +1773,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg
-                                                             format:SSDKImageFormatJpeg
-                                                           settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -2110,7 +1878,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -2142,7 +1910,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -2206,7 +1974,7 @@ extern "C" {
                 if (value)
                 {
                     NSString *text = nil;
-                    SSDKImage* image = nil;
+                    NSString *image = nil;
                     NSString *url = nil;
                     NSString *title = nil;
                     SSDKContentType type = SSDKContentTypeText;
@@ -2216,22 +1984,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg
-                                                             format:SSDKImageFormatJpeg
-                                                           settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
@@ -2259,7 +2012,7 @@ extern "C" {
                 if (value)
                 {
                     NSString *text = nil;
-                    SSDKImage* image = nil;
+                    NSString *image = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
                     if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
@@ -2268,22 +2021,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg
-                                                             format:SSDKImageFormatJpeg
-                                                           settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
                     {
@@ -2300,7 +2038,7 @@ extern "C" {
                 if (value)
                 {
                     NSString *text = nil;
-                    SSDKImage* image = nil;
+                    NSString *image = nil;
                     NSString *audioPath = nil;
                     NSString *videoPath = nil;
                     CGFloat menuX;
@@ -2312,22 +2050,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
-                        
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg
-                                                             format:SSDKImageFormatJpeg
-                                                           settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
                     if ([[value objectForKey:@"audioPath"] isKindOfClass:[NSString class]])
                     {
@@ -2415,7 +2138,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -2447,7 +2170,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -2550,7 +2273,7 @@ extern "C" {
                 if (value)
                 {
                     NSString *text = nil;
-                    SSDKImage *image = nil;
+                    NSString *image = nil;
                     NSString *title = nil;
                     NSString *url = nil;
                     SSDKContentType type = SSDKContentTypeText;
@@ -2562,23 +2285,8 @@ extern "C" {
                     if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
                     {
                         
-                        NSString* imgPath = [value objectForKey:@"image"];
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg
-                                                             format:SSDKImageFormatJpeg
-                                                           settings:nil];
-                        }
+                        image = [value objectForKey:@"image"];
                     }
-                    
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
@@ -2639,7 +2347,7 @@ extern "C" {
                         
                         if (image)
                         {
-                            [images addObject:image];
+                            [images addObject:imgPath];
                         }
                         else
                         {
@@ -2673,7 +2381,7 @@ extern "C" {
                             
                             if (image)
                             {
-                                [images addObject:image];
+                                [images addObject:path];
                             }
                             else
                             {
@@ -2979,7 +2687,7 @@ extern "C" {
              NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
              [resultDict setObject:[NSNumber numberWithInteger:8] forKey:@"action"];
              [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-             [resultDict setObject:[NSNumber numberWithInteger:platType] forKey:@"type"];
+             [resultDict setObject:[NSNumber numberWithInteger:platType] forKey:@"platform"];
              [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
              
              if (state == SSDKResponseStateFail && error)

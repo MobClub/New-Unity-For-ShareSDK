@@ -167,7 +167,7 @@ public class Demo : MonoBehaviour {
 	{
 		if (state == ResponseState.Success)
 		{
-			print ("authorize success !");
+			print ("authorize success !" + "Platform :" + type);
 		}
 		else if (state == ResponseState.Fail)
 		{
@@ -189,6 +189,7 @@ public class Demo : MonoBehaviour {
 		{
 			print ("get user info result :");
 			print (MiniJSON.jsonEncode(result));
+			print ("Get userInfo success !Platform :" + type );
 		}
 		else if (state == ResponseState.Fail)
 		{
