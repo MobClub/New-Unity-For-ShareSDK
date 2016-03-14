@@ -50,15 +50,20 @@ public class ShareSDKUtils implements Callback{
 		}	
 	}
 	
-	public void initSDKAndSetPlatfromConfig(String appKey, String configs) {
+	public void initSDK(String appKey) {
 		if (DEBUG) {
 			System.out.println("initSDK appkey ==>>" + appKey);
-			System.out.println("initSDK configs ==>>" + configs);
 		}
 		if (!TextUtils.isEmpty(appKey)) {
 			ShareSDK.initSDK(context, appKey);
 		} else {
 			ShareSDK.initSDK(context);
+		}
+	}
+	
+	public void setPlatformConfig(String configs) {
+		if (DEBUG) {
+			System.out.println("initSDK configs ==>>" + configs);
 		}
 		
 		if (!TextUtils.isEmpty(configs)) {
@@ -250,7 +255,7 @@ public class ShareSDKUtils implements Callback{
 					if (DEBUG) {
 						System.out.println("share content ==>>" + content);
 					}
-					HashMap<String, Object> data = CSMapToJavaMap(hashon.fromJson(content));
+					HashMap<String, Object> data = hashon.fromJson(content);
 					ShareParams sp = new ShareParams(data);
 					plat.share(sp);
 				} catch (Throwable t) {
@@ -267,7 +272,7 @@ public class ShareSDKUtils implements Callback{
 				if (DEBUG) {
 					System.out.println("onekeyshare  ==>>" + content);
 				}
-				HashMap<String, Object> map = CSMapToJavaMap(hashon.fromJson(content));
+				HashMap<String, Object> map = hashon.fromJson(content);
 				OnekeyShare oks = new OnekeyShare();
 				if (platform > 0) {
 					String name = ShareSDK.platformIdToName(platform);
@@ -349,38 +354,6 @@ public class ShareSDKUtils implements Callback{
 			break;
 		}
 		return false;
-	}
-	
-	private HashMap<String, Object> CSMapToJavaMap(HashMap<String, Object> content) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("text", content.get("content"));
-		String image = (String)content.get("image");
-		if (!TextUtils.isEmpty(image) && image.startsWith("/")) {
-			map.put("imagePath", image);
-		} else if(!TextUtils.isEmpty(image)){
-			map.put("imageUrl", image);
-		}
-		map.put("title", content.get("title"));
-		map.put("comment", content.get("description"));
-		map.put("url", content.get("url"));
-		map.put("titleUrl", content.get("url"));
-		String type = (String) content.get("type");
-		if (DEBUG) {
-			System.out.println("share content type==>>" + type);
-		}
-		if (type != null) {
-			int shareType = Integer.parseInt(type) ;
-			shareType = shareType == 0 ? 1 :shareType;//ios的自动类型，改成Text
-			map.put("shareType", shareType);
-		}
-		map.put("shareTheme", content.get("shareTheme"));
-		map.put("filePath", content.get("file"));
-		map.put("siteUrl", content.get("siteUrl"));
-		map.put("site", content.get("site"));
-		map.put("musicUrl", content.get("musicUrl"));
-		map.put("extInfo", content.get("extInfo"));
-		
-		return map;
 	}
 	
 }
