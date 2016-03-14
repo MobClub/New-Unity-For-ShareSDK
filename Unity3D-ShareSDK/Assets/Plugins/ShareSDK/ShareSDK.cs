@@ -13,16 +13,22 @@ namespace cn.sharesdk.unity3d
 	/// </summary>
 	public class ShareSDK : MonoBehaviour 
 	{
-		public int reqID;
-		public AppKey appkey;
+		private int reqID;
+		//配置ShareSDK AppKey
+		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
+		#if UNITY_ANDROID
+		public string appKey = "androidv1101";
+		#elif UNITY_IPHONE
+		public string appKey = "iosv1101";
+		#endif
 		public DevInfoSet devInfo;
-		public ShareSDKUtilsInterface shareSDKUtils;
+		public ShareSDKImpl shareSDKUtils;
 
-		public EventResultListener authHandler;
-		public EventResultListener shareHandler;
-		public EventResultListener showUserHandler;
-		public EventResultListener getFriendsHandler;
-		public EventResultListener followFriendHandler;
+		public EventHandler authHandler;
+		public EventHandler shareHandler;
+		public EventHandler showUserHandler;
+		public EventHandler getFriendsHandler;
+		public EventHandler followFriendHandler;
 
 		void Awake()
 		{				
@@ -49,14 +55,13 @@ namespace cn.sharesdk.unity3d
 				platformConfigs.Add(platformId, table);
 			}
 
-			string appKey = (string)appkey.GetType().GetField("appKey").GetValue(appkey);
-
 			#if UNITY_ANDROID
-			shareSDKUtils = new AndroidUtils(gameObject);
+			shareSDKUtils = new AndroidImpl(gameObject);
 			#elif UNITY_IPHONE
-			shareSDKUtils = new iOSUtils(gameObject);
+			shareSDKUtils = new iOSUImpl(gameObject);
 			#endif
-			shareSDKUtils.RigisterAppAndSetPlatformConfig(appKey, platformConfigs);
+			shareSDKUtils.InitSDK(appKey);
+			shareSDKUtils.SetPlatformConfig(platformConfigs);
 		}
 		
 		/// <summary>
@@ -264,20 +269,22 @@ namespace cn.sharesdk.unity3d
 			}
 			}
 		}
+		
+		/// <summary>
+		/// init the ShareSDK.
+		/// </summary>
+		public void InitSDK (String appKey)
+		{			
+			// if you don't add ShareSDK.xml in your assets folder, use the following line
+			shareSDKUtils.InitSDK (appKey);
+		}
 
 		/// <summary>
 		/// Sets the platform config.
 		/// </summary>
-		/// <param name='type'>
-		/// Type.
-		/// </param>
-		/// <param name='configInfo'>
-		/// Config info.
-		/// </param>
-		public void RigisterAppAndSetPlatformConfig (String appKey, Hashtable configInfo)
+		public void SetPlatformConfig (Hashtable configInfo)
 		{			
-			// if you don't add ShareSDK.xml in your assets folder, use the following line
-			shareSDKUtils.RigisterAppAndSetPlatformConfig (appKey, configInfo);			
+			shareSDKUtils.SetPlatformConfig (configInfo);			
 		}
 		
 		/// <summary>
@@ -319,9 +326,9 @@ namespace cn.sharesdk.unity3d
 		/// <param name='type'>
 		/// Type.
 		/// </param>
-		public bool IsAuthorizedValid (PlatformType platform)
+		public bool IsAuthorized (PlatformType platform)
 		{
-			return shareSDKUtils.IsAuthorizedValid(platform);			
+			return shareSDKUtils.IsAuthorized(platform);			
 		}
 
 		public bool IsClientValid (PlatformType platform)
@@ -357,7 +364,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public int ShareContent(PlatformType platform, Hashtable content)
+		public int ShareContent(PlatformType platform, ShareContent content)
 		{
 			reqID ++;
 			shareSDKUtils.ShareContent(reqID, platform, content);			
@@ -376,7 +383,7 @@ namespace cn.sharesdk.unity3d
 		/// <param name='resultHandler'>
 		/// Callback.
 		/// </param>
-		public int ShareContent(PlatformType[] platforms, Hashtable content)
+		public int ShareContent(PlatformType[] platforms, ShareContent content)
 		{
 			reqID ++;
 			shareSDKUtils.ShareContent(reqID, platforms, content);			
@@ -395,10 +402,10 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public int ShowShareMenu (PlatformType[] platforms, Hashtable content, int x, int y)
+		public int ShowPlatformList (PlatformType[] platforms, ShareContent content, int x, int y)
 		{
 			reqID ++;
-			shareSDKUtils.ShowShareMenu(reqID, platforms, content, x, y);			
+			shareSDKUtils.ShowPlatformList(reqID, platforms, content, x, y);			
 			return reqID;
 		}
 		
@@ -414,10 +421,10 @@ namespace cn.sharesdk.unity3d
 		/// <param name='callback'>
 		/// Callback.
 		/// </param>
-		public int ShowShareView (PlatformType platform, Hashtable content)
+		public int ShowShareContentEditor (PlatformType platform, ShareContent content)
 		{			
 			reqID ++;
-			shareSDKUtils.ShowShareView(reqID, platform, content);		
+			shareSDKUtils.ShowShareContentEditor(reqID, platform, content);		
 			return reqID;
 		}
 
@@ -459,14 +466,14 @@ namespace cn.sharesdk.unity3d
 		/// Close the SSO when authorize.
 		/// </summary>
 		/// <param name="open">If set to <c>true</c> open.</param>
-		public void CloseSSOWhenAuthorize(Boolean open){
-			shareSDKUtils.CloseSSOWhenAuthorize (open);			
+		public void DisableSSO(Boolean open){
+			shareSDKUtils.DisableSSO (open);			
 		}
 
 		/// <summary>
 		/// Event result listener.
 		/// </summary>
-		public delegate void EventResultListener (int reqID, ResponseState state, PlatformType type, Hashtable data);
+		public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
 
 	}
 }

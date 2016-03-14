@@ -5,18 +5,6 @@ using System;
 namespace cn.sharesdk.unity3d 
 {
 	[Serializable]
-	public class AppKey 
-	{
-		//配置ShareSDK AppKey
-		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
-		#if UNITY_ANDROID
-		public string appKey = "androidv1101";
-		#elif UNITY_IPHONE
-		public string appKey = "iosv1101";
-		#endif
-	}
-
-	[Serializable]
 	public class DevInfoSet
 
 	{

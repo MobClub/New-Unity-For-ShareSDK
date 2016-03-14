@@ -12,11 +12,11 @@ public class Demo : MonoBehaviour {
 	void Start ()
 	{	
 		ssdk = gameObject.GetComponent<ShareSDK>();
-		ssdk.authHandler = AuthResultHandler;
-		ssdk.shareHandler = ShareResultHandler;
-		ssdk.showUserHandler = GetUserInfoResultHandler;
-		ssdk.getFriendsHandler = GetFriendsResultHandler;
-		ssdk.followFriendHandler = FollowFriendResultHandler;
+		ssdk.authHandler = OnAuthResultHandler;
+		ssdk.shareHandler = OnShareResultHandler;
+		ssdk.showUserHandler = OnGetUserInfoResultHandler;
+		ssdk.getFriendsHandler = OnGetFriendsResultHandler;
+		ssdk.followFriendHandler = OnFollowFriendResultHandler;
 	}
 
 	// Update is called once per frame
@@ -60,20 +60,17 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share Menu"))
 		{
-
-			Hashtable content = new Hashtable();
-			content["content"] = "this is a test string.";
-			content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
-			content["title"] = "test title";
-			content["description"] = "test description";
-			content["url"] = "http://sharesdk.cn";
-			//type只对微信分享有效,分享图片Image,分享链接类型为WebPage
-			content["type"] = ContentType.Image;
-			content["siteUrl"] = "http://sharesdk.cn";
-			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
-			content["site"] = "ShareSDK";
-			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
-			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
+			ShareContent content = new ShareContent();
+			content.SetText("this is a test string.");
+			content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+			content.SetTitle("test title");
+			content.SetTitleUrl("http://www.mob.com");
+			content.SetSite("Mob-ShareSDK");
+			content.SetSiteUrl("http://www.mob.com");
+			content.SetUrl("http://www.mob.com");
+			content.SetComment("test description");
+			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+			content.SetShareType(ContentType.Image);
 
 			#if UNITY_IPHONE
 			//仅支持iOS,定制新浪的分享内容Example,各平台所支持的字段请参考文档
@@ -92,41 +89,40 @@ public class Demo : MonoBehaviour {
 			content.Add((int)PlatformType.SinaWeibo,sinaContent);
 			#endif
 
-			ssdk.ShowShareMenu (null, content, 100, 100);
+			ssdk.ShowPlatformList (null, content, 100, 100);
 		}
 
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share View"))
 		{
-			Hashtable content = new Hashtable();
-			content["content"] = "this is a test string.";
-			content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
-			content["title"] = "test title";
-			content["description"] = "test description";
-			content["url"] = "http://sharesdk.cn";
-			content["type"] = ContentType.Webpage;
-			content["siteUrl"] = "http://sharesdk.cn";
-			content["shareTheme"] = "classic";//ShareTheme has only two value which are skyblue and classic
-			content["site"] = "ShareSDK";
-			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
-			//用sharesdk提供的onekeyshare库，有界面的快捷分享，包括九宫格和skybule风格
-			ssdk.ShowShareView (PlatformType.TencentWeibo, content);
+			ShareContent content = new ShareContent();
+			content.SetText("this is a test string.");
+			content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+			content.SetTitle("test title");
+			content.SetTitleUrl("http://www.mob.com");
+			content.SetSite("Mob-ShareSDK");
+			content.SetSiteUrl("http://www.mob.com");
+			content.SetUrl("http://www.mob.com");
+			content.SetComment("test description");
+			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+			content.SetShareType(ContentType.Webpage);
+			ssdk.ShowShareContentEditor (PlatformType.TencentWeibo, content);
 		}
 
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Content"))
 		{
-			Hashtable content = new Hashtable();
-			content["content"] = "this is a test string.";
-			content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
-			content["title"] = "test title";
-			content["description"] = "test description";
-			content["url"] = "http://sharesdk.cn";
-			content["type"] = ContentType.Image;
-			content["siteUrl"] = "http://sharesdk.cn";
-			content["site"] = "ShareSDK";
-			content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
-
+			ShareContent content = new ShareContent();
+			content.SetText("this is a test string.");
+			content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+			content.SetTitle("test title");
+			content.SetTitleUrl("http://www.mob.com");
+			content.SetSite("Mob-ShareSDK");
+			content.SetSiteUrl("http://www.mob.com");
+			content.SetUrl("http://www.mob.com");
+			content.SetComment("test description");
+			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+			content.SetShareType(ContentType.Webpage);
 			ssdk.ShareContent (PlatformType.SinaWeibo, content);
 		}
 
@@ -149,7 +145,7 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Close SSO Auth"))
 		{
-			ssdk.CloseSSOWhenAuthorize (true);			
+			ssdk.DisableSSO (true);			
 		}
 
 		btnTop += btnHeight + 20 * scale;
@@ -167,7 +163,7 @@ public class Demo : MonoBehaviour {
 
 	}
 	
-	void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
+	void OnAuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
 		{
@@ -187,7 +183,7 @@ public class Demo : MonoBehaviour {
 		}
 	}
 	
-	void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	void OnGetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
 		{
@@ -208,7 +204,7 @@ public class Demo : MonoBehaviour {
 		}
 	}
 	
-	void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	void OnShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
 		{
@@ -229,7 +225,7 @@ public class Demo : MonoBehaviour {
 		}
 	}
 
-	void GetFriendsResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	void OnGetFriendsResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
 		{			
@@ -250,7 +246,7 @@ public class Demo : MonoBehaviour {
 		}
 	}
 
-	void FollowFriendResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	void OnFollowFriendResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
 		{
