@@ -225,30 +225,33 @@ extern "C" {
             case 7:
                 return SSDKContentTypeApp;
             case 8:
-                return SSDKContentTypeApp;
+                return SSDKContentTypeFile;
             case 9:
                 return SSDKContentTypeImage;
             default:
-                return SSDKContentTypeAudio;
+                return SSDKContentTypeText;
         }
     }
     
     void __setWechatParams(NSDictionary* value,NSMutableDictionary* params,SSDKPlatformType subType)
     {
-        NSString* text = nil;
-        NSString* title = nil;
-        NSString* url = nil;
-        NSString* thumbImg = nil;
-        NSString* image = nil;
-        NSString* musicFileUrl = nil;
-        NSString* extInfo = nil;
-        NSData* fileData = nil;
-        NSData* emoData = nil;
+        NSString *text = nil;
+        NSString *title = nil;
+        NSString *url = nil;
+        NSString *thumbImg = nil;
+        NSString *image = nil;
+        NSString *musicFileUrl = nil;
+        NSString *extInfo = nil;
+        NSData *fileData = nil;
+        NSData *emoData = nil;
+        NSString *sourceFileExtension = nil;
+        NSData *sourceFileData = nil;
+        
         SSDKContentType type = SSDKContentTypeText;
         
-        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
         {
-            text = [value objectForKey:@"content"];
+            text = [value objectForKey:@"text"];
         }
         if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
         {
@@ -258,34 +261,45 @@ extern "C" {
         {
             url = [value objectForKey:@"url"];
         }
-        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"thumbImageUrl"] isKindOfClass:[NSString class]])
         {
-            thumbImg = [value objectForKey:@"thumbImg"];
+            thumbImg = [value objectForKey:@"thumbImageUrl"];
         }
-        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
         {
-            image = [value objectForKey:@"image"];
+            image = [value objectForKey:@"imageUrl"];
         }
-        if ([[value objectForKey:@"musicFileUrl"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"musicUrl"] isKindOfClass:[NSString class]])
         {
-            musicFileUrl = [value objectForKey:@"musicFileUrl"];
+            musicFileUrl = [value objectForKey:@"musicUrl"];
         }
-        if ([[value objectForKey:@"extInfo"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"extInfoPath"] isKindOfClass:[NSString class]])
         {
-            extInfo = [value objectForKey:@"extInfo"];
+            extInfo = [value objectForKey:@"extInfoPath"];
         }
-        if ([[value objectForKey:@"fileData"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"filePath"] isKindOfClass:[NSString class]])
         {
-            fileData = [NSData dataWithContentsOfFile:[value objectForKey:@"fileData"]];
+            fileData = [NSData dataWithContentsOfFile:[value objectForKey:@"filePath"]];
         }
-        if ([[value objectForKey:@"emoticonData"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"emotionPath"] isKindOfClass:[NSString class]])
         {
-            emoData = [NSData dataWithContentsOfFile:[value objectForKey:@"emoticonData"]];
+            emoData = [NSData dataWithContentsOfFile:[value objectForKey:@"emotionPath"]];
         }
-        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+        
+        if ([[value objectForKey:@"sourceFileExtension"] isKindOfClass:[NSString class]])
         {
-            type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+            sourceFileExtension = [value objectForKey:@"sourceFileExtension"];
         }
+        if ([[value objectForKey:@"sourceFilePath"] isKindOfClass:[NSString class]])
+        {
+            sourceFileData = [NSData dataWithContentsOfFile:[value objectForKey:@"sourceFilePath"]];
+        }
+        
+        if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+        {
+            type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+        }
+
         [params SSDKSetupWeChatParamsByText:text
                                       title:title
                                         url:[NSURL URLWithString:url]
@@ -295,6 +309,8 @@ extern "C" {
                                     extInfo:extInfo
                                    fileData:fileData
                                emoticonData:emoData
+                        sourceFileExtension:sourceFileExtension
+                             sourceFileData:sourceFileData
                                        type:type
                          forPlatformSubType:subType];
         
@@ -309,9 +325,9 @@ extern "C" {
         NSString* image = nil;
         SSDKContentType type = SSDKContentTypeText;
         
-        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
         {
-            text = [value objectForKey:@"content"];
+            text = [value objectForKey:@"text"];
         }
         if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
         {
@@ -321,17 +337,17 @@ extern "C" {
         {
             url = [value objectForKey:@"url"];
         }
-        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"thumbImageUrl"] isKindOfClass:[NSString class]])
         {
-            thumbImg = [value objectForKey:@"thumbImg"];
+            thumbImg = [value objectForKey:@"thumbImageUrl"];
         }
-        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
         {
-            image = [value objectForKey:@"image"];
+            image = [value objectForKey:@"imageUrl"];
         }
-        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
         {
-            type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+            type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
         }
         [params SSDKSetupQQParamsByText:text
                                   title:title
@@ -358,9 +374,9 @@ extern "C" {
         NSString *toUserId = nil;
         SSDKContentType type = SSDKContentTypeText;
         
-        if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
         {
-            text = [value objectForKey:@"content"];
+            text = [value objectForKey:@"text"];
         }
         if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
         {
@@ -370,37 +386,37 @@ extern "C" {
         {
             url = [value objectForKey:@"url"];
         }
-        if ([[value objectForKey:@"thumbImg"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"thumbImageUrl"] isKindOfClass:[NSString class]])
         {
-            thumbImg = [value objectForKey:@"thumbImg"];
+            thumbImg = [value objectForKey:@"thumbImageUrl"];
         }
-        if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
         {
-            image = [value objectForKey:@"image"];
+            image = [value objectForKey:@"imageUrl"];
         }
-        if ([[value objectForKey:@"musicFileURL"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"musicUrl"] isKindOfClass:[NSString class]])
         {
-            musicFileURL = [value objectForKey:@"musicFileURL"];
+            musicFileURL = [value objectForKey:@"musicUrl"];
         }
-        if ([[value objectForKey:@"extInfo"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"extInfoPath"] isKindOfClass:[NSString class]])
         {
-            extInfo = [value objectForKey:@"extInfo"];
+            extInfo = [value objectForKey:@"extInfoPath"];
         }
-        if ([[value objectForKey:@"fileDataPath"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"filePath"] isKindOfClass:[NSString class]])
         {
-            fileDataPath = [value objectForKey:@"fileDataPath"];
+            fileDataPath = [value objectForKey:@"filePath"];
         }
         if ([[value objectForKey:@"comment"] isKindOfClass:[NSString class]])
         {
             comment = [value objectForKey:@"comment"];
         }
-        if ([[value objectForKey:@"toUserId"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"toUserID"] isKindOfClass:[NSString class]])
         {
-            toUserId = [value objectForKey:@"toUserId"];
+            toUserId = [value objectForKey:@"toUserID"];
         }
-        if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
         {
-            type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+            type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
         }
         
         [params SSDKSetupYiXinParamsByText:text
@@ -417,6 +433,180 @@ extern "C" {
                         forPlatformSubType:subType];
     }
     
+    void __setKakaoParams(NSDictionary* value,NSMutableDictionary* params,SSDKPlatformType subType)
+    {
+        NSString *text = nil;
+        NSMutableArray *images = [NSMutableArray array];
+        NSString *title = nil;
+        NSString *url = nil;
+        NSString *permission = nil;
+        BOOL enableShare;
+        CGFloat imageWidth;
+        CGFloat imageHeight;
+        NSString *appButtonTitle = nil;
+        
+        NSDictionary *androidExecParam = nil;
+        NSString *androidMarkParam = nil;
+        
+        NSDictionary *iphoneExecParams = nil;
+        NSString *iphoneMarkParam = nil;
+        
+        NSDictionary *ipadExecParams = nil;
+        NSString *ipadMarkParam = nil;
+        
+        SSDKContentType type = SSDKContentTypeText;
+        
+        if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
+        {
+            text = [value objectForKey:@"text"];
+        }
+        
+        if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
+        {
+            NSString* imgPath =  [value objectForKey:@"imageUrl"];
+            SSDKImage* image = nil;
+            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                    options:MOBFRegexOptionsNoOptions
+                                    inRange:NSMakeRange(0, imgPath.length)
+                                 withString:imgPath])
+            {
+                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
+            }
+            else
+            {
+                UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
+                image = [[SSDKImage alloc] initWithImage:localImg
+                                                  format:SSDKImageFormatJpeg
+                                                settings:nil];
+            }
+            
+            if (image)
+            {
+                [images addObject:imgPath];
+            }
+            else
+            {
+                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+            }
+            
+        }
+        else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
+        {
+            
+            NSArray* paths = [value objectForKey:@"imageUrl"];
+            for (NSString* path in paths)
+            {
+                SSDKImage* image = nil;
+                if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                        options:MOBFRegexOptionsNoOptions
+                                        inRange:NSMakeRange(0, path.length)
+                                     withString:path])
+                {
+                    image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
+                }
+                else
+                {
+                    UIImage* localImg = [UIImage imageWithContentsOfFile:path];
+                    image = [[SSDKImage alloc] initWithImage:localImg
+                                                      format:SSDKImageFormatJpeg
+                                                    settings:nil];
+                }
+                
+                if (image)
+                {
+                    [images addObject:path];
+                }
+                else
+                {
+                    NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                }
+                
+            }
+        }
+        
+        if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+        {
+            title = [value objectForKey:@"title"];
+        }
+        if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+        {
+            url = [value objectForKey:@"url"];
+        }
+        if ([[value objectForKey:@"permission"] isKindOfClass:[NSString class]])
+        {
+            permission = [value objectForKey:@"permission"];
+        }
+        
+        if ([[value objectForKey:@"enableShare"] boolValue])
+        {
+            enableShare = YES;
+        }
+        
+        if ([[value objectForKey:@"imageWidth"] isKindOfClass:[NSString class]])
+        {
+            imageWidth = [[value objectForKey:@"imageWidth"] floatValue];
+        }
+        if ([[value objectForKey:@"imageHeight"] isKindOfClass:[NSString class]])
+        {
+            imageHeight = [[value objectForKey:@"imageHeight"] floatValue];
+        }
+        if ([[value objectForKey:@"appButtonTitle"] isKindOfClass:[NSString class]])
+        {
+            appButtonTitle = [value objectForKey:@"appButtonTitle"];
+        }
+        
+        if ([[value objectForKey:@"androidExecParam"] isKindOfClass:[NSDictionary class]])
+        {
+            androidExecParam = [value objectForKey:@"androidExecParam"];
+        }
+        if ([[value objectForKey:@"androidMarkParam"] isKindOfClass:[NSString class]])
+        {
+            androidMarkParam = [value objectForKey:@"androidMarkParam"];
+        }
+        
+        if ([[value objectForKey:@"iphoneExecParam"] isKindOfClass:[NSDictionary class]])
+        {
+            iphoneExecParams = [value objectForKey:@"iphoneExecParam"];
+        }
+        if ([[value objectForKey:@"iphoneMarkParam"] isKindOfClass:[NSString class]])
+        {
+            iphoneMarkParam = [value objectForKey:@"iphoneMarkParam"];
+        }
+        
+        if ([[value objectForKey:@"ipadExecParam"] isKindOfClass:[NSDictionary class]])
+        {
+            ipadExecParams = [value objectForKey:@"ipadExecParam"];
+        }
+        if ([[value objectForKey:@"ipadMarkParam"] isKindOfClass:[NSString class]])
+        {
+            ipadMarkParam = [value objectForKey:@"ipadMarkParam"];
+        }
+        
+        if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+        {
+            type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+            
+        }
+        
+        [params SSDKSetupKaKaoParamsByText:text
+                                    images:images
+                                     title:title
+                                       url:[NSURL URLWithString:url]
+                                permission:permission
+                               enableShare:enableShare
+                                 imageSize:CGSizeMake(imageWidth, imageHeight)
+                            appButtonTitle:appButtonTitle
+                          androidExecParam:androidExecParam
+                          androidMarkParam:androidMarkParam
+                          iphoneExecParams:iphoneExecParams
+                           iphoneMarkParam:iphoneMarkParam
+                            ipadExecParams:ipadExecParams
+                             ipadMarkParam:ipadMarkParam
+                                      type:type
+                        forPlatformSubType:subType];
+
+    }
+    
     
     NSMutableDictionary* __getShareParamsWithString(NSString* dataStr)
     {
@@ -429,16 +619,16 @@ extern "C" {
         SSDKContentType type = SSDKContentTypeText;
         
         NSDictionary* shareParamsDic = [MOBFJson objectFromJSONString:dataStr];
-        
+
         if (shareParamsDic)
         {
             
-            if ([[shareParamsDic objectForKey:@"content"] isKindOfClass:[NSString class]])
+            if ([[shareParamsDic objectForKey:@"text"] isKindOfClass:[NSString class]])
             {
-                text = [shareParamsDic objectForKey:@"content"];
+                text = [shareParamsDic objectForKey:@"text"];
             }
             
-            id img = [shareParamsDic objectForKey:@"image"];
+            id img = [shareParamsDic objectForKey:@"imageUrl"];
             if ([img isKindOfClass:[NSString class]])
             {
                 NSString* imgPath = img;
@@ -513,9 +703,9 @@ extern "C" {
                 url = [shareParamsDic objectForKey:@"url"];
                 
             }
-            if ([[shareParamsDic objectForKey:@"type"] isKindOfClass:[NSString class]])
+            if ([[shareParamsDic objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
             {
-                type = __convertContentType([[shareParamsDic objectForKey:@"type"] integerValue]);
+                type = __convertContentType([[shareParamsDic objectForKey:@"shareType"] integerValue]);
             }
             
             
@@ -526,11 +716,12 @@ extern "C" {
                                           type:type];
             
             
+            NSDictionary *customizeShareParams = [shareParamsDic objectForKey:@"customizeShareParams"];
             
-            if (shareParamsDic)
+            if (customizeShareParams && [[customizeShareParams allKeys] count] > 0)
             {
                 //新浪微博
-                id value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSinaWeibo]];
+                id value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSinaWeibo]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -542,37 +733,37 @@ extern "C" {
                     NSString *objID = nil;
                     SSDKContentType type = SSDKContentTypeWebPage;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image =  [value objectForKey:@"image"];
+                        image =  [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"lat"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"latitude"] isKindOfClass:[NSString class]])
                     {
-                        lat = [[value objectForKey:@"lat"] doubleValue];
+                        lat = [[value objectForKey:@"latitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"lng"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"longitude"] isKindOfClass:[NSString class]])
                     {
-                        lng = [[value objectForKey:@"lng"] doubleValue];
+                        lng = [[value objectForKey:@"longitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"objID"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"objectID"] isKindOfClass:[NSString class]])
                     {
-                        objID = [value objectForKey:@"objID"];
+                        objID = [value objectForKey:@"objectID"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupSinaWeiboShareParamsByText:text
@@ -586,7 +777,7 @@ extern "C" {
                     
                 }
                 //腾讯微博
-                value  = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]];
+                value  = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -595,13 +786,13 @@ extern "C" {
                     double lng;
                     SSDKContentType type = SSDKContentTypeImage;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -628,10 +819,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -663,17 +854,17 @@ extern "C" {
                         }
                     }
                     
-                    if ([[value objectForKey:@"lat"] isKindOfClass:[NSNumber class]])
+                    if ([[value objectForKey:@"latitude"] isKindOfClass:[NSNumber class]])
                     {
-                        lat = [[value objectForKey:@"lat"] doubleValue];
+                        lat = [[value objectForKey:@"latitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"lng"] isKindOfClass:[NSNumber class]])
+                    if ([[value objectForKey:@"longitude"] isKindOfClass:[NSNumber class]])
                     {
-                        lng = [[value objectForKey:@"lng"] doubleValue];
+                        lng = [[value objectForKey:@"longitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     
@@ -685,7 +876,7 @@ extern "C" {
                     
                 }
                 //豆瓣
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDouBan]];
+                value  = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDouBan]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -695,13 +886,13 @@ extern "C" {
                     NSString *urlDesc = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -715,9 +906,9 @@ extern "C" {
                     {
                         urlDesc = [value objectForKey:@"urlDesc"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     [params SSDKSetupDouBanParamsByText:text
                                                   image:image
@@ -728,37 +919,37 @@ extern "C" {
                     
                 }
                 //QQ系列
-                value  =  [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setQQParams(value,params,SSDKPlatformSubTypeQQFriend);
                     
                 }
-                value  =  [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQZone]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQZone]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setQQParams(value,params,SSDKPlatformSubTypeQZone);
                 }
                 
                 //微信系列
-                value  =  [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatSession]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatSession]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setWechatParams(value,params,SSDKPlatformSubTypeWechatSession);
                 }
-                value  =  [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatTimeline]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatTimeline]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setWechatParams(value,params,SSDKPlatformSubTypeWechatTimeline);
                 }
-                value  =  [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatFav]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeWechatFav]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setWechatParams(value,params,SSDKPlatformSubTypeWechatFav);
                 }
                 
                 //人人网
-                [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeRenren]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeRenren]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
@@ -767,25 +958,25 @@ extern "C" {
                     NSString* albumId = nil;
                     SSDKContentType type = SSDKContentTypeImage;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"albumId"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"albumID"] isKindOfClass:[NSString class]])
                     {
-                        albumId = [value objectForKey:@"albumId"];
+                        albumId = [value objectForKey:@"albumID"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     [params SSDKSetupRenRenParamsByText:text
                                                   image:image
@@ -794,43 +985,47 @@ extern "C" {
                                                    type:type];
                 }
                 //开心网
-                [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKaixin]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKaixin]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
                     NSString* image = nil;
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
-                    {
-                        text = [value objectForKey:@"content"];
-                    }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
-                    {
-                        image = [value objectForKey:@"image"];
-                    }
                     SSDKContentType type = SSDKContentTypeText;
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"text"];
+                    }
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
+                    {
+                        image = [value objectForKey:@"imageUrl"];
+                    }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+                    {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
                     [params SSDKSetupKaiXinParamsByText:text
                                                   image:image
                                                    type:type];
                 }
                 //Facebook
-                value  =  [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFacebook]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFacebook]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
                     NSString* image = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupFacebookParamsByText:text
@@ -838,7 +1033,7 @@ extern "C" {
                                                      type:type];
                 }
                 //Twitter
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTwitter]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTwitter]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
@@ -847,13 +1042,13 @@ extern "C" {
                     double lng;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -880,10 +1075,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -916,17 +1111,17 @@ extern "C" {
                         }
                     }
                     
-                    if ([[value objectForKey:@"lat"] isKindOfClass:[NSNumber class]])
+                    if ([[value objectForKey:@"latitude"] isKindOfClass:[NSNumber class]])
                     {
-                        lat = [[value objectForKey:@"lat"] doubleValue];
+                        lat = [[value objectForKey:@"latitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"lng"] isKindOfClass:[NSNumber class]])
+                    if ([[value objectForKey:@"longitude"] isKindOfClass:[NSNumber class]])
                     {
-                        lng = [[value objectForKey:@"lng"] doubleValue];
+                        lng = [[value objectForKey:@"longitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupTwitterParamsByText:text
@@ -938,7 +1133,7 @@ extern "C" {
                 }
                 
                 //YinXiang
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYinXiang]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYinXiang]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text  = nil;
@@ -946,19 +1141,18 @@ extern "C" {
                     NSMutableArray *images = [NSMutableArray array];
                     NSMutableArray* tags = [NSMutableArray array];
                     NSString *notebook = nil;
-                    SSDKPlatformType platformType = SSDKPlatformTypeYinXiang;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -985,10 +1179,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         for (NSString* path in paths)
                         {
                             SSDKImage* image = nil;
@@ -1032,20 +1226,16 @@ extern "C" {
                         tags = [tagValue mutableCopy];
                     }
                     
-                    if ([[value objectForKey:@"platformType"] isKindOfClass:[NSString class]])
-                    {
-                        platformType = [[value objectForKey:@"platformType"] integerValue];
-                    }
                     [params SSDKSetupEvernoteParamsByText:text
                                                    images:images
                                                     title:title
                                                  notebook:notebook
                                                      tags:tags
-                                             platformType:platformType];
+                                             platformType:SSDKPlatformTypeYinXiang];
                 }
                 
                 //GooglePlus
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeGooglePlus]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeGooglePlus]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     
@@ -1053,17 +1243,17 @@ extern "C" {
                     NSString* url = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupGooglePlusParamsByText:text
@@ -1073,16 +1263,16 @@ extern "C" {
                 }
                 
                 //Instagram
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstagram]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstagram]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *image = nil;
                     CGFloat menuX;
                     CGFloat menuY;
                     
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"menuX"] isKindOfClass:[NSString class]])
                     {
@@ -1098,7 +1288,7 @@ extern "C" {
                 }
                 
                 //LinkedIn
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLinkedIn]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLinkedIn]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -1109,13 +1299,13 @@ extern "C" {
                     NSString *visibility = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -1133,9 +1323,9 @@ extern "C" {
                     {
                         visibility = [value objectForKey:@"visibility"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                         
                     }
                     
@@ -1148,7 +1338,7 @@ extern "C" {
                                                      type:type];
                 }
                 //Tumblr
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTumblr]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTumblr]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -1158,13 +1348,13 @@ extern "C" {
                     NSString *blogName = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -1178,9 +1368,9 @@ extern "C" {
                     {
                         blogName = [value objectForKey:@"blogName"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                         
                     }
                     [params SSDKSetupTumblrParamsByText:text
@@ -1192,7 +1382,7 @@ extern "C" {
                 }
                 
                 //Mail
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeMail]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeMail]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text  = nil;
@@ -1205,17 +1395,17 @@ extern "C" {
                     SSDKContentType type = SSDKContentTypeText;
                     
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -1242,10 +1432,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -1278,14 +1468,14 @@ extern "C" {
                         }
                     }
                     
-                    if ([[value objectForKey:@"attachmentsPaths"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"attachmentPath"] isKindOfClass:[NSString class]])
                     {
-                        NSData* attachementsData = [NSData dataWithContentsOfFile:[value objectForKey:@"attachmentsPath"]];
+                        NSData* attachementsData = [NSData dataWithContentsOfFile:[value objectForKey:@"attachmentPath"]];
                         [attachments addObject:attachementsData];
                     }
-                    else if ([[value objectForKey:@"attachmentsPaths"] isKindOfClass:[NSArray class]])
+                    else if ([[value objectForKey:@"attachmentPath"] isKindOfClass:[NSArray class]])
                     {
-                        NSArray* paths = [value objectForKey:@"attachmentsPaths"];
+                        NSArray* paths = [value objectForKey:@"attachmentPath"];
                         for (NSString* path in paths)
                         {
                             
@@ -1329,9 +1519,9 @@ extern "C" {
                             [bccRecipients addObject:recipient];
                         }
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupMailParamsByText:text
@@ -1345,7 +1535,7 @@ extern "C" {
                 }
                 
                 //SMS
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSMS]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSMS]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text  = nil;
@@ -1355,17 +1545,17 @@ extern "C" {
                     NSMutableArray* recipients = [NSMutableArray array];
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -1392,10 +1582,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -1428,14 +1618,14 @@ extern "C" {
                         }
                     }
                     
-                    if ([[value objectForKey:@"attachmentsPaths"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"attachmentPath"] isKindOfClass:[NSString class]])
                     {
-                        NSData* attachementsData = [NSData dataWithContentsOfFile:[value objectForKey:@"attachmentsPath"]];
+                        NSData* attachementsData = [NSData dataWithContentsOfFile:[value objectForKey:@"attachmentPath"]];
                         [attachments addObject:attachementsData];
                     }
-                    else if ([[value objectForKey:@"attachmentsPaths"] isKindOfClass:[NSArray class]])
+                    else if ([[value objectForKey:@"attachmentPath"] isKindOfClass:[NSArray class]])
                     {
-                        NSArray* paths = [value objectForKey:@"attachmentsPaths"];
+                        NSArray* paths = [value objectForKey:@"attachmentPath"];
                         for (NSString* path in paths)
                         {
                             
@@ -1455,9 +1645,9 @@ extern "C" {
                             [recipients addObject:recipient];
                         }
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupSMSParamsByText:text
@@ -1472,7 +1662,7 @@ extern "C" {
                 //无定制内容方法
                 
                 //Copy
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeCopy]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeCopy]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
@@ -1480,13 +1670,13 @@ extern "C" {
                     NSString* url = nil;
                     SSDKContentType type = SSDKContentTypeImage;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -1513,10 +1703,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -1552,9 +1742,9 @@ extern "C" {
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     [params SSDKSetupCopyParamsByText:text
                                                images:images
@@ -1563,7 +1753,7 @@ extern "C" {
                 }
                 
                 //Instapaper
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstapaper]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeInstapaper]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *url = nil;
@@ -1586,11 +1776,10 @@ extern "C" {
                     {
                         desc = [value objectForKey:@"desc"];
                     }
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        content = [value objectForKey:@"content"];
+                        content = [value objectForKey:@"text"];
                     }
-                    
                     if ([[value objectForKey:@"isPrivateFromSource"] boolValue])
                     {
                         isPrivateFromSource = YES;
@@ -1612,7 +1801,7 @@ extern "C" {
                 }
                 
                 //Pocket
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypePocket]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypePocket]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* url = nil;
@@ -1637,9 +1826,9 @@ extern "C" {
                         NSArray* tagsArr = tagValue;
                         tags = [tagsArr componentsJoinedByString:@","];
                     }
-                    if ([[value objectForKey:@"tweetId"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"tweetID"] isKindOfClass:[NSString class]])
                     {
-                        tweetId = [value objectForKey:@"tweetId"];
+                        tweetId = [value objectForKey:@"tweetID"];
                     }
                     [params SSDKSetupPocketParamsByUrl:[NSURL URLWithString:url]
                                                  title:title
@@ -1648,8 +1837,7 @@ extern "C" {
                 }
                 
                 //YouDaoNote
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYouDaoNote]];
-                
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYouDaoNote]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text  = nil;
@@ -1659,17 +1847,17 @@ extern "C" {
                     NSString *author = nil;
                     NSString *notebook = nil;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString *imgPath =  [value objectForKey:@"image"];
+                        NSString *imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage *image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -1696,10 +1884,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -1753,7 +1941,7 @@ extern "C" {
                 }
                 
                 //Flickr
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFlickr]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFlickr]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
@@ -1762,18 +1950,18 @@ extern "C" {
                     NSMutableArray* tags = [NSMutableArray array];
                     BOOL isPublic;
                     BOOL isFriend;
-                    BOOL isFamliy;
+                    BOOL isFamiliy;
                     NSInteger safetyLevel;
                     NSInteger contentType;
                     NSInteger hidden;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -1796,17 +1984,17 @@ extern "C" {
                     {
                         isFriend = YES;
                     }
-                    if ([[value objectForKey:@"isFamliy"] boolValue])
+                    if ([[value objectForKey:@"isFamiliy"] boolValue])
                     {
-                        isFamliy = YES;
+                        isFamiliy = YES;
                     }
                     if ([[value objectForKey:@"safetyLevel"] integerValue])
                     {
                         safetyLevel = [[value objectForKey:@"safetyLevel"] integerValue];
                     }
-                    if ([[value objectForKey:@"type"] integerValue])
+                    if ([[value objectForKey:@"contentType"] integerValue])
                     {
-                        contentType = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        contentType = __convertContentType([[value objectForKey:@"contentType"] integerValue]);
                     }
                     if ([[value objectForKey:@"hidden"] integerValue])
                     {
@@ -1819,15 +2007,15 @@ extern "C" {
                                                    tags:tags
                                                isPublic:isPublic
                                                isFriend:isFriend
-                                               isFamily:isFamliy
+                                               isFamily:isFamiliy
                                             safetyLevel:safetyLevel
                                             contentType:contentType
                                                  hidden:hidden];
                 }
                 
                 //Dropbox
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDropbox]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDropbox]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *attachmentPath = nil;
                     if ([[value objectForKey:@"attachmentPath"] isKindOfClass:[NSString class]])
@@ -1838,8 +2026,8 @@ extern "C" {
                 }
                 
                 //VKontakte
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeVKontakte]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeVKontakte]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString* text = nil;
                     NSString* url = nil;
@@ -1849,17 +2037,17 @@ extern "C" {
                     double lat;
                     double lng;
                     SSDKContentType type = SSDKContentTypeText;
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -1886,10 +2074,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         for (NSString* path in paths)
                         {
                             SSDKImage* image = nil;
@@ -1919,25 +2107,25 @@ extern "C" {
                             
                         }
                     }
-                    if ([[value objectForKey:@"groupId"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"groupID"] isKindOfClass:[NSString class]])
                     {
-                        groupId = [value objectForKey:@"groupId"];
+                        groupId = [value objectForKey:@"groupID"];
                     }
                     if ([[value objectForKey:@"friendsOnly"] boolValue])
                     {
                         friendsOnly = YES;
                     }
-                    if ([[value objectForKey:@"lat"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"latitude"] isKindOfClass:[NSString class]])
                     {
-                        lat = [[value objectForKey:@"lat"] doubleValue];
+                        lat = [[value objectForKey:@"latitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"lng"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"longitude"] isKindOfClass:[NSString class]])
                     {
-                        lng = [[value objectForKey:@"lng"] doubleValue];
+                        lng = [[value objectForKey:@"longitude"] doubleValue];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                         
                     }
                     
@@ -1952,39 +2140,38 @@ extern "C" {
                 }
                 
                 //Yixin系列
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeYiXinSession]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeYiXinSession]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setYixinParams(value, params, SSDKPlatformSubTypeYiXinSession);
                 }
-                
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeYiXinTimeline]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeYiXinTimeline]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setYixinParams(value, params, SSDKPlatformSubTypeYiXinTimeline);
                 }
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeYiXinFav]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeYiXinFav]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     __setYixinParams(value, params, SSDKPlatformSubTypeYiXinFav);
                 }
                 
                 //MingDao
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeMingDao]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeMingDao]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
                     NSString *image = nil;
                     NSString *url = nil;
                     NSString *title = nil;
                     SSDKContentType type = SSDKContentTypeText;
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
                     {
@@ -1994,9 +2181,9 @@ extern "C" {
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                         
                     }
                     
@@ -2008,24 +2195,24 @@ extern "C" {
                 }
                 
                 //Line
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLine]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeLine]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
                     NSString *image = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                         
                     }
                     [params SSDKSetupLineParamsByText:text
@@ -2034,8 +2221,8 @@ extern "C" {
                 }
                 
                 //whatsApp
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWhatsApp]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWhatsApp]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
                     NSString *image = nil;
@@ -2044,13 +2231,13 @@ extern "C" {
                     CGFloat menuX;
                     CGFloat menuY;
                     SSDKContentType type = SSDKContentTypeText;
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"audioPath"] isKindOfClass:[NSString class]])
                     {
@@ -2070,9 +2257,9 @@ extern "C" {
                     }
                     CGPoint point = CGPointMake(menuX, menuY);
                     
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                         
                     }
                     
@@ -2085,192 +2272,24 @@ extern "C" {
                     
                 }
                 
+                
                 //Kakao系列
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKakao]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeKakaoTalk]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
-                    
-                    NSString *text = nil;
-                    NSMutableArray *images = [NSMutableArray array];
-                    NSString *title = nil;
-                    NSString *url = nil;
-                    NSString *permission = nil;
-                    BOOL enableShare;
-                    CGFloat imageWidth;
-                    CGFloat imageHeight;
-                    NSString *appButtonTitle = nil;
-                    
-                    NSDictionary *androidExecParam = nil;
-                    NSString *androidMarkParam = nil;
-                    
-                    NSDictionary *iphoneExecParams = nil;
-                    NSString *iphoneMarkParam = nil;
-                    
-                    NSDictionary *ipadExecParams = nil;
-                    NSString *ipadMarkParam = nil;
-                    
-                    SSDKContentType type = SSDKContentTypeText;
-                    SSDKPlatformType platType = SSDKPlatformSubTypeKakaoTalk;
-                    
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
-                    {
-                        text = [value objectForKey:@"content"];
-                    }
-                    
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
-                    {
-                        NSString* imgPath =  [value objectForKey:@"image"];
-                        SSDKImage* image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage* localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc] initWithImage:localImg
-                                                              format:SSDKImageFormatJpeg
-                                                            settings:nil];
-                        }
-                        
-                        if (image)
-                        {
-                            [images addObject:imgPath];
-                        }
-                        else
-                        {
-                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
-                        }
-                        
-                    }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
-                    {
-                        
-                        NSArray* paths = [value objectForKey:@"image"];
-                        for (NSString* path in paths)
-                        {
-                            SSDKImage* image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                    options:MOBFRegexOptionsNoOptions
-                                                    inRange:NSMakeRange(0, path.length)
-                                                 withString:path])
-                            {
-                                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
-                            }
-                            else
-                            {
-                                UIImage* localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc] initWithImage:localImg
-                                                                  format:SSDKImageFormatJpeg
-                                                                settings:nil];
-                            }
-                            
-                            if (image)
-                            {
-                                [images addObject:path];
-                            }
-                            else
-                            {
-                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
-                            }
-                            
-                        }
-                    }
-                    
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
-                    {
-                        title = [value objectForKey:@"title"];
-                    }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
-                    {
-                        url = [value objectForKey:@"url"];
-                    }
-                    if ([[value objectForKey:@"permission"] isKindOfClass:[NSString class]])
-                    {
-                        permission = [value objectForKey:@"permission"];
-                    }
-                    
-                    if ([[value objectForKey:@"enableShare"] boolValue])
-                    {
-                        enableShare = YES;
-                    }
-                    
-                    if ([[value objectForKey:@"imageWidth"] isKindOfClass:[NSString class]])
-                    {
-                        imageWidth = [[value objectForKey:@"imageWidth"] floatValue];
-                    }
-                    if ([[value objectForKey:@"imageHeight"] isKindOfClass:[NSString class]])
-                    {
-                        imageHeight = [[value objectForKey:@"imageHeight"] floatValue];
-                    }
-                    if ([[value objectForKey:@"appButtonTitle"] isKindOfClass:[NSString class]])
-                    {
-                        appButtonTitle = [value objectForKey:@"appButtonTitle"];
-                    }
-                    
-                    if ([[value objectForKey:@"androidExecParam"] isKindOfClass:[NSDictionary class]])
-                    {
-                        androidExecParam = [value objectForKey:@"androidExecParam"];
-                    }
-                    if ([[value objectForKey:@"androidMarkParam"] isKindOfClass:[NSString class]])
-                    {
-                        androidMarkParam = [value objectForKey:@"androidMarkParam"];
-                    }
-                    
-                    if ([[value objectForKey:@"iphoneExecParams"] isKindOfClass:[NSDictionary class]])
-                    {
-                        iphoneExecParams = [value objectForKey:@"iphoneExecParams"];
-                    }
-                    if ([[value objectForKey:@"iphoneMarkParam"] isKindOfClass:[NSString class]])
-                    {
-                        iphoneMarkParam = [value objectForKey:@"iphoneMarkParam"];
-                    }
-                    
-                    if ([[value objectForKey:@"ipadExecParams"] isKindOfClass:[NSDictionary class]])
-                    {
-                        ipadExecParams = [value objectForKey:@"ipadExecParams"];
-                    }
-                    if ([[value objectForKey:@"ipadMarkParam"] isKindOfClass:[NSString class]])
-                    {
-                        ipadMarkParam = [value objectForKey:@"ipadMarkParam"];
-                    }
-                    
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
-                    {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
-                        
-                    }
-                    if ([[value objectForKey:@"platformType"] isKindOfClass:[NSString class]])
-                    {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
-                        
-                    }
-                    
-                    [params SSDKSetupKaKaoParamsByText:text
-                                                images:images
-                                                 title:title
-                                                   url:[NSURL URLWithString:url]
-                                            permission:permission
-                                           enableShare:enableShare
-                                             imageSize:CGSizeMake(imageWidth, imageHeight)
-                                        appButtonTitle:appButtonTitle
-                                      androidExecParam:androidExecParam
-                                      androidMarkParam:androidMarkParam
-                                      iphoneExecParams:iphoneExecParams
-                                       iphoneMarkParam:iphoneMarkParam
-                                        ipadExecParams:ipadExecParams
-                                         ipadMarkParam:ipadMarkParam
-                                                  type:type
-                                    forPlatformSubType:platType];
+                    __setKakaoParams(value,params,SSDKPlatformSubTypeKakaoTalk);
+                }
+                
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeKakaoStory]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    __setKakaoParams(value,params,SSDKPlatformSubTypeKakaoStory);
                 }
                 
                 
                 //支付宝好友
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocial]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocial]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
                     NSString *image = nil;
@@ -2278,14 +2297,14 @@ extern "C" {
                     NSString *url = nil;
                     SSDKContentType type = SSDKContentTypeText;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
                         
-                        image = [value objectForKey:@"image"];
+                        image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -2295,9 +2314,9 @@ extern "C" {
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"type"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
-                        type = __convertContentType([[value objectForKey:@"type"] integerValue]);
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
                     [params SSDKSetupAliPaySocialParamsByText:text
@@ -2308,27 +2327,26 @@ extern "C" {
                 }
                 
                 //Evernote
-                value = [shareParamsDic objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeEvernote]];
-                if (value)
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeEvernote]]];
+                if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text  = nil;
                     NSString *title = nil;
                     NSMutableArray *images = [NSMutableArray array];
                     NSMutableArray* tags = [NSMutableArray array];
                     NSString *notebook = nil;
-                    SSDKPlatformType platformType = SSDKPlatformTypeEvernote;
                     
-                    if ([[value objectForKey:@"content"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
-                        text = [value objectForKey:@"content"];
+                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"image"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        NSString* imgPath =  [value objectForKey:@"image"];
+                        NSString* imgPath =  [value objectForKey:@"imageUrl"];
                         SSDKImage* image = nil;
                         if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
                                                 options:MOBFRegexOptionsNoOptions
@@ -2355,10 +2373,10 @@ extern "C" {
                         }
                         
                     }
-                    else if([[value objectForKey:@"image"] isKindOfClass:[NSArray class]])
+                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
                     {
                         
-                        NSArray* paths = [value objectForKey:@"image"];
+                        NSArray* paths = [value objectForKey:@"imageUrl"];
                         
                         for (NSString* path in paths)
                         {
@@ -2403,17 +2421,12 @@ extern "C" {
                     {
                         tags = [tagValue mutableCopy];
                     }
-                    
-                    if ([[value objectForKey:@"platformType"] isKindOfClass:[NSString class]])
-                    {
-                        platformType = [[value objectForKey:@"platformType"] integerValue];
-                    }
                     [params SSDKSetupEvernoteParamsByText:text
                                                    images:images
                                                     title:title
                                                  notebook:notebook
                                                      tags:tags
-                                             platformType:platformType];
+                                             platformType:SSDKPlatformTypeEvernote];
                 }
                 
             }
@@ -2883,7 +2896,7 @@ extern "C" {
     
     void __iosShareSDKShowShareMenu (int reqID, void *platTypes, void *content, int x, int y, void *observer)
     {
-        
+       
         NSArray *platTypesArr = nil;
         NSMutableArray *actionSheetItems = [NSMutableArray array];
         NSString *observerStr = nil;
@@ -2899,7 +2912,6 @@ extern "C" {
         else
         {
             platTypesArr = [ShareSDK activePlatforms];
-            
             for (id obj in platTypesArr)
             {
                 NSInteger platformInterger = [obj integerValue];

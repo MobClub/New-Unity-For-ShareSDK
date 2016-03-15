@@ -476,6 +476,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.VKontakte;
 		public string application_id = "3921561";
 		public string secret_key = "6Qf883ukLDyz4OBepYF1";
+		public string auth_type = "both";
 		#endif
 	}
 

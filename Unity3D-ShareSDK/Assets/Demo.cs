@@ -76,25 +76,10 @@ public class Demo : MonoBehaviour {
 			ShareContent customizeShareParams = new ShareContent();
 			customizeShareParams.SetText("Sina share content");
 			customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
-
+			customizeShareParams.SetShareType(ContentType.Image);
+			customizeShareParams.SetObjectID("SinaID");
 			content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
-			#if UNITY_IPHONE
-			//仅支持iOS,定制新浪的分享内容Example,各平台所支持的字段请参考文档
-			Hashtable sinaContent = new Hashtable();
-			sinaContent["content"] = "the sina custom content string";
-			sinaContent["title"] = "the sina title";
-			//string path = Application.dataPath+"/Raw"+"/ShareSDK.jpg";
-			string path = "http://img.baidu.com/img/image/zhenrenmeinv0207.jpg";
-			sinaContent["image"] = path;
-			sinaContent["url"] = "http://sharesdk.cn";
-			//iOS分享图文类型为Image,分享链接类型为WebPage/News
-			sinaContent["type"] = ContentType.Image;
-			sinaContent["lat"] = "33.33";
-			sinaContent["lng"] = "99.99";
-			sinaContent["objID"] = @"sinaID";
-			content.Add((int)PlatformType.SinaWeibo,sinaContent);
-			#endif
-
+		
 			ssdk.ShowPlatformList (null, content, 100, 100);
 		}
 
@@ -111,7 +96,7 @@ public class Demo : MonoBehaviour {
 			content.SetUrl("http://www.mob.com");
 			content.SetComment("test description");
 			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-			content.SetShareType(ContentType.Webpage);
+			content.SetShareType(ContentType.Image);
 			ssdk.ShowShareContentEditor (PlatformType.TencentWeibo, content);
 		}
 
@@ -128,7 +113,7 @@ public class Demo : MonoBehaviour {
 			content.SetUrl("http://www.mob.com");
 			content.SetComment("test description");
 			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-			content.SetShareType(ContentType.Webpage);
+			content.SetShareType(ContentType.Image);
 			ssdk.ShareContent (PlatformType.SinaWeibo, content);
 		}
 

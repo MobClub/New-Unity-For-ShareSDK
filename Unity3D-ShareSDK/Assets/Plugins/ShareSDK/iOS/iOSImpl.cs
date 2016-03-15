@@ -51,7 +51,7 @@ namespace cn.sharesdk.unity3d
 		
 		private string _callbackObjectName = "Main Camera";
 		private string _appKey;
-		public iOSUtils (GameObject go) 
+		public iOSImpl (GameObject go) 
 		{
 			Debug.Log("iOSUtils  ===>>>  iOSUtils" );
 			try{
@@ -64,7 +64,7 @@ namespace cn.sharesdk.unity3d
 		
 		public override void InitSDK (String appKey) 
 		{
-			_appKey = appKey
+			_appKey = appKey;
 		}
 
 		public override void SetPlatformConfig (Hashtable configs) 

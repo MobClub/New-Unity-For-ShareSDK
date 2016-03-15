@@ -22,6 +22,8 @@ namespace cn.sharesdk.unity3d
 		Hashtable shareParams = new Hashtable();
 		Hashtable customizeShareParams = new Hashtable();
 
+
+		/*以下方法为定制基本分享内容字段的方法*/
 		public void SetTitle(String title) {
 			shareParams["title"] = title;
 		}
@@ -34,16 +36,22 @@ namespace cn.sharesdk.unity3d
 			shareParams["url"] = url;
 		}
 
-		public void SetTitleUrl(String titleUrl) {
-			shareParams["titleUrl"] = titleUrl;
-		}
-
-		public void SetImagePath(String imagePath) {
-			shareParams["imagePath"] = imagePath;
-		}
-
 		public void SetImageUrl(String imageUrl) {
 			shareParams["imageUrl"] = imageUrl;
+		}
+
+		public void SetShareType(int shareType) {
+			if (shareType == 0) {
+				shareType = 1;
+			}
+			shareParams["shareType"] = shareType;
+		}
+
+		/*---------------------------------------*/
+		/*以下方法为定制指定平台分享内容的时候可能用到的方法*/
+
+		public void SetTitleUrl(String titleUrl) {
+			shareParams["titleUrl"] = titleUrl;
 		}
 
 		public void SetFilePath(String filePath) {
@@ -51,11 +59,7 @@ namespace cn.sharesdk.unity3d
 		}
 
 		public void SetComment(String comment) {
-			#if UNITY_ANDROID
 			shareParams["comment"] = comment;
-			#elif UNITY_IPHONE
-			shareParams["description"] = comment;
-			#endif
 		}
 
 		public void SetSite(String site) {
@@ -70,13 +74,6 @@ namespace cn.sharesdk.unity3d
 			shareParams["musicUrl"] = musicUrl;
 		}
 
-		public void SetShareType(int shareType) {
-			if (shareType == 0) {
-				shareType = 1;
-			}
-			shareParams["shareType"] = shareType;
-		}
-
 		public void SetAddress(String address) {
 			shareParams["address"] = address;
 		}
@@ -88,6 +85,27 @@ namespace cn.sharesdk.unity3d
 		public void SetLongitude(String longitude) {
 			shareParams["longitude"] = longitude;
 		}
+
+		public void SetObjectID(String objectId) {
+			shareParams["objectID"] = objectId;
+		}
+
+		public void SetAlbumID(String albumId) {
+			shareParams["AlbumID"] = albumId;
+		}
+
+		public void SetEmotionPath(String emotionPath){
+			shareParams["emotionPath"] = emotionPath;
+		}
+
+		public void SetExtInfoPath(String extInfoPath){
+			shareParams["extInfoPath"] = extInfoPath;
+		}
+
+		public void SetThumbImageUrl(String thumbImageUrl){
+			shareParams["thumbImageUrl"] = thumbImageUrl;
+		}
+
 
 		//不同平台分享不同内容
 		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
