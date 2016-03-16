@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Demo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/ShareSDK.cs">
     <Files>
-      <File FileName="Assets\Demo.cs" Line="93" Column="33" />
-      <File FileName="Assets\Plugins\ShareSDK\Android\AndroidImpl.cs" Line="92" Column="4" />
-      <File FileName="Assets\Plugins\ShareSDK\ShareSDK.cs" Line="370" Column="23" />
-      <File FileName="Assets\Plugins\ShareSDK\ShareSDKDevInfo.cs" Line="117" Column="9" />
+      <File FileName="../../../Desktop/New-Unity-For-ShareSDK/Unity3D-ShareSDK/Assets/Demo.cs" Line="26" Column="23" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="26" Column="39" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="63" Column="34" />
+      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="19" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

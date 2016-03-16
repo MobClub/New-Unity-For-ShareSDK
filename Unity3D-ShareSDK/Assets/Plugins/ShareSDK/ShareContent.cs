@@ -22,88 +22,324 @@ namespace cn.sharesdk.unity3d
 		Hashtable shareParams = new Hashtable();
 		Hashtable customizeShareParams = new Hashtable();
 
-
-		/*以下方法为定制基本分享内容字段的方法*/
+		/*iOS/Android*/
 		public void SetTitle(String title) {
 			shareParams["title"] = title;
 		}
 
+		/*iOS/Android*/
 		public void SetText(String text) {
 			shareParams["text"] = text;
 		}
 
+		/*iOS/Android*/
 		public void SetUrl(String url) {
 			shareParams["url"] = url;
 		}
 
+		/*iOS/Android - 本地图片路径*/
+		public void SetImagePath(String imagePath) {
+			#if UNITY_ANDROID
+			shareParams["imagePath"] = imagePath;
+			#elif UNITY_IPHONE
+			shareParams["imageUrl"] = imagePath;
+			#endif
+		}
+
+		/*iOS/Android - 网络图片路径*/
 		public void SetImageUrl(String imageUrl) {
 			shareParams["imageUrl"] = imageUrl;
 		}
 
+		/*iOS/Android - 分享类型*/
 		public void SetShareType(int shareType) {
+
+			#if UNITY_ANDROID
 			if (shareType == 0) {
 				shareType = 1;
 			}
+			#endif
 			shareParams["shareType"] = shareType;
 		}
 
-		/*---------------------------------------*/
-		/*以下方法为定制指定平台分享内容的时候可能用到的方法*/
-
+		/*Android Only*/
 		public void SetTitleUrl(String titleUrl) {
 			shareParams["titleUrl"] = titleUrl;
 		}
 
-		public void SetFilePath(String filePath) {
-			shareParams["filePath"] = filePath;
-		}
-
+		/*iOS/Android*/
 		public void SetComment(String comment) {
 			shareParams["comment"] = comment;
 		}
 
+		/*Android Only*/
 		public void SetSite(String site) {
 			shareParams["site"] = site;
 		}
 
+		/*Android Only*/
 		public void SetSiteUrl(String siteUrl) {
 			shareParams["siteUrl"] = siteUrl;
 		}
 
+		/*Android Only*/
+		public void SetAddress(String address) {
+			shareParams["address"] = address;
+		}
+
+		/*iOS/Android*/
+		public void SetFilePath(String filePath) {
+			shareParams["filePath"] = filePath;
+		}
+
+		/*iOS/Android*/
 		public void SetMusicUrl(String musicUrl) {
 			shareParams["musicUrl"] = musicUrl;
 		}
 
-		public void SetAddress(String address) {
-			shareParams["address"] = address;
-		}
-		
+		/*iOS/Android - Sina/Tencent/Twitter/VKontakte*/
 		public void SetLatitude(String latitude) {
 			shareParams["latitude"] = latitude;
 		}
-			
+
+		/*iOS/Android - Sina/Tencent/Twitter/VKontakte*/
 		public void SetLongitude(String longitude) {
 			shareParams["longitude"] = longitude;
 		}
 
+		/*iOS Only - Sina*/
 		public void SetObjectID(String objectId) {
 			shareParams["objectID"] = objectId;
 		}
 
+		/*iOS Only - Renren*/
 		public void SetAlbumID(String albumId) {
 			shareParams["AlbumID"] = albumId;
 		}
 
+		/*iOS Only - Wechat*/
 		public void SetEmotionPath(String emotionPath){
 			shareParams["emotionPath"] = emotionPath;
 		}
 
+		/*iOS Only - Wechat/Yixin*/
 		public void SetExtInfoPath(String extInfoPath){
 			shareParams["extInfoPath"] = extInfoPath;
 		}
 
+		/*iOS Only - Wechat*/ 
+		public void SetSourceFileExtension(String sourceFileExtension){
+			shareParams["sourceFileExtension"] = sourceFileExtension;
+		}
+
+		/*iOS Only - Wechat*/
+		public void SetSourceFilePath(String sourceFilePath){
+			shareParams["sourceFilePath"] = sourceFilePath;
+		}
+
+		/*iOS Only - QQ/Wechat/Yixin*/
 		public void SetThumbImageUrl(String thumbImageUrl){
 			shareParams["thumbImageUrl"] = thumbImageUrl;
+		}
+
+		/*iOS Only - Douban/LinkedIn*/
+		public void SetUrlDescription(String urlDescription){
+			shareParams["urlDescription"] = urlDescription;
+		}
+
+		/*iOS Only - YouDaoNote/YinXiang/Evernote*/
+		public void SetNotebook(String notebook){
+			shareParams ["notebook"] = notebook;
+		}
+
+		/*iOS Only - Pocket/Flickr/YinXiang/Evernote*/
+		public void SetTags(String tags){
+			shareParams ["tags"] = tags;
+		}
+
+		/*iOS Only - WhatsApp/Instagram*/
+		public void SetMenuX(float menuX){
+			shareParams ["menuX"] = menuX;
+		}
+
+		/*iOS Only - WhatsApp/Instagram*/
+		public void SetMenuY(float menuY){
+			shareParams ["menuY"] = menuY;
+		}
+
+		/*iOS Only - LinkedIn*/
+		public void SetVisibility(String visibility){
+			shareParams ["visibility"] = visibility;
+		}
+
+		/*iOS Only - Tumblr*/
+		public void SetBlogName(String blogName){
+			shareParams ["blogName"] = blogName;
+		}
+
+		/*iOS Only - SMS/Mail*/
+		public void SetRecipients(String recipients){
+			shareParams ["recipients"] = recipients;
+		}
+
+		/*iOS Only - Mail*/
+		public void SetCCRecipients(String ccRecipients){
+			shareParams ["ccRecipients"] = ccRecipients;
+		}
+
+		/*iOS Only - Mail*/
+		public void SetBCCRecipients(String bccRecipients){
+			shareParams ["bccRecipients"] = bccRecipients;
+		}
+
+		/*iOS Only - Dropbox/Mail/SMS*/
+		public void SetAttachmentPath(String attachmentPath){
+			shareParams ["attachmentPath"] = attachmentPath;
+		}
+
+		/*iOS Only - Instapaper*/
+		public void SetDesc(String desc){
+			shareParams ["desc"] = desc;
+		}
+
+		/*iOS Only - Instapaper*/
+		public void SetIsPrivateFromSource(bool isPrivateFromSource){
+			shareParams ["isPrivateFromSource"] = isPrivateFromSource;
+		}
+
+		/*iOS Only - Instapaper*/
+		public void SetResolveFinalUrl(bool resolveFinalUrl){
+			shareParams ["resolveFinalUrl"] = resolveFinalUrl;
+		}
+
+		/*iOS Only - - Instapaper*/
+		public void SetFolderId(int folderId){
+			shareParams ["folderId"] = folderId;
+		}
+
+		/*iOS Only - Pocket*/
+		public void SetTweetID(String tweetID){
+			shareParams ["tweetID"] = tweetID;
+		}
+
+		/*iOS Only - YouDaoNote*/
+		public void SetSource(String source){
+			shareParams ["source"] = source;
+		}
+
+		/*iOS Only - YouDaoNote*/
+		public void SetAuthor(String author){
+			shareParams ["author"] = author;
+		}
+
+		/*iOS Only - Flickr*/
+		public void SetSafetyLevel(int safetyLevel){
+			shareParams ["safetyLevel"] = safetyLevel;
+		}
+
+		/*iOS Only - Flickr*/
+		public void SetContentType(int contentType){
+			shareParams ["contentType"] = contentType;
+		}
+
+		/*iOS Only - Flickr*/
+		public void SetHidden(int hidden){
+			shareParams ["hidden"] = hidden;
+		}
+
+		/*iOS Only - Flickr*/
+		public void SetIsPublic(bool isPublic){
+			shareParams ["isPublic"] = isPublic;
+		}
+
+		/*iOS Only - Flickr*/
+		public void SetIsFriend(bool isFriend){
+			shareParams ["isFriend"] = isFriend;
+		}
+
+		/*iOS Only - Flickr*/
+		public void SetIsFamily(bool isFamily){
+			shareParams ["isFamily"] = isFamily;
+		}
+
+		/*iOS Only - VKontakte*/
+		public void SetFriendsOnly(bool friendsOnly){
+			shareParams ["friendsOnly"] = friendsOnly;
+		}
+
+		/*iOS Only - VKontakte*/
+		public void SetGroupID(String groupID){
+			shareParams ["groupID"] = groupID;
+		}
+
+		/*iOS Only - Yixin*/
+		public void SetToUserID(String toUserID){
+			shareParams ["toUserID"] = toUserID;
+		}
+
+		/*iOS Only - WhatsApp*/
+		public void SetAudioPath(String audioPath){
+			shareParams ["audioPath"] = audioPath;
+		}
+
+		/*iOS Only - WhatsApp*/
+		public void SetVideoPath(String videoPath){
+			shareParams ["videoPath"] = videoPath;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetPermission(String permission){
+			shareParams ["permission"] = permission;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetEnableShare(bool enableShare){
+			shareParams ["enableShare"] = enableShare;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetImageWidth(float imageWidth){
+			shareParams ["imageWidth"] = imageWidth;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetImageHeight(float imageHeight){
+			shareParams ["imageHeight"] = imageHeight;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetAppButtonTitle(String appButtonTitle){
+			shareParams ["appButtonTitle"] = appButtonTitle;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetAndroidExecParam(Hashtable androidExecParam){
+			shareParams ["androidExecParam"] = androidExecParam;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetAndroidMarkParam(String androidMarkParam){
+			shareParams ["androidMarkParam"] = androidMarkParam;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetIphoneExecParam(Hashtable iphoneExecParam){
+			shareParams ["iphoneExecParam"] = iphoneExecParam;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetIphoneMarkParam(String iphoneMarkParam){
+			shareParams ["iphoneMarkParam"] = iphoneMarkParam;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetIpadExecParam(Hashtable ipadExecParam){
+			shareParams ["ipadExecParam"] = ipadExecParam;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetIpadMarkParam(String ipadMarkParam){
+			shareParams ["ipadMarkParam"] = ipadMarkParam;
 		}
 
 

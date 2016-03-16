@@ -542,11 +542,11 @@ extern "C" {
             enableShare = YES;
         }
         
-        if ([[value objectForKey:@"imageWidth"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"imageWidth"] isKindOfClass:[NSNumber class]])
         {
             imageWidth = [[value objectForKey:@"imageWidth"] floatValue];
         }
-        if ([[value objectForKey:@"imageHeight"] isKindOfClass:[NSString class]])
+        if ([[value objectForKey:@"imageHeight"] isKindOfClass:[NSNumber class]])
         {
             imageHeight = [[value objectForKey:@"imageHeight"] floatValue];
         }
@@ -1994,7 +1994,7 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"contentType"] integerValue])
                     {
-                        contentType = __convertContentType([[value objectForKey:@"contentType"] integerValue]);
+                        contentType = [[value objectForKey:@"contentType"] integerValue];
                     }
                     if ([[value objectForKey:@"hidden"] integerValue])
                     {
@@ -2444,7 +2444,6 @@ extern "C" {
         {
             platformsDict = __parseWithHashtable(configInfo);
         }
-        
         for (id obj in [platformsDict allKeys])
         {
             NSInteger platformInterger = [obj integerValue];
@@ -2457,7 +2456,6 @@ extern "C" {
             
             
         }
-        
         [ShareSDK registerApp:appKeyStr
               activePlatforms:activePlatforms
                      onImport:^(SSDKPlatformType platformType) {
