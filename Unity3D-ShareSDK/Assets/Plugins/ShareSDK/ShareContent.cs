@@ -53,7 +53,6 @@ namespace cn.sharesdk.unity3d
 
 		/*iOS/Android - 分享类型*/
 		public void SetShareType(int shareType) {
-
 			#if UNITY_ANDROID
 			if (shareType == 0) {
 				shareType = 1;
@@ -106,6 +105,96 @@ namespace cn.sharesdk.unity3d
 		public void SetLongitude(String longitude) {
 			shareParams["longitude"] = longitude;
 		}
+		
+		/*iOS/Android - YouDaoNote*/
+		public void SetSource(String source){
+			#if UNITY_ANDROID
+			shareParams["url"] = source;
+			#elif UNITY_IPHONE
+			shareParams ["source"] = source;
+			#endif
+		}
+		
+		/*iOS/Android - YouDaoNote*/
+		public void SetAuthor(String author){
+			#if UNITY_ANDROID
+			shareParams["address"] = author;
+			#elif UNITY_IPHONE
+			shareParams ["author"] = author;
+			#endif
+		}
+		
+		/*iOS/Android - Flickr*/
+		public void SetSafetyLevel(int safetyLevel){
+			shareParams ["safetyLevel"] = safetyLevel;
+		}
+		
+		/*iOS/Android - Flickr*/
+		public void SetContentType(int contentType){
+			shareParams ["contentType"] = contentType;
+		}
+		
+		/*iOS/Android - Flickr*/
+		public void SetHidden(int hidden){
+			shareParams ["hidden"] = hidden;
+		}
+		
+		/*iOS/Android - Flickr*/
+		public void SetIsPublic(bool isPublic){
+			shareParams ["isPublic"] = isPublic;
+		}
+		
+		/*iOS/Android - Flickr*/
+		public void SetIsFriend(bool isFriend){
+			shareParams ["isFriend"] = isFriend;
+		}
+		
+		/*iOS/Android - Flickr*/
+		public void SetIsFamily(bool isFamily){
+			shareParams ["isFamily"] = isFamily;
+		}
+		
+		/*iOS/Android - VKontakte*/
+		public void SetFriendsOnly(bool friendsOnly){
+			#if UNITY_ANDROID
+			shareParams["isFriend"] = friendsOnly;
+			#elif UNITY_IPHONE
+			shareParams ["friendsOnly"] = friendsOnly;
+			#endif
+		}
+		
+		/*iOS/Android - VKontakte*/
+		public void SetGroupID(String groupID){
+			shareParams ["groupID"] = groupID;
+		}
+		
+		/*iOS/Android - WhatsApp*/
+		public void SetAudioPath(String audioPath){
+			#if UNITY_ANDROID
+			shareParams["filePath"] = audioPath;
+			#elif UNITY_IPHONE
+			shareParams ["audioPath"] = audioPath;
+			#endif
+		}
+		
+		/*iOS/Android - WhatsApp*/
+		public void SetVideoPath(String videoPath){
+			#if UNITY_ANDROID
+			shareParams["filePath"] = videoPath;
+			#elif UNITY_IPHONE
+			shareParams ["videoPath"] = videoPath;
+			#endif
+		}
+		
+		/*iOS/Android - YouDaoNote/YinXiang/Evernote*/
+		public void SetNotebook(String notebook){
+			shareParams ["notebook"] = notebook;
+		}
+		
+		/*iOS/Android - Pocket/Flickr/YinXiang/Evernote*/
+		public void SetTags(String tags){
+			shareParams ["tags"] = tags;
+		}
 
 		/*iOS Only - Sina*/
 		public void SetObjectID(String objectId) {
@@ -145,16 +234,6 @@ namespace cn.sharesdk.unity3d
 		/*iOS Only - Douban/LinkedIn*/
 		public void SetUrlDescription(String urlDescription){
 			shareParams["urlDescription"] = urlDescription;
-		}
-
-		/*iOS Only - YouDaoNote/YinXiang/Evernote*/
-		public void SetNotebook(String notebook){
-			shareParams ["notebook"] = notebook;
-		}
-
-		/*iOS Only - Pocket/Flickr/YinXiang/Evernote*/
-		public void SetTags(String tags){
-			shareParams ["tags"] = tags;
 		}
 
 		/*iOS Only - WhatsApp/Instagram*/
@@ -222,69 +301,9 @@ namespace cn.sharesdk.unity3d
 			shareParams ["tweetID"] = tweetID;
 		}
 
-		/*iOS Only - YouDaoNote*/
-		public void SetSource(String source){
-			shareParams ["source"] = source;
-		}
-
-		/*iOS Only - YouDaoNote*/
-		public void SetAuthor(String author){
-			shareParams ["author"] = author;
-		}
-
-		/*iOS Only - Flickr*/
-		public void SetSafetyLevel(int safetyLevel){
-			shareParams ["safetyLevel"] = safetyLevel;
-		}
-
-		/*iOS Only - Flickr*/
-		public void SetContentType(int contentType){
-			shareParams ["contentType"] = contentType;
-		}
-
-		/*iOS Only - Flickr*/
-		public void SetHidden(int hidden){
-			shareParams ["hidden"] = hidden;
-		}
-
-		/*iOS Only - Flickr*/
-		public void SetIsPublic(bool isPublic){
-			shareParams ["isPublic"] = isPublic;
-		}
-
-		/*iOS Only - Flickr*/
-		public void SetIsFriend(bool isFriend){
-			shareParams ["isFriend"] = isFriend;
-		}
-
-		/*iOS Only - Flickr*/
-		public void SetIsFamily(bool isFamily){
-			shareParams ["isFamily"] = isFamily;
-		}
-
-		/*iOS Only - VKontakte*/
-		public void SetFriendsOnly(bool friendsOnly){
-			shareParams ["friendsOnly"] = friendsOnly;
-		}
-
-		/*iOS Only - VKontakte*/
-		public void SetGroupID(String groupID){
-			shareParams ["groupID"] = groupID;
-		}
-
 		/*iOS Only - Yixin*/
 		public void SetToUserID(String toUserID){
 			shareParams ["toUserID"] = toUserID;
-		}
-
-		/*iOS Only - WhatsApp*/
-		public void SetAudioPath(String audioPath){
-			shareParams ["audioPath"] = audioPath;
-		}
-
-		/*iOS Only - WhatsApp*/
-		public void SetVideoPath(String videoPath){
-			shareParams ["videoPath"] = videoPath;
 		}
 
 		/*iOS Only - Kakao*/
