@@ -115,7 +115,7 @@ and Defination of callback:
             }
         }
 
-iv. Transfer contents to Sharing interface :
+iv. Pass the sharecontent to Sharing interface :
 
         //Share by the menu
         ssdk.ShowPlatformList (null, content, 100, 100);
