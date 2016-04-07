@@ -76,15 +76,23 @@ Please import Name Space first :
 #### About Sharing
 i.Customize the sharing information :
 
-        Hashtable content = new Hashtable();
-        content["content"] = "this is a test string.";
-        content["image"] = "https://f1.webshare.mob.com/code/demo/img/1.jpg";
-        content["title"] = "test title";
-        content["description"] = "test description";
-        content["url"] = "http://sharesdk.cn";
-        content["type"] = ContentType.News;
+        ShareContent content = new ShareContent();
+        content.SetText("this is a test string.");
+        content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+        content.SetTitle("test title");
+        content.SetShareType(ContentType.Image);
 
-ii.Set the sharing callback param :
+ii.If need,you can customize the ShareContent for some detail platform(Please refer the attachment<分享内容参数表>):
+
+        ShareContent customizeShareParams = new ShareContent();
+        customizeShareParams.SetText("Sina share content");
+        customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
+        customizeShareParams.SetShareType(ContentType.Image);
+        customizeShareParams.SetObjectID("SinaID");
+        content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
+
+
+iii.Set the sharing callback param :
 
         ssdk.shareHandler = ShareResultHandler;
 
@@ -92,24 +100,31 @@ and Defination of callback:
 
         void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
         {
-        if (state == ResponseState.Success)
-        {
-        print ("share result :");
-        print (MiniJSON.jsonEncode(result));
-        }
-        else if (state == ResponseState.Fail)
-        {
-        print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-        }
-        else if (state == ResponseState.Cancel) 
-        {
-        print ("cancel !");
-        }
+            if (state == ResponseState.Success)
+            {
+            print ("share result :");
+            print (MiniJSON.jsonEncode(result));
+            }
+            else if (state == ResponseState.Fail)
+            {
+            print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+            }
+            else if (state == ResponseState.Cancel) 
+            {
+            print ("cancel !");
+            }
         }
 
-iii. Transfer contents to Sharing interface :
+iv. Pass the sharecontent to Sharing interface :
 
-        ssdk.ShowShareMenu (reqID, null, content, 100, 100);
+        //Share by the menu
+        ssdk.ShowPlatformList (null, content, 100, 100);
+
+        //share by the content editor
+        ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
+
+        //share directly
+        ssdk.ShareContent (PlatformType.SinaWeibo, content);
 
 #### About Authorization
 
@@ -182,11 +197,11 @@ You could export XCode project after editing complete
 
 Import ShareSDK iOS version to the project.
 Log in Mob website to download the latest version of ShareSDK.If you have not download, please click here to download.(Notes: You could choose the platforms to use or download the whole offical demo.) If you download the demo, it will apears after you unzip it:
-![image](http://wiki.mob.com/wp-content/uploads/2015/09/SDK1.jpg)
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/u3d1.jpg)
 
-Drag file”libraries” to Xcode project from Untiy3D:
+Drag file”ShareSDK” to Xcode project from Untiy3D:
 
-![image](http://wiki.mob.com/wp-content/uploads/2015/09/SDK2.jpg)
+![image](http://wiki.mob.com/wp-content/uploads/2015/09/u3d2.jpg)
 
 Choose “Create groups”, check the project.Check “Copy item if needed”, and you could copy the folder to Xcode projects. (If you don’t check “copy if needed”, it means just refer the file but copy), and click Finish, you could add ShareSDK to Xcode project:
 
