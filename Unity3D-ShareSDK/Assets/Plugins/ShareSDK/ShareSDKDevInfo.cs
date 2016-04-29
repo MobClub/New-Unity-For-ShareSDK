@@ -45,7 +45,6 @@ namespace cn.sharesdk.unity3d
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
-		public Bluetooth bluetooth;
 		#elif UNITY_IPHONE		
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
@@ -61,7 +60,7 @@ namespace cn.sharesdk.unity3d
 
 	public class DevInfo 
 	{	
-		public bool Enable = true;
+		public bool Enable = false;
 	}
 
 	[Serializable]
@@ -69,7 +68,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		public const int type = (int) PlatformType.SinaWeibo;
-		public string SortId = "1";
+		public string SortId = "4";
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
@@ -88,7 +87,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		public const int type = (int) PlatformType.TencentWeibo;
-		public string SortId = "2";
+		public string SortId = "3";
 		public string AppKey = "801307650";
 		public string AppSecret = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
 		public string RedirectUri = "http://sharesdk.cn";
@@ -105,7 +104,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		public const int type = (int) PlatformType.QQ;
-		public string SortId = "3";
+		public string SortId = "2";
 		public string AppId = "100371282";
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
 		public string ShareByAppClient = "true";
@@ -121,7 +120,7 @@ namespace cn.sharesdk.unity3d
 	public class QZone : DevInfo 
 	{
 		#if UNITY_ANDROID
-		public string SortId = "4";
+		public string SortId = "1";
 		public const int type = (int) PlatformType.QZone;
 		public string AppId = "100371282";
 		public string AppKey = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
