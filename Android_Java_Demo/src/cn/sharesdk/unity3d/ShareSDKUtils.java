@@ -71,7 +71,7 @@ public class ShareSDKUtils implements Callback{
 			Message msg = new Message();
 			msg.what = MSG_INITSDK;
 			msg.obj = configs;
-			UIHandler.sendMessageDelayed(msg, 1000, this);
+			UIHandler.sendMessage(msg, this);
 		}
 	}
 	
@@ -215,8 +215,12 @@ public class ShareSDKUtils implements Callback{
 				HashMap<String, Object> devInfo = hashon.fromJson(configs);
 				for(Entry<String, Object> entry: devInfo.entrySet()){
 					String p = ShareSDK.platformIdToName(Integer.parseInt(entry.getKey()));
-					//System.out.println(p + " ==>>" + new Hashon().fromHashMap((HashMap<String, Object>)entry.getValue()));
-					ShareSDK.setPlatformDevInfo(p, (HashMap<String, Object>)entry.getValue());
+					if (p != null) {
+						if (DEBUG) {
+							System.out.println(p + " ==>>" + new Hashon().fromHashMap((HashMap<String, Object>)entry.getValue()));
+						}
+						ShareSDK.setPlatformDevInfo(p, (HashMap<String, Object>)entry.getValue());
+					}
 				}
 			}
 			break;
