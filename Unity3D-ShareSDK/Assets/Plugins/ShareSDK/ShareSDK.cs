@@ -60,7 +60,7 @@ namespace cn.sharesdk.unity3d
 			#elif UNITY_IPHONE
 			shareSDKUtils = new iOSImpl(gameObject);
 			#endif
-			shareSDKUtils.InitSDK(null);
+			shareSDKUtils.InitSDK(appKey);
 			shareSDKUtils.SetPlatformConfig(platformConfigs);
 		}
 		
