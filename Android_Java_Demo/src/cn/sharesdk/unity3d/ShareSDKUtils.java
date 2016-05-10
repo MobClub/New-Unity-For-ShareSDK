@@ -71,7 +71,7 @@ public class ShareSDKUtils implements Callback{
 			Message msg = new Message();
 			msg.what = MSG_INITSDK;
 			msg.obj = configs;
-			UIHandler.sendMessage(msg, this);
+			UIHandler.sendMessageDelayed(msg, 1000, this);
 		}
 	}
 	
