@@ -72,7 +72,7 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
-		public string ShareByAppClient = "false";
+		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SinaWeibo;
 		public string app_key = "568898243";
@@ -107,7 +107,7 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "2";
 		public string AppId = "100371282";
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
-		public string ShareByAppClient = "true";
+		public bool ShareByAppClient = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQ;
 		public string app_id = "100371282";
@@ -124,7 +124,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QZone;
 		public string AppId = "100371282";
 		public string AppKey = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
-		public string ShareByAppClient = "true";
+		public bool ShareByAppClient = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QZone;
 		public string app_id = "100371282";
@@ -143,7 +143,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChat;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public string BypassApproval = "true";
+		public bool BypassApproval = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx4868b35061f87885";
@@ -159,7 +159,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public string BypassApproval = "false";
+		public bool BypassApproval = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string app_id = "wx4868b35061f87885";
@@ -333,7 +333,7 @@ namespace cn.sharesdk.unity3d
 		public enum HostType{sandbox = 1, china = 2, product = 3}
 		public string ConsumerKey = "sharesdk-7807";
 		public string ConsumerSecret = "d05bf86993836004";
-		public string ShareByAppClient = "false";
+		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Evernote;
 		public string consumer_key = "sharesdk-7807";
@@ -511,7 +511,7 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "27";
 		public const int type = (int) PlatformType.YiXinSession;
 		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval = "true";
+		public bool BypassApproval = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinSession;
 		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
@@ -528,7 +528,7 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "28";
 		public const int type = (int) PlatformType.YiXinTimeline;
 		public string AppId = "yx0d9a9f9088ea44d78680f3274da1765f";
-		public string BypassApproval = "true";
+		public bool BypassApproval = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.YiXinTimeline;
 		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";

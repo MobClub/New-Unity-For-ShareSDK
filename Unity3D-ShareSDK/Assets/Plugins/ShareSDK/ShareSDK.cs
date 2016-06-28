@@ -46,7 +46,7 @@ namespace cn.sharesdk.unity3d
 				{
 					if ("type".EndsWith(field.Name)) {
 						continue;
-					} else if ("Enable".EndsWith(field.Name)) {
+					} else if ("Enable".EndsWith(field.Name) || "ShareByAppClient".EndsWith(field.Name) || "BypassApproval".EndsWith(field.Name)) {
 						table.Add(field.Name, Convert.ToString(field.GetValue(info)).ToLower());
 					} else {
 						table.Add(field.Name, Convert.ToString(field.GetValue(info)));
