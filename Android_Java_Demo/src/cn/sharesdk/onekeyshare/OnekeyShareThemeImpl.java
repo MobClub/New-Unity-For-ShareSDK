@@ -123,10 +123,17 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			}
 		} else if ("SinaWeibo".equals(name)) {
 			if ("true".equals(platform.getDevinfo("ShareByAppClient"))) {
+
 				Intent test = new Intent(Intent.ACTION_SEND);
 				test.setPackage("com.sina.weibo");
 				test.setType("image/*");
 				ResolveInfo ri = platform.getContext().getPackageManager().resolveActivity(test, 0);
+				if(ri == null) {
+					test = new Intent(Intent.ACTION_SEND);
+					test.setPackage("com.sina.weibog3");
+					test.setType("image/*");
+					ri = platform.getContext().getPackageManager().resolveActivity(test, 0);
+				}
 				return (ri != null);
 			}
 		}
