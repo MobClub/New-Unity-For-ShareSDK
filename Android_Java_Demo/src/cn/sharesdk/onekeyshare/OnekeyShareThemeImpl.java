@@ -175,12 +175,6 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 	final boolean formateShareData(Platform plat) {
 		String name = plat.getName();
 
-		boolean isGooglePlus = "GooglePlus".equals(name);
-		if (isGooglePlus && !plat.isClientValid()) {
-			toast("ssdk_google_plus_client_inavailable");
-			return false;
-		}
-
 		boolean isAlipay = "Alipay".equals(name);
 		if (isAlipay && !plat.isClientValid()) {
 			toast("ssdk_alipay_client_inavailable");
