@@ -2658,7 +2658,7 @@ extern "C" {
                  {
                      if ([user rawData])
                      {
-                         [resultDict setObject:[user rawData] forKey:@"res"];
+                         [resultDict setObject:[[user credential] rawData] forKey:@"res"];
                      }
                  }
                  
