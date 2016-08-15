@@ -429,6 +429,24 @@ namespace cn.sharesdk.unity3d
 		}
 
 		/// <summary>
+		/// share according to the name of node<Content> in ShareContent.xml file  (only valid in iOS temporarily)(此接口暂时仅支持iOS环境)
+		/// </summary>
+		/// <param name='platform'>
+		/// Platform Type
+		/// </param>
+		/// <param name='contentName'>
+		/// the name of node<Content> in ShareContent.xml file
+		/// </param>
+		/// <param name='customFields'>
+		/// your share customFields which will be replace in ShareContent.xml
+		/// </param>
+		public int ShareWithContentName(PlatformType platform, string contentName, Hashtable customFields)
+		{
+			reqID++;
+			shareSDKUtils.ShareWithContentName (reqID, platform, contentName, customFields);
+			return reqID;
+		}
+		/// <summary>
 		/// Gets the friends.
 		/// </summary>
 		/// <param name="type">Type.</param>
@@ -466,10 +484,11 @@ namespace cn.sharesdk.unity3d
 		/// Close the SSO when authorize.
 		/// </summary>
 		/// <param name="open">If set to <c>true</c> open.</param>
-		public void DisableSSO(Boolean open){
+		public void DisableSSO(Boolean open)
+		{
 			shareSDKUtils.DisableSSO (open);			
 		}
-
+			
 		/// <summary>
 		/// Event result listener.
 		/// </summary>

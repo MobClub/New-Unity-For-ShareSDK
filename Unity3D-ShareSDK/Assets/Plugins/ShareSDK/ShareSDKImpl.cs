@@ -68,6 +68,11 @@ namespace cn.sharesdk.unity3d{
 		public abstract void ShowShareContentEditor (int reqID, PlatformType platform, ShareContent content);
 
 		/// <summary>
+		/// share according to the name of node<Content> in ShareContent.xml file  (only valid in iOS temporarily) 
+		/// </summary>
+		public abstract void ShareWithContentName (int reqId, PlatformType platform, string contentName, Hashtable customFields);
+
+		/// <summary>
 		/// Gets the friend list.
 		/// </summary>
 		public abstract void GetFriendList (int reqID, PlatformType platform, int count, int page);

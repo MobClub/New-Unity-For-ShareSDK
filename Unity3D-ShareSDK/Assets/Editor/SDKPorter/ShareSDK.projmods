@@ -1,0 +1,29 @@
+{
+    "group":       "ShareSDK",
+    "libs":        [],
+    "frameworks":  ["ImageIO.framework",
+                    "MessageUI.framework",
+                    "JavaScriptCore.framework",
+                    ],
+    "zips":         ["ShareSDK.zip"],                
+    "headerpaths": [],
+    "librarypaths": [],
+    "files":       ["ShareSDK/ShareSDK.framework",
+                    "ShareSDK/Support/Required/MOBFoundation.framework",
+                    "ShareSDK/Support/Required/ShareSDKConnector.framework",
+                    "ShareSDK/Support/Optional/ShareSDKExtension.framework",
+                    "ShareSDK/Support/Optional/ShareSDKUI.framework",
+                    "ShareSDK/Support/PlatformSDK/FacebookMessengerSDK/FBSDKMessengerShareKit.framework",
+                    "ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenAPI.framework",
+                    "ShareSDK/Support/PlatformSDK/KaKaoSDK/TencentOpenAPI.framework",
+                    "ShareSDK/Support/PlatformSDK/RenRenSDK/RennSDK.framework",
+                    "ShareSDK/Support/PlatformSDK/KaKaoSDK/KakaoOpenSDK.framework"],
+    "folders":     [],
+    "buildSettings": { 
+        "OTHER_LDFLAGS" : ["-ObjC",
+                           "-lsqlite3.0",
+                           "-lz",
+                           "licucore"]
+    },
+    "excludes":    ["^.*.meta$", "^.*.mdown^", "^.*.pdf$"]
+}

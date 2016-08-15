@@ -39,26 +39,26 @@ public class Demo : MonoBehaviour {
 			scale = Screen.width / 320;
 		}
 		
-		float btnWidth = 200 * scale;
-		float btnHeight = 45 * scale;
+		float btnWidth = 165 * scale;
+		float btnHeight = 30 * scale;
 		float btnTop = 20 * scale;
-		GUI.skin.button.fontSize = Convert.ToInt32(16 * scale);
+		float btnGap = 20 * scale;
+		GUI.skin.button.fontSize = Convert.ToInt32(14 * scale);
 
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Authorize"))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Authorize"))
 		{
 			print(ssdk == null);
 
 			ssdk.Authorize(PlatformType.SinaWeibo);
 		}
-
-		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Get User Info"))
+			
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
 		{
 			ssdk.GetUserInfo(PlatformType.SinaWeibo);
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share Menu"))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Show Share Menu"))
 		{
 			ShareContent content = new ShareContent();
 			content.SetText("this is a test string.");
@@ -79,12 +79,12 @@ public class Demo : MonoBehaviour {
 			customizeShareParams.SetShareType(ContentType.Image);
 			customizeShareParams.SetObjectID("SinaID");
 			content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
-		
+
+			//通过分享菜单分享
 			ssdk.ShowPlatformList (null, content, 100, 100);
 		}
-
-		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Show Share View"))
+			
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Show Share View"))
 		{
 			ShareContent content = new ShareContent();
 			content.SetText("this is a test string.");
@@ -97,11 +97,12 @@ public class Demo : MonoBehaviour {
 			content.SetComment("test description");
 			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
 			content.SetShareType(ContentType.Image);
-			ssdk.ShowShareContentEditor (PlatformType.TencentWeibo, content);
+
+			ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Content"))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Share Content"))
 		{
 			ShareContent content = new ShareContent();
 			content.SetText("this is a test string.");
@@ -116,9 +117,8 @@ public class Demo : MonoBehaviour {
 			content.SetShareType(ContentType.Image);
 			ssdk.ShareContent (PlatformType.SinaWeibo, content);
 		}
-
-		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
+			
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
 		{
 			//获取新浪微博好友，第一页，每页15条数据
 			print ("Click Btn Of Get Friends SinaWeibo");
@@ -126,30 +126,37 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Get Token SinaWeibo "))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Get Token SinaWeibo "))
 		{
 			Hashtable authInfo = ssdk.GetAuthInfo (PlatformType.SinaWeibo);			
 			print ("share result :");
 			print (MiniJSON.jsonEncode(authInfo));
 		}
-
-		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Close SSO Auth"))
+			
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap , btnTop, btnWidth, btnHeight), "Close SSO Auth"))
 		{
 			ssdk.DisableSSO (true);			
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Remove Authorize "))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Remove Authorize "))
 		{
 			ssdk.CancelAuthorize (PlatformType.SinaWeibo);			
 		}
-
-		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Add Friend "))
+			
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Add Friend "))
 		{
 			//关注新浪微博
 			ssdk.AddFriend (PlatformType.SinaWeibo, "3189087725");			
+		}
+
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "ShareWithContentName"))
+		{
+			Hashtable customFields = new Hashtable ();
+			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
+			//根据配置文件分享【本接口功能仅暂时支持iOS】
+			ssdk.ShareWithContentName(PlatformType.SinaWeibo, "mob", customFields);		
 		}
 
 	}

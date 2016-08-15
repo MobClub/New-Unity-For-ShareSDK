@@ -411,7 +411,7 @@ namespace cn.sharesdk.unity3d
 		public string ClientId = "1432928";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Pinterest;
-		public string client_id = "1432928";
+		public string client_id = "4797078908495202393";
 		#endif
 	}
 

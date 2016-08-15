@@ -1,5 +1,15 @@
 fileFormatVersion: 2
 guid: 431bb603be334a64088f26cf2702d333
 folderAsset: yes
-DefaultImporter:
+PluginImporter:
+  serializedVersion: 1
+  iconMap: {}
+  executionOrder: {}
+  isPreloaded: 0
+  platformData:
+    Any:
+      enabled: 1
+      settings: {}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -10,7 +10,7 @@ namespace cn.sharesdk.unity3d
 	public class iOSImpl : ShareSDKImpl
 	{
 		[DllImport("__Internal")]
-		private static extern void __iosShareSDKRegisterAppAndSetPltformsConfig (string appKey,string configInfo);
+		private static extern void __iosShareSDKRegisterAppAndSetPltformsConfig (string appKey, string configInfo);
 		
 		[DllImport("__Internal")]
 		private static extern void __iosShareSDKAuthorize (int reqID, int platType, string observer);
@@ -47,7 +47,9 @@ namespace cn.sharesdk.unity3d
 		
 		[DllImport("__Internal")]
 		private static extern bool __iosShareSDKIsClientInstalled (int platType);
-		
+
+		[DllImport("__Internal")]
+		private static extern void __iosShareSDKShareWithContentName (int reqID, int platform, string contentNmae, string customFields, string observer);
 		
 		private string _callbackObjectName = "Main Camera";
 		private string _appKey;
@@ -141,10 +143,15 @@ namespace cn.sharesdk.unity3d
 			__iosShareSDKShowShareView (reqID, (int)platform, content.GetShareParamsStr(), _callbackObjectName);
 			
 		}
-		
+
+		public override void ShareWithContentName (int reqId, PlatformType platform, string contentName, Hashtable customFields)
+		{
+			String customFieldsStr = MiniJSON.jsonEncode(customFields);
+			__iosShareSDKShareWithContentName (reqId, (int)platform, contentName, customFieldsStr,  _callbackObjectName);
+		}
+
 		public override void GetFriendList (int reqID, PlatformType platform, int count, int page) 
 		{
-			
 			__iosShareSDKGetFriendsList (reqID, (int)platform, count, page, _callbackObjectName);
 		}
 		

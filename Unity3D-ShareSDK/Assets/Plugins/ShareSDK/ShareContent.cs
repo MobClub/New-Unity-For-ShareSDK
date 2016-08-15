@@ -236,6 +236,11 @@ namespace cn.sharesdk.unity3d
 			shareParams["urlDescription"] = urlDescription;
 		}
 
+		/*iOS Only - Pinterest*/
+		public void SetBoard(String SetBoard){
+			shareParams["board"] = SetBoard;
+		}
+
 		/*iOS Only - WhatsApp/Instagram*/
 		public void SetMenuX(float menuX){
 			shareParams ["menuX"] = menuX;
@@ -276,7 +281,7 @@ namespace cn.sharesdk.unity3d
 			shareParams ["attachmentPath"] = attachmentPath;
 		}
 
-		/*iOS Only - Instapaper*/
+		/*iOS Only - Instapaper/Pinterest*/
 		public void SetDesc(String desc){
 			shareParams ["desc"] = desc;
 		}
