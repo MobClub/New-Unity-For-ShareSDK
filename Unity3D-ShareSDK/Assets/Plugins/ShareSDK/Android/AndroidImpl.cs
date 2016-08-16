@@ -152,6 +152,11 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
+		public override void ShareWithContentName (int reqId, PlatformType platform, string contentName, Hashtable customFields)
+		{
+			Debug.Log("#WARING : Do not support this feature in Android temporarily" );
+		}
+
 	}
 	#endif
 }
