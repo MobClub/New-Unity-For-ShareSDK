@@ -383,7 +383,7 @@ namespace cn.sharesdk.unity3d.sdkporter
 						}
 
 						if ( !string.IsNullOrEmpty( absPath ) && File.Exists(absPath) && tree.CompareTo( "SOURCE_ROOT" ) == 0 ) {
-							UnityEngine.Debug.LogError(absPath);
+//							UnityEngine.Debug.LogError(absPath);
 							string libraryPath = Path.Combine( "$(SRCROOT)", Path.GetDirectoryName( filePath ) );
 							this.AddLibrarySearchPaths( new PBXList(libraryPath) );
 						}
