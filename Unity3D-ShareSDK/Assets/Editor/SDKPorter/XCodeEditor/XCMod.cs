@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.IO;
-using Json = XMiniJSON;
 
 namespace cn.sharesdk.unity3d.sdkporter 
 {
@@ -104,7 +103,7 @@ namespace cn.sharesdk.unity3d.sdkporter
 			path = System.IO.Path.GetDirectoryName( filename );
 			
 			string contents = projectFileInfo.OpenText().ReadToEnd();
-			_datastore = (Hashtable)XMiniJSON.jsonDecode( contents );
+			_datastore = (Hashtable)MiniJSON.jsonDecode( contents );
 		}
 	}
 	

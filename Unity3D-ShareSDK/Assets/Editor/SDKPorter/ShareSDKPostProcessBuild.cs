@@ -23,13 +23,12 @@ public static class ShareSDKPostProcessBuild {
 			project.ApplyMod( file );
 		}
 
-		//得到xcode工程的路径
+		//如需要预配置Xocode中的URLScheme 和 白名单,请打开下两行代码,并自行配置相关键值
 		string projPath = Path.GetFullPath (targetPath);
-
 		EditInfoPlist (projPath);
 
 
-		// Finally save the xcode project
+		//Finally save the xcode project
 		project.Save();
 
 	}
