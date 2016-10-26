@@ -24,8 +24,6 @@
     	
     	各个平台注册应用信息的地址如下：
 			新浪微博        http://open.weibo.com
-			腾讯微博        http://dev.t.qq.com
-			QQ空间          http://connect.qq.com/intro/login/
 			微信好友        http://open.weixin.qq.com
 			Facebook       https://developers.facebook.com
 			Twitter        https://dev.twitter.com
@@ -52,6 +50,7 @@
 			Pocket         http://getpocket.com/developer/apps/new
 			KakaoTalk      https://developers.kakao.com/
 			KakaoStory     https://developers.kakao.com/
+			Plurk          http://www.plurk.com/API
     -->
     
     <ShareSDK 
@@ -215,6 +214,9 @@
      <GooglePlus
     	Id="21"
         SortId="21"
+        ClientID="682795613743-cfo3a8r4va0ujja7qofr54hobt2kv3cq.apps.googleusercontent.com"
+        RedirectUrl="http://localhost"
+        ShareByAppClient = "false"
         Enable="true" />
      
      <FourSquare
@@ -328,7 +330,7 @@
     <Bluetooth
         Id="36"
         SortId="36"
-        Enable="false" />
+        Enable="true" />
 
     <Pocket
         Id="37"
@@ -350,8 +352,15 @@
         Enable="true" />
     
      <Alipay
-        Id="52"
-        SortId="52"  
+        Id="50"
+        SortId="50"  
         AppId="2015072400185895"
         Enable="true"/>
+     
+     <AlipayMoments
+        Id="51"
+        SortId="51"  
+        AppId="2015072400185895"
+        Enable="true"/>
+
 </DevInfor>
