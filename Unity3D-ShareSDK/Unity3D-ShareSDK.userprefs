@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/SDKPorter/ShareSDKPostProcessBuild.cs">
     <Files>
-      <File FileName="Assets/Editor/SDKPorter/ShareSDKPostProcessBuild.cs" Line="33" Column="3" />
+      <File FileName="Assets/Editor/SDKPorter/ShareSDKPostProcessBuild.cs" Line="32" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

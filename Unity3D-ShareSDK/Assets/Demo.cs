@@ -151,12 +151,31 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "ShareWithContentName"))
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2 , btnTop, btnWidth, btnHeight), "ShareWithContentName"))
 		{
 			Hashtable customFields = new Hashtable ();
 			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
 			//根据配置文件分享【本接口功能仅暂时支持iOS】
-			ssdk.ShareWithContentName(PlatformType.SinaWeibo, "mob", customFields);		
+			ssdk.ShareWithContentName(PlatformType.SinaWeibo, "ShareSDK", customFields);		
+		}
+
+		btnWidth += 80 * scale;
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "ShowShareMenuWithContentName"))
+		{
+			Hashtable customFields = new Hashtable ();
+			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
+			//根据配置文件展示分享菜单分享【本接口功能仅暂时支持iOS】
+			ssdk.ShowPlatformListWithContentName ("ShareSDK", customFields, null, 100, 100);
+		}
+
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "ShowShareViewWithContentName"))
+		{
+			Hashtable customFields = new Hashtable ();
+			//根据配置文件展示编辑界面分享【本接口功能仅暂时支持iOS】
+			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
+			ssdk.ShowShareContentEditorWithContentName(PlatformType.SinaWeibo, "ShareSDK", customFields);		
 		}
 
 	}
