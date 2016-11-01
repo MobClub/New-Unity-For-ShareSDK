@@ -42,7 +42,7 @@ namespace cn.sharesdk.unity3d
 		public YixinMoments yixinMoments;
 		public FacebookMessenger facebookMessenger;
 		public Instapaper instapaper;
-//		public Alipay alipay;
+		public Alipay alipay;
 		public AlipayMoments alipayMoments;
 
 

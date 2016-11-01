@@ -1,6 +1,0 @@
-#ifndef UNITY_LIBRARIES_REGISTER_FEATURES
-#define UNITY_LIBRARIES_REGISTER_FEATURES
-
-void RegisterFeatures();
-
-#endif
