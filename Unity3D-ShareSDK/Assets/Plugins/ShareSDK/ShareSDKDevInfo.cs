@@ -42,6 +42,9 @@ namespace cn.sharesdk.unity3d
 		public YixinMoments yixinMoments;
 		public FacebookMessenger facebookMessenger;
 		public Instapaper instapaper;
+//		public Alipay alipay;
+		public AlipayMoments alipayMoments;
+
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
@@ -701,6 +704,28 @@ namespace cn.sharesdk.unity3d
 		public string app_secret = "1a5bd421ae089c3";
 		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
 		public string auth_type = "both";   //can pass "both","sso",or "web" 
+		#endif
+	}
+		
+	[Serializable]
+	public class Alipay : DevInfo
+	{
+		#if UNITY_ANDROID
+		//待定
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.Alipay;
+		public string app_id = "2015072400185895";
+		#endif
+	}
+
+	[Serializable]
+	public class AlipayMoments : DevInfo
+	{
+		#if UNITY_ANDROID
+		//待定
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.AlipayMoments;
+		public string app_id = "2015072400185895";
 		#endif
 	}
 

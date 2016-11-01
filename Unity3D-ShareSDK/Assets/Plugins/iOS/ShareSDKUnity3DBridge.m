@@ -26,6 +26,8 @@
 #define __SHARESDK_KAKAO__
 #define __SHARESDK_YIXIN__
 #define __SHARESDK_FACEBOOK_MSG__
+#define __SHARESDK_ALIPAYSOCIAL__
+
 
 #ifdef __SHARESDK_WECHAT__
 #import "WXApi.h"
@@ -56,6 +58,9 @@
 #import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 #endif
 
+#ifdef __SHARESDK_ALIPAYSOCIAL__
+#import "APOpenAPI.h"
+#endif
 
 static UIView *_refView = nil;
 #if defined (__cplusplus)
@@ -2593,6 +2598,11 @@ extern "C" {
                                  [ShareSDKConnector connectFacebookMessenger:[FBSDKMessengerSharer class]];
 #endif
                                  break;
+                             case SSDKPlatformTypeAliPaySocial:
+#ifdef __SHARESDK_ALIPAYSOCIAL__
+                                 [ShareSDKConnector connectAliPaySocial:[APOpenAPI class]];
+#endif
+                                 break;
                              default:
                                  break;
                          }
@@ -2685,6 +2695,22 @@ extern "C" {
                                          *stop = YES;
                                      }
                                  }];
+                                 break;
+                             }
+                             case SSDKPlatformTypeAliPaySocial:
+                             {
+                                 NSDictionary *platformDict = nil;
+                                 NSDictionary *dictFromAliPaySocial = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocial]];
+                                 NSDictionary *dictFromAliPaySocialTimeline = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocialTimeline]];
+                                 if (dictFromAliPaySocial)
+                                 {
+                                     platformDict = dictFromAliPaySocial;
+                                 }
+                                 else
+                                 {
+                                     platformDict = dictFromAliPaySocialTimeline;
+                                 }
+                                 [appInfo addEntriesFromDictionary:platformDict];
                                  break;
                              }
                              default:
