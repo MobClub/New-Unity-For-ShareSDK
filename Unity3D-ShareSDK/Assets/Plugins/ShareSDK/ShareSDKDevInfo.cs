@@ -382,6 +382,9 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "19";
 		public const int type = (int) PlatformType.GooglePlus;
+		public string ClientID = "682795613743-cfo3a8r4va0ujja7qofr54hobt2kv3cq.apps.googleusercontent.com";
+		public string RedirectUrl = "http://localhost";
+		public bool	ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.GooglePlus;
 		public string client_id = "232554794995.apps.googleusercontent.com";
@@ -711,7 +714,9 @@ namespace cn.sharesdk.unity3d
 	public class Alipay : DevInfo
 	{
 		#if UNITY_ANDROID
-		//待定
+		public string SortId = "50";
+		public const int type = (int) PlatformType.Alipay;
+		public string AppId = "2015072400185895";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Alipay;
 		public string app_id = "2015072400185895";
@@ -722,7 +727,9 @@ namespace cn.sharesdk.unity3d
 	public class AlipayMoments : DevInfo
 	{
 		#if UNITY_ANDROID
-		//待定
+		public string SortId = "51";
+		public const int type = (int) PlatformType.AlipayMoments;
+		public string AppId = "2015072400185895";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.AlipayMoments;
 		public string app_id = "2015072400185895";
