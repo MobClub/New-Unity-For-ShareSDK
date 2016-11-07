@@ -62,7 +62,7 @@ public class Demo : MonoBehaviour {
 		{
 			ShareContent content = new ShareContent();
 			content.SetText("this is a test string.");
-			content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
 			content.SetTitle("test title");
 			content.SetTitleUrl("http://www.mob.com");
 			content.SetSite("Mob-ShareSDK");
@@ -88,7 +88,7 @@ public class Demo : MonoBehaviour {
 		{
 			ShareContent content = new ShareContent();
 			content.SetText("this is a test string.");
-			content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
 			content.SetTitle("test title");
 			content.SetTitleUrl("http://www.mob.com");
 			content.SetSite("Mob-ShareSDK");
@@ -106,7 +106,7 @@ public class Demo : MonoBehaviour {
 		{
 			ShareContent content = new ShareContent();
 			content.SetText("this is a test string.");
-			content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
 			content.SetTitle("test title");
 			content.SetTitleUrl("http://www.mob.com");
 			content.SetSite("Mob-ShareSDK");
