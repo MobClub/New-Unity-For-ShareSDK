@@ -7,7 +7,8 @@ using System.IO;
 
 
 public static class ShareSDKPostProcessBuild {
-	[PostProcessBuild]
+	//[PostProcessBuild]
+	[PostProcessBuildAttribute(88)]
 	public static void onPostProcessBuild(BuildTarget target,string targetPath){
 		string unityEditorAssetPath = Application.dataPath;
 
