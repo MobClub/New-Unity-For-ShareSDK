@@ -774,8 +774,8 @@ extern "C" {
                     NSString *title = nil;
                     NSString *image = nil;
                     NSString *url = nil;
-                    double lat;
-                    double lng;
+                    double lat = 0;
+                    double lng = 0;
                     NSString *objID = nil;
                     SSDKContentType type = SSDKContentTypeWebPage;
                     
