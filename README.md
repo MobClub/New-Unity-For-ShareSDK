@@ -1,7 +1,7 @@
 # New-Unity-For-ShareSDK
 ### This is the new version and new sample of ShareSDK for Unity3D.
 **supported original ShareSDK version:**
-- Android - V2.7.8
+- Android - V2.7.10
 - iOS - V3.5.0
 - 中文文档请查看[简洁版unity3d快速集成](http://wiki.mob.com/%E7%AE%80%E6%B4%81%E7%89%88unity3d%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3/)
 
