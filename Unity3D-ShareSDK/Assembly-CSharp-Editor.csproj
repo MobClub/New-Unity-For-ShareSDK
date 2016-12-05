@@ -64,6 +64,7 @@
      <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCSourceFile.cs" />
      <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCTarget.cs" />
      <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCodeEditorMenu.cs" />
+     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\ZipHelper.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
@@ -96,6 +97,9 @@
  </Reference>
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.SharpZipLib">
+ <HintPath>/Users/chenjd/GitHub/New-Unity-For-ShareSDK/Unity3D-ShareSDK/Assets/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>

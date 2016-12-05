@@ -597,37 +597,14 @@ namespace cn.sharesdk.unity3d.sdkporter
 				string zipFileName = zipPath;
 				string sdkName = zipFileName.Remove(zipFileName.LastIndexOf("."));
 
-				string sdkshell = mod.path +"/import.sh";
-				string modPath = mod.path;
-				string action = "decompress";
+				string unzipLoc = mod.path + "/" + zipFileName;
+				string dirpath = this.projectRootPath;
+				ZipHelper zipTool = new ZipHelper();
+				zipTool.UnzipWithPath (unzipLoc, dirpath);
 
-				//解压命令参数说明
-				//$1 - .zip文件所在路径(即.projmod所在路径,即mod.path)
-				//$2 - 行为： 解压为:"decompress"; 移动为:"movefile"
-				//$3 - zip完整文件名,例如ShareSDK.zip，此处即 zipFileName = zipPath
-				//解压zip
-				string unzipCommand = sdkshell + " " + modPath + " " + action + " " + zipPath;
-				Process zipProcess = new Process (); 
-				zipProcess.StartInfo.FileName = "/bin/bash";
-				zipProcess.StartInfo.Arguments = unzipCommand;
-				zipProcess.Start ();
-				zipProcess.WaitForExit ();
-				zipProcess.Close();
-
-				//移动命令参数说明
-				//$1 - .zip文件所在路径(即.projmod所在路径,即mod.path)
-				//$2 - 行为： 解压为:"decompress"; 移动为:"movefile"
-				//$3 - 目标路径,此处即为生成的项目的根目录,即this.projectRootPath
-				//$4 - SDK名称,一般应该为解压后得到的文件夹的名称,例如 ShareSDK 
-				//移动解压的文件到项目
-				action = "movefile";
-				string movefileCommand = sdkshell + " " + modPath + " " + action + " " + this.projectRootPath + " " + sdkName;
-				Process moveProcess = new Process (); 
-				moveProcess.StartInfo.FileName = "/bin/bash";
-				moveProcess.StartInfo.Arguments = movefileCommand;
-				moveProcess.Start ();
-				moveProcess.WaitForExit ();
-				moveProcess.Close();
+				//删除多余解压文件
+				DirectoryInfo di = new DirectoryInfo(dirpath + "/__MACOSX");
+				di.Delete(true);
 
 				string absoluteFolderPath = System.IO.Path.Combine( this.projectRootPath, sdkName + "/" );
 //				this.AddFolder( absoluteFolderPath, modGroup, (string[])mod.excludes.ToArray( typeof(string) ) );
@@ -757,6 +734,17 @@ namespace cn.sharesdk.unity3d.sdkporter
 		{
 			
 		}
+
+
+
+
+
+
+
+
+
+
+
 	}
 }
 
