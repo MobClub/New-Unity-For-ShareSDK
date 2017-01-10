@@ -372,7 +372,8 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.LinkedIn;
 		public string api_key = "ejo5ibkye3vo";
 		public string secret_key = "cC7B2jpxITqPLZ5M";
-		public string redirect_uri = "http://sharesdk.cn";
+		public string redirect_url = "http://sharesdk.cn";
+
 		#endif
 	}
 
