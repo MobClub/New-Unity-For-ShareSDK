@@ -44,7 +44,7 @@ namespace cn.sharesdk.unity3d
 		public Instapaper instapaper;
 		public Alipay alipay;
 		public AlipayMoments alipayMoments;
-
+		public DingTalk dingTalk;
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
@@ -199,6 +199,7 @@ namespace cn.sharesdk.unity3d
 		public string api_key = "107704292745179";
 		public string app_secret = "38053202e1a5fe26c80c753071f0b573";
 		public string auth_type = "both";  //can pass "both","sso",or "web" 
+		public string display_name = "ShareSDK";//如果需要使用客户端分享，必填且需与FB 后台配置一样
 		#endif
 	}
 
@@ -734,6 +735,17 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.AlipayMoments;
 		public string app_id = "2015072400185895";
+		#endif
+	}
+
+	[Serializable]
+	public class DingTalk : DevInfo
+	{
+		#if UNITY_ANDROID
+		//安卓暂不支持,请留意更新
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.DingTalk;
+		public string app_id = "dingoanxyrpiscaovl4qlw";
 		#endif
 	}
 

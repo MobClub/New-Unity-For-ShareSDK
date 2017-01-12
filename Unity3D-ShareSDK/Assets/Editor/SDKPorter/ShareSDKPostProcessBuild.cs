@@ -45,6 +45,14 @@ public static class ShareSDKPostProcessBuild {
 				<dict>
 					<key>CFBundleURLSchemes</key>
 					<array>
+						<string>dingoanxyrpiscaovl4qlw</string>
+					</array>
+					<key>CFBundleURLName</key>
+					<string>dingtalk</string>
+				</dict>
+				<dict>
+					<key>CFBundleURLSchemes</key>
+					<array>
 						<string>ap2015072400185895</string>
 					</array>
 					<key>CFBundleURLName</key>
@@ -53,7 +61,7 @@ public static class ShareSDKPostProcessBuild {
 				<dict>
 					<key>CFBundleURLSchemes</key>
 					<array>
-						<string>vk5312801</string>
+					<string>vk5312801</string>
 					<string>yx0d9a9f9088ea44d78680f3274da1765f</string>
 					<string>pin4797078908495202393</string>
 					<string>kakao48d3f524e4a636b08d81b3ceb50f1003</string>
@@ -75,6 +83,8 @@ public static class ShareSDKPostProcessBuild {
 		string LSAdd = @"
 		<key>LSApplicationQueriesSchemes</key>
 			<array>
+			<string>dingtalk-open</string>
+			<string>dingtalk</string>
 			<string>mqqopensdkapiV4</string>
 			<string>weibosdk</string>
 			<string>sinaweibohd</string>

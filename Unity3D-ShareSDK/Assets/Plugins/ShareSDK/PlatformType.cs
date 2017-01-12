@@ -58,6 +58,7 @@ namespace cn.sharesdk.unity3d
 		Bluetooth = 48,         //Bluetooth
 		Alipay = 50,            //Alipay
 		AlipayMoments = 51,     //AlipayMoments
+		DingTalk = 52,			//DingTalk 钉钉
 
         #if UNITY_ANDROID
 		KakaoPlatform = 44,    

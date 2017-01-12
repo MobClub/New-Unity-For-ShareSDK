@@ -1,4 +1,4 @@
-i//
+//
 //  ShareSDKUnity3DBridge.m
 //  Unity-iPhone
 //
@@ -27,7 +27,7 @@ i//
 #define __SHARESDK_YIXIN__
 #define __SHARESDK_FACEBOOK_MSG__
 #define __SHARESDK_ALIPAYSOCIAL__
-
+#define __SHARESDK_DINGTALK__
 
 #ifdef __SHARESDK_WECHAT__
 #import "WXApi.h"
@@ -60,6 +60,10 @@ i//
 
 #ifdef __SHARESDK_ALIPAYSOCIAL__
 #import "APOpenAPI.h"
+#endif
+
+#ifdef __SHARESDK_DINGTALK__
+#import <DTShareKit/DTOpenAPI.h>
 #endif
 
 static UIView *_refView = nil;
@@ -754,6 +758,15 @@ extern "C" {
                 type = __convertContentType([[shareParamsDic objectForKey:@"shareType"] integerValue]);
             }
             
+            if ([[shareParamsDic objectForKey:@"clientShare"] isKindOfClass:[NSNumber class]])
+            {
+                NSInteger enable = [[shareParamsDic objectForKey:@"clientShare"] integerValue];
+                if (enable > 0)
+                {
+                    [params SSDKEnableUseClientShare];
+                }
+            }
+            
             
             [params SSDKSetupShareParamsByText:text
                                         images:imageArray
@@ -810,6 +823,15 @@ extern "C" {
                     if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
                         type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+                    
+                    if ([[value objectForKey:@"clientShare"] isKindOfClass:[NSNumber class]])
+                    {
+                        NSInteger enable = [[value objectForKey:@"clientShare"] integerValue];
+                        if (enable > 0)
+                        {
+                            [params SSDKEnableUseClientShare];
+                        }
                     }
                     
                     [params SSDKSetupSinaWeiboShareParamsByText:text
@@ -1091,6 +1113,15 @@ extern "C" {
                     if ([[value objectForKey:@"attachmentPath"] isKindOfClass:[NSString class]])
                     {
                         attachmentPath = [value objectForKey:@"attachmentPath"];
+                    }
+                    
+                    if ([[value objectForKey:@"clientShare"] isKindOfClass:[NSNumber class]])
+                    {
+                        NSInteger enable = [[value objectForKey:@"clientShare"] integerValue];
+                        if (enable > 0)
+                        {
+                            [params SSDKEnableUseClientShare];
+                        }
                     }
                     
                     [params SSDKSetupFacebookParamsByText:text
@@ -2401,7 +2432,6 @@ extern "C" {
                     }
                     if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
-                        
                         image = [value objectForKey:@"imageUrl"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
@@ -2422,6 +2452,45 @@ extern "C" {
                                                         title:title
                                                           url:[NSURL URLWithString:url]
                                                          type:type];
+                }
+                
+                //钉钉
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDingTalk]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString *text = nil;
+                    NSString *image = nil;
+                    NSString *title = nil;
+                    NSString *url = nil;
+                    SSDKContentType type = SSDKContentTypeText;
+                    
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"text"];
+                    }
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
+                    {
+                        image = [value objectForKey:@"imageUrl"];
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
+                        url = [value objectForKey:@"url"];
+                    }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+                    {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+
+                    [params SSDKSetupDingTalkParamsByText:text
+                                                    image:image
+                                                    title:title
+                                                      url:[NSURL URLWithString:url]
+                                                     type:type];
+                    
                 }
                 
                 //Evernote
@@ -2601,6 +2670,11 @@ extern "C" {
                              case SSDKPlatformTypeAliPaySocial:
 #ifdef __SHARESDK_ALIPAYSOCIAL__
                                  [ShareSDKConnector connectAliPaySocial:[APOpenAPI class]];
+#endif
+                                 break;
+                             case SSDKPlatformTypeDingTalk:
+#ifdef __SHARESDK_DINGTALK__
+                                 [ShareSDKConnector connectDingTalk:[DTOpenAPI class]];
 #endif
                                  break;
                              default:

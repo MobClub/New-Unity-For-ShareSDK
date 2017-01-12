@@ -366,7 +366,10 @@ namespace cn.sharesdk.unity3d
 			shareParams ["ipadMarkParam"] = ipadMarkParam;
 		}
 
-
+		public void SetEnableClientShare(bool enalble){
+			shareParams ["clientShare"] = enalble;
+		}
+			
 		//不同平台分享不同内容
 		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
 			customizeShareParams [(int)platform] = content.GetShareParamsStr();
