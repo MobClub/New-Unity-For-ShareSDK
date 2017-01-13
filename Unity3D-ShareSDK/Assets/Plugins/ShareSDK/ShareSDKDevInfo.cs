@@ -743,6 +743,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		//安卓暂不支持,请留意更新
+		public const int type = (int) PlatformType.DingTalk;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.DingTalk;
 		public string app_id = "dingoanxyrpiscaovl4qlw";
