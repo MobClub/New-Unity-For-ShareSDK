@@ -45,6 +45,8 @@ namespace cn.sharesdk.unity3d
 		public Alipay alipay;
 		public AlipayMoments alipayMoments;
 		public DingTalk dingTalk;
+		public Youtube youtube;
+		public MeiPai meiPai;
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
@@ -791,4 +793,29 @@ namespace cn.sharesdk.unity3d
 		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
+
+	[Serializable]
+	public class Youtube : DevInfo
+	{
+		#if UNITY_ANDROID
+		//待添加
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.Youtube;
+		public string client_id = "906418427202-jinnbqal1niq4s8isbg2ofsqc5ddkcgr.apps.googleusercontent.com";
+		public string client_secret = "";
+		public string redirect_uri = "http://localhost";
+		#endif
+	}
+
+	[Serializable]
+	public class MeiPai : DevInfo
+	{
+		#if UNITY_ANDROID
+		//待添加
+		#elif UNITY_IPHONE
+		public const int type = (int) PlatformType.MeiPai;
+		public string app_key = "1089867596";
+		#endif
+	}
+
 }

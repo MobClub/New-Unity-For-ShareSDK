@@ -28,6 +28,7 @@
 #define __SHARESDK_FACEBOOK_MSG__
 #define __SHARESDK_ALIPAYSOCIAL__
 #define __SHARESDK_DINGTALK__
+#define __SHARESDK_MEIPAI__
 
 #ifdef __SHARESDK_WECHAT__
 #import "WXApi.h"
@@ -64,6 +65,10 @@
 
 #ifdef __SHARESDK_DINGTALK__
 #import <DTShareKit/DTOpenAPI.h>
+#endif
+
+#ifdef __SHARESDK_MEIPAI__
+#import <MPShareSDK/MPShareSDK.h>
 #endif
 
 static UIView *_refView = nil;
@@ -2596,6 +2601,69 @@ extern "C" {
                                              platformType:SSDKPlatformTypeEvernote];
                 }
                 
+                //Youtube
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeYouTube]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString *desc = nil;
+                    NSString *title = nil;
+                    NSString *videoPath = nil;
+                    NSMutableArray *tags = [NSMutableArray array];
+                    SSDKPrivacyStatus privacyStatus = SSDKPrivacyStatusPrivate;
+                    
+                    if ([[value objectForKey:@"desc"] isKindOfClass:[NSString class]])
+                    {
+                        desc = [value objectForKey:@"desc"];
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    id tagValue = [value objectForKey:@"tags"];
+                    if ([tagValue isKindOfClass:[NSString class]])
+                    {
+                        NSArray *tagArr = [tagValue componentsSeparatedByString:@","];
+                        [tags addObjectsFromArray:tagArr];
+                    }
+                    else if ([tagValue isKindOfClass:[NSArray class]])
+                    {
+                        tags = [tagValue mutableCopy];
+                    }
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        videoPath = [value objectForKey:@"videoPath"];
+                    }
+                    if ([[value objectForKey:@"privateStatus"] integerValue] != 0) {
+                        privacyStatus = [[value objectForKey:@"privateStatus"] integerValue];
+                    }
+                    
+                    [params SSDKSetupYouTubeParamsByVideo:videoPath
+                                                    title:title
+                                              description:desc
+                                                     tags:tags
+                                            privacyStatus:privacyStatus];
+                   
+                }
+                
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeMeiPai]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    
+                    NSString *videoPath = nil;
+                    SSDKContentType type = SSDKContentTypeVideo;
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        videoPath = [value objectForKey:@"videoPath"];
+                    }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+                    {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+                    
+                    [params SSDKSetupMeiPaiParamsByUrl:[NSURL URLWithString:videoPath]
+                                                  type:type];
+                }
+                
             }
         }
         return params;
@@ -2675,6 +2743,11 @@ extern "C" {
                              case SSDKPlatformTypeDingTalk:
 #ifdef __SHARESDK_DINGTALK__
                                  [ShareSDKConnector connectDingTalk:[DTOpenAPI class]];
+#endif
+                                 break;
+                             case SSDKPlatformTypeMeiPai:
+#ifdef __SHARESDK_MEIPAI__
+                                 [ShareSDKConnector connectMeiPai:[MPShareSDK class]];
 #endif
                                  break;
                              default:

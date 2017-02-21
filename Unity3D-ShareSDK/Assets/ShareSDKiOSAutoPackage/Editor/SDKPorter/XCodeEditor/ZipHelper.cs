@@ -85,7 +85,8 @@ namespace cn.sharesdk.unity3d
 			}
 			catch (Exception e)
 			{
-				throw new Exception();
+				Debug.Log("UnZip Error");
+				throw e;
 			}
 		}
 			

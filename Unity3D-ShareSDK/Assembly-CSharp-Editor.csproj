@@ -45,26 +45,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\SDKPorter\ShareSDKPostProcessBuild.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCPlist.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXBuildFile.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXBuildPhase.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXDictionary.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXFileReference.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXGroup.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXList.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXObject.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXParser.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\PBXProject.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCBuildConfiguration.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCConfigurationList.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCFileOperationQueue.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCMod.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCProject.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCSourceFile.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCTarget.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\XCodeEditorMenu.cs" />
-     <Compile Include="Assets\Editor\SDKPorter\XCodeEditor\ZipHelper.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\ManagePlatforms\ChosenPlatforms.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\ManagePlatforms\EditorUI.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\ShareSDKPostProcessBuild.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCPlist.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXBuildFile.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXBuildPhase.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXDictionary.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXFileReference.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXGroup.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXList.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXObject.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXParser.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXProject.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCBuildConfiguration.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCConfigurationList.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCFileOperationQueue.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCMod.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCProject.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCSourceFile.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCTarget.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCodeEditorMenu.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\ZipHelper.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
@@ -99,7 +101,7 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.SharpZipLib">
- <HintPath>/Users/chenjd/GitHub/New-Unity-For-ShareSDK/Unity3D-ShareSDK/Assets/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
+ <HintPath>/Users/chenjd/GitHub/New-Unity-For-ShareSDK/Unity3D-ShareSDK/Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>

@@ -177,7 +177,7 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 		
-		/*iOS/Android - WhatsApp*/
+		/*iOS/Android - WhatsApp/Youtube/ MeiPai(the path must be an assetUrl path in iOS)*/
 		public void SetVideoPath(String videoPath){
 			#if UNITY_ANDROID
 			shareParams["filePath"] = videoPath;
@@ -191,11 +191,17 @@ namespace cn.sharesdk.unity3d
 			shareParams ["notebook"] = notebook;
 		}
 		
-		/*iOS/Android - Pocket/Flickr/YinXiang/Evernote*/
+		/*iOS/Android - Pocket/Flickr/YinXiang/Evernote/Youtube*/
 		public void SetTags(String tags){
 			shareParams ["tags"] = tags;
 		}
 
+		/*iOS - Youtube(0-public;1-private;2-unlisted)*/
+		public void SetPrivateStatus(int status)
+		{
+			shareParams ["privateStatus"] = status;
+		}
+			
 		/*iOS Only - Sina*/
 		public void SetObjectID(String objectId) {
 			shareParams["objectID"] = objectId;
@@ -281,7 +287,7 @@ namespace cn.sharesdk.unity3d
 			shareParams ["attachmentPath"] = attachmentPath;
 		}
 
-		/*iOS Only - Instapaper/Pinterest*/
+		/*iOS Only - Instapaper/Pinterest/Youtube*/
 		public void SetDesc(String desc){
 			shareParams ["desc"] = desc;
 		}

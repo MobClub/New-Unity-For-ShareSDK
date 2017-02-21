@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Demo.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\ManagePlatforms.cs" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
      <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />

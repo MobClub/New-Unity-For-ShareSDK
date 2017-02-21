@@ -45,7 +45,7 @@ namespace cn.sharesdk.unity3d
 		Flickr = 34,			//Flickr          
 		Dropbox = 35,			//Dropbox          
 		VKontakte = 36,			//VKontakte       
-		WeChatFavorites = 37,			//WeChat Favorited        
+		WeChatFavorites = 37,	//WeChat Favorited        
 		YiXinSession = 38, 		//YiXin Session   
 		YiXinTimeline = 39,		//YiXin Timeline   
 		YiXinFav = 40,			//YiXin Favorited  
@@ -59,6 +59,9 @@ namespace cn.sharesdk.unity3d
 		Alipay = 50,            //Alipay
 		AlipayMoments = 51,     //AlipayMoments
 		DingTalk = 52,			//DingTalk 钉钉
+		Youtube = 53,			//youtube
+		MeiPai = 54,			//美拍
+
 
         #if UNITY_ANDROID
 		KakaoPlatform = 44,    

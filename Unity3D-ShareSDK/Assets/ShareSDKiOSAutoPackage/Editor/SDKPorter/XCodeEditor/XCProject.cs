@@ -6,6 +6,8 @@ using System.IO;
 using System;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
 
 namespace cn.sharesdk.unity3d.sdkporter
 {
@@ -27,7 +29,7 @@ namespace cn.sharesdk.unity3d.sdkporter
 		public string filePath { get; private set; }
 		private string sourcePathRoot;
 		private bool modified = false;
-		
+
 		#region Data
 		
 		// Objects
@@ -46,7 +48,9 @@ namespace cn.sharesdk.unity3d.sdkporter
 		private PBXDictionary<XCConfigurationList> _configurationLists;
 		
 		private PBXProject _project;
-		
+
+
+
 		#endregion
 		#region Constructor
 		
@@ -461,7 +465,7 @@ namespace cn.sharesdk.unity3d.sdkporter
 //				UnityEngine.Debug.Log( "DIR: " + directory );
 				if( directory.EndsWith( ".bundle" ) ) {
 					// Treath it like a file and copy even if not recursive
-					UnityEngine.Debug.LogWarning( "This is a special folder: " + directory );
+					//UnityEngine.Debug.LogWarning( "This is a special folder: " + directory );
 					AddFile( directory, newGroup, "SOURCE_ROOT", createBuildFile );
 //					UnityEngine.Debug.Log( "fatto" );
 					continue;
@@ -606,6 +610,13 @@ namespace cn.sharesdk.unity3d.sdkporter
 				DirectoryInfo di = new DirectoryInfo(dirpath + "/__MACOSX");
 				di.Delete(true);
 
+				if (sdkName == "ShareSDK") 
+				{
+					//根据Editor所勾选执行删除工作
+					DeleteUnnecessaryFile();
+
+				}
+					
 				string absoluteFolderPath = System.IO.Path.Combine( this.projectRootPath, sdkName + "/" );
 //				this.AddFolder( absoluteFolderPath, modGroup, (string[])mod.excludes.ToArray( typeof(string) ) );
 				//第二个参数传null,能够在xcode项目再减少一层文件夹
@@ -721,8 +732,10 @@ namespace cn.sharesdk.unity3d.sdkporter
 		/**
 		* Raw project data.
 		*/
-		public Dictionary<string, object> objects {
-			get {
+		public Dictionary<string, object> objects 
+		{
+			get 
+			{
 				return null;
 			}
 		}
@@ -736,15 +749,63 @@ namespace cn.sharesdk.unity3d.sdkporter
 		}
 
 
+		private void DeleteUnnecessaryFile()
+		{
+			ChosenPlatforms chosenPlats;
+			try
+			{
+				string binFilePath = Application.dataPath + "/ShareSDKiOSAutoPackage/Editor/SDKPorter/ManagePlatforms/ChosenPlatforms.bin";
+				BinaryFormatter formatter = new BinaryFormatter();
+				Stream destream = new FileStream(binFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+				chosenPlats = (ChosenPlatforms)formatter.Deserialize(destream);
+				destream.Flush();
+				destream.Close();
+			}
+			catch (Exception) 
+			{
+				chosenPlats = new ChosenPlatforms ();
+			}
+				
+			Type t = chosenPlats.GetType ();
+			foreach (PropertyInfo platform in t.GetProperties ()) 
+			{
+				Hashtable plat = (Hashtable)platform.GetValue (chosenPlats, null);
 
+				if (!(Boolean)plat["chosen"]) 
+				{
+					//删除多余平台相关文件
+					if (plat ["sdkPath"] != null) 
+					{
+						DirectoryInfo di = new DirectoryInfo(this.projectRootPath + (string)plat ["sdkPath"]);
+						if (di.Exists) 
+						{
+							di.Delete(true);
+						}
 
+					}
 
+					if (plat ["connectorPath"] != null) 
+					{
+						DirectoryInfo di = new DirectoryInfo(this.projectRootPath + (string)plat ["connectorPath"]);
+						if (di.Exists) 
+						{
+							di.Delete(true);
+						}
+					}
 
+					if (plat ["jsPath"] != null) 
+					{
+						if (File.Exists (this.projectRootPath + (string)plat ["jsPath"])) 
+						{
+							File.Delete (this.projectRootPath + (string)plat ["jsPath"]);
+						}
 
+					}
 
-
-
-
+				}
+			}
+		}
+			
 	}
 }
 

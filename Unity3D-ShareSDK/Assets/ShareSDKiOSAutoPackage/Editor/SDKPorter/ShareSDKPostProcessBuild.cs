@@ -6,21 +6,25 @@ using cn.sharesdk.unity3d.sdkporter;
 using System.IO;
 
 
-public static class ShareSDKPostProcessBuild {
+public static class ShareSDKPostProcessBuild 
+{
 	//[PostProcessBuild]
 	[PostProcessBuildAttribute(88)]
-	public static void onPostProcessBuild(BuildTarget target,string targetPath){
+	public static void onPostProcessBuild(BuildTarget target,string targetPath)
+	{
 		string unityEditorAssetPath = Application.dataPath;
 
-		if (target != BuildTarget.iOS) {
+		if (target != BuildTarget.iOS) 
+		{
 			Debug.LogWarning ("Target is not iPhone. XCodePostProcess will not run");
 			return;
 		}
 
 		XCProject project = new XCProject (targetPath);
 		//var files = System.IO.Directory.GetFiles( unityEditorAssetPath, "*.projmods", System.IO.SearchOption.AllDirectories );
-		var files = System.IO.Directory.GetFiles( unityEditorAssetPath + "/Editor/SDKPorter", "*.projmods", System.IO.SearchOption.AllDirectories);
-		foreach( var file in files ) {
+		var files = System.IO.Directory.GetFiles( unityEditorAssetPath + "/ShareSDKiOSAutoPackage/Editor/SDKPorter", "*.projmods", System.IO.SearchOption.AllDirectories);
+		foreach( var file in files ) 
+		{
 			project.ApplyMod( file );
 		}
 
@@ -28,13 +32,12 @@ public static class ShareSDKPostProcessBuild {
 		string projPath = Path.GetFullPath (targetPath);
 		EditInfoPlist (projPath);
 
-
 		//Finally save the xcode project
 		project.Save();
-
 	}
 
-	private static void EditInfoPlist(string projPath){
+	private static void EditInfoPlist(string projPath)
+	{
 
 		XCPlist plist = new XCPlist (projPath);
 
@@ -42,6 +45,14 @@ public static class ShareSDKPostProcessBuild {
 		string PlistAdd = @"  
             <key>CFBundleURLTypes</key>
 			<array>
+				<dict>
+					<key>CFBundleURLName</key>
+					<string>meipai</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>mp1089867596</string>
+					</array>
+				</dict>
 				<dict>
 					<key>CFBundleURLSchemes</key>
 					<array>
