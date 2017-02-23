@@ -1,6 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="C:\Users\yjin\Desktop\NewU3D\Assets\js\home.cs">
+    <Files>
+      <File FileName="C:\Users\yjin\Desktop\NewU3D\Assets\js\main.js" Line="1" Column="1" />
+      <File FileName="C:\Users\yjin\Desktop\NewU3D\Assets\js\home.cs" Line="8" Column="19" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
