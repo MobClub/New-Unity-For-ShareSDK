@@ -44,7 +44,7 @@ namespace cn.sharesdk.unity3d
 		public Instapaper instapaper;
 		public Alipay alipay;
 		public AlipayMoments alipayMoments;
-		public DingTalk dingTalk;
+		public Dingding dingTalk;
 		public Youtube youtube;
 		public MeiPai meiPai;
 
@@ -741,7 +741,7 @@ namespace cn.sharesdk.unity3d
 	}
 
 	[Serializable]
-	public class DingTalk : DevInfo
+	public class Dingding : DevInfo
 	{
 		#if UNITY_ANDROID
 		//安卓暂不支持,请留意更新
