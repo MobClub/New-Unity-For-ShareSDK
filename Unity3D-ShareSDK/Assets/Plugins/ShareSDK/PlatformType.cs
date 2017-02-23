@@ -58,7 +58,7 @@ namespace cn.sharesdk.unity3d
 		Bluetooth = 48,         //Bluetooth
 		Alipay = 50,            //Alipay
 		AlipayMoments = 51,     //AlipayMoments
-		DingTalk = 52,			//DingTalk 钉钉
+		Dingding = 52,			//DingTalk 钉钉
 		Youtube = 53,			//youtube
 		MeiPai = 54,			//美拍
 

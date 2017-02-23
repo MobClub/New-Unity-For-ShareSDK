@@ -745,7 +745,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		//安卓暂不支持,请留意更新
-		public const int type = (int) PlatformType.DingTalk;
+		public const int type = (int) PlatformType.Dingding;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.DingTalk;
 		public string app_id = "dingoanxyrpiscaovl4qlw";
@@ -798,7 +798,11 @@ namespace cn.sharesdk.unity3d
 	public class Youtube : DevInfo
 	{
 		#if UNITY_ANDROID
-		//待添加
+		public string SortId = "53";
+		public const int type = (int) PlatformType.Youtube;
+		public string ClientID = "370141748022-bicrnsjfiije93bvdt63dh3728m4shas.apps.googleusercontent.com";
+		public string RedirectUrl="http://localhost";
+		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Youtube;
 		public string client_id = "906418427202-jinnbqal1niq4s8isbg2ofsqc5ddkcgr.apps.googleusercontent.com";
@@ -811,7 +815,11 @@ namespace cn.sharesdk.unity3d
 	public class MeiPai : DevInfo
 	{
 		#if UNITY_ANDROID
-		//待添加
+		public string SortId = "54";
+		public const int type = (int) PlatformType.MeiPai;
+		public string ClientID = "1089867596";
+		public string RedirectUrl="http://localhost";
+		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.MeiPai;
 		public string app_key = "1089867596";
