@@ -237,7 +237,7 @@ namespace cn.sharesdk.unity3d
 			shareParams["thumbImageUrl"] = thumbImageUrl;
 		}
 
-		/*iOS Only - Douban/LinkedIn*/
+		/*iOS Only - Douban/LinkedIn/Faceobook*/
 		public void SetUrlDescription(String urlDescription){
 			shareParams["urlDescription"] = urlDescription;
 		}

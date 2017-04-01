@@ -975,9 +975,9 @@ extern "C" {
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"urlDescription"] isKindOfClass:[NSString class]])
                     {
-                        urlDesc = [value objectForKey:@"urlDesc"];
+                        urlDesc = [value objectForKey:@"urlDescription"];
                     }
                     if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
@@ -1107,9 +1107,9 @@ extern "C" {
                     {
                         title = [value objectForKey:@"title"];
                     }
-                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"urlDescription"] isKindOfClass:[NSString class]])
                     {
-                        urlDesc = [value objectForKey:@"urlDesc"];
+                        urlDesc = [value objectForKey:@"urlDescription"];
                     }
                     if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
@@ -1421,9 +1421,9 @@ extern "C" {
                     {
                         url = [value objectForKey:@"url"];
                     }
-                    if ([[value objectForKey:@"urlDesc"] isKindOfClass:[NSString class]])
+                    if ([[value objectForKey:@"urlDescription"] isKindOfClass:[NSString class]])
                     {
-                        urlDesc = [value objectForKey:@"urlDesc"];
+                        urlDesc = [value objectForKey:@"urlDescription"];
                     }
                     if ([[value objectForKey:@"visibility"] isKindOfClass:[NSString class]])
                     {
@@ -2453,10 +2453,52 @@ extern "C" {
                     }
                     
                     [params SSDKSetupAliPaySocialParamsByText:text
-                                                        image:image
+                                                        image:img
                                                         title:title
                                                           url:[NSURL URLWithString:url]
-                                                         type:type];
+                                                         type:type
+                                                 platformType:SSDKPlatformTypeAliPaySocial];
+                    
+                }
+                
+                //支付宝朋友圈
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocialTimeline]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString *text = nil;
+                    NSString *image = nil;
+                    NSString *title = nil;
+                    NSString *url = nil;
+                    SSDKContentType type = SSDKContentTypeText;
+                    
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"text"];
+                    }
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
+                    {
+                        image = [value objectForKey:@"imageUrl"];
+                    }
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
+                        url = [value objectForKey:@"url"];
+                    }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+                    {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+                    
+                    [params SSDKSetupAliPaySocialParamsByText:text
+                                                        image:img
+                                                        title:title
+                                                          url:[NSURL URLWithString:url]
+                                                         type:type
+                                                 platformType:SSDKPlatformTypeAliPaySocialTimeline];
+                    
                 }
                 
                 //钉钉

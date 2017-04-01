@@ -36,6 +36,8 @@
                     "ShareSDK/Support/PlatformConnector/YouTubeConnector.framework",
                     "ShareSDK/Support/PlatformConnector/MeiPaiConnector.framework",
                     "ShareSDK/Support/PlatformSDK/FacebookMessengerSDK/FBSDKMessengerShareKit.framework",
+                    "ShareSDK/Support/PlatformSDK/FacebookMessengerSDK/FBSDKCoreKit.framework",
+                    "ShareSDK/Support/PlatformSDK/LineSDK/LineSDK.framework",
                     "ShareSDK/Support/PlatformSDK/QQSDK/TencentOpenAPI.framework",
                     "ShareSDK/Support/PlatformSDK/RenRenSDK/RennSDK.framework",
                     "ShareSDK/Support/PlatformSDK/KaKaoSDK/KakaoOpenSDK.framework",

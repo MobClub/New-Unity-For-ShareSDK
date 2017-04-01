@@ -175,6 +175,7 @@ namespace cn.sharesdk.unity3d.sdkporter
 
 			this.Line = new Hashtable ();
 			this.Line ["chosen"] = true;
+			this.Line ["sdkPath"] = "/ShareSDK/Support/PlatformSDK/LineSDK";
 			this.Line ["connectorPath"] = "/ShareSDK/Support/PlatformConnector/LineConnector.framework";
 			this.Line ["jsPath"] = "/ShareSDK/Support/Required/ShareSDK.bundle/ScriptCore/platforms/Line.js";
 
