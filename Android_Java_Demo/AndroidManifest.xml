@@ -83,6 +83,17 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"/>  
+             <!-- 钉钉分享回调 -->
+        <activity 
+            android:name=".ddshare.DDShareActivity"
+            android:launchMode="singleInstance"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

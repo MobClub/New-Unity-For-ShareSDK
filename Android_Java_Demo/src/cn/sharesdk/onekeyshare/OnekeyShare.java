@@ -8,20 +8,22 @@
 
 package cn.sharesdk.onekeyshare;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.mob.MobSDK;
+import com.mob.tools.utils.BitmapHelper;
+import com.mob.tools.utils.ResHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-
-import com.mob.tools.utils.BitmapHelper;
-import com.mob.tools.utils.ResHelper;
 
 /**
 * 快捷分享的入口
@@ -232,7 +234,8 @@ public class OnekeyShare {
 		HashMap<String, Object> shareParamsMap = new HashMap<String, Object>();
 		shareParamsMap.putAll(params);
 
-		ShareSDK.initSDK(context.getApplicationContext());
+		MobSDK.init(context.getApplicationContext());
+		ShareSDK.initSDK(context);
 
 		// 打开分享菜单的统计
 		ShareSDK.logDemoEvent(1, null);

@@ -5,8 +5,6 @@ Project("{58593430-FD7A-667F-0E77-20224E080C9F}") = "Unity3D-ShareSDK", "Assembl
 EndProject
 Project("{58593430-FD7A-667F-0E77-20224E080C9F}") = "Unity3D-ShareSDK", "Assembly-CSharp.csproj", "{60709281-E20D-0AD6-F9D5-925C0FF63B51}"
 EndProject
-Project("{58593430-FD7A-667F-0E77-20224E080C9F}") = "Unity3D-ShareSDK", "Assembly-CSharp-Editor.csproj", "{3CE53B23-A03C-86C2-38CF-DD125A0C4BAD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,15 +19,11 @@ Global
 		{60709281-E20D-0AD6-F9D5-925C0FF63B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60709281-E20D-0AD6-F9D5-925C0FF63B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60709281-E20D-0AD6-F9D5-925C0FF63B51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CE53B23-A03C-86C2-38CF-DD125A0C4BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CE53B23-A03C-86C2-38CF-DD125A0C4BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CE53B23-A03C-86C2-38CF-DD125A0C4BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CE53B23-A03C-86C2-38CF-DD125A0C4BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-									GlobalSection(MonoDevelopProperties) = preSolution
+																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -48,4 +42,5 @@ Global
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection
+
 EndGlobal

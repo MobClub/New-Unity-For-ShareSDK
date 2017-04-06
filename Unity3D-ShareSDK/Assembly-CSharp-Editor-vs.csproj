@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{3CE53B23-A03C-86C2-38CF-DD125A0C4BAD}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>d:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>d:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\ManagePlatforms\ChosenPlatforms.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\ManagePlatforms\EditorUI.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\ShareSDKPostProcessBuild.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCPlist.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXBuildFile.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXBuildPhase.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXDictionary.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXFileReference.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXGroup.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXList.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXObject.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXParser.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\PBXProject.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCBuildConfiguration.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCConfigurationList.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCFileOperationQueue.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCMod.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCProject.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCSourceFile.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCTarget.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\XCodeEditorMenu.cs" />
+     <Compile Include="Assets\ShareSDKiOSAutoPackage\Editor\SDKPorter\XCodeEditor\ZipHelper.cs" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_platform_cell_back.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_strings.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_color_drawables.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_instapaper_strings.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_oks_strings.xml" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>d:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>d:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/Editor/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.SharpZipLib">
+ <HintPath>D:/New-Unity-For-ShareSDK/Unity3D-ShareSDK/Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/ICSharpCode.SharpZipLib.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>d:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{FAF7DFCA-9C47-D8C5-D7D5-E6F7D395EF75}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{60709281-E20D-0AD6-F9D5-925C0FF63B51}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
