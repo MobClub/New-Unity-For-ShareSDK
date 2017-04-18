@@ -24,6 +24,7 @@ namespace cn.sharesdk.unity3d
 		public const int App = 7; 				//应用分享
 		public const int File = 8;				//附件分享
 		public const int Emoji = 9;				//表情分享
+		public const int MiniProgram = 10;      //微信小程序 v3.6.3
 	}
 
 }

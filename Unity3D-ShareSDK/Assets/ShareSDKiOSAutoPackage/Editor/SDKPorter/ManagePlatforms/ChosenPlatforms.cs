@@ -83,6 +83,8 @@ namespace cn.sharesdk.unity3d.sdkporter
 
 			this.Twitter = new Hashtable ();
 			this.Twitter ["chosen"] = true;
+			//v3.6.3
+			this.Twitter ["connectorPath"] = "/ShareSDK/Support/PlatformConnector/TwitterConnector.framework";
 			this.Twitter ["jsPath"] = "/ShareSDK/Support/Required/ShareSDK.bundle/ScriptCore/platforms/Twitter.js";
 
 			this.Evernote = new Hashtable ();

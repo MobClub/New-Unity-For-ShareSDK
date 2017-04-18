@@ -23,12 +23,12 @@
 #define __SHARESDK_QQ__
 #define __SHARESDK_SINA_WEIBO__
 #define __SHARESDK_RENREN__
-#define __SHARESDK_KAKAO__
+//#define __SHARESDK_KAKAO__
 #define __SHARESDK_YIXIN__
 #define __SHARESDK_FACEBOOK_MSG__
 #define __SHARESDK_ALIPAYSOCIAL__
-#define __SHARESDK_DINGTALK__
-#define __SHARESDK_MEIPAI__
+//#define __SHARESDK_DINGTALK__
+//#define __SHARESDK_MEIPAI__
 
 #ifdef __SHARESDK_WECHAT__
 #import "WXApi.h"
@@ -772,6 +772,15 @@ extern "C" {
                 }
             }
             
+            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+            {
+                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
+                if (enable > 0)
+                {
+                    [params SSDKEnableAdvancedInterfaceShare];
+                }
+            }
+            
             
             [params SSDKSetupShareParamsByText:text
                                         images:imageArray
@@ -836,6 +845,15 @@ extern "C" {
                         if (enable > 0)
                         {
                             [params SSDKEnableUseClientShare];
+                        }
+                    }
+                    
+                    if ([[value objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+                    {
+                        NSInteger enable = [[value objectForKey:@"advancedShare"] integerValue];
+                        if (enable > 0)
+                        {
+                            [params SSDKEnableAdvancedInterfaceShare];
                         }
                     }
                     
@@ -1126,6 +1144,15 @@ extern "C" {
                         if (enable > 0)
                         {
                             [params SSDKEnableUseClientShare];
+                        }
+                    }
+                    
+                    if ([[value objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+                    {
+                        NSInteger enable = [[value objectForKey:@"advancedShare"] integerValue];
+                        if (enable > 0)
+                        {
+                            [params SSDKEnableAdvancedInterfaceShare];
                         }
                     }
                     

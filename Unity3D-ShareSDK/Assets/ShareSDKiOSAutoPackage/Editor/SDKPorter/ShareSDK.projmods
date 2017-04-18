@@ -35,6 +35,7 @@
                     "ShareSDK/Support/PlatformConnector/DingTalkConnector.framework",
                     "ShareSDK/Support/PlatformConnector/YouTubeConnector.framework",
                     "ShareSDK/Support/PlatformConnector/MeiPaiConnector.framework",
+                    "ShareSDK/Support/PlatformConnector/TwitterConnector.framework",
                     "ShareSDK/Support/PlatformSDK/FacebookMessengerSDK/FBSDKMessengerShareKit.framework",
                     "ShareSDK/Support/PlatformSDK/FacebookMessengerSDK/FBSDKCoreKit.framework",
                     "ShareSDK/Support/PlatformSDK/LineSDK/LineSDK.framework",

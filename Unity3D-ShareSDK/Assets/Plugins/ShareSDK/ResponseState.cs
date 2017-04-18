@@ -18,7 +18,8 @@ namespace cn.sharesdk.unity3d
 		Begin = 0,				//Begin
 		Success = 1,			//Success
 		Fail = 2,				//Failure
-		Cancel = 3				//Cancel
+		Cancel = 3,				//Cancel
+		BeginUPLoad = 4,        //iOS 视频开始上传 youtube facebook Twitter v3.6.3
 	}
 
 }
