@@ -1,0 +1,13 @@
+*.class
+*.apk
+bin/
+gen/
+.settings/
+proguard/
+*.mdb  
+*.ldb  
+*.sln  
+*.config  
+Debug/  
+Release/  
+obj/  
