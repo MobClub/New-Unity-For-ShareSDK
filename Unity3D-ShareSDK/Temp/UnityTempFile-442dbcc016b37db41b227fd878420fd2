@@ -1,0 +1,56 @@
+-debug
+-target:library
+-nowarn:0169
+-out:Temp/Assembly-CSharp-firstpass.dll
+-r:"D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll"
+-r:"D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll"
+-r:"D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll"
+-define:UNITY_4_6_2
+-define:UNITY_4_6
+-define:UNITY_ANDROID
+-define:ENABLE_MICROPHONE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_NEW_HIERARCHY 
+-define:ENABLE_AUDIO_FMOD
+-define:ENABLE_TERRAIN
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_GENERICS
+-define:INCLUDE_IL2CPP
+-define:INCLUDE_WP8SUPPORT
+-define:ENABLE_WWW
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_4_6_FEATURES
+-define:INCLUDE_WP_BLUE_SUPPORT
+-define:ENABLE_WEBCAM
+-define:INCLUDE_METROSUPPORT
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_NETWORK
+-define:ENABLE_PHYSICS
+-define:UNITY5_SCRIPTING_IN_UNITY4
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:UNITY_ANDROID_API
+-define:ENABLE_2D_PHYSICS
+-define:ENABLE_SHADOWS
+-define:ENABLE_AUDIO
+-define:ENABLE_NAVMESH_CARVING
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:ENABLE_MONO
+-define:ENABLE_PROFILER
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_WIN
+-define:UNITY_TEAM_LICENSE
+-define:UNITY_PRO_LICENSE
+Assets/Plugins/ShareSDK/Android/AndroidImpl.cs
+Assets/Plugins/ShareSDK/ContentType.cs
+Assets/Plugins/ShareSDK/MiniJSON.cs
+Assets/Plugins/ShareSDK/PlatformType.cs
+Assets/Plugins/ShareSDK/ResponseState.cs
+Assets/Plugins/ShareSDK/ShareContent.cs
+Assets/Plugins/ShareSDK/ShareSDK.cs
+Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs
+Assets/Plugins/ShareSDK/ShareSDKImpl.cs
+Assets/Plugins/ShareSDK/iOS/iOSImpl.cs
+-r:"D:/Program Files (x86)/Unity/Editor/Data/Mono\lib/mono/unity\System.Runtime.Serialization.dll"
+-r:"D:/Program Files (x86)/Unity/Editor/Data/Mono\lib/mono/unity\System.Xml.Linq.dll"
