@@ -196,6 +196,7 @@ namespace cn.sharesdk.unity3d
 		public string ConsumerKey = "107704292745179";
 		public string ConsumerSecret = "38053202e1a5fe26c80c753071f0b573";
 		public string RedirectUrl = "http://mob.com/";
+		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Facebook;
 		public string api_key = "107704292745179";
