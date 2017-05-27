@@ -324,7 +324,9 @@ public class ShareSDKUtils implements Callback{
 				}
 				if (map.containsKey("url")) {
 					oks.setUrl((String)map.get("url"));
-					oks.setTitleUrl((String)map.get("url"));
+				}
+				if (map.containsKey("titleUrl")) {
+					oks.setTitleUrl((String)map.get("titleUrl"));
 				}
 				if (map.containsKey("site")) {
 					oks.setSite((String)map.get("site"));
@@ -333,7 +335,7 @@ public class ShareSDKUtils implements Callback{
 					oks.setSiteUrl((String)map.get("siteUrl"));
 				}
 				if (map.containsKey("musicUrl")) {
-					oks.setSiteUrl((String)map.get("musicUrl"));
+					oks.setMusicUrl((String)map.get("musicUrl"));
 				}
 				if (map.containsKey("shareType")) {
 					if ("6".equals(String.valueOf(map.get("shareType")))) {
