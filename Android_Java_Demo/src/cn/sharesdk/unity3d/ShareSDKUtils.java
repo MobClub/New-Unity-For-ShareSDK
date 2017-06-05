@@ -189,6 +189,7 @@ public class ShareSDKUtils implements Callback{
 			map.put("expiresIn", plat.getDb().getExpiresIn());
 			map.put("expiresTime", plat.getDb().getExpiresTime());
 			map.put("token", plat.getDb().getToken());
+			map.put("refresh_token", plat.getDb().get("refresh_token"));
 			map.put("tokenSecret", plat.getDb().getTokenSecret());
 			map.put("userGender", plat.getDb().getUserGender());
 			map.put("userID", plat.getDb().getUserId());
