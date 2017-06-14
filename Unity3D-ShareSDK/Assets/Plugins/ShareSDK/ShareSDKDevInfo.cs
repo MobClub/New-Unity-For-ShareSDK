@@ -6,7 +6,6 @@ namespace cn.sharesdk.unity3d
 {
 	[Serializable]
 	public class DevInfoSet
-
 	{
 		public SinaWeiboDevInfo sinaweibo;
 		public TencentWeiboDevInfo tencentweibo;

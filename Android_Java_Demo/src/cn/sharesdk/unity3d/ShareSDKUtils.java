@@ -14,6 +14,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 
+import com.mob.MobSDK;
 import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.UIHandler;
 import com.unity3d.player.UnityPlayer;
@@ -56,9 +57,9 @@ public class ShareSDKUtils implements Callback{
 			System.out.println("initSDK appkey ==>>" + appKey);
 		}
 		if (!TextUtils.isEmpty(appKey)) {
-			ShareSDK.initSDK(context, appKey);
+			MobSDK.init(context, appKey);
 		} else {
-			ShareSDK.initSDK(context);
+			MobSDK.init(context);
 		}
 	}
 	
@@ -91,7 +92,7 @@ public class ShareSDKUtils implements Callback{
 			System.out.println("ShareSDKUtils.removeAccount");
 		}
 		String name = ShareSDK.platformIdToName(platform);
-		Platform plat = ShareSDK.getPlatform(context, name);
+		Platform plat = ShareSDK.getPlatform(name);
 		plat.removeAccount(true);
 	}
 	
@@ -100,7 +101,7 @@ public class ShareSDKUtils implements Callback{
 			System.out.println("ShareSDKUtils.isAuthValid");
 		}
 		String name = ShareSDK.platformIdToName(platform);
-		Platform plat = ShareSDK.getPlatform(context, name);
+		Platform plat = ShareSDK.getPlatform(name);
 		return plat.isAuthValid();
 	}
 	
@@ -109,7 +110,7 @@ public class ShareSDKUtils implements Callback{
 			System.out.println("ShareSDKUtils.isClientValid");
 		}
 		String name = ShareSDK.platformIdToName(platform);
-		Platform plat = ShareSDK.getPlatform(context, name);
+		Platform plat = ShareSDK.getPlatform(name);
 		return plat.isClientValid();
 	}
 	
@@ -182,14 +183,13 @@ public class ShareSDKUtils implements Callback{
 		}
 		
 		String name = ShareSDK.platformIdToName(platform);
-		Platform plat = ShareSDK.getPlatform(context, name);
+		Platform plat = ShareSDK.getPlatform(name);
 		Hashon hashon = new Hashon();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(plat.isValid()){
+		if(plat.isClientValid()){
 			map.put("expiresIn", plat.getDb().getExpiresIn());
 			map.put("expiresTime", plat.getDb().getExpiresTime());
 			map.put("token", plat.getDb().getToken());
-			map.put("refresh_token", plat.getDb().get("refresh_token"));
 			map.put("tokenSecret", plat.getDb().getTokenSecret());
 			map.put("userGender", plat.getDb().getUserGender());
 			map.put("userID", plat.getDb().getUserId());
@@ -231,7 +231,7 @@ public class ShareSDKUtils implements Callback{
 				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
 				paListener.setReqID(msg.arg2);
 				String name = ShareSDK.platformIdToName(platform);
-				Platform plat = ShareSDK.getPlatform(context, name);
+				Platform plat = ShareSDK.getPlatform(name);
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				plat.authorize();
@@ -242,7 +242,7 @@ public class ShareSDKUtils implements Callback{
 				Unity3dPlatformActionListener paListener = new Unity3dPlatformActionListener(u3dGameObject, u3dCallback);
 				paListener.setReqID(msg.arg2);
 				String name = ShareSDK.platformIdToName(platform);
-				Platform plat = ShareSDK.getPlatform(context, name);
+				Platform plat = ShareSDK.getPlatform(name);
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				plat.showUser(null);
@@ -254,7 +254,7 @@ public class ShareSDKUtils implements Callback{
 				paListener.setReqID(msg.arg2);
 				String content = (String) msg.obj;
 				String pName = ShareSDK.platformIdToName(platformID);
-				Platform plat = ShareSDK.getPlatform(context, pName);
+				Platform plat = ShareSDK.getPlatform(pName);
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				try {
@@ -325,9 +325,7 @@ public class ShareSDKUtils implements Callback{
 				}
 				if (map.containsKey("url")) {
 					oks.setUrl((String)map.get("url"));
-				}
-				if (map.containsKey("titleUrl")) {
-					oks.setTitleUrl((String)map.get("titleUrl"));
+					oks.setTitleUrl((String)map.get("url"));
 				}
 				if (map.containsKey("site")) {
 					oks.setSite((String)map.get("site"));
@@ -336,7 +334,7 @@ public class ShareSDKUtils implements Callback{
 					oks.setSiteUrl((String)map.get("siteUrl"));
 				}
 				if (map.containsKey("musicUrl")) {
-					oks.setMusicUrl((String)map.get("musicUrl"));
+					oks.setSiteUrl((String)map.get("musicUrl"));
 				}
 				if (map.containsKey("shareType")) {
 					if ("6".equals(String.valueOf(map.get("shareType")))) {
@@ -382,7 +380,7 @@ public class ShareSDKUtils implements Callback{
 				int page = msg.getData().getInt("page");
 				int count = msg.getData().getInt("count");
 				String name = ShareSDK.platformIdToName(platform);
-				Platform plat = ShareSDK.getPlatform(context, name);
+				Platform plat = ShareSDK.getPlatform(name);
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				plat.listFriend(count, page, null);
@@ -394,7 +392,7 @@ public class ShareSDKUtils implements Callback{
 				paListener.setReqID(msg.arg2);
 				String account = (String) msg.obj;
 				String name = ShareSDK.platformIdToName(platform);
-				Platform plat = ShareSDK.getPlatform(context, name);
+				Platform plat = ShareSDK.getPlatform(name);
 				plat.setPlatformActionListener(paListener);
 				plat.SSOSetting(disableSSO);
 				plat.followFriend(account);

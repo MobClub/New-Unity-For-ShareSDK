@@ -36,6 +36,7 @@ import cn.sharesdk.onekeyshare.OnekeyShareThemeImpl;
 import cn.sharesdk.onekeyshare.themes.classic.land.FriendListPageLand;
 import cn.sharesdk.onekeyshare.themes.classic.port.FriendListPagePort;
 
+import com.mob.MobSDK;
 import com.mob.tools.gui.AsyncImageView;
 import com.mob.tools.utils.DeviceHelper;
 import com.mob.tools.utils.ResHelper;
@@ -142,7 +143,7 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 			page = new FriendListPageLand(impl);
 		}
 		page.setPlatform(platform);
-		page.showForResult(platform.getContext(), null, this);
+		page.showForResult(MobSDK.getContext(), null, this);
 	}
 
 	public void onResult(HashMap<String, Object> data) {

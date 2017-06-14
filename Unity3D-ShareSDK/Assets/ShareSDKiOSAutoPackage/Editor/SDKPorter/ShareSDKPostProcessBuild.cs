@@ -3,8 +3,10 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using System.Collections;
 using cn.sharesdk.unity3d.sdkporter;
+using cn.sharesdk.unity3d;
 using System.IO;
-
+using System.Runtime.Serialization.Formatters.Binary;
+using System;
 
 public static class ShareSDKPostProcessBuild 
 {
@@ -35,12 +37,10 @@ public static class ShareSDKPostProcessBuild
 		//Finally save the xcode project
 		project.Save();
 	}
-
 	private static void EditInfoPlist(string projPath)
 	{
 
 		XCPlist plist = new XCPlist (projPath);
-
 		//URL Scheme 添加
 		string PlistAdd = @"  
             <key>CFBundleURLTypes</key>
@@ -140,6 +140,30 @@ public static class ShareSDKPostProcessBuild
 		//在plist里面增加一行
 		plist.AddKey(PlistAdd);
 		plist.AddKey (LSAdd);
+
+		 ShareSDKConfig theConfig;
+		 try
+		 {
+		 	string filePath = Application.dataPath + "/Plugins/ShareSDK/ShareSDKConfig.bin";
+		 	BinaryFormatter formatter = new BinaryFormatter();
+		 	Stream destream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+		 	ShareSDKConfig config = (ShareSDKConfig)formatter.Deserialize(destream);
+		 	destream.Flush();
+		 	destream.Close();
+		 	theConfig = config;
+		 }
+		 catch(Exception)
+		 {
+		 	theConfig = new ShareSDKConfig ();
+		 }
+		
+		string AppKey = @"<key>MOBAppkey</key> <string>" + theConfig.appKey + "</string>";
+		string AppSecret = @"<key>MOBAppSecret</key> <string>" + theConfig.appSecret + "</string>";
+
+		//在plist里面增加一行
+		plist.AddKey(AppKey);
+		plist.AddKey(AppSecret);
+
 		plist.Save();
 	}
 

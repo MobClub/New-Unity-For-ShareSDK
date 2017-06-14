@@ -2742,7 +2742,7 @@ extern "C" {
     {
         NSMutableArray *activePlatforms = [NSMutableArray array];
         NSMutableDictionary *platformsDict = [NSMutableDictionary dictionary];
-        NSString *appKeyStr = [NSString stringWithCString:appKey encoding:NSUTF8StringEncoding];
+//        NSString *appKeyStr = [NSString stringWithCString:appKey encoding:NSUTF8StringEncoding];
         
         if (configInfo)
         {
@@ -2760,8 +2760,7 @@ extern "C" {
             
             
         }
-        [ShareSDK registerApp:appKeyStr
-              activePlatforms:activePlatforms
+        [ShareSDK registerActivePlatforms:activePlatforms
                      onImport:^(SSDKPlatformType platformType) {
                          switch (platformType)
                          {

@@ -234,8 +234,7 @@ public class OnekeyShare {
 		HashMap<String, Object> shareParamsMap = new HashMap<String, Object>();
 		shareParamsMap.putAll(params);
 
-		MobSDK.init(context.getApplicationContext());
-		ShareSDK.initSDK(context);
+		MobSDK.init(context);
 
 		// 打开分享菜单的统计
 		ShareSDK.logDemoEvent(1, null);

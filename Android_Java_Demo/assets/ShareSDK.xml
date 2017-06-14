@@ -2,7 +2,7 @@
 <DevInfor>
     <!--
     	说明：
-    	
+
     	所有集成到您项目的平台都应该为其在表格中填写相对应的开发者信息，以新浪微博为例：
     	    <SinaWeibo
                 Id="1"
@@ -47,8 +47,11 @@
 			KakaoStory     https://developers.kakao.com/
 			Plurk          http://www.plurk.com/API
     -->
-    
-    <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
+
+    <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false, -->
+	<!-- 1、isNewApi是否使用新街口，true是使用新接口，false为老接口
+		 2、用户分享到微博的文本内容，必须做URLencode，内容不超过140个汉字，文本中不能包含“#话题词#”，同时文本中必须包含至少一个第三方分享到微博的网页URL，
+		且该URL只能是该第三方（调用方）绑定域下的URL链接，绑定域在“我的应用 － 应用信息 － 基本应用信息编辑 － 安全域名”里设置。-->
     <SinaWeibo
         Id="1"
         SortId="1"
@@ -56,7 +59,7 @@
         AppSecret="38a4f8204cc784f81f9f0daaf31e02e3"
         RedirectUrl="http://www.sharesdk.cn"
         ShareByAppClient="true"
-		isNewApi="true";
+		IsNewApi = "true"
         Enable="true" />
 
     <TencentWeibo
@@ -84,14 +87,15 @@
 		
 		BypassApproval是绕过审核的标记，设置为true后AppId将被忽略，故不经过
 		审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
-		默认值为false。此外，微信收藏不支持此字段。
+		默认值为false。此外，微信收藏不支持此字段。wx4868b35061f87885
 	-->
+	<!--要分享微信小应用程序时用userName,path-->
     <Wechat
         Id="4"
         SortId="4"
         AppId="wx4868b35061f87885"
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
-		userName="gh_afb25ac019c9@app"
+		userName="gh_afb25ac019c9"
 		path="/page/API/pages/share/share"
         BypassApproval="false"
         Enable="true" />
@@ -205,14 +209,15 @@
         ApiKey="ejo5ibkye3vo"
         SecretKey="cC7B2jpxITqPLZ5M" 
         RedirectUrl="http://sharesdk.cn"
+		ShareByAppClient="true"
         Enable="true" />
     
      <GooglePlus
     	Id="21"
         SortId="21"
-        ClientID="682795613743-cfo3a8r4va0ujja7qofr54hobt2kv3cq.apps.googleusercontent.com"
+        ClientID="236300675100-am5pm8km7md1memjevq8rl9pg5c4s4b8.apps.googleusercontent.com"
         RedirectUrl="http://localhost"
-        ShareByAppClient = "false"
+        ShareByAppClient = "true"
         Enable="true" />
      
      <FourSquare
@@ -304,7 +309,7 @@
 	<Line
 	    Id="32"
         SortId="32"
-        ChannelID = "1506934625"
+        ChannelID = "1477692153"
         ChannelSecret ="f30c036370f2e04ade71c52eef73a9af"
         Enable="true" />
 	

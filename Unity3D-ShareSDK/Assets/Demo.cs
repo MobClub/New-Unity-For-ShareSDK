@@ -49,7 +49,7 @@ public class Demo : MonoBehaviour {
 		{
 			print(ssdk == null);
 
-			ssdk.Authorize(PlatformType.SinaWeibo);
+			ssdk.Authorize(PlatformType.WeChat);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
@@ -111,14 +111,14 @@ public class Demo : MonoBehaviour {
 			content.SetText("this is a test string.");
 			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
 			content.SetTitle("test title");
-			content.SetTitleUrl("http://www.mob.com");
-			content.SetSite("Mob-ShareSDK");
-			content.SetSiteUrl("http://www.mob.com");
-			content.SetUrl("http://www.mob.com");
-			content.SetComment("test description");
-			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-			content.SetShareType(ContentType.Image);
-			ssdk.ShareContent (PlatformType.SinaWeibo, content);
+//			content.SetTitleUrl("http://www.mob.com");
+//			content.SetSite("Mob-ShareSDK");
+			// content.SetSiteUrl("http://www.mob.com");
+			content.SetUrl("http://qjsj.youzu.com/jycs/");
+//			content.SetComment("test description");
+//			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+			content.SetShareType(ContentType.Webpage);
+			ssdk.ShareContent (PlatformType.WeChat, content);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
