@@ -63,6 +63,19 @@ public class ShareSDKUtils implements Callback{
 		}
 	}
 	
+	public void initSDK(String appKey,String screct){
+		if (DEBUG) {
+			System.out.println("initSDK appkey ==>>" + appKey);
+		}
+		if (!TextUtils.isEmpty(appKey) && !TextUtils.isEmpty(screct)) {
+			MobSDK.init(context, appKey,screct);
+		} else if(!TextUtils.isEmpty(appKey)){
+			MobSDK.init(context, appKey);
+		} else {
+			MobSDK.init(context);
+		}
+	}
+	
 	public void setPlatformConfig(String configs) {
 		if (DEBUG) {
 			System.out.println("initSDK configs ==>>" + configs);
