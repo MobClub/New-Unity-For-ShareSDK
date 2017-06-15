@@ -28,6 +28,15 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
+		public override void InitSDK (String appKey,String appSecret) 
+		{
+			Debug.Log("AndroidImpl  ===>>>  InitSDK === " + appKey);
+			if (ssdk != null) 
+			{			
+				ssdk.Call("initSDK", appKey,appSecret);
+			}
+		}
+
 		public override void SetPlatformConfig (Hashtable configs) 
 		{
 			String json = MiniJSON.jsonEncode(configs);

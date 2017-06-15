@@ -17,6 +17,8 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		public abstract void InitSDK (String appKey);
 
+		public abstract void InitSDK (String appKey,String screct);
+
 		/// <summary>
 		/// Sets the platform config.
 		/// </summary>

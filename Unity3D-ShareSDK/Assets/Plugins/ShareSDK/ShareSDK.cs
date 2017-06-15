@@ -16,12 +16,16 @@ namespace cn.sharesdk.unity3d
 		private int reqID;
 		//配置ShareSDK AppKey
 		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
+		public string appKey;
+		public string appSecret;
 		 #if UNITY_ANDROID
-		 public string appKey = "androidv1101";
+		appKey = "moba6b6c6d6";
+		appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
 		 #elif UNITY_IPHONE
-		 public string appKey = "iosv1101";
+		 appKey = "iosv1101";
+		 appSecret = "";
 		 #endif
-		public string appSecret = "";
+
 		public DevInfoSet devInfo;
 		public ShareSDKImpl shareSDKUtils;
 
@@ -58,10 +62,11 @@ namespace cn.sharesdk.unity3d
 
 			#if UNITY_ANDROID
 			shareSDKUtils = new AndroidImpl(gameObject);
+			shareSDKUtils.InitSDK(appKey,appSecret);
 			#elif UNITY_IPHONE
 			shareSDKUtils = new iOSImpl(gameObject);
 			#endif
-			shareSDKUtils.InitSDK(appKey);
+
 			shareSDKUtils.SetPlatformConfig(platformConfigs);
 		}
 		
@@ -278,6 +283,12 @@ namespace cn.sharesdk.unity3d
 		{			
 			// if you don't add ShareSDK.xml in your assets folder, use the following line
 			shareSDKUtils.InitSDK (appKey);
+		}
+
+		public void InitSDK (String appKey,String appSecret)
+		{			
+			// if you don't add ShareSDK.xml in your assets folder, use the following line
+			shareSDKUtils.InitSDK (appKey,appSecret);
 		}
 
 		/// <summary>
