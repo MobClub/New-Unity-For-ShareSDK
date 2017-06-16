@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.mob.MobApplication;
 import com.mob.MobSDK;
 import com.mob.tools.utils.BitmapHelper;
 import com.mob.tools.utils.ResHelper;
@@ -233,8 +234,9 @@ public class OnekeyShare {
 	public void show(Context context) {
 		HashMap<String, Object> shareParamsMap = new HashMap<String, Object>();
 		shareParamsMap.putAll(params);
-
-		MobSDK.init(context);
+		if(!(context instanceof MobApplication)){
+			MobSDK.init(context);
+		}
 
 		// 打开分享菜单的统计
 		ShareSDK.logDemoEvent(1, null);

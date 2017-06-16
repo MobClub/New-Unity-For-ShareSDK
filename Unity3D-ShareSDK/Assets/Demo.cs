@@ -49,7 +49,7 @@ public class Demo : MonoBehaviour {
 		{
 			print(ssdk == null);
 
-			ssdk.Authorize(PlatformType.WeChat);
+			ssdk.Authorize(PlatformType.QQ);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
