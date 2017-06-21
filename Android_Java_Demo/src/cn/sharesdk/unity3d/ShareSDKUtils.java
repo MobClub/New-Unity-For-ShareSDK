@@ -199,7 +199,7 @@ public class ShareSDKUtils implements Callback{
 		Platform plat = ShareSDK.getPlatform(name);
 		Hashon hashon = new Hashon();
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(plat.isClientValid()){
+		if(plat.isAuthValid()){
 			map.put("expiresIn", plat.getDb().getExpiresIn());
 			map.put("expiresTime", plat.getDb().getExpiresTime());
 			map.put("token", plat.getDb().getToken());
