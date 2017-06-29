@@ -13,6 +13,7 @@ import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+import cn.sharesdk.wechat.friends.Wechat;
 
 import com.mob.MobSDK;
 import com.mob.tools.utils.Hashon;
@@ -65,7 +66,7 @@ public class ShareSDKUtils implements Callback{
 	
 	public void initSDK(String appKey,String screct){
 		if (DEBUG) {
-			System.out.println("initSDK appkey ==>>" + appKey);
+			System.out.println("initSDK appkey ==>>" + appKey + "appscrect ==>>" + screct);
 		}
 		if (!TextUtils.isEmpty(appKey) && !TextUtils.isEmpty(screct)) {
 			MobSDK.init(context, appKey,screct);
@@ -203,6 +204,7 @@ public class ShareSDKUtils implements Callback{
 			map.put("expiresIn", plat.getDb().getExpiresIn());
 			map.put("expiresTime", plat.getDb().getExpiresTime());
 			map.put("token", plat.getDb().getToken());
+			map.put("refresh_token", plat.getDb().get("refresh_token"));
 			map.put("tokenSecret", plat.getDb().getTokenSecret());
 			map.put("userGender", plat.getDb().getUserGender());
 			map.put("userID", plat.getDb().getUserId());
@@ -228,6 +230,7 @@ public class ShareSDKUtils implements Callback{
 				String configs = (String) msg.obj;
 				Hashon hashon = new Hashon();
 				HashMap<String, Object> devInfo = hashon.fromJson(configs);
+				ShareSDK.getPlatformList();
 				for(Entry<String, Object> entry: devInfo.entrySet()){
 					String p = ShareSDK.platformIdToName(Integer.parseInt(entry.getKey()));
 					if (p != null) {
@@ -338,7 +341,9 @@ public class ShareSDKUtils implements Callback{
 				}
 				if (map.containsKey("url")) {
 					oks.setUrl((String)map.get("url"));
-					oks.setTitleUrl((String)map.get("url"));
+				}
+				if (map.containsKey("titleUrl")) {
+					oks.setTitleUrl((String)map.get("titleUrl"));
 				}
 				if (map.containsKey("site")) {
 					oks.setSite((String)map.get("site"));
@@ -347,7 +352,7 @@ public class ShareSDKUtils implements Callback{
 					oks.setSiteUrl((String)map.get("siteUrl"));
 				}
 				if (map.containsKey("musicUrl")) {
-					oks.setSiteUrl((String)map.get("musicUrl"));
+					oks.setMusicUrl((String)map.get("musicUrl"));
 				}
 				if (map.containsKey("shareType")) {
 					if ("6".equals(String.valueOf(map.get("shareType")))) {

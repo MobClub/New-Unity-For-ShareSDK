@@ -26,6 +26,7 @@ public class Unity3dPlatformActionListener implements PlatformActionListener{
 	}
 
 	public void onError(Platform platform, int action, Throwable t) {
+		t.printStackTrace();
 		String resp = javaActionResToCS(platform, action, t);
 		UnityPlayer.UnitySendMessage(u3dGameObject, u3dCallback, resp);
 	}
