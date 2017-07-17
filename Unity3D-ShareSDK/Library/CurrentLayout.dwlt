@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 11
-    y: 49
+    x: 20
+    y: 51
     width: 1818
     height: 1022
   m_ShowMode: 4
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 70
+  controlID: 21
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1818
     height: 1022
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 71
+  controlID: 22
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 46
+  controlID: 23
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -309,8 +309,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 11
-    y: 435
+    x: 20
+    y: 437
     width: 1322
     height: 614
   m_SearchFilter:
@@ -334,9 +334,9 @@ MonoBehaviour:
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ee240000
-    m_LastClickedID: 9454
-    m_ExpandedIDs: 00000000ee240000622500009a250000a4250000bc250000f425000024260000302600005c26000000ca9a3bffffff7f
+    m_SelectedIDs: ec240000
+    m_LastClickedID: 9452
+    m_ExpandedIDs: 00000000ec240000602500009a250000f825000026260000322600006026000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ee240000622500009a250000a4250000bc250000f425000024260000302600005c260000
+    m_ExpandedIDs: 00000000ec240000602500009a250000f8250000262600003226000060260000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -441,8 +441,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 1337
-    y: 98
+    x: 1346
+    y: 100
     width: 492
     height: 951
   m_ScrollPosition: {x: 0, y: 0}
@@ -474,8 +474,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 11
-    y: 98
+    x: 20
+    y: 100
     width: 326
     height: 316
   m_TreeViewState:
@@ -501,7 +501,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - test
+  - ShareSDK-Unity
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -527,8 +527,8 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 341
-    y: 98
+    x: 350
+    y: 100
     width: 992
     height: 316
   m_SceneLighting: 1
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_LastLockedObject: {fileID: 0}
-  m_ViewIsLockedToObject: 1
+  m_ViewIsLockedToObject: 0
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 11
-    y: 435
+    x: 20
+    y: 437
     width: 1322
     height: 614

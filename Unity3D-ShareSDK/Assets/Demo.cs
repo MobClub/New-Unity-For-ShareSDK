@@ -81,8 +81,10 @@ public class Demo : MonoBehaviour {
 			content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
 			//优先客户端分享
 			// content.SetEnableClientShare(true);
-			//使用微博高级接口进行本地图片 文字 应用内分享 17年6月30日后需申请高级接口
-			// content.SetEnableAdvancedInterfaceShare(true);
+
+			//使用微博API接口应用内分享 iOS only
+			 // content.SetEnableSinaWeiboAPIShare(true);
+
 			//通过分享菜单分享
 			ssdk.ShowPlatformList (null, content, 100, 100);
 		}

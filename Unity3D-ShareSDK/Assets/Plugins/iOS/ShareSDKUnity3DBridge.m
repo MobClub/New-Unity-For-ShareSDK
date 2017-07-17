@@ -772,15 +772,25 @@ extern "C" {
                 }
             }
             
-            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+            //v4.0.1 弃用
+//            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+//            {
+//                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
+//                if (enable > 0)
+//                {
+//                    [params SSDKEnableAdvancedInterfaceShare];
+//                }
+//            }
+            
+            //使用新浪微博 api进行分享
+            if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
             {
-                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
+                NSInteger enable = [[shareParamsDic objectForKey:@"apiShare"] integerValue];
                 if (enable > 0)
                 {
-                    [params SSDKEnableAdvancedInterfaceShare];
+                    [params SSDKEnableSinaWeiboAPIShare];
                 }
             }
-            
             
             [params SSDKSetupShareParamsByText:text
                                         images:imageArray
@@ -848,12 +858,23 @@ extern "C" {
                         }
                     }
                     
-                    if ([[value objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+                    //v4.0.1 弃用
+                    //            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+                    //            {
+                    //                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
+                    //                if (enable > 0)
+                    //                {
+                    //                    [params SSDKEnableAdvancedInterfaceShare];
+                    //                }
+                    //            }
+                    
+                    //使用新浪微博 api进行分享
+                    if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
                     {
-                        NSInteger enable = [[value objectForKey:@"advancedShare"] integerValue];
+                        NSInteger enable = [[shareParamsDic objectForKey:@"apiShare"] integerValue];
                         if (enable > 0)
                         {
-                            [params SSDKEnableAdvancedInterfaceShare];
+                            [params SSDKEnableSinaWeiboAPIShare];
                         }
                     }
                     
@@ -1147,12 +1168,23 @@ extern "C" {
                         }
                     }
                     
-                    if ([[value objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+                    //v4.0.1 弃用
+                    //            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
+                    //            {
+                    //                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
+                    //                if (enable > 0)
+                    //                {
+                    //                    [params SSDKEnableAdvancedInterfaceShare];
+                    //                }
+                    //            }
+                    
+                    //使用新浪微博 api进行分享
+                    if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
                     {
-                        NSInteger enable = [[value objectForKey:@"advancedShare"] integerValue];
+                        NSInteger enable = [[shareParamsDic objectForKey:@"apiShare"] integerValue];
                         if (enable > 0)
                         {
-                            [params SSDKEnableAdvancedInterfaceShare];
+                            [params SSDKEnableSinaWeiboAPIShare];
                         }
                     }
                     

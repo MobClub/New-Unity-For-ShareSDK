@@ -376,7 +376,12 @@ namespace cn.sharesdk.unity3d
 			shareParams ["clientShare"] = enalble;
 		}
 
-		//iOS Only 应用内分享时使用微博高级接口 v3.6.3
+		//iOS Only 用于启用新浪微博的api分享
+		public void SetEnableSinaWeiboAPIShare(bool enalble){
+			shareParams ["apiShare"] = enalble;
+		}
+
+		//iOS Only 应用内分享时使用微博高级接口 v3.6.3  v4.0.1 弃用
 		public void SetEnableAdvancedInterfaceShare(bool enalble){
 			shareParams ["advancedShare"] = enalble;
 		}
