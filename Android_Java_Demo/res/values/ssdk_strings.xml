@@ -16,6 +16,7 @@
     <string name="ssdk_laiwang_client_inavailable">目前您的来往版本过低或未安装，需要安装来往才能使用</string>
     <string name="ssdk_alipay_client_inavailable">目前您的支付宝版本过低或未安装，需要安装支付宝才能使用</string>
     <string name="ssdk_facebookmessenger_client_inavailable">目前您的FacebookMessenger版本过低或未安装，需要安装才能使用</string>
+	<string name="ssdk_dont_keep_activitys_client">由于您已开启 不保留活动 ,导致授权功能无法正常使用.我们建议您点击左下方 设置 按钮,在 开发者选项 中关闭 不保留活动 功能.</string>
     
 	<string name="ssdk_sinaweibo">新浪微博</string>
 	<string name="ssdk_tencentweibo">腾讯微博</string>
@@ -82,4 +83,19 @@
 	<string name="ssdk_gender_male">男</string>
 	<string name="ssdk_gender_female">女</string>
 	<string name="ssdk_symbol_ellipsis">...</string>
+
+	<!--sina web -->
+	<string name="ssdk_share_sina_web_close">关闭</string>
+	<string name="ssdk_share_sina_web_net_error">网络出错啦，请点击按钮重新加载</string>
+	<string name="ssdk_share_sina_web_refresh">重新加载</string>
+	<string name="ssdk_share_sina_web_title">微博分享</string>
+
+	
+	<!-- 短信登录资源 -->
+	<string name="ssdk_sms_btn_next">下一步</string>
+	<string name="ssdk_sms_btn_submit">提交</string>
+	<string name="ssdk_sms_dialog_btn_cancel">取消</string>
+	<string name="ssdk_sms_dialog_btn_ok">好</string>
+	<string name="ssdk_sms_dialog_title">确认手机号码</string>
+	<string name="ssdk_sms_dialog_text">我们将发送验证码短信到这个手机号码：%s</string>
 </resources>
