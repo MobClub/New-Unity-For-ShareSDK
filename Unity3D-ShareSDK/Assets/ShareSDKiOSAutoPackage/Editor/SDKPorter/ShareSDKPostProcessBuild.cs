@@ -144,7 +144,7 @@ public static class ShareSDKPostProcessBuild
 		 ShareSDKConfig theConfig;
 		 try
 		 {
-		 	string filePath = Application.dataPath + "/Plugins/ShareSDK/ShareSDKConfig.bin";
+		 	string filePath = Application.dataPath + "/Plugins/ShareSDK/Editor/ShareSDKConfig.bin";
 		 	BinaryFormatter formatter = new BinaryFormatter();
 		 	Stream destream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 		 	ShareSDKConfig config = (ShareSDKConfig)formatter.Deserialize(destream);

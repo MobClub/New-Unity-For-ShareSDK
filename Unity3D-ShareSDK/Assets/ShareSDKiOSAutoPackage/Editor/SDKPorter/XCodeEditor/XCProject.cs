@@ -610,7 +610,7 @@ namespace cn.sharesdk.unity3d.sdkporter
 				DirectoryInfo di = new DirectoryInfo(dirpath + "/__MACOSX");
 				di.Delete(true);
 
-				if (sdkName == "ShareSDK") 
+				if (sdkName == "SDK") 
 				{
 					//根据Editor所勾选执行删除工作
 					DeleteUnnecessaryFile();
