@@ -47,7 +47,7 @@ public class ShareSDKConfigEditor : Editor {
 		{
 			try
 			{
-					string filePath = Application.dataPath + "/Plugins/ShareSDK/Editor/ShareSDKConfig.bin";
+					string filePath = Application.dataPath + "/Plugins/ShareSDK/ShareSDKConfig.bin";
 					BinaryFormatter formatter = new BinaryFormatter();
 					Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
 					formatter.Serialize(stream, this.config);
