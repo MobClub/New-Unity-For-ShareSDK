@@ -26,6 +26,7 @@ public class OnekeySharePage extends FakeActivity {
 	}
 
 	/** 分享界面是否弹窗模式 */
+
 	protected final boolean isDialogMode() {
 		return impl.dialogMode;
 	}

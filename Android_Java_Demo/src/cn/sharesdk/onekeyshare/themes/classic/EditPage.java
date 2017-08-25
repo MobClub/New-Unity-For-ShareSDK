@@ -12,12 +12,14 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -29,6 +31,7 @@ import android.widget.Toast;
 import com.mob.MobSDK;
 import com.mob.tools.gui.AsyncImageView;
 import com.mob.tools.utils.DeviceHelper;
+import com.mob.tools.utils.ReflectHelper;
 import com.mob.tools.utils.ResHelper;
 
 import java.util.ArrayList;
@@ -77,20 +80,21 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		this.sp = sp;
 	}
 
-	public void setActivity(Activity activity) {
-		super.setActivity(activity);
+	@Override
+	protected int onSetTheme(int resid, boolean atLaunch) {
 		if (isDialogMode()) {
-//			activity.setTheme(android.R.style.Theme_Dialog);
-//			activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//			if (Build.VERSION.SDK_INT >= 11) {
-//				try {
-//					ReflectHelper.invokeInstanceMethod(activity, "setFinishOnTouchOutside", false);
-//				} catch (Throwable e) {}
-//			}
+			activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			if (Build.VERSION.SDK_INT >= 11) {
+				try {
+					ReflectHelper.invokeInstanceMethod(activity, "setFinishOnTouchOutside", false);
+				} catch (Throwable e) {}
+			}
+			return android.R.style.Theme_Dialog;
+		} else {
+			activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+					| WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 		}
-
-		activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
-				| WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+		return super.onSetTheme(resid, atLaunch);
 	}
 
 	public void onCreate() {

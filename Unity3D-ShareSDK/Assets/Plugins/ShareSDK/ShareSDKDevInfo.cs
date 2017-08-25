@@ -76,7 +76,6 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
-		public bool ShareByWebApi = true;
 		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SinaWeibo;
@@ -584,6 +583,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		public string SortId = "31";
+		public string AppKey="48d3f524e4a636b08d81b3ceb50f1003";
 		public const int type = (int) PlatformType.KakaoTalk;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoTalk;
@@ -593,12 +593,13 @@ namespace cn.sharesdk.unity3d
 		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
-	
+
 	[Serializable]
 	public class KakaoStory : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "32";
+		public string AppKey="48d3f524e4a636b08d81b3ceb50f1003";
 		public const int type = (int) PlatformType.KakaoStory;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoStory;
