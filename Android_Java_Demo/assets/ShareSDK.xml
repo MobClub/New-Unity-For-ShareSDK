@@ -49,11 +49,9 @@
     -->
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false, -->
-	<!-- 1、ShareByWebApi是否使用新街口，true是使用新浪API接口分享，false为新浪H5网页分享
+	<!-- 1、isNewApi是否使用新街口，true是使用新接口，false为老接口
 		 2、用户分享到微博的文本内容，必须做URLencode，内容不超过140个汉字，文本中不能包含“#话题词#”，同时文本中必须包含至少一个第三方分享到微博的网页URL，
 		且该URL只能是该第三方（调用方）绑定域下的URL链接，绑定域在“我的应用 － 应用信息 － 基本应用信息编辑 － 安全域名”里设置。-->
-	<!--在ShareByAppClient为false，ShareByWebApi = "false"时，分享会调用Web页面分享{调用web分享，需集成res资源文件，以及libs下的so库}，
-		在ShareByAppClient为false，ShareByWebApi = "true"时，会走API方式分享-->
     <SinaWeibo
         Id="1"
         SortId="1"
@@ -61,6 +59,7 @@
         AppSecret="38a4f8204cc784f81f9f0daaf31e02e3"
         RedirectUrl="http://www.sharesdk.cn"
         ShareByAppClient="true"
+		IsNewApi = "true"
         Enable="true" />
 
     <TencentWeibo
@@ -76,7 +75,6 @@
         SortId="3"
         AppId="100371282"
         AppKey="aed9b0303e3ed1e27bae87c33761161d"
-		BypassApproval="true"
         Enable="true" />
     
     <!-- 
@@ -98,8 +96,8 @@
         AppId="wx4868b35061f87885"
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
 		userName="gh_afb25ac019c9"
-		path="pages/index/index.html?id=1"
-        BypassApproval="true"
+		path="/page/API/pages/share/share"
+        BypassApproval="false"
         Enable="true" />
     
     <WechatMoments
@@ -107,7 +105,7 @@
         SortId="5"
         AppId="wx4868b35061f87885"
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        BypassApproval="true"
+        BypassApproval="false"
         Enable="true" />
         
 	<WechatFavorite
@@ -123,8 +121,7 @@
         SortId="7"
         AppId="100371282"
         AppKey="aed9b0303e3ed1e27bae87c33761161d"
-        ShareByAppClient ="true"
-		BypassApproval = "false"
+        ShareByAppClient="true"
         Enable="true" />
     
     <Facebook
@@ -132,7 +129,7 @@
         SortId="8"
         ConsumerKey="107704292745179"
         ConsumerSecret="38053202e1a5fe26c80c753071f0b573"
-        RedirectUrl="fbconnect://success"
+        RedirectUrl="http://mob.com"
 		ShareByAppClient="true"
 		Enable="true" />
 
@@ -212,7 +209,7 @@
         ApiKey="ejo5ibkye3vo"
         SecretKey="cC7B2jpxITqPLZ5M" 
         RedirectUrl="http://sharesdk.cn"
-		ShareByAppClient="false"
+		ShareByAppClient="true"
         Enable="true" />
     
      <GooglePlus
@@ -250,7 +247,7 @@
         SortId="25"
         OAuthConsumerKey="2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM"
 		SecretKey="3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo"
-		CallbackUrl="http://www.sharesdk.cn"
+		CallbackUrl="http://sharesdk.cn"
         Enable="true" />
  
 	<Dropbox

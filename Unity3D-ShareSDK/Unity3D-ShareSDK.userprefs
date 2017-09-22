@@ -1,8 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/XCProject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/PlatformType.cs">
     <Files>
-      <File FileName="Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/XCProject.cs" Line="802" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="64" Column="2" />
+      <File FileName="Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/XCProject.cs" Line="28" Column="3" />
+      <File FileName="Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/PBXObject.cs" Line="1" Column="1" />
+      <File FileName="Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/PBXBuildFile.cs" Line="1" Column="1" />
+      <File FileName="Assets/ShareSDKiOSAutoPackage/Editor/SDKPorter/XCodeEditor/XCTarget.cs" Line="15" Column="2" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="72" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

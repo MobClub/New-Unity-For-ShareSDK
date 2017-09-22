@@ -8,6 +8,7 @@ using UnityEditor;
 
 namespace cn.sharesdk.unity3d
 {
+	#if UNITY_IPHONE
 [CustomEditor(typeof(ShareSDK))]
 [ExecuteInEditMode]
 public class ShareSDKConfigEditor : Editor {
@@ -47,7 +48,7 @@ public class ShareSDKConfigEditor : Editor {
 		{
 			try
 			{
-					string filePath = Application.dataPath + "/Plugins/ShareSDK/ShareSDKConfig.bin";
+					string filePath = Application.dataPath + "/Plugins/ShareSDK/Editor/ShareSDKConfig.bin";
 					BinaryFormatter formatter = new BinaryFormatter();
 					Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
 					formatter.Serialize(stream, this.config);
@@ -60,4 +61,6 @@ public class ShareSDKConfigEditor : Editor {
 			}
 		}
 	}
+
+	#endif
 }
