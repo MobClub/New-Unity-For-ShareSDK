@@ -39,31 +39,42 @@ public class Demo : MonoBehaviour {
 			scale = Screen.width / 320;
 		}
 		
-		float btnWidth = 165 * scale;
-		float btnHeight = 30 * scale;
-		float btnTop = 20 * scale;
+		//float btnWidth = 165 * scale;
+		float btnWidth= Screen.width / 5 * 2;
+		float btnHeight = Screen.height / 25;
+		float btnTop = 30 * scale;
 		float btnGap = 20 * scale;
-		GUI.skin.button.fontSize = Convert.ToInt32(14 * scale);
+		GUI.skin.button.fontSize = Convert.ToInt32(28 * scale);
 
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Authorize"))
 		{
 			print(ssdk == null);
-
 			ssdk.Authorize(PlatformType.QQ);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
 		{
-			ssdk.GetUserInfo(PlatformType.SinaWeibo);
+			ssdk.GetUserInfo(PlatformType.QQ);
 		}
 
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Show Share Menu"))
 		{
 			ShareContent content = new ShareContent();
+
+			//(Android only) 隐藏九宫格里面不需要用到的平台（仅仅是不显示平台）
+			//(Android only) 也可以把jar包删除或者把Enabl属性e改成false（对应平台的全部功能将用不了）
+			String[] platfsList = { ((int)PlatformType.QQ).ToString(), ((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString() };
+			content.SetHidePlatforms (platfsList);
+
 			content.SetText("this is a test string.");
 			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
 			content.SetTitle("test title");
+
+			//(Android only) 针对Android绕过审核的多图分享，传图片String数组 
+			String[] imageArray =  {"/sdcard/test.jpg", "http://f1.webshare.mob.com/dimgs/1c950a7b02087bf41bc56f07f7d3572c11dfcf36.jpg", "/sdcard/test.jpg"};
+			content.SetImageArray (imageArray);
+
 			content.SetTitleUrl("http://www.mob.com");
 			content.SetSite("Mob-ShareSDK");
 			content.SetSiteUrl("http://www.mob.com");
@@ -183,13 +194,23 @@ public class Demo : MonoBehaviour {
 			ssdk.ShowShareContentEditorWithContentName(PlatformType.SinaWeibo, "ShareSDK", customFields);		
 		}
 
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "SMS Authorize"))
+		{
+			ssdk.Authorize(PlatformType.SMS);		
+		}
+
 	}
 	
 	void OnAuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
 		if (state == ResponseState.Success)
 		{
-			print ("authorize success !" + "Platform :" + type);
+			if (result.Count > 0) {
+				print ("authorize success !" + "Platform :" + type + "result:" + MiniJSON.jsonEncode(result));
+			} else {
+				print ("authorize success !" + "Platform :" + type);
+			}
 		}
 		else if (state == ResponseState.Fail)
 		{
@@ -211,7 +232,7 @@ public class Demo : MonoBehaviour {
 		{
 			print ("get user info result :");
 			print (MiniJSON.jsonEncode(result));
-			print ("AuthInfo:" + MiniJSON.jsonEncode (ssdk.GetAuthInfo (PlatformType.SinaWeibo)));
+			print ("AuthInfo:" + MiniJSON.jsonEncode (ssdk.GetAuthInfo (PlatformType.QQ)));
 			print ("Get userInfo success !Platform :" + type );
 		}
 		else if (state == ResponseState.Fail)

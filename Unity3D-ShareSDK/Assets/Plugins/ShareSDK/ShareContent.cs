@@ -22,6 +22,11 @@ namespace cn.sharesdk.unity3d
 		Hashtable shareParams = new Hashtable();
 		Hashtable customizeShareParams = new Hashtable();
 
+		/*Android Only- 隐藏九宫格的平台（平台id数组,例如：(int)PlatformType.Facebook）*/
+		public void SetHidePlatforms(String[] hidePlatformList) {
+			shareParams["hidePlatformList"] = String.Join (",", hidePlatformList);
+		}
+
 		/*iOS/Android*/
 		public void SetTitle(String title) {
 			shareParams["title"] = title;
@@ -49,6 +54,11 @@ namespace cn.sharesdk.unity3d
 		/*iOS/Android - 网络图片路径*/
 		public void SetImageUrl(String imageUrl) {
 			shareParams["imageUrl"] = imageUrl;
+		}
+
+		/*Android Only- 图片string数组（多图分享）*/
+		public void SetImageArray(String[] imageArray) {
+			shareParams["imageArray"] = String.Join(",", imageArray);
 		}
 
 		/*iOS/Android - 分享类型*/

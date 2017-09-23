@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
@@ -13,10 +15,11 @@ import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
-import cn.sharesdk.wechat.friends.Wechat;
 
 import com.mob.MobSDK;
+import com.mob.tools.utils.ApplicationTracker;
 import com.mob.tools.utils.Hashon;
+import com.mob.tools.utils.ReflectHelper;
 import com.mob.tools.utils.UIHandler;
 import com.unity3d.player.UnityPlayer;
 
@@ -280,7 +283,6 @@ public class ShareSDKUtils implements Callback{
 					}
 					HashMap<String, Object> data = hashon.fromJson(content);
 					ShareParams sp = new ShareParams(data);
-					//不同平台，分享不同内容
 					if (data.containsKey("customizeShareParams")) {
 						final HashMap<String, String> customizeSP = (HashMap<String, String>) data.get("customizeShareParams");
 						if (customizeSP.size() > 0) {
@@ -324,6 +326,15 @@ public class ShareSDKUtils implements Callback{
 						oks.setSilent(false);
 					}
 				}
+				if (map.containsKey("hidePlatformList")) {
+					String hidePlatformList = (String)map.get("hidePlatformList");
+					String[] stringList = hidePlatformList.split(",");
+					int platformId;
+					for (int i = 0; i < stringList.length; i++) {
+						platformId = Integer.parseInt(stringList[i]);
+						oks.addHiddenPlatform(ShareSDK.platformIdToName(platformId));
+					}
+				}
 				if (map.containsKey("text")) {
 					oks.setText((String)map.get("text"));
 				}
@@ -332,6 +343,11 @@ public class ShareSDKUtils implements Callback{
 				}
 				if (map.containsKey("imageUrl")) {
 					oks.setImageUrl((String)map.get("imageUrl"));
+				}
+				if (map.containsKey("imageArray")) {
+					String imageString = (String)map.get("imageArray");
+					String[] imageArray = imageString.split(",");
+					oks.setImageArray(imageArray);
 				}
 				if (map.containsKey("title")) {
 					oks.setTitle((String)map.get("title"));
@@ -361,7 +377,6 @@ public class ShareSDKUtils implements Callback{
 						}
 					}
 				}
-				//不同平台，分享不同内容
 				if (map.containsKey("customizeShareParams")) {
 					final HashMap<String, String> customizeSP = (HashMap<String, String>) map.get("customizeShareParams");
 					if (customizeSP.size() > 0) {

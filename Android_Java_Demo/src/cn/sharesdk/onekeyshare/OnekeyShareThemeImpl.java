@@ -119,6 +119,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 				|| "AlipayMoments".equals(name) || "FacebookMessenger".equals(name)
 				|| "GooglePlus".equals(name) || "Dingding".equals(name)
 				|| "Youtube".equals(name) || "Meipai".equals(name)
+				|| "Telegram".equals(name)
 				) {
 			return true;
 		} else if ("Evernote".equals(name)) {
@@ -248,6 +249,11 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 
 		if ("FacebookMessenger".equals(name) && !plat.isClientValid()) {
 			toast("ssdk_facebookmessenger_client_inavailable");
+			return false;
+		}
+
+		if ("Telegram".equals(name) && !plat.isClientValid()) {
+			toast("ssdk_telegram_client_inavailable");
 			return false;
 		}
 

@@ -12,7 +12,7 @@ namespace cn.sharesdk.unity3d
 		public Facebook facebook;
 		public Twitter twitter;
 		public Email email;
-		public ShortMessage shortMessage;
+		public SMS sms;
 		public Douban douban;
 		public Renren renren;
 		public GooglePlus googlePlus;
@@ -47,8 +47,10 @@ namespace cn.sharesdk.unity3d
 		public Youtube youtube;
 		public MeiPai meiPai;
 
+
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
+		public Telegram telegram;
 		#elif UNITY_IPHONE		
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
@@ -76,7 +78,6 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
-		public bool ShareByWebApi  = true;
 		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SinaWeibo;
@@ -112,6 +113,7 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "2";
 		public string AppId = "100371282";
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
+		public bool BypassApproval = true;
 		public bool ShareByAppClient = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQ;
@@ -129,7 +131,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QZone;
 		public string AppId = "100371282";
 		public string AppKey = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
-		public bool ShareByAppClient = true;
+		public bool BypassApproval = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QZone;
 		public string app_id = "100371282";
@@ -195,9 +197,9 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "8";
 		public const int type = (int) PlatformType.Facebook;
-		public string ConsumerKey = "1412473428822331";
-		public string ConsumerSecret = "a42f4f3f867dc947b9ed6020c2e93558";
-		public string RedirectUrl = "https://mob.com/";
+		public string ConsumerKey = "107704292745179";
+		public string ConsumerSecret = "38053202e1a5fe26c80c753071f0b573";
+		public string RedirectUrl = "http://mob.com/";
 		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Facebook;
@@ -272,7 +274,7 @@ namespace cn.sharesdk.unity3d
 	}
 
 	[Serializable]
-	public class ShortMessage : DevInfo 
+	public class SMS : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "13";
@@ -584,6 +586,7 @@ namespace cn.sharesdk.unity3d
 	{
 		#if UNITY_ANDROID
 		public string SortId = "31";
+		public string AppKey="48d3f524e4a636b08d81b3ceb50f1003";
 		public const int type = (int) PlatformType.KakaoTalk;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoTalk;
@@ -593,12 +596,13 @@ namespace cn.sharesdk.unity3d
 		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
-	
+
 	[Serializable]
 	public class KakaoStory : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "32";
+		public string AppKey="48d3f524e4a636b08d81b3ceb50f1003";
 		public const int type = (int) PlatformType.KakaoStory;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoStory;
@@ -826,6 +830,15 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.MeiPai;
 		public string app_key = "1089867596";
+		#endif
+	}
+	[Serializable]
+	public class Telegram : DevInfo
+	{
+		#if UNITY_ANDROID
+		public string SortId = "47";
+		public const int type = (int) PlatformType.Telegram;
+		#elif UNITY_IPHONE
 		#endif
 	}
 

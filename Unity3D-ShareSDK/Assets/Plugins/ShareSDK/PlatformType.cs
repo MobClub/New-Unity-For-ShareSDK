@@ -69,6 +69,7 @@ namespace cn.sharesdk.unity3d
 		WechatPlatform = 22,  
 		QQPlatform = 24,
 		YixinPlatform = 38,
+		Telegram = 47,         //Telegram
 		#elif UNITY_IPHONE	
 		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series

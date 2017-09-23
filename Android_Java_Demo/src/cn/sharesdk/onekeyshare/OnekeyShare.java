@@ -82,6 +82,13 @@ public class OnekeyShare {
 		}
 	}
 
+	/** imageData是bitmap图片，微信、易信支持此字段 */
+	public void setImageData(String iamgeData) {
+		if(!TextUtils.isEmpty(iamgeData)) {
+			params.put("imageData", iamgeData);
+		}
+	}
+
 	/** url在微信（包括好友、朋友圈收藏）和易信（包括好友和朋友圈）中使用，否则可以不提供 */
 	public void setUrl(String url) {
 		params.put("url", url);
@@ -130,6 +137,10 @@ public class OnekeyShare {
 	/** 是否直接分享 */
 	public void setSilent(boolean silent) {
 		params.put("silent", silent);
+	}
+
+	public void setDialogMode(boolean isDialog) {
+		params.put("dialogMode", isDialog);
 	}
 
 	/** 设置编辑页的初始化选中平台 */

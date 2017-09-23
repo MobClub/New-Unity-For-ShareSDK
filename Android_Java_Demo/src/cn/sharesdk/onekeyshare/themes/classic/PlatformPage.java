@@ -198,5 +198,4 @@ public abstract class PlatformPage extends OnekeySharePage {
 		llPanel.setVisibility(View.GONE);
 		return true;
 	}
-
 }
