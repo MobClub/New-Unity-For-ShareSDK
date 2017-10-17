@@ -26,7 +26,7 @@
 //#define __SHARESDK_KAKAO__
 #define __SHARESDK_YIXIN__
 #define __SHARESDK_FACEBOOK_MSG__
-#define __SHARESDK_ALIPAYSOCIAL__
+//#define __SHARESDK_ALISOCIAL__
 //#define __SHARESDK_DINGTALK__
 //#define __SHARESDK_MEIPAI__
 
@@ -59,7 +59,7 @@
 #import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 #endif
 
-#ifdef __SHARESDK_ALIPAYSOCIAL__
+#ifdef __SHARESDK_ALISOCIAL__
 #import "APOpenAPI.h"
 #endif
 
@@ -2481,7 +2481,7 @@ extern "C" {
                 
                 
                 //支付宝好友
-                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocial]]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliSocial]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -2511,17 +2511,17 @@ extern "C" {
                         type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
-                    [params SSDKSetupAliPaySocialParamsByText:text
-                                                        image:img
-                                                        title:title
-                                                          url:[NSURL URLWithString:url]
-                                                         type:type
-                                                 platformType:SSDKPlatformTypeAliPaySocial];
+                    [params SSDKSetupAliSocialParamsByText:text
+                                                     image:img
+                                                     title:title
+                                                       url:[NSURL URLWithString:url]
+                                                     type:type
+                                              platformType:SSDKPlatformTypeAliSocial];
                     
                 }
                 
                 //支付宝朋友圈
-                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocialTimeline]]];
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliSocialTimeline]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
                     NSString *text = nil;
@@ -2551,12 +2551,12 @@ extern "C" {
                         type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
-                    [params SSDKSetupAliPaySocialParamsByText:text
-                                                        image:img
-                                                        title:title
-                                                          url:[NSURL URLWithString:url]
-                                                         type:type
-                                                 platformType:SSDKPlatformTypeAliPaySocialTimeline];
+                    [params SSDKSetupAliSocialParamsByText:text
+                                                     image:img
+                                                     title:title
+                                                       url:[NSURL URLWithString:url]
+                                                      type:type
+                                              platformType:SSDKPlatformTypeAliSocialTimeline];
                     
                 }
                 
@@ -2835,9 +2835,9 @@ extern "C" {
                                  [ShareSDKConnector connectFacebookMessenger:[FBSDKMessengerSharer class]];
 #endif
                                  break;
-                             case SSDKPlatformTypeAliPaySocial:
-#ifdef __SHARESDK_ALIPAYSOCIAL__
-                                 [ShareSDKConnector connectAliPaySocial:[APOpenAPI class]];
+                             case SSDKPlatformTypeAliSocial:
+#ifdef __SHARESDK_ALISOCIAL__
+                                 [ShareSDKConnector connectAliSocial:[APOpenAPI class]];
 #endif
                                  break;
                              case SSDKPlatformTypeDingTalk:
@@ -2944,18 +2944,18 @@ extern "C" {
                                  }];
                                  break;
                              }
-                             case SSDKPlatformTypeAliPaySocial:
+                             case SSDKPlatformTypeAliSocial:
                              {
                                  NSDictionary *platformDict = nil;
-                                 NSDictionary *dictFromAliPaySocial = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocial]];
-                                 NSDictionary *dictFromAliPaySocialTimeline = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliPaySocialTimeline]];
-                                 if (dictFromAliPaySocial)
+                                 NSDictionary *dictFromAliSocial = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliSocial]];
+                                 NSDictionary *dictFromAliSocialTimeline = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeAliSocialTimeline]];
+                                 if (dictFromAliSocial)
                                  {
-                                     platformDict = dictFromAliPaySocial;
+                                     platformDict = dictFromAliSocial;
                                  }
                                  else
                                  {
-                                     platformDict = dictFromAliPaySocialTimeline;
+                                     platformDict = dictFromAliSocialTimeline;
                                  }
                                  [appInfo addEntriesFromDictionary:platformDict];
                                  break;

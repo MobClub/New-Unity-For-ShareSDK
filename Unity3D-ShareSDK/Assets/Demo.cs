@@ -44,7 +44,7 @@ public class Demo : MonoBehaviour {
 		float btnHeight = Screen.height / 25;
 		float btnTop = 30 * scale;
 		float btnGap = 20 * scale;
-		GUI.skin.button.fontSize = Convert.ToInt32(28 * scale);
+		GUI.skin.button.fontSize = Convert.ToInt32(13 * scale);
 
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Authorize"))
 		{

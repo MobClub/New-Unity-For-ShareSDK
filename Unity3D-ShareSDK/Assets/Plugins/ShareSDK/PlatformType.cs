@@ -56,8 +56,8 @@ namespace cn.sharesdk.unity3d
 		KakaoStory = 45,        //KakaoStory 
 		FacebookMessenger = 46, //FacebookMessenger
 		Bluetooth = 48,         //Bluetooth
-		Alipay = 50,            //Alipay
-		AlipayMoments = 51,     //AlipayMoments
+		AliSocial = 50,            //AliSocial
+		AliSocialMoments = 51,     //AliSocialMoments
 		Dingding = 52,			//DingTalk 钉钉
 		Youtube = 53,			//youtube
 		MeiPai = 54,			//美拍
@@ -69,7 +69,6 @@ namespace cn.sharesdk.unity3d
 		WechatPlatform = 22,  
 		QQPlatform = 24,
 		YixinPlatform = 38,
-		Telegram = 47,         //Telegram
 		#elif UNITY_IPHONE	
 		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series

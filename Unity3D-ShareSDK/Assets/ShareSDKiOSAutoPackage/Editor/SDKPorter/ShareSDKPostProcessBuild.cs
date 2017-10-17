@@ -64,14 +64,6 @@ public static class ShareSDKPostProcessBuild
 				<dict>
 					<key>CFBundleURLSchemes</key>
 					<array>
-						<string>ap2015072400185895</string>
-					</array>
-					<key>CFBundleURLName</key>
-					<string>alipayShare</string>
-				</dict>
-				<dict>
-					<key>CFBundleURLSchemes</key>
-					<array>
 					<string>vk5312801</string>
 					<string>yx0d9a9f9088ea44d78680f3274da1765f</string>
 					<string>pin4797078908495202393</string>
@@ -109,11 +101,9 @@ public static class ShareSDKPostProcessBuild
 			<string>pinit</string>
 			<string>kakaolink</string>
 			<string>kakao48d3f524e4a636b08d81b3ceb50f1003</string>
-			<string>alipay</string>
 			<string>storykompassauth</string>
 			<string>pinterestsdk.v1</string>
 			<string>kakaokompassauth</string>
-			<string>alipayshare</string>
 			<string>pinit</string>
 			<string>line</string>
 			<string>whatsapp</string>
