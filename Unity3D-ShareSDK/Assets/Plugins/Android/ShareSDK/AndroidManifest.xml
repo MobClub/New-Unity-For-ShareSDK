@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -27,26 +28,13 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" >
-			
-            <!--
-            	如果集成QQ分享，或者使用QQ客户端来进行QQ空间的分享，须要在此处添加一个对ACTION_VIEW
-            	事件的过滤器，其中的scheme是“tencent”前缀再开发者应用的加上appId。如果此过滤器不设置，
-            	则分享结束以后不能得到正确的回调
-            -->
-            <intent-filter android:priority="1000" >
-                <data android:scheme="tencent100371282" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-            
-		 				<!-- 新浪回调 -->
+       
+		 	<!-- 新浪回调 -->
             <intent-filter>
-							 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-							 <category android:name="android.intent.category.DEFAULT" />
-						</intent-filter>
-						
-					 <!-- 集成Line客户端登录授权，需要添加如下格式的过滤器 -->
+				<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+						<category android:name="android.intent.category.DEFAULT" />
+				</intent-filter>
+				 <!-- 集成Line客户端登录授权，需要添加如下格式的过滤器 -->
             <intent-filter android:priority="1000">
                <action android:name="android.intent.action.VIEW" />
                <category android:name="android.intent.category.DEFAULT" />
@@ -54,7 +42,24 @@
   						 <data android:scheme="line.1477692153" />
             </intent-filter>	
         </activity>
-		
+
+        <!--
+            如果集成QQ分享，或者使用QQ客户端来进行QQ空间的分享，须要在此处添加一个回调activity，
+            对ACTION_VIEW事件的过滤器，其中的scheme是“tencent”前缀再开发者应用的加上appId。如
+            果此过滤器不设置，则分享结束以后不能得到正确的回调
+        -->
+        <activity
+            android:name="cn.sharesdk.tencent.qq.ReceiveActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent100371282" />
+            </intent-filter>
+        </activity>
+
         <!-- 微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
