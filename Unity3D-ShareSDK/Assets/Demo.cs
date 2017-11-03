@@ -206,7 +206,7 @@ public class Demo : MonoBehaviour {
 	{
 		if (state == ResponseState.Success)
 		{
-			if (result.Count > 0) {
+			if (result != null && result.Count > 0) {
 				print ("authorize success !" + "Platform :" + type + "result:" + MiniJSON.jsonEncode(result));
 			} else {
 				print ("authorize success !" + "Platform :" + type);
