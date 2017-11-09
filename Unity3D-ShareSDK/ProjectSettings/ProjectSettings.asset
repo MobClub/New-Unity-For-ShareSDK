@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 13
-  productGUID: 7045dfba6ec2a4afb9b209cf16fb81a1
+  productGUID: 7d955f936e4544407ad34ce01bbe4389
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
@@ -603,8 +603,8 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: e24d8584-bbc1-4c69-91e5-d5ce052bd786
-  projectName: Unity3D-ShareSDK
+  cloudProjectId: 3bce7d3e-3752-4ba9-a822-fe3a4cfeeffc
+  projectName: Unity3D-ShareSDK (1)
   organizationId: vhbvb
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

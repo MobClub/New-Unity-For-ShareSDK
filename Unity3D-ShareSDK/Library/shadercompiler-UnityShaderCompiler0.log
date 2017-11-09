@@ -1,2 +1,5 @@
 Base path: /Applications/Unity/Unity.app/Contents
 Cmd: initializeCompiler
+Unhandled exception: Protocol error - failed to read correct magic number
+
+Quitting shader compiler process
