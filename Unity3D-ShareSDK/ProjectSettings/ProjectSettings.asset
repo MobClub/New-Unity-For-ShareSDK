@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 13
-  productGUID: 7d955f936e4544407ad34ce01bbe4389
+  productGUID: 5d226019f74c14c70a0d1eb17c25780f
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
@@ -599,12 +599,11 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled:
-    UNet: 1
+  cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 3bce7d3e-3752-4ba9-a822-fe3a4cfeeffc
-  projectName: Unity3D-ShareSDK (1)
+  cloudProjectId: 43036235-b51f-4bd3-8f5b-a397a063a821
+  projectName: Unity3D-ShareSDK (2)
   organizationId: vhbvb
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
