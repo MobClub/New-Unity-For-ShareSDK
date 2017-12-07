@@ -76,7 +76,6 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
-		public bool ShareByWebApi  = true;
 		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SinaWeibo;
@@ -148,8 +147,8 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChat;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public string userName = "gh_afb25ac019c9@app";
-		public string path = "/page/API/pages/share/share";
+		public string UserName = "gh_afb25ac019c9@app";
+		public string Path = "/page/API/pages/share/share";
 		public bool BypassApproval = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChat;
@@ -667,9 +666,7 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "37";
 		public const int type = (int) PlatformType.FacebookMessenger;
-		public string ConsumerKey = "107704292745179";
-		public string ConsumerSecret = "38053202e1a5fe26c80c753071f0b573";
-		public string RedirectUrl = "http://mob.com";
+		public string AppId = "107704292745179";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.FacebookMessenger;
 		#endif

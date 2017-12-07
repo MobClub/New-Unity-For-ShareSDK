@@ -83,8 +83,8 @@ public class OnekeyShare {
 	}
 
 	/** imageData是bitmap图片，微信、易信支持此字段 */
-	public void setImageData(String iamgeData) {
-		if(!TextUtils.isEmpty(iamgeData)) {
+	public void setImageData(Bitmap iamgeData) {
+		if(iamgeData != null) {
 			params.put("imageData", iamgeData);
 		}
 	}

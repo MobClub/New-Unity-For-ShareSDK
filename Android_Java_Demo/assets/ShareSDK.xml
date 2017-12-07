@@ -61,7 +61,6 @@
         AppSecret="38a4f8204cc784f81f9f0daaf31e02e3"
         RedirectUrl="http://www.sharesdk.cn"
         ShareByAppClient="true"
-		ShareByWebApi = "false"
         Enable="true" />
 
     <TencentWeibo
@@ -78,6 +77,7 @@
         AppId="100371282"
         AppKey="aed9b0303e3ed1e27bae87c33761161d"
 		BypassApproval="true"
+		BypassApproval = "false"
         Enable="true" />
     
     <!-- 
@@ -98,8 +98,8 @@
         SortId="4"
         AppId="wx4868b35061f87885"
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
-		userName="gh_afb25ac019c9"
-		path="pages/index/index.html?id=1"
+		UserName="gh_afb25ac019c9"
+		Path="pages/index/index.html?id=1"
         BypassApproval="true"
         Enable="true" />
     

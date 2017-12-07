@@ -22,7 +22,7 @@ public class PlatformPageLand extends PlatformPage {
 	}
 
 	public void onCreate() {
-		requestLandscapeOrientation();
+		requestSensorLandscapeOrientation();
 		super.onCreate();
 	}
 
