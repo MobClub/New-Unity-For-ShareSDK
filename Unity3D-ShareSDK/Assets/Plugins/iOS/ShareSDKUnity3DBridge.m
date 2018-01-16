@@ -772,16 +772,6 @@ extern "C" {
                 }
             }
             
-            //v4.0.1 弃用
-//            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
-//            {
-//                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
-//                if (enable > 0)
-//                {
-//                    [params SSDKEnableAdvancedInterfaceShare];
-//                }
-//            }
-            
             //使用新浪微博 api进行分享
             if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
             {
@@ -811,9 +801,11 @@ extern "C" {
                     NSString *title = nil;
                     NSString *image = nil;
                     NSString *url = nil;
+                    NSString *video = nil;
                     double lat = 0;
                     double lng = 0;
                     NSString *objID = nil;
+                    BOOL shareToStory = NO;
                     SSDKContentType type = SSDKContentTypeWebPage;
                     
                     if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
@@ -848,7 +840,15 @@ extern "C" {
                     {
                         type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
-                    
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        video = [value objectForKey:@"videoPath"];
+                    }
+                    if ([[value objectForKey:@"isShareToStory"] isKindOfClass:[NSNumber class]])
+                    {
+                        shareToStory = [[value objectForKey:@"isShareToStory"] integerValue];
+                    }
+    
                     if ([[value objectForKey:@"clientShare"] isKindOfClass:[NSNumber class]])
                     {
                         NSInteger enable = [[value objectForKey:@"clientShare"] integerValue];
@@ -857,16 +857,6 @@ extern "C" {
                             [params SSDKEnableUseClientShare];
                         }
                     }
-                    
-                    //v4.0.1 弃用
-                    //            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
-                    //            {
-                    //                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
-                    //                if (enable > 0)
-                    //                {
-                    //                    [params SSDKEnableAdvancedInterfaceShare];
-                    //                }
-                    //            }
                     
                     //使用新浪微博 api进行分享
                     if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
@@ -880,13 +870,14 @@ extern "C" {
                     
                     [params SSDKSetupSinaWeiboShareParamsByText:text
                                                           title:title
-                                                          image:image
+                                                         images:image
+                                                          video:video
                                                             url:[NSURL URLWithString:url]
                                                        latitude:lat
                                                       longitude:lng
                                                        objectID:objID
+                                                 isShareToStory:shareToStory
                                                            type:type];
-                    
                 }
                 //腾讯微博
                 value  = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]]];
@@ -3212,10 +3203,7 @@ extern "C" {
                          {
                              NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
                              [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                             
-                             
-                             
-                             
+
                              if ([[error userInfo] objectForKey:@"error_message"])
                              {
                                  if ([[error userInfo] objectForKey:@"error_message"])

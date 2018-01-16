@@ -187,7 +187,7 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 		
-		/*iOS/Android - WhatsApp/Youtube/ MeiPai(the path must be an assetUrl path in iOS)*/
+		/*iOS/Android - WhatsApp/Youtube/ MeiPai/Sina(the path must be an assetUrl path in iOS)*/
 		public void SetVideoPath(String videoPath){
 			#if UNITY_ANDROID
 			shareParams["filePath"] = videoPath;
@@ -395,6 +395,22 @@ namespace cn.sharesdk.unity3d
 		public void SetEnableAdvancedInterfaceShare(bool enalble){
 			shareParams ["advancedShare"] = enalble;
 		}
+
+		// iOS v4.0.8 新浪微博 分享到Story开关
+		public void SetSinaShareEnableShareToStory(bool enalble){
+			shareParams ["isShareToStory"] = enalble;
+		}
+
+//		// iOS v4.0.8 微信小程序 withTicket开关
+//		public void SetMiniProgramShareWithShareTicket(bool enalble){
+//			shareParams ["withShareTicket"] = enalble;
+//		}
+//
+//		// iOS v4.0.8 分享小程序的版本（0-正式，1-开发，2-体验）
+//		public void SetMiniProgramType(int type){
+//			shareParams ["miniProgramType"] = type;
+//		}
+//
 			
 		//不同平台分享不同内容
 		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
