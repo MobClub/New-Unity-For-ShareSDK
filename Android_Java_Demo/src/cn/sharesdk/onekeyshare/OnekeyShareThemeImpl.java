@@ -38,10 +38,11 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 	protected boolean silent;
 	protected ArrayList<CustomerLogo> customerLogos;
 	protected HashMap<String, String> hiddenPlatforms;
-	protected PlatformActionListener callback;
 	protected ShareContentCustomizeCallback customizeCallback;
 	protected boolean disableSSO;
 	protected Context context;
+
+	public PlatformActionListener callback;
 
 	public OnekeyShareThemeImpl() {
 		callback = this;
@@ -129,7 +130,6 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			if(shareByAppClient && platform.isClientValid()){
 				return true;
 			} else if(shareParamsMap.containsKey("url") && !TextUtils.isEmpty((String)shareParamsMap.get("url"))){
-				System.out.println("Facebook:" + platform.getDevinfo("ShareByAppClient"));
 				return true;
 			}
 		}
@@ -149,6 +149,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 				}
 				platform.setPlatformActionListener(callback);
 				platform.share(sp);
+				callback = null;
 			}
 		}
 	}
@@ -280,6 +281,19 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 							shareType = Platform.SHARE_WEBPAGE;
 							if (shareParamsMap.containsKey("musicUrl") && !TextUtils.isEmpty((String)shareParamsMap.get("musicUrl")) && isWechat) {
 								shareType = Platform.SHARE_MUSIC;
+							}
+						}
+					} else {
+						Bitmap imageData = (Bitmap)shareParamsMap.get("imageData");
+						if(imageData != null){
+							shareType = Platform.SHARE_IMAGE;
+							if (String.valueOf(imageUrl).endsWith(".gif") && isWechat) {
+								shareType = Platform.SHARE_EMOJI;
+							} else if (shareParamsMap.containsKey("url") && !TextUtils.isEmpty((String)shareParamsMap.get("url"))) {
+								shareType = Platform.SHARE_WEBPAGE;
+								if (shareParamsMap.containsKey("musicUrl") && !TextUtils.isEmpty((String)shareParamsMap.get("musicUrl")) && isWechat) {
+									shareType = Platform.SHARE_MUSIC;
+								}
 							}
 						}
 					}

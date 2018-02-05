@@ -66,7 +66,9 @@ namespace cn.sharesdk.unity3d
 			#if UNITY_ANDROID
 			if (shareType == 0) {
 				shareType = 1;
-			}
+			} else if(shareType == 10){
+				shareType = 11;
+			} 
 			#endif
 			shareParams["shareType"] = shareType;
 		}

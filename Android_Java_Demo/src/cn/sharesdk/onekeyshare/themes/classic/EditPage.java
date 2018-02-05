@@ -120,7 +120,7 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		}
 		platform.setPlatformActionListener(getCallback());
 		platform.share(sp);
-
+		impl.callback = null;
 		finish();
 	}
 

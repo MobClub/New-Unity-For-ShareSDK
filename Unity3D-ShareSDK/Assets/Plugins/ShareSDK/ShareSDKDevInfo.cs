@@ -49,6 +49,7 @@ namespace cn.sharesdk.unity3d
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
+		public Telegram telegram;
 		#elif UNITY_IPHONE		
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
@@ -150,6 +151,8 @@ namespace cn.sharesdk.unity3d
 		public string UserName = "gh_afb25ac019c9@app";
 		public string Path = "/page/API/pages/share/share";
 		public bool BypassApproval = true;
+		public bool WithShareTicket = true;
+		public string MiniprogramType = "0";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx4868b35061f87885";
@@ -165,7 +168,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		public bool BypassApproval = false;
+		public bool BypassApproval = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string app_id = "wx4868b35061f87885";
@@ -573,6 +576,8 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "30";
 		public const int type = (int) PlatformType.Line;
+		public string ChannelID = "1477692153";
+		public string ChannelSecret = "f30c036370f2e04ade71c52eef73a9af";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Line;
 		#endif
@@ -584,6 +589,7 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "31";
 		public const int type = (int) PlatformType.KakaoTalk;
+		public string AppKey = "48d3f524e4a636b08d81b3ceb50f1003";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoTalk;
 		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
@@ -599,6 +605,7 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "32";
 		public const int type = (int) PlatformType.KakaoStory;
+		public string AppKey = "48d3f524e4a636b08d81b3ceb50f1003";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoStory;
 		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
@@ -801,6 +808,7 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "53";
 		public const int type = (int) PlatformType.Youtube;
 		public string ClientID = "370141748022-bicrnsjfiije93bvdt63dh3728m4shas.apps.googleusercontent.com";
+		public string AppSecret = "AIzaSyAO06g-0TDpHcsXXO918a7QE3Zdct2bB5E";
 		public string RedirectUrl="http://localhost";
 		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
@@ -818,12 +826,21 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "54";
 		public const int type = (int) PlatformType.MeiPai;
 		public string ClientID = "1089867596";
-		public string RedirectUrl="http://localhost";
 		public string ShareByAppClient = "true";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.MeiPai;
 		public string app_key = "1089867596";
 		#endif
+	}
+	
+	[Serializable]		
+	public class Telegram : DevInfo		
+	{		
+		#if UNITY_ANDROID		
+		public string SortId = "47";		
+		public const int type = (int) PlatformType.Telegram;		
+		#elif UNITY_IPHONE		
+		#endif		
 	}
 
 }

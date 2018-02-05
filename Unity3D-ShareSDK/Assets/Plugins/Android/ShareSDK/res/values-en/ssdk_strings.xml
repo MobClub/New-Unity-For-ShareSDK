@@ -16,6 +16,7 @@
     <string name="ssdk_laiwang_client_inavailable">Laiwangs client not exists or the version is too low</string>
     <string name="ssdk_alipay_client_inavailable">Alipay client not exists or the version is too low</string>
     <string name="ssdk_facebookmessenger_client_inavailable">Facebookmessenger client not exists or the version is too low</string>
+	<string name="ssdk_telegram_client_inavailable">Telegram client not exists or the version is too low</string>
     
 	<string name="ssdk_sinaweibo">Sina Weibo</string>
 	<string name="ssdk_tencentweibo">Tencent Weibo</string>
@@ -69,6 +70,7 @@
     <string name="ssdk_dingding">Dingding</string>
 	<string name="ssdk_meipai">Meipai</string>
 	<string name="ssdk_youtube">Youtube</string>
+	<string name="ssdk_telegram">Telegram</string>
 
 	<string name="ssdk_share_to_qzone">Share To QZone</string>
 	<string name="ssdk_share_to_qq">Share To QQ</string>
