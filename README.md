@@ -245,7 +245,7 @@ For those who need client side sharing platforms and Single sign on authorizatio
 
 ###### Step 1 : 
 
-Download”New-Unity-For-ShareSDK”project, and copy” Unity3D-ShareSDK/Assets/plugins” catalogue to Assets catalogue in your project. Or doule click “sharesdk-unity3d-plugin.unitypackage” and import relative documents, Whle you doing that, ShareSDK has been integrated successfully in your project.
+Download”New-Unity-For-ShareSDK”project, and copy” Unity3D-ShareSDK/Assets/plugins” catalogue to Assets catalogue in your project. Or doule click “ShareSDKForU3D.unitypackage” and import relative documents, Whle you doing that, ShareSDK has been integrated successfully in your project.
 
 ![image](http://wiki.mob.com/wp-content/uploads/2015/09/F8EBCCEA-A5F9-42A5-9129-FAFE7FD1324E.png)
 ![image](http://wiki.mob.com/wp-content/uploads/2015/09/E2190F1F-5F64-47F4-A747-1B481B63025F.png)
