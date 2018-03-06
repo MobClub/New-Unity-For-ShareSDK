@@ -1,0 +1,6 @@
+{
+	"URLSchemes" : {
+    				"CFBundleURLSchemes" :["vk{appkey}"],
+    				"CFBundleURLName" : "VKontakte"
+    				}
+}

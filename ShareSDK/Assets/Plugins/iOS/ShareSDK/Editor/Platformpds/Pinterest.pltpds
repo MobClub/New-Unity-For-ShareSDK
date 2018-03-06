@@ -1,0 +1,7 @@
+{
+	"LSApplicationQueriesSchemes":["pinterestsdk.v1"],
+    "URLSchemes" : {
+    				"CFBundleURLSchemes" :["pdk{appkey}"],
+    				"CFBundleURLName" : "pinterest"
+    				}
+}
