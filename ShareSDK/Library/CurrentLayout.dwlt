@@ -13,14 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 44
-    y: 106
+    x: 110
+    y: 80
     width: 1684
     height: 926
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
     y: 0
     width: 1684
     height: 926
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -341,8 +341,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 44
-    y: 502
+    x: 110
+    y: 476
     width: 1339
     height: 508
   m_SearchFilter:
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Plugins/iOS/ShareSDK/Editor
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: /Users/chenjd/Desktop/NewShareSDK
+  m_LastProjectPath: /Users/chenjd/Documents/GitHub/New-Unity-For-ShareSDK/ShareSDK
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
@@ -474,8 +474,8 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 1343
-    y: 19
+    x: 1453
+    y: 129
     width: 341
     height: 855
   m_ScrollPosition: {x: 0, y: 0}
@@ -507,15 +507,15 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 44
-    y: 155
+    x: 110
+    y: 129
     width: 332
     height: 326
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0cf4ffffb0f4ffffe2f5ffffa6fbffff00000000
+    m_ExpandedIDs: a6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 380
-    y: 155
+    x: 446
+    y: 129
     width: 1003
     height: 326
   m_SceneLighting: 1
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 63
-    y: 615
+    x: 44
+    y: 502
     width: 1339
     height: 508

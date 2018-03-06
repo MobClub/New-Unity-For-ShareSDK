@@ -12,13 +12,13 @@ namespace cn.sharesdk.unity3d
 	#if UNITY_IOS	
 	[CustomEditor(typeof(ShareSDK))]
 	[ExecuteInEditMode]
-	public class SMSSDKConfigEditor : Editor 
+	public class ShareSDKConfigEditor : Editor 
 	{
 		string appKey = "";
 		string appSecret = "";
 		Hashtable platformConfList;
 
-		public SMSSDKConfigEditor()
+		public ShareSDKConfigEditor()
 		{
 			SetPlatformConfList ();
 		}
