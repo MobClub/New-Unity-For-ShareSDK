@@ -49,7 +49,7 @@ namespace cn.sharesdk.unity3d
 			platformConfList.Add ((int)PlatformType.KakaoTalk,"app_key");
 			platformConfList.Add ((int)PlatformType.KakaoStory,"app_key");
 			platformConfList.Add ((int)PlatformType.Facebook,"api_key");
-			platformConfList.Add ((int)PlatformType.FacebookMessenger,"api_key");
+//			platformConfList.Add ((int)PlatformType.FacebookMessenger,"api_key");
 			platformConfList.Add ((int)PlatformType.QZone,"app_id");
 			platformConfList.Add ((int)PlatformType.QQ,"app_id");
 			platformConfList.Add ((int)PlatformType.QQPlatform,"app_id");
@@ -63,7 +63,7 @@ namespace cn.sharesdk.unity3d
 			platformConfList.Add ((int)PlatformType.YixinPlatform,"app_id");
 			platformConfList.Add ((int)PlatformType.Dingding,"app_id");
 			platformConfList.Add ((int)PlatformType.SinaWeibo,"app_key");
-			platformConfList.Add ((int)PlatformType.Line,"channel_id");
+//			platformConfList.Add ((int)PlatformType.Line,"channel_id");
 		}
 
 		private void Prepare()
