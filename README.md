@@ -1,11 +1,13 @@
 # New-Unity-For-ShareSDK
-### This is the new version and new sample of ShareSDK for Unity3D.
+### This is the new version and new sample of [ShareSDK](https://github.com/MobClub/ShareSDK-for-iOS) for Unity3D.
 **supported original ShareSDK version:**
-- Android - V3.0.0
-- iOS - V4.0.0
-- 中文文档请查看[简洁版unity3d快速集成](http://wiki.mob.com/%E7%AE%80%E6%B4%81%E7%89%88unity3d%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3/)
+- Android - V3.1.4
+- iOS - V4.1.1
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+**中文集成文档**
+-[Android](http://wiki.mob.com/unity3d%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E6%8C%87%E5%8D%97/)
+-[iOS](http://wiki.mob.com/sharesdk-ios-for-untiy3d-%E5%90%AB%E5%BF%AB%E6%8D%B7%E6%89%93%E5%8C%85%E6%8F%92%E4%BB%B6/)
+- - - - - - - - - - - -
 
 ##The notes for fast integration of Unity3D##
 
@@ -286,3 +288,5 @@ While runing the Demo, you need to add Demo.cs and ShareSDK.cs together
 - or Skype:amber
 
 More information About ShareSDK, please visit our website [Mob.com](http://www.mob.com)
+
+
