@@ -187,11 +187,16 @@ namespace cn.mob.unity3d.sdkporter
 					string fileName = (string)platformConfList[key];
 //					Debug.LogWarning (fileName);
 					var files = System.IO.Directory.GetFiles(Application.dataPath , fileName + ".pltpds", System.IO.SearchOption.AllDirectories);
-					string filePath = files [0];
 
-					string appkey = (string)platforms[key];
-					//读取配置
-					ReadMobpds (filePath,appkey,savefilePath);
+					if (files.Length > 0) 
+					{
+						string filePath = files [0];
+
+						string appkey = (string)platforms[key];
+						//读取配置
+						ReadMobpds (filePath,appkey,savefilePath);
+					}
+						
 				}
 			}
 		}
