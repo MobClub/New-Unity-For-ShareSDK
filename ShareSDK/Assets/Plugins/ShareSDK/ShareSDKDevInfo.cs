@@ -676,6 +676,7 @@ namespace cn.sharesdk.unity3d
 		public string AppId = "107704292745179";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.FacebookMessenger;
+		public string api_key = "107704292745179";
 		#endif
 	}
 
