@@ -25,7 +25,6 @@
 #define __SHARESDK_RENREN__
 //#define __SHARESDK_KAKAO__
 #define __SHARESDK_YIXIN__
-#define __SHARESDK_FACEBOOK_MSG__
 //#define __SHARESDK_ALISOCIAL__
 //#define __SHARESDK_DINGTALK__
 //#define __SHARESDK_MEIPAI__
@@ -53,10 +52,6 @@
 
 #ifdef __SHARESDK_YIXIN__
 #import "YXApi.h"
-#endif
-
-#ifdef __SHARESDK_FACEBOOK_MSG__
-#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
 #endif
 
 #ifdef __SHARESDK_ALISOCIAL__
@@ -2830,11 +2825,6 @@ extern "C" {
                                  [ShareSDKConnector connectYiXin:[YXApi class]];
 #endif
                                  break;
-                             case SSDKPlatformTypeFacebookMessenger:
-#ifdef __SHARESDK_FACEBOOK_MSG__
-                                 [ShareSDKConnector connectFacebookMessenger:[FBSDKMessengerSharer class]];
-#endif
-                                 break;
                              case SSDKPlatformTypeAliSocial:
 #ifdef __SHARESDK_ALISOCIAL__
                                  [ShareSDKConnector connectAliSocial:[APOpenAPI class]];
@@ -2906,7 +2896,7 @@ extern "C" {
                                  
                                  [KakaoTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                      
-                                     NSDictionary *KakaoDict = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)obj]];
+                                     NSDictionary *KakaoDict = [platformsDict objectForKey:[NSString stringWithFormat:@"%@",obj]];
                                      
                                      if (KakaoDict && [[KakaoDict allKeys] count] > 0)
                                      {
@@ -2930,7 +2920,7 @@ extern "C" {
                                  
                                  [yiXinTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                      
-                                     NSDictionary *yixinDict = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)obj]];
+                                     NSDictionary *yixinDict = [platformsDict objectForKey:[NSString stringWithFormat:@"%@",obj]];
                                      
                                      if (yixinDict && [[yixinDict allKeys] count] > 0)
                                      {
