@@ -124,8 +124,8 @@ GameObject:
   - component: {fileID: 1900725051}
   - component: {fileID: 1900725050}
   - component: {fileID: 1900725049}
-  - component: {fileID: 1900725048}
   - component: {fileID: 1900725047}
+  - component: {fileID: 1900725048}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -312,6 +312,7 @@ MonoBehaviour:
       auth_type: both
     facebookMessenger:
       Enable: 1
+      api_key: 107704292745179
     instapaper:
       Enable: 1
       consumer_key: 4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA
