@@ -8,6 +8,8 @@ proguard/
 *.ldb  
 *.sln  
 *.config  
+*.DS_Store 
+*.meta 
 Debug/  
 Release/  
 obj/  
