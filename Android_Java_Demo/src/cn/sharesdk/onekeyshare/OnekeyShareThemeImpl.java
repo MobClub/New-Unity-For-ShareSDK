@@ -150,6 +150,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 				platform.setPlatformActionListener(callback);
 				platform.share(sp);
 				callback = null;
+				customizeCallback = null;
 			}
 		}
 	}
@@ -159,11 +160,13 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			ShareParams sp = shareDataToShareParams(platform);
 			if (sp != null) {
 				// 编辑分享内容的统计
-				ShareSDK.logDemoEvent(3, null);
+				ShareSDK.logDemoEvent(3, platform);
+				sp.setOpenCustomEven(true);
 				if (customizeCallback != null) {
 					customizeCallback.onShare(platform, sp);
 				}
 				showEditPage(context, platform, sp);
+				customizeCallback = null;
 			}
 		}
 	}

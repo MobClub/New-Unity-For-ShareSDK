@@ -128,7 +128,8 @@ public abstract class PlatformPage extends OnekeySharePage {
 					ShareParams sp = formateShareData(platform);
 					if (sp != null) {
 						// 编辑分享内容的统计
-						ShareSDK.logDemoEvent(3, null);
+						ShareSDK.logDemoEvent(3, platform);
+						sp.setOpenCustomEven(true);
 						if (getCustomizeCallback() != null) {
 							getCustomizeCallback().onShare(platform, sp);
 						}
