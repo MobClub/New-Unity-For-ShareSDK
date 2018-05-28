@@ -200,6 +200,25 @@ public class Demo : MonoBehaviour {
 			ssdk.Authorize(PlatformType.SMS);		
 		}
 
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share wxMiniProgram (ios only)"))
+		{
+			ShareContent content = new ShareContent ();
+			content.SetTitle ("MiniProgram");
+			content.SetText ("test MiniProgram");
+			content.SetUrl("http://www.mob.com");
+			content.SetMiniProgramPath ("pages/index/index");
+			content.SetThumbImageUrl ("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527484508213&di=d993c2ca41fec50717d137718511120f&imgtype=0&src=http%3A%2F%2Fimg5.2345.com%2Fduoteimg%2FzixunImg%2Flocal%2F2017%2F05%2F03%2F14938009295612.jpg");
+			content.SetMiniProgramHdThumbImage ("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522154322305&di=7f4bf3d0803fe8c2c66c140f0a6ea0b4&imgtype=0&src=http%3A%2F%2Fa4.topitme.com%2Fo%2F201007%2F29%2F12803876734174.jpg");
+			content.SetMiniProgramUserName ("gh_afb25ac019c9");
+			content.SetMiniProgramWithShareTicket (true);
+			content.SetMiniProgramType (0);
+			content.SetShareType (ContentType.MiniProgram);
+
+			ShareContent shareContent = new ShareContent ();
+			shareContent.SetShareContentCustomize (PlatformType.WeChat, content);
+			ssdk.ShareContent (PlatformType.WeChat, shareContent);
+		}
 	}
 	
 	void OnAuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)

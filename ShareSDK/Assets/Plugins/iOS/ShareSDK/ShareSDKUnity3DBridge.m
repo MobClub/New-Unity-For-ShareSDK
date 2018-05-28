@@ -279,6 +279,8 @@ extern "C" {
                 return SSDKContentTypeFile;
             case 9:
                 return SSDKContentTypeImage;
+            case 10:
+                return SSDKContentTypeMiniProgram;
             default:
                 return SSDKContentTypeText;
         }
@@ -297,6 +299,13 @@ extern "C" {
         NSData *emoData = nil;
         NSString *sourceFileExtension = nil;
         NSData *sourceFileData = nil;
+        
+        //小程序参数
+        NSString *path = nil;
+        NSString *hdThumbImage = nil;
+        NSString *username = nil;
+        BOOL withShareTicket = NO;
+        int miniProgramType = 0;
         
         SSDKContentType type = SSDKContentTypeText;
         
@@ -350,21 +359,57 @@ extern "C" {
         {
             type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
         }
-
-        [params SSDKSetupWeChatParamsByText:text
-                                      title:title
-                                        url:[NSURL URLWithString:url]
-                                 thumbImage:thumbImg
-                                      image:image
-                               musicFileURL:[NSURL URLWithString:musicFileUrl]
-                                    extInfo:extInfo
-                                   fileData:fileData
-                               emoticonData:emoData
-                        sourceFileExtension:sourceFileExtension
-                             sourceFileData:sourceFileData
-                                       type:type
-                         forPlatformSubType:subType];
         
+        if ([[value objectForKey:@"wxUserName"] isKindOfClass:[NSString class]])
+        {
+            username = [value objectForKey:@"wxUserName"];
+        }
+        if ([[value objectForKey:@"wxPath"] isKindOfClass:[NSString class]])
+        {
+            path = [value objectForKey:@"wxPath"];
+        }
+        if ([[value objectForKey:@"wxMiniProgramHdThumbImage"] isKindOfClass:[NSString class]])
+        {
+            hdThumbImage = [value objectForKey:@"wxMiniProgramHdThumbImage"];
+        }
+        if ([[value objectForKey:@"wxWithShareTicket"] isKindOfClass:[NSNumber class]])
+        {
+            withShareTicket = [[value objectForKey:@"wxWithShareTicket"] boolValue];
+        }
+        if ([[value objectForKey:@"wxMiniProgramType"] isKindOfClass:[NSNumber class]])
+        {
+            miniProgramType = [[value objectForKey:@"wxMiniProgramType"] intValue];
+        }
+        
+        if (type == SSDKContentTypeMiniProgram)
+        {
+            [params SSDKSetupWeChatMiniProgramShareParamsByTitle:title
+                                                     description:text
+                                                      webpageUrl:[NSURL URLWithString:url]
+                                                            path:path
+                                                      thumbImage:thumbImg
+                                                    hdThumbImage:hdThumbImage
+                                                        userName:username
+                                                 withShareTicket:withShareTicket
+                                                 miniProgramType:miniProgramType
+                                              forPlatformSubType:subType];
+        }
+        else
+        {
+            [params SSDKSetupWeChatParamsByText:text
+                                          title:title
+                                            url:[NSURL URLWithString:url]
+                                     thumbImage:thumbImg
+                                          image:image
+                                   musicFileURL:[NSURL URLWithString:musicFileUrl]
+                                        extInfo:extInfo
+                                       fileData:fileData
+                                   emoticonData:emoData
+                            sourceFileExtension:sourceFileExtension
+                                 sourceFileData:sourceFileData
+                                           type:type
+                             forPlatformSubType:subType];
+        }
     }
     
     void __setQQParams(NSDictionary *value,NSMutableDictionary *params,SSDKPlatformType subType)

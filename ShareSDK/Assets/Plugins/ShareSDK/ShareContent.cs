@@ -422,6 +422,11 @@ namespace cn.sharesdk.unity3d
 		public void SetMiniProgramType(int type){
 			shareParams ["wxMiniProgramType"] = type;
 		}
+
+		// iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k
+		public void SetMiniProgramHdThumbImage(string hdThumbImage){
+			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
+		}
 			
 		//不同平台分享不同内容
 		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
