@@ -61,7 +61,7 @@ namespace cn.sharesdk.unity3d
 		Dingding = 52,			//DingTalk 钉钉
 		Youtube = 53,			//youtube
 		MeiPai = 54,			//美拍
-
+		CMCC = 55,				//中国移动
 
         #if UNITY_ANDROID
 		KakaoPlatform = 44,    

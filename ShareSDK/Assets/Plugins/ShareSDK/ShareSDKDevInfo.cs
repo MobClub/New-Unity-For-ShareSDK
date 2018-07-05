@@ -46,6 +46,7 @@ namespace cn.sharesdk.unity3d
 		public Dingding dingTalk;
 		public Youtube youtube;
 		public MeiPai meiPai;
+		public CMCC cmcc;
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
@@ -841,6 +842,18 @@ namespace cn.sharesdk.unity3d
 		public string SortId = "47";		
 		public const int type = (int) PlatformType.Telegram;		
 		#elif UNITY_IPHONE		
+		#endif		
+	}
+
+	[Serializable]		
+	public class CMCC : DevInfo		
+	{		
+		#if UNITY_ANDROID			
+		#elif UNITY_IPHONE
+		public string app_id = "300011862498";
+		public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
+		public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
+		public const int type = (int) PlatformType.CMCC;
 		#endif		
 	}
 

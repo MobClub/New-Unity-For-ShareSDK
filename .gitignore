@@ -15,3 +15,13 @@ Release/
 obj/  
 Unity3D-ShareSDK/Assets/Plugins/.DS_Store
 Unity3D-ShareSDK/Assets/.DS_Store
+ShareSDK/Library/
+ShareSDK/obj/
+ShareSDK/ProjectSettings/
+ShareSDK/UnityPackageManager/
+ShareSDK/Temp/
+ShareSDK.sln
+ShareSDK.userprefs
+Assembly-CSharp.csproj
+Assembly-CSharp-firstpass.csproj
+Assembly-CSharp-Editor-firstpass.csproj

@@ -63,6 +63,7 @@ namespace cn.sharesdk.unity3d
 			platformConfList.Add ((int)PlatformType.YixinPlatform,"app_id");
 			platformConfList.Add ((int)PlatformType.Dingding,"app_id");
 			platformConfList.Add ((int)PlatformType.SinaWeibo,"app_key");
+			platformConfList.Add ((int)PlatformType.CMCC,"app_id");
 //			platformConfList.Add ((int)PlatformType.Line,"channel_id");
 		}
 

@@ -334,6 +334,11 @@ MonoBehaviour:
     meiPai:
       Enable: 1
       app_key: 1089867596
+    cmcc:
+      Enable: 1
+      app_id: 300011862498
+      app_key: 38D9CA1CC280C5F207E2C343745D4A4B
+      displayUI: 1
     copy:
       Enable: 1
     yixinFavorites:

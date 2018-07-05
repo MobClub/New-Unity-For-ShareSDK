@@ -11,7 +11,7 @@
 #import <ShareSDK/ShareSDK+Base.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKExtension/SSDKFriendsPaging.h>
-#import <ShareSDKUI/ShareSDK+SSUI.h>
+#import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDKExtension/SSEShareHelper.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import <ShareSDKConfigFile/ShareSDK+XML.h>
@@ -22,12 +22,13 @@
 #define __SHARESDK_WECHAT__
 #define __SHARESDK_QQ__
 #define __SHARESDK_SINA_WEIBO__
-#define __SHARESDK_RENREN__
+//#define __SHARESDK_RENREN__
 //#define __SHARESDK_KAKAO__
-#define __SHARESDK_YIXIN__
+//#define __SHARESDK_YIXIN__
 //#define __SHARESDK_ALISOCIAL__
 //#define __SHARESDK_DINGTALK__
 //#define __SHARESDK_MEIPAI__
+#define __SHARESDK_CMCC__
 
 #ifdef __SHARESDK_WECHAT__
 #import "WXApi.h"
@@ -64,6 +65,10 @@
 
 #ifdef __SHARESDK_MEIPAI__
 #import <MPShareSDK/MPShareSDK.h>
+#endif
+
+#ifdef __SHARESDK_CMCC__
+#import <TYRZSDK/TYRZUILogin.h>
 #endif
 
 static UIView *_refView = nil;
@@ -812,26 +817,6 @@ extern "C" {
                 }
             }
             
-            //v4.0.1 弃用
-//            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
-//            {
-//                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
-//                if (enable > 0)
-//                {
-//                    [params SSDKEnableAdvancedInterfaceShare];
-//                }
-//            }
-            
-            //使用新浪微博 api进行分享
-            if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
-            {
-                NSInteger enable = [[shareParamsDic objectForKey:@"apiShare"] integerValue];
-                if (enable > 0)
-                {
-                    [params SSDKEnableSinaWeiboAPIShare];
-                }
-            }
-            
             [params SSDKSetupShareParamsByText:text
                                         images:imageArray
                                            url:[NSURL URLWithString:url]
@@ -898,33 +883,15 @@ extern "C" {
                         }
                     }
                     
-                    //v4.0.1 弃用
-                    //            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
-                    //            {
-                    //                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
-                    //                if (enable > 0)
-                    //                {
-                    //                    [params SSDKEnableAdvancedInterfaceShare];
-                    //                }
-                    //            }
-                    
-                    //使用新浪微博 api进行分享
-                    if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
-                    {
-                        NSInteger enable = [[shareParamsDic objectForKey:@"apiShare"] integerValue];
-                        if (enable > 0)
-                        {
-                            [params SSDKEnableSinaWeiboAPIShare];
-                        }
-                    }
-                    
                     [params SSDKSetupSinaWeiboShareParamsByText:text
                                                           title:title
-                                                          image:image
+                                                         images:image
+                                                          video:nil
                                                             url:[NSURL URLWithString:url]
                                                        latitude:lat
                                                       longitude:lng
                                                        objectID:objID
+                                                 isShareToStory:NO
                                                            type:type];
                     
                 }
@@ -1205,26 +1172,6 @@ extern "C" {
                         if (enable > 0)
                         {
                             [params SSDKEnableUseClientShare];
-                        }
-                    }
-                    
-                    //v4.0.1 弃用
-                    //            if ([[shareParamsDic objectForKey:@"advancedShare"] isKindOfClass:[NSNumber class]])
-                    //            {
-                    //                NSInteger enable = [[shareParamsDic objectForKey:@"advancedShare"] integerValue];
-                    //                if (enable > 0)
-                    //                {
-                    //                    [params SSDKEnableAdvancedInterfaceShare];
-                    //                }
-                    //            }
-                    
-                    //使用新浪微博 api进行分享
-                    if ([[shareParamsDic objectForKey:@"apiShare"] isKindOfClass:[NSNumber class]])
-                    {
-                        NSInteger enable = [[shareParamsDic objectForKey:@"apiShare"] integerValue];
-                        if (enable > 0)
-                        {
-                            [params SSDKEnableSinaWeiboAPIShare];
                         }
                     }
                     
@@ -2885,6 +2832,11 @@ extern "C" {
                                  [ShareSDKConnector connectMeiPai:[MPShareSDK class]];
 #endif
                                  break;
+                             case SSDKPlatformTypeCMCC:
+#ifdef __SHARESDK_CMCC__
+                                 [ShareSDKConnector connectCMCC:[TYRZUILogin class]];
+#endif
+                                 break;
                              default:
                                  break;
                          }
@@ -2995,6 +2947,13 @@ extern "C" {
                                  [appInfo addEntriesFromDictionary:platformDict];
                                  break;
                              }
+                             case SSDKPlatformTypeCMCC:
+                             {
+                                 NSDictionary *platformDict = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)platformType]];
+                                 [appInfo addEntriesFromDictionary:platformDict];
+                                 appInfo[@"displayUI"] = @([platformDict[@"displayUI"] intValue]);
+                                 break;
+                             }
                              default:
                              {
                                  NSDictionary *platformDict = [platformsDict objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)platformType]];
@@ -3020,6 +2979,7 @@ extern "C" {
         [ShareSDK authorize:platType
                    settings:nil
              onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+                 
                  NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
                  [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"action"];
                  [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
@@ -3056,10 +3016,9 @@ extern "C" {
                  }
                  if (state == SSDKResponseStateSuccess)
                  {
-                     if ([user rawData])
-                     {
-                         [resultDict setObject:[[user credential] rawData] forKey:@"res"];
-                     }
+                     NSMutableDictionary *userData = [user rawData].mutableCopy;
+                     userData[@"credential"] = [[user credential] rawData];
+                     resultDict[@"res"] = userData;
                  }
                  
                  NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
@@ -3294,7 +3253,6 @@ extern "C" {
     
     void __iosShareSDKShowShareMenu (int reqID, void *platTypes, void *content, int x, int y, void *observer)
     {
-       
         NSArray *platTypesArr = nil;
         NSMutableArray *actionSheetItems = [NSMutableArray array];
         NSString *observerStr = nil;
@@ -3336,73 +3294,69 @@ extern "C" {
             
         }
         
-        [ShareSDK showShareActionSheet:_refView
-                                 items:platTypesArr
-                           shareParams:shareParams
-                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                       
-                       NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-                       [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
-                       [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-                       [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
-                       [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
-                       
-                       if (state == SSDKResponseStateFail && error)
-                       {
-                           
-                           NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
-                           [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                           if ([[error userInfo] objectForKey:@"error_message"])
-                           {
-                               if ([[error userInfo] objectForKey:@"error_message"])
-                               {
-                                   [errorDict setObject:[[error userInfo] objectForKey:@"error_message"]
-                                                 forKey:@"error_msg"];
-                                   
-                               }
-                           }
-                           else if ([[error userInfo] objectForKey:@"user_data"])
-                           {
-                               NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
-                               if ([error_data objectForKey:@"error"])
-                               {
-                                   [errorDict setObject:[error_data objectForKey:@"error"]
-                                                 forKey:@"error_msg"];
-                               }
-                               else if ([error_data objectForKey:@"error_message"])
-                               {
-                                   [errorDict setObject:[error_data objectForKey:@"error_message"]
-                                                 forKey:@"error_msg"];
-                               }
-                               
-                               if ([error_data objectForKey:@"error_code"])
-                               {
-                                   [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]]
-                                                 forKey:@"error_code"];
-                               }
-                           }
-                           
-                           [resultDict setObject:errorDict forKey:@"res"];
-                       }
-                       
-                       if (state == SSDKResponseStateSuccess)
-                       {
-                           if ([contentEntity rawData])
-                           {
-                               [resultDict setObject:[contentEntity rawData] forKey:@"res"];
-                           }
-                       }
-                       
-                       NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
-                       UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
-                       if (_refView)
-                       {
-                           //移除视图
-                           [_refView removeFromSuperview];
-                       }
-                       
-                   }];
-        
+        [ShareSDK showShareActionSheet:_refView customItems:platTypesArr shareParams:shareParams sheetConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            {
+                NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+                [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
+                [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+                [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
+                [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+                
+                if (state == SSDKResponseStateFail && error)
+                {
+                    NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
+                    [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                    if ([[error userInfo] objectForKey:@"error_message"])
+                    {
+                        if ([[error userInfo] objectForKey:@"error_message"])
+                        {
+                            [errorDict setObject:[[error userInfo] objectForKey:@"error_message"]
+                                          forKey:@"error_msg"];
+                            
+                        }
+                    }
+                    else if ([[error userInfo] objectForKey:@"user_data"])
+                    {
+                        NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
+                        if ([error_data objectForKey:@"error"])
+                        {
+                            [errorDict setObject:[error_data objectForKey:@"error"]
+                                          forKey:@"error_msg"];
+                        }
+                        else if ([error_data objectForKey:@"error_message"])
+                        {
+                            [errorDict setObject:[error_data objectForKey:@"error_message"]
+                                          forKey:@"error_msg"];
+                        }
+                        
+                        if ([error_data objectForKey:@"error_code"])
+                        {
+                            [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]]
+                                          forKey:@"error_code"];
+                        }
+                    }
+                    
+                    [resultDict setObject:errorDict forKey:@"res"];
+                }
+                
+                if (state == SSDKResponseStateSuccess)
+                {
+                    if ([contentEntity rawData])
+                    {
+                        [resultDict setObject:[contentEntity rawData] forKey:@"res"];
+                    }
+                }
+                
+                NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+                UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+                if (_refView)
+                {
+                    //移除视图
+                    [_refView removeFromSuperview];
+                }
+                
+            }
+        }];
     }
     
     void __iosShareSDKShowShareView (int reqID, int platType, void *content, void *observer)
@@ -3419,58 +3373,54 @@ extern "C" {
             shareParams = __getShareParamsWithString(contentStr);
         }
         
-        
-        [ShareSDK showShareEditor:platType
-               otherPlatformTypes:nil
-                      shareParams:shareParams
-              onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                  
-                  NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-                  [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
-                  [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-                  [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
-                  [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
-                  
-                  if (state == SSDKResponseStateFail && error)
-                  {
-                      NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
-                      [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                      if ([[error userInfo] objectForKey:@"error_message"])
-                      {
-                          if ([[error userInfo] objectForKey:@"error_message"])
-                          {
-                              [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
-                              
-                          }
-                      }
-                      else if ([[error userInfo] objectForKey:@"user_data"])
-                      {
-                          NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
-                          if ([error_data objectForKey:@"error"])
-                          {
-                              [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
-                          }
-                          if ([error_data objectForKey:@"error_code"])
-                          {
-                              [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
-                          }
-                      }
-                      
-                      [resultDict setObject:errorDict forKey:@"res"];
-                  }
-                  
-                  if (state == SSDKResponseStateSuccess)
-                  {
-                      
-                      if ([contentEntity rawData])
-                      {
-                          [resultDict setObject:[contentEntity rawData] forKey:@"res"];
-                      }
-                  }
-                  
-                  NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
-                  UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
-              }];
+        [ShareSDK showShareEditor:platType otherPlatforms:nil shareParams:shareParams editorConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+            NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+            [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
+            [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+            [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
+            [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+            
+            if (state == SSDKResponseStateFail && error)
+            {
+                NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
+                [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                if ([[error userInfo] objectForKey:@"error_message"])
+                {
+                    if ([[error userInfo] objectForKey:@"error_message"])
+                    {
+                        [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
+                        
+                    }
+                }
+                else if ([[error userInfo] objectForKey:@"user_data"])
+                {
+                    NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
+                    if ([error_data objectForKey:@"error"])
+                    {
+                        [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
+                    }
+                    if ([error_data objectForKey:@"error_code"])
+                    {
+                        [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
+                    }
+                }
+                
+                [resultDict setObject:errorDict forKey:@"res"];
+            }
+            
+            if (state == SSDKResponseStateSuccess)
+            {
+                
+                if ([contentEntity rawData])
+                {
+                    [resultDict setObject:[contentEntity rawData] forKey:@"res"];
+                }
+            }
+            
+            NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+            UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+        }];
     }
     
     void __iosShareSDKGetFriendsList (int reqID, int platType, int count , int page, void *observer)
@@ -3768,7 +3718,6 @@ extern "C" {
             
         }
         
-
         if ([MOBFDevice isPad])
         {
             if (!_refView)
@@ -3780,74 +3729,75 @@ extern "C" {
             
         }
         
-        [ShareSDK showShareActionSheet:_refView
-                                 items:platTypesArr
-                           contentName:contentNodeName
-                          customFields:customFields
-                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                       
-                       NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-                       [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
-                       [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-                       [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
-                       [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
-                       
-                       if (state == SSDKResponseStateFail && error)
-                       {
-                           
-                           NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
-                           [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                           if ([[error userInfo] objectForKey:@"error_message"])
-                           {
-                               if ([[error userInfo] objectForKey:@"error_message"])
-                               {
-                                   [errorDict setObject:[[error userInfo] objectForKey:@"error_message"]
-                                                 forKey:@"error_msg"];
-                                   
-                               }
-                           }
-                           else if ([[error userInfo] objectForKey:@"user_data"])
-                           {
-                               NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
-                               if ([error_data objectForKey:@"error"])
-                               {
-                                   [errorDict setObject:[error_data objectForKey:@"error"]
-                                                 forKey:@"error_msg"];
-                               }
-                               else if ([error_data objectForKey:@"error_message"])
-                               {
-                                   [errorDict setObject:[error_data objectForKey:@"error_message"]
-                                                 forKey:@"error_msg"];
-                               }
-                               
-                               if ([error_data objectForKey:@"error_code"])
-                               {
-                                   [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]]
-                                                 forKey:@"error_code"];
-                               }
-                           }
-                           
-                           [resultDict setObject:errorDict forKey:@"res"];
-                       }
-                       
-                       if (state == SSDKResponseStateSuccess)
-                       {
-                           if ([contentEntity rawData])
-                           {
-                               [resultDict setObject:[contentEntity rawData] forKey:@"res"];
-                           }
-                       }
-                       
-                       NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
-                       UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
-                       if (_refView)
-                       {
-                           //移除视图
-                           [_refView removeFromSuperview];
-                       }
-
-                   }];
+        NSMutableDictionary *params = [ShareSDK getShareParamsWithContentName:contentNodeName customFields:customFields];
         
+        [ShareSDK showShareActionSheet:_refView
+                           customItems:platTypesArr
+                           shareParams:params
+                    sheetConfiguration:nil
+                        onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+            NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+            [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
+            [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+            [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
+            [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+            
+            if (state == SSDKResponseStateFail && error)
+            {
+                
+                NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
+                [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                if ([[error userInfo] objectForKey:@"error_message"])
+                {
+                    if ([[error userInfo] objectForKey:@"error_message"])
+                    {
+                        [errorDict setObject:[[error userInfo] objectForKey:@"error_message"]
+                                      forKey:@"error_msg"];
+                        
+                    }
+                }
+                else if ([[error userInfo] objectForKey:@"user_data"])
+                {
+                    NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
+                    if ([error_data objectForKey:@"error"])
+                    {
+                        [errorDict setObject:[error_data objectForKey:@"error"]
+                                      forKey:@"error_msg"];
+                    }
+                    else if ([error_data objectForKey:@"error_message"])
+                    {
+                        [errorDict setObject:[error_data objectForKey:@"error_message"]
+                                      forKey:@"error_msg"];
+                    }
+                    
+                    if ([error_data objectForKey:@"error_code"])
+                    {
+                        [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]]
+                                      forKey:@"error_code"];
+                    }
+                }
+                
+                [resultDict setObject:errorDict forKey:@"res"];
+            }
+            
+            if (state == SSDKResponseStateSuccess)
+            {
+                if ([contentEntity rawData])
+                {
+                    [resultDict setObject:[contentEntity rawData] forKey:@"res"];
+                }
+            }
+            
+            NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+            UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+            if (_refView)
+            {
+                //移除视图
+                [_refView removeFromSuperview];
+            }
+            
+        }];
     }
     
     void __iosShareSDKShowShareViewWithContentName(int reqID, int platType, void *contentName, void *customHashtable, void *observer)
@@ -3862,59 +3812,57 @@ extern "C" {
             customFields = __parseWithHashtable(customHashtable);
         }
         
-        [ShareSDK showShareEditor:shareType
-               otherPlatformTypes:nil
-                      contentName:contentNodeName
-                     customFields:customFields
-              onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                 
-                  NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-                  [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
-                  [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
-                  [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
-                  [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
-                  
-                  if (state == SSDKResponseStateFail && error)
-                  {
-                      NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
-                      [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
-                      if ([[error userInfo] objectForKey:@"error_message"])
-                      {
-                          if ([[error userInfo] objectForKey:@"error_message"])
-                          {
-                              [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
-                              
-                          }
-                      }
-                      else if ([[error userInfo] objectForKey:@"user_data"])
-                      {
-                          NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
-                          if ([error_data objectForKey:@"error"])
-                          {
-                              [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
-                          }
-                          if ([error_data objectForKey:@"error_code"])
-                          {
-                              [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
-                          }
-                      }
-                      
-                      [resultDict setObject:errorDict forKey:@"res"];
-                  }
-                  
-                  if (state == SSDKResponseStateSuccess)
-                  {
-                      
-                      if ([contentEntity rawData])
-                      {
-                          [resultDict setObject:[contentEntity rawData] forKey:@"res"];
-                      }
-                  }
-                  
-                  NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
-                  UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
-                  
-              }];
+        NSMutableDictionary *params = [ShareSDK getShareParamsWithContentName:contentNodeName customFields:customFields];
+        
+        [ShareSDK showShareEditor:shareType otherPlatforms:nil shareParams:params editorConfiguration:nil onStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+            NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+            [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
+            [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+            [resultDict setObject:[NSNumber numberWithInteger:platformType] forKey:@"platform"];
+            [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+            
+            if (state == SSDKResponseStateFail && error)
+            {
+                NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
+                [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                if ([[error userInfo] objectForKey:@"error_message"])
+                {
+                    if ([[error userInfo] objectForKey:@"error_message"])
+                    {
+                        [errorDict setObject:[[error userInfo] objectForKey:@"error_message"] forKey:@"error_msg"];
+                        
+                    }
+                }
+                else if ([[error userInfo] objectForKey:@"user_data"])
+                {
+                    NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
+                    if ([error_data objectForKey:@"error"])
+                    {
+                        [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
+                    }
+                    if ([error_data objectForKey:@"error_code"])
+                    {
+                        [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]] forKey:@"error_code"];
+                    }
+                }
+                
+                [resultDict setObject:errorDict forKey:@"res"];
+            }
+            
+            if (state == SSDKResponseStateSuccess)
+            {
+                
+                if ([contentEntity rawData])
+                {
+                    [resultDict setObject:[contentEntity rawData] forKey:@"res"];
+                }
+            }
+            
+            NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+            UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+            
+        }];
     }
     
 #if defined (__cplusplus)
