@@ -61,8 +61,7 @@ namespace cn.sharesdk.unity3d
 		Dingding = 52,			//DingTalk 钉钉
 		Youtube = 53,			//youtube
 		MeiPai = 54,			//美拍
-		CMCC = 55,				//中国移动
-
+		
         #if UNITY_ANDROID
 		KakaoPlatform = 44,    
 		EvernoteInternational = 12,
@@ -76,7 +75,9 @@ namespace cn.sharesdk.unity3d
 		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series
 		QQPlatform = 998,		//QQ Series  
-		#endif
+	#elif UNITY_IPHONE
+		CMCC = 55,				//中国移动
+	#endif
 
 	}
 
