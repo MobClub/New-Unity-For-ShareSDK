@@ -46,12 +46,12 @@ namespace cn.sharesdk.unity3d
 		public Dingding dingTalk;
 		public Youtube youtube;
 		public MeiPai meiPai;
-		public CMCC cmcc;
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
 		public Telegram telegram;
-		#elif UNITY_IPHONE		
+		#elif UNITY_IPHONE
+		public CMCC cmcc;
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
 		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
@@ -845,16 +845,15 @@ namespace cn.sharesdk.unity3d
 		#endif		
 	}
 
+	#if UNITY_ANDROID			
+	#elif UNITY_IPHONE
 	[Serializable]		
 	public class CMCC : DevInfo		
 	{		
-		#if UNITY_ANDROID			
-		#elif UNITY_IPHONE
 		public string app_id = "300011862498";
 		public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
 		public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
 		public const int type = (int) PlatformType.CMCC;
-		#endif		
 	}
-
+	#endif
 }

@@ -75,9 +75,8 @@ namespace cn.sharesdk.unity3d
 		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series
 		QQPlatform = 998,		//QQ Series  
-	#elif UNITY_IPHONE
 		CMCC = 55,				//中国移动
-	#endif
+		#endif
 
 	}
 
