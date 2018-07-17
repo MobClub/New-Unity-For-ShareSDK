@@ -1,7 +1,7 @@
 {
     "folders" : ["/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK"],
     "framework" : ["/SDK/ShareSDK/Support/PlatformConnector/WechatConnector.framework"],
-    "LSApplicationQueriesSchemes":["weixin"],
+    "LSApplicationQueriesSchemes":["weixin","wechat"],
     "URLSchemes" : {
     				"CFBundleURLSchemes" :["{appkey}"],
     				"CFBundleURLName" : "weChat"
