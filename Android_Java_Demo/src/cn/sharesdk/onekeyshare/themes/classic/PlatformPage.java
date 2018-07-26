@@ -104,7 +104,9 @@ public abstract class PlatformPage extends OnekeySharePage {
 		}
 		for (Platform p : platforms) {
 			if (!hides.containsKey(p.getName())) {
-				cells.add(p);
+				if(isCanShare(p)){
+					cells.add(p);
+				}
 			}
 		}
 
@@ -149,6 +151,15 @@ public abstract class PlatformPage extends OnekeySharePage {
 		};
 		finish();
 	}
+
+	private boolean isCanShare(Platform platform){
+		String name = platform.getName();
+		if ("Cmcc".equals(name)) {
+			return false;
+		}
+		return true;
+	}
+
 
 	private void initAnims() {
 		animShow = new TranslateAnimation(
