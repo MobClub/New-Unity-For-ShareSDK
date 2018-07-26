@@ -49,11 +49,7 @@
     -->
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false, -->
-	<!-- 1、ShareByWebApi是否使用新街口，true是使用新浪API接口分享，false为新浪H5网页分享
-		 2、用户分享到微博的文本内容，必须做URLencode，内容不超过140个汉字，文本中不能包含“#话题词#”，同时文本中必须包含至少一个第三方分享到微博的网页URL，
-		且该URL只能是该第三方（调用方）绑定域下的URL链接，绑定域在“我的应用 － 应用信息 － 基本应用信息编辑 － 安全域名”里设置。-->
-	<!--在ShareByAppClient为false，ShareByWebApi = "false"时，分享会调用Web页面分享{调用web分享，需集成res资源文件，以及libs下的so库}，
-		在ShareByAppClient为false，ShareByWebApi = "true"时，会走API方式分享-->
+
     <SinaWeibo
         Id="1"
         SortId="1"
@@ -64,7 +60,7 @@
         Enable="true" />
 
     <TencentWeibo
-        Id="2" 
+        Id="2"
         SortId="2"
         AppKey="801307650"
         AppSecret="ae36f4ee3946e1cbb98d6965b0b2ff5c"
@@ -74,33 +70,33 @@
     <QZone
         Id="3"
         SortId="3"
-        AppId="100371282"
-        AppKey="aed9b0303e3ed1e27bae87c33761161d"
-		BypassApproval="true"
-		BypassApproval = "false"
+		AppId="100371282"
+		AppKey="aed9b0303e3ed1e27bae87c33761161d"
+		BypassApproval="false"
         Enable="true" />
     
     <!-- 
     	Wechat微信和WechatMoments微信朋友圈的appid是一样的；
     
-                       注意：开发者不能用我们这两个平台的appid,否则分享不了
-    
-       	  微信测试的时候，微信测试需要先签名打包出apk,
+        注意：开发者不能用我们这两个平台的appid,否则分享不了
+       	微信测试的时候，微信测试需要先签名打包出apk,
 		sample测试微信，要先签名打包，keystore在sample项目中，密码123456
-		
+
 		BypassApproval是绕过审核的标记，设置为true后AppId将被忽略，故不经过
 		审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
 		默认值为false。此外，微信收藏不支持此字段。wx4868b35061f87885
 	-->
-	<!--要分享微信小应用程序时用userName,path-->
+
     <Wechat
         Id="4"
         SortId="4"
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
-		UserName="gh_afb25ac019c9"
-		Path="pages/index/index.html?id=1"
-        BypassApproval="true"
+		AppId="wx4868b35061f87885"
+		AppSecret="64020361b8ec4c99936c0e3999a9f249"
+		UserName="gh_b0c6a9ca668a"
+		Path="pages/index/index?id=mob"
+        BypassApproval="false"
+		WithShareTicket = "true"
+		MiniprogramType = "2"
         Enable="true" />
     
     <WechatMoments
@@ -108,7 +104,7 @@
         SortId="5"
         AppId="wx4868b35061f87885"
         AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        BypassApproval="true"
+        BypassApproval="false"
         Enable="true" />
         
 	<WechatFavorite
@@ -119,29 +115,32 @@
         Enable="true" />
     
 	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
+
 	<QQ
         Id="7"
         SortId="7"
         AppId="100371282"
         AppKey="aed9b0303e3ed1e27bae87c33761161d"
-        ShareByAppClient ="true"
-		BypassApproval = "false"
+		BypassApproval="false"
+        ShareByAppClient="true"
         Enable="true" />
-    
+
+
+
     <Facebook
         Id="8"
         SortId="8"
-        ConsumerKey="107704292745179"
-        ConsumerSecret="38053202e1a5fe26c80c753071f0b573"
-        RedirectUrl="fbconnect://success"
-		ShareByAppClient="true"
+		ConsumerKey="1412473428822331"
+		ConsumerSecret="a42f4f3f867dc947b9ed6020c2e93558"
+		RedirectUrl="https://mob.com"
+		ShareByAppClient="false"
 		Enable="true" />
 
     <Twitter
         Id="9"
         SortId="9"
-        ConsumerKey="LRBM0H75rWrU9gNHvlEAA2aOy"
-        ConsumerSecret="gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G"
+        ConsumerKey="viOnkeLpHBKs6KXV7MPpeGyzE"
+        ConsumerSecret="NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey"
         CallbackUrl="http://mob.com"
         Enable="true" />
     
@@ -206,16 +205,17 @@
 		ConsumerSecret="d05bf86993836004"
 		ShareByAppClient="true"
 		Enable="true" />
-    
+
+	<!---->
     <LinkedIn
     	Id="20"
         SortId="20"
         ApiKey="ejo5ibkye3vo"
-        SecretKey="cC7B2jpxITqPLZ5M" 
-        RedirectUrl="http://sharesdk.cn"
-		ShareByAppClient="false"
+        SecretKey="cC7B2jpxITqPLZ5M"
+		RedirectUrl="http://sharesdk.cn"
+		ShareByAppClient="true"
         Enable="true" />
-    
+
      <GooglePlus
     	Id="21"
         SortId="21"
@@ -267,7 +267,8 @@
         SortId="27"
         ApplicationId="3921561"
         Enable="true" />
-        
+
+	<!---->
     <Instagram 
     	Id="28"
         SortId="28"
@@ -357,7 +358,9 @@
         SortId="39"
         AppId="107704292745179"
         Enable="true" />
-    
+
+	<!--支付SDK的key：2017073107971452-->
+	<!--ShareSDK的key：2015072400185895-->
      <Alipay
         Id="50"
         SortId="50"  
@@ -393,10 +396,17 @@
 		AppSecret="y9ym6rrjjijtkt23qtsc"
 		ShareByAppClient = "true"
 		Enable="true"/>
-	
+
 	<Telegram
 		Id="47"
 		SortId="47"
 		Enable="true"/>
+
+	<Cmcc
+		Id="55"
+		SortId="55"
+		AppId="300011860247"
+		AppKey="2D464D8BFCE73A44B4F9DF95A2FDBE1C"
+		Eneble="true"/>
 	
 </DevInfor>
