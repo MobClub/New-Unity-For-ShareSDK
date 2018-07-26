@@ -46,12 +46,12 @@ namespace cn.sharesdk.unity3d
 		public Dingding dingTalk;
 		public Youtube youtube;
 		public MeiPai meiPai;
+        public CMCC cmcc;
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
-		public Telegram telegram;
+		//public Telegram telegram;
 		#elif UNITY_IPHONE
-		public CMCC cmcc;
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
 		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
@@ -835,18 +835,27 @@ namespace cn.sharesdk.unity3d
 		#endif
 	}
 	
-	[Serializable]		
-	public class Telegram : DevInfo		
-	{		
-		#if UNITY_ANDROID		
-		public string SortId = "47";		
-		public const int type = (int) PlatformType.Telegram;		
-		#elif UNITY_IPHONE		
-		#endif		
-	}
+	//[Serializable]		
+	//public class Telegram : DevInfo		
+	//{		
+	//	#if UNITY_ANDROID		
+	//	public string SortId = "47";		
+	//	public const int type = (int) PlatformType.Telegram;		
+	//	#elif UNITY_IPHONE		
+	//	#endif		
+	//}
 
-	#if UNITY_ANDROID			
-	#elif UNITY_IPHONE
+    #if UNITY_ANDROID
+    [Serializable]
+    public class CMCC : DevInfo
+    {
+        public string SortId = "55";
+        public const int type = (int) PlatformType.CMCC;
+        public string AppId = "300011860247";
+        public string AppKey = "2D464D8BFCE73A44B4F9DF95A2FDBE1C";
+   }
+    
+    #elif UNITY_IPHONE
 	[Serializable]		
 	public class CMCC : DevInfo		
 	{		
@@ -855,5 +864,6 @@ namespace cn.sharesdk.unity3d
 		public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
 		public const int type = (int) PlatformType.CMCC;
 	}
-	#endif
+    #endif
+
 }
