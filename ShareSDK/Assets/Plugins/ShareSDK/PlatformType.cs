@@ -72,7 +72,7 @@ namespace cn.sharesdk.unity3d
         CMCC = 55               //中国移动
        
 #elif UNITY_IPHONE
-        CMCC = 55               //中国移动
+        CMCC = 55,               //中国移动
 		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition
