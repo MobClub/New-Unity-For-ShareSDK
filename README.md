@@ -2,8 +2,8 @@
 ### This is the new version and new sample of [ShareSDK](https://github.com/MobClub/ShareSDK-for-iOS) for Unity3D.
 **supported original ShareSDK version:**
 
-- Android - V3.1.4
-- iOS - V4.1.1
+- Android - V3.2.1
+- iOS - V4.1.3
 
 **中文集成文档**
 
