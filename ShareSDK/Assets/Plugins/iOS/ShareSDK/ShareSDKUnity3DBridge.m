@@ -1193,6 +1193,7 @@ extern "C" {
                     double lat;
                     double lng;
                     SSDKContentType type = SSDKContentTypeText;
+                    NSString *videoPath = nil;
                     
                     if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
@@ -1271,16 +1272,31 @@ extern "C" {
                     {
                         lng = [[value objectForKey:@"longitude"] doubleValue];
                     }
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        videoPath = [value objectForKey:@"videoPath"];
+                    }
                     if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
                     {
                         type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
                     }
                     
-                    [params SSDKSetupTwitterParamsByText:text
-                                                  images:images
-                                                latitude:lat
-                                               longitude:lng
-                                                    type:type];
+                    if (type == SSDKContentTypeVideo)
+                    {
+                        [params SSDKSetupTwitterParamsByText:text
+                                                       video:[NSURL URLWithString:videoPath]
+                                                    latitude:lat
+                                                   longitude:lng
+                                                         tag:@""];
+                    }
+                    else
+                    {
+                        [params SSDKSetupTwitterParamsByText:text
+                                                      images:images
+                                                    latitude:lat
+                                                   longitude:lng
+                                                        type:type];
+                    }
                     
                 }
                 
@@ -1421,6 +1437,8 @@ extern "C" {
                     NSString *image = nil;
                     CGFloat menuX;
                     CGFloat menuY;
+                    SSDKContentType type = SSDKContentTypeText;
+                    NSString *videoPath = nil;
                     
                     if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
                     {
@@ -1434,9 +1452,25 @@ extern "C" {
                     {
                         menuX = [[value objectForKey:@"menuY"] floatValue];
                     }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+                    {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        videoPath = [value objectForKey:@"videoPath"];
+                    }
                     
                     CGPoint point = CGPointMake(menuX, menuY);
-                    [params SSDKSetupInstagramByImage:image menuDisplayPoint:point];
+                    
+                    if (type == SSDKContentTypeVideo)
+                    {
+                        [params SSDKSetupInstagramByVideo:[NSURL URLWithString:videoPath]];
+                    }
+                    else
+                    {
+                        [params SSDKSetupInstagramByImage:image menuDisplayPoint:point];
+                    }
                 }
                 
                 //LinkedIn
