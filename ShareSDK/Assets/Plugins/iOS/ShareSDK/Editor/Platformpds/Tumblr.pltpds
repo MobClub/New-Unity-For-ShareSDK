@@ -1,0 +1,6 @@
+{
+	"URLSchemes" : {
+    				"CFBundleURLSchemes" :["tb{appkey}"],
+    				"CFBundleURLName" : "Tumblr"
+    				}
+}
