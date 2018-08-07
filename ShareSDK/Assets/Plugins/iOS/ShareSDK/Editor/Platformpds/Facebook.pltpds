@@ -1,8 +1,0 @@
-{
-    "framework" : ["/SDK/ShareSDK/Support/PlatformConnector/FacebookConnector.framework"],
-    "LSApplicationQueriesSchemes":["fbauth","fbauth2"],
-    "URLSchemes" : {
-    				"CFBundleURLSchemes" :["fb{appkey}"],
-    				"CFBundleURLName" : "facebook"
-    				}
-}
