@@ -50,7 +50,7 @@ namespace cn.sharesdk.unity3d
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
-		//public Telegram telegram;
+		//public Telegram telegram;//安卓配置印象笔记国内与国际版直接在Evernote中配置		
 		#elif UNITY_IPHONE
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
@@ -58,8 +58,8 @@ namespace cn.sharesdk.unity3d
 		public WechatSeries wechatSeries;						//iOS端微信系列, 可直接配置微信三个子平台 		[仅支持iOS端]
 		public QQSeries qqSeries;								//iOS端QQ系列,  可直接配置QQ系列两个子平台		[仅支持iOS端]
 		public KakaoSeries kakaoSeries;							//iOS端Kakao系列, 可直接配置Kakao系列两个子平台	[仅支持iOS端]
-		public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置												 
-		//安卓配置印象笔记国内与国际版直接在Evernote中配置														
+		public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
+		public Telegram telegram;									
 		#endif
 
 	}
@@ -863,6 +863,12 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
 		public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
 		public const int type = (int) PlatformType.CMCC;
+	}
+
+	[Serializable]
+	public class Telegram : DevInfo		
+	{		
+		public const int type = (int) PlatformType.Telegram;
 	}
     #endif
 
