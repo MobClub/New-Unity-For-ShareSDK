@@ -18,16 +18,16 @@ Please notice that this operation could cover your original existed files!
 
 #### Step 2 : Set up script and configurations
 Make sure that the 'ShareSDK' component was added to your GameObject(such as 'Main Camera').Click'Add Component' from the right-hand side bar, and choose 'ShareSDK'.
-![1](media/15367260097687/1.png)
+![](https://lh3.googleusercontent.com/-rmrjMgkzmGw/W5kKylTphXI/AAAAAAAABwg/9-Dr--MShCgr2T0xVgfQ44brTSqiEAXSgCHMYCw/I/1.png)
 
 Then you will see some configurations under the ShareSDK Script. 
 You should setup your own configuration by editing the fields.Setup Your MOBAppKey/MOBAppSecret and other SNS's config which you want, such as Facebook's key/secret, Wechat's, Twitter's etc.
 
 **Setup Mob AppKey/Secret.**
-![1.1](media/15367260097687/1.1.png)
+![](https://lh3.googleusercontent.com/-KGH-XMjhjwk/W5kKyETfF_I/AAAAAAAABwY/DkK2Bb8HhqYEINRytORIffBC5t-I9uOWQCHMYCw/I/1.1.png)
 
 **Setup SNS's Config**
-![1.2](media/15367260097687/1.2.png)
+![](https://lh3.googleusercontent.com/-ultUnBrwpvQ/W5kKyGs4cKI/AAAAAAAABwc/CbYWZT9rQXcQtyTDCRJUDpuqlN7hwPweQCHMYCw/I/1.2.png)
 
 Please differentiate the compiler environment between  Android or the iOS, cause some SNS's fields are different.
 

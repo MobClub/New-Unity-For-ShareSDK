@@ -21,7 +21,7 @@
 ![](http://wiki.mob.com/wp-content/uploads/2015/09/step1.jpg)
 
 挂接后会发现提供了当前支持的平台和及其配置信息。可以直接在此处修改你所需要的平台的配置信息。需要注意的是当前的编译环境是Android还是iOS，其字段名称是不同的哦！
-![cn1](media/15367473885374/cn1.png)
+![](https://lh3.googleusercontent.com/-jNoaTtDaWsI/W5kKg2hkujI/AAAAAAAABwQ/qUCfdCDp6i8Psy3TusEM7eZkXPuwDodIwCHMYCw/I/cn1.png)
 
 除了可以上图处设定配置信息，也可以在ShareSDKDevInfo.cs文件中配置所需的平台信息，效果都是一样的。
 **您可以直接通过修改里面的字符串值来设置平台信息,例如:**
