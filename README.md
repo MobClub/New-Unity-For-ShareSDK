@@ -6,7 +6,7 @@
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.2.1
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.1.4
 
-**文档语言 :** **中文** | **[English](https://github.com/MobClub/New-Unity-For-ShareSDK/README_EN.md)**
+**文档语言 :** **中文** | **[English](https://github.com/MobClub/New-Unity-For-ShareSDK/blob/master/README_EN.md)**
 
 - - - - - - - - - - - -
 
