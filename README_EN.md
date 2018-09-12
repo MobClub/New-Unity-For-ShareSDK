@@ -1,30 +1,39 @@
 # New-Unity-For-ShareSDK
-### 这是一个基于ShareSDK功能的扩展的Unity插件。使用此插件能够帮助您，在您的Unity应用/游戏里面便捷快速地实现社交分享功能。
+### This is a UnityPackage for ShareSDK.It's an convenient tool for you to quickly implement SNS Share feature on your Unity Project on iOS/Android.
 
-**原生SDK版本支持:**
+**supported original ShareSDK version:**
 
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.2.1
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.1.4
 
-**文档语言 :** **中文** | **[English](https://github.com/MobClub/New-Unity-For-ShareSDK/README_EN.md)**
+**Document Language :** **[中文](https://github.com/MobClub/New-Unity-For-ShareSDK)** | **English**
 
 - - - - - - - - - - - -
 
-### *通用集成部分*
+### *Integration of general part*
 
-#### 步骤 1 : 下载 ShareSDK.unitypackage
-下载 ShareSDK.unitypackage文件，双击并导入相关文件。
-注意该操作可能会覆盖您原来已经存在的文件！
+#### Step 1 : Download ShareSDK.unitypackage
+Download this git(master),import the ShareSDK.unitypackage to your Unity project.
+Please notice that this operation could cover your original existed files!
 
-#### 步骤 2 ：挂接ShareSDK脚本并配置平台信息
-选择好需要挂接的GameObject(例如Main Camera),在右侧栏中点击Add Component，选择Share SDK 进行挂接。
-![](http://wiki.mob.com/wp-content/uploads/2015/09/step1.jpg)
+#### Step 2 : Set up script and configurations
+Make sure that the 'ShareSDK' component was added to your GameObject(such as 'Main Camera').Click'Add Component' from the right-hand side bar, and choose 'ShareSDK'.
+![1](media/15367260097687/1.png)
 
-挂接后会发现提供了当前支持的平台和及其配置信息。可以直接在此处修改你所需要的平台的配置信息。需要注意的是当前的编译环境是Android还是iOS，其字段名称是不同的哦！
-![cn1](media/15367473885374/cn1.png)
+Then you will see some configurations under the ShareSDK Script. 
+You should setup your own configuration by editing the fields.Setup Your MOBAppKey/MOBAppSecret and other SNS's config which you want, such as Facebook's key/secret, Wechat's, Twitter's etc.
 
-除了可以上图处设定配置信息，也可以在ShareSDKDevInfo.cs文件中配置所需的平台信息，效果都是一样的。
-**您可以直接通过修改里面的字符串值来设置平台信息,例如:**
+**Setup Mob AppKey/Secret.**
+![1.1](media/15367260097687/1.1.png)
+
+**Setup SNS's Config**
+![1.2](media/15367260097687/1.2.png)
+
+Please differentiate the compiler environment between  Android or the iOS, cause some SNS's fields are different.
+
+Your could also setup the SNS's config in the file 'ShareSDKDevInfo.cs'.**The effect is the same as the Mentioned above.**
+
+**Setup SNS's Config by change the string VALUE (NOT THE KEY) - example:**
 ```
 public class SinaWeiboDevInfo : DevInfo 
 {
@@ -45,19 +54,18 @@ public class SinaWeiboDevInfo : DevInfo
 }
 ```
 
-#### 步骤 3 : 编写代码，实现分享/授权功能
-请先导入命名空间 :
+#### Step 3 : Code for Sharing and Authorization
+Please import Name Space first :
 ```
 using cn.sharesdk.unity3d;
 ```
-声明类 'ShareSDK'
+and declare the Class 'ShareSDK'
 ```
 private ShareSDK ssdk;
 ```
-##### 分享
-分享步骤:
 
-i.定制分享信息
+##### About Sharing
+i.Customize the sharing information :
 ```
 ShareContent content = new ShareContent();
 content.SetText("this is a test string.");
@@ -65,8 +73,7 @@ content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
 content.SetTitle("test title");
 content.SetShareType(ContentType.Image);
 ```
-
-ii.如有需要可以单独定制对应的深交平台的分享内容,例如设定微博的:
+ii.If you need, you can customize the ShareContent for some detail platform, such as setup SinaWeibo:
 ```
 ShareContent customizeShareParams = new ShareContent();
 customizeShareParams.SetText("Sina share content");
@@ -75,32 +82,33 @@ customizeShareParams.SetShareType(ContentType.Image);
 customizeShareParams.SetObjectID("SinaID");
 content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
 ```
+iii.Define the callback, then setup the shareHandler.
 
-iii.制定分享的回调
+set up handler:
 ```
 ssdk.shareHandler = ShareResultHandler;
 ```
-以下为回调的定义:
+define callback:
 ```
 void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 {
-	if (state == ResponseState.Success)
-	{
-		print ("share result :");
-		print (MiniJSON.jsonEncode(result));
-	}
-	else if (state == ResponseState.Fail)
-	{
-		print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
-	}
-	else if (state == ResponseState.Cancel) 
-	{
-		print ("cancel !");
-	}
+    if (state == ResponseState.Success)
+    {
+    print ("share result :");
+    print (MiniJSON.jsonEncode(result));
+    }
+    else if (state == ResponseState.Fail)
+    {
+    print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+    }
+    else if (state == ResponseState.Cancel) 
+    {
+    print ("cancel !");
+    }
 }
 ```
 
-iv.传入分享参数，选择你喜欢的方式进行分享 
+iv.Pass the content params, and Share. 
 
 ```
 //Share by the menu
@@ -113,12 +121,12 @@ ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
 ssdk.ShareContent (PlatformType.SinaWeibo, content);
 ```
 
-##### 授权
-i. 设定授权的回调 :
+##### About Authorization
+i. Set the auth call back :
 ```
 ssdk.authHandler = AuthResultHandler;
 ```
-以下为回调的定义:
+define callback:
 ```
 void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
 {
@@ -136,18 +144,18 @@ void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashta
     }
 }
 ```
-ii. 进行授权:
+ii. now you can make an Authorization:
 ```
 ssdk.Authorize(reqID, PlatformType.SinaWeibo);
 ```
 
-##### 获取用户信息
+##### About Get User's information
 
-i. 设定回调 :
+i. Set the call back :
 ```
 sdk.showUserHandler = GetUserInfoResultHandler;
 ```
-以下为回调的定义:
+define callback:
 ```
 void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
 {
@@ -167,21 +175,26 @@ void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type
 }
 ```
 
-ii. 获取用户信息:
+ii. now you can get the user's info:
 ```
 ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);
 ```
 
-### *关于 iOS*
-完成上述步骤后即可导出Xcode项目进行测试,并且不再需要在Xcode项目中进行其他操作。
+### *About iOS*
+If you finished setup ShareSDK for your project, you can just build a Xcode Project, then test it.That's All!
 
-### *关于 Android*
+### *About Android*
+
 **AndroidManifest.xml**
-注意目录下的AndroidManifest.xml中的包名（package）改成您自己的项目的包名。并确Mob-AppKey/Mob-AppSecret的设置，请设置成您在我们官网上申请得到配置。
+Please make sure that the Package Name was changed to your own's.Setup the value of Mob-AppKey/Mob-AppSecret as same as 'MOBAppKey/MOBAppSecret' which mentioned in Step 2.
+
+Now you can build your .apk and test it!
+
 
 -------
-**更多详细用法或代码演示，请直接参考本项目中的Demo.cs文件**
-**如果您集成中遇到任何需要我们帮助的地方，请联系我们，我们提供7x24小时的免费技术支持**
-**客服QQ : 4006852216**
+
+**Please refer to the Demo.cs in the git and know the detail usage**
+**Finally, if you have any other questions, please contact us on 7x24 hours.We will provide FREE Technical supports:**
+**Service QQ : 4006852216** 
 **Email : support@mob.com**
 
