@@ -133,6 +133,10 @@ public class MOBPostProcessBuild
 		string[] secondDirectories = Directory.GetFiles(secondFilePath, "*", SearchOption.AllDirectories);
 		foreach (string lastFilePath in secondDirectories) 
 		{
+			if (secondFilePath.EndsWith ("SDK/ShareSDK") && lastFilePath.Contains ("Support/PlatformSDK")) {
+				continue;
+			}
+//			Debug.LogWarning("lastFilePath:" + lastFilePath);
 			if (!lastFilePath.Contains (".framework") && 
 				!lastFilePath.Contains (".a") && 
 				!lastFilePath.Contains (".h") && 
@@ -140,7 +144,6 @@ public class MOBPostProcessBuild
 				!lastFilePath.Contains (".DS_Store") &&
 				!lastFilePath.Contains (".meta")) 
 			{
-//				Debug.Log("lastFilePath" + lastFilePath);
 				string otherFilePath = lastFilePath.Replace(pathModel.rootPath, "");
 				int index = otherFilePath.LastIndexOf ("/");
 				//项目目录
@@ -157,7 +160,7 @@ public class MOBPostProcessBuild
 				string savePath = xcodeTargetPath + otherFilePath;
 				fileInfo.CopyTo (savePath,true);
 				//将.a 加入 proj中
-				Debug.Log(fileName);
+				Debug.LogWarning(savePath);
 				if (fileFlags.ContainsKey (fileName)) 
 				{
 					string flag = (string)fileFlags[fileName];
@@ -178,8 +181,9 @@ public class MOBPostProcessBuild
 		ArrayList savePathArray = new ArrayList ();
 		foreach (string lastFilePath in secondDirectories) 
 		{
-//			Debug.Log("lastFilePath" + lastFilePath);
-			//如果路径中带有 .framework 则不导入
+			if (secondFilePath.EndsWith ("SDK/ShareSDK") && lastFilePath.Contains ("Support/PlatformSDK")) {
+				continue;
+			}
 			if (!lastFilePath.Contains (".framework"))
 			{
 				string headerPath = lastFilePath.Replace(pathModel.rootPath, "");
@@ -211,10 +215,21 @@ public class MOBPostProcessBuild
 	//添加 .a文件
 	private static void AddStaticLibrary(string secondFilePath,string xcodeTargetPath,string xcodeTargetGuid,MOBPathModel pathModel,PBXProject xcodeProj)
 	{
+//		SearchOption searchOption;
+//		if (secondFilePath.Contains ("/ShareSDK/")) //shareSDK
+//		{
+//			searchOption = SearchOption.TopDirectoryOnly;
+//		} 
+//		else 
+//		{
+//			searchOption = SearchOption.AllDirectories;
+//		}
 		string[] secondDirectories = Directory.GetFiles(secondFilePath, "*.a", SearchOption.AllDirectories);
 		foreach (string lastFilePath in secondDirectories) 
 		{
-//			Debug.Log("lastFilePath" + lastFilePath);
+			if (secondFilePath.EndsWith ("SDK/ShareSDK") && lastFilePath.Contains ("Support/PlatformSDK")) {
+				continue;
+			}
 			string staticLibraryPath = lastFilePath.Replace(pathModel.rootPath, "");
 			int index = staticLibraryPath.LastIndexOf ("/");
 			//项目目录
@@ -251,6 +266,9 @@ public class MOBPostProcessBuild
 		string[] secondDirectories = Directory.GetDirectories(secondFilePath, "*.bundle", searchOption);
 		foreach (string lastFilePath in secondDirectories) 
 		{
+			if (secondFilePath.EndsWith ("SDK/ShareSDK") && lastFilePath.Contains ("Support/PlatformSDK")) {
+				continue;
+			}
 //			Debug.Log("lastFilePath" + lastFilePath);
 			string bundlePath = lastFilePath.Replace(pathModel.rootPath, "");
 //			Debug.Log("bundlePath" + bundlePath);
