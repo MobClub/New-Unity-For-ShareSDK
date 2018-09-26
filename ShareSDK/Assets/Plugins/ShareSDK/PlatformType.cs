@@ -74,6 +74,7 @@ namespace cn.sharesdk.unity3d
 #elif UNITY_IPHONE
 		Telegram = 47, 			//Telegram
         CMCC = 55,               //中国移动
+		Reddit = 56,			//Reddit
 		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition

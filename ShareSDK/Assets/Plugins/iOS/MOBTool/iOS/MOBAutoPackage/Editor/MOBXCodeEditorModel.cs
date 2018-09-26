@@ -92,7 +92,9 @@ namespace cn.mob.unity3d.sdkporter
 				{
 					savefilePath = filePath;
 					savefilePath = savefilePath.Substring (0,index);
+
 				}
+//				Debug.LogWarning (savefilePath);
 				//permissionsreplaceAppKeydebug.logdebug.log
 				AddPrmissions (datastore);
 				//LSApplicationQueriesSchemes
@@ -352,6 +354,7 @@ namespace cn.mob.unity3d.sdkporter
 				foreach (string value in tempArrayList)
 				{
 					string filePath = path + value;
+//					Debug.LogWarning (filePath);
 					if(!comparisonFolders.Contains(filePath))
 					{
 						comparisonFolders.Add (filePath);

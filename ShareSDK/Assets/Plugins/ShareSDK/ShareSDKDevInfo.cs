@@ -47,6 +47,7 @@ namespace cn.sharesdk.unity3d
 		public Youtube youtube;
 		public MeiPai meiPai;
         public CMCC cmcc;
+		public Reddit reddit;
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
@@ -867,8 +868,17 @@ namespace cn.sharesdk.unity3d
 
 	[Serializable]
 	public class Telegram : DevInfo		
-	{		
+	{	public string bot_token = "600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ";
+		public string bot_domain = "http://127.0.0.1";
 		public const int type = (int) PlatformType.Telegram;
+	}
+
+	[Serializable]
+	public class Reddit : DevInfo		
+	{
+		public string app_key = "ObzXn50T7Cg0Xw";
+		public string redirect_uri = "https://www.mob.com/reddit_callback";
+		public const int type = (int) PlatformType.Reddit;
 	}
     #endif
 

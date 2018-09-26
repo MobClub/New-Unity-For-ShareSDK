@@ -384,6 +384,31 @@ namespace cn.sharesdk.unity3d
 			shareParams ["ipadMarkParam"] = ipadMarkParam;
 		}
 
+		/*iOS Only - Kakao*/
+		public void SetTemplateArgs(Hashtable templateArgs){
+			shareParams ["templateArgs"] = templateArgs;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetTemplateId(String templateId){
+			shareParams ["templateId"] = templateId;
+		}
+
+		/*iOS Only - facebook*/
+		public void SetFacebookHashtag(String hashtag){
+			shareParams ["hashtag"] = hashtag;
+		}
+
+		/*iOS Only - facebook*/
+		public void SetFacebookQuote(String quote){
+			shareParams ["quote"] = quote;
+		}
+
+		/*iOS Only - facebookMessenger*/
+		public void SetMessengerGif(String gif){
+			shareParams ["gif"] = gif;
+		}
+
 		public void SetEnableClientShare(bool enalble){
 			shareParams ["clientShare"] = enalble;
 		}
