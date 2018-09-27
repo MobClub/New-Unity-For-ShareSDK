@@ -2825,7 +2825,7 @@ extern "C" {
                 
                 if (type == SSDKPlatformTypeSinaWeibo)
                 {
-                    [platformsRegister setupSinaWeiboWithAppkey:platformsDict[@"app_key"] appSecret:platformsDict[@"app_secret"] redirectUrl:platformsDict[@"redirect_uri"]];
+                    [platformsRegister setupSinaWeiboWithAppkey:platformInfo[@"app_key"] appSecret:platformInfo[@"app_secret"] redirectUrl:platformInfo[@"redirect_uri"]];
                 }
                 else if (type == SSDKPlatformTypeWechat ||
                     type == SSDKPlatformSubTypeWechatSession ||

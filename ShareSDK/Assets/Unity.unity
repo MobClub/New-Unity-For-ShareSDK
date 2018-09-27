@@ -154,7 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1900725046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06ec628d3773470c99b541a974fbedf, type: 3}
+  m_Script: {fileID: 11500000, guid: b5bc554b7daf941e9a398153af79cf46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   appKey: moba6b6c6d6
@@ -339,6 +339,10 @@ MonoBehaviour:
       app_id: 300011862498
       app_key: 38D9CA1CC280C5F207E2C343745D4A4B
       displayUI: 1
+    reddit:
+      Enable: 1
+      app_key: ObzXn50T7Cg0Xw
+      redirect_uri: https://www.mob.com/reddit_callback
     copy:
       Enable: 1
     yixinFavorites:
@@ -375,6 +379,8 @@ MonoBehaviour:
       isSandBox: 0
     telegram:
       Enable: 1
+      bot_token: 600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ
+      bot_domain: http://127.0.0.1
 --- !u!81 &1900725049
 AudioListener:
   m_ObjectHideFlags: 0
