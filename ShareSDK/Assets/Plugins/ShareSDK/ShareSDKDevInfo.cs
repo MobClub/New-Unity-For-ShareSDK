@@ -223,8 +223,8 @@ namespace cn.sharesdk.unity3d
 		public string CallbackUrl = "http://mob.com";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Twitter;
-		public string consumer_key = "LRBM0H75rWrU9gNHvlEAA2aOy";
-		public string consumer_secret = "gbeWsZvA9ELJSdoBzJ5oLKX0TU09UOwrzdGfo9Tg7DjyGuMe8G";
+		public string consumer_key = "viOnkeLpHBKs6KXV7MPpeGyzE";
+		public string consumer_secret = "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey";
 		public string redirect_uri = "http://mob.com";
 		#endif
 	}
