@@ -85,7 +85,7 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "568898243";
 		public string app_secret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string redirect_uri = "http://www.sharesdk.cn";
-		public string auth_type = "both";	//can pass "both","sso",or "web"  
+//		public string auth_type = "both";	//can pass "both","sso",or "web"  
 		#endif
 	}
 
@@ -119,7 +119,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QQ;
 		public string app_id = "100371282";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
+//		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -136,7 +136,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QZone;
 		public string app_id = "100371282";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
+//		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 	
@@ -207,7 +207,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Facebook;
 		public string api_key = "107704292745179";
 		public string app_secret = "38053202e1a5fe26c80c753071f0b573";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
+//		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		public string display_name = "ShareSDK";//如果需要使用客户端分享，必填且需与FB 后台配置一样
 		#endif
 	}
@@ -243,7 +243,7 @@ namespace cn.sharesdk.unity3d
 		public string app_id = "226427";
 		public string app_key = "fc5b8aed373c4c27a05b712acba0f8c3";
 		public string secret_key = "f29df781abdd4f49beca5a2194676ca4";
-		public string auth_type =  "both";  //can pass "both","sso",or "web" 
+//		public string auth_type =  "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -401,7 +401,7 @@ namespace cn.sharesdk.unity3d
 		public string client_id = "232554794995.apps.googleusercontent.com";
 		public string client_secret = "PEdFgtrMw97aCvf0joQj7EMk";
 		public string redirect_uri = "http://localhost";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
+//		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -492,7 +492,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.VKontakte;
 		public string application_id = "3921561";
 		public string secret_key = "6Qf883ukLDyz4OBepYF1";
-		public string auth_type = "both";
+//		public string auth_type = "both";
 		#endif
 	}
 
@@ -534,7 +534,7 @@ namespace cn.sharesdk.unity3d
 		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
 		public string app_secret = "1a5bd421ae089c3";
 		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -551,7 +551,7 @@ namespace cn.sharesdk.unity3d
 		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
 		public string app_secret = "1a5bd421ae089c3";
 		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -597,7 +597,7 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
 		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
 		public string redirect_uri = "http://www.mob.com/oauth";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 	
@@ -613,7 +613,7 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
 		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
 		public string redirect_uri = "http://www.mob.com/oauth";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 	
@@ -650,7 +650,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Pocket;
 		public string consumer_key = "11496-de7c8c5eb25b2c9fcdc2b627";
 		public string redirect_uri = "pocketapp1234";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
+//		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -704,7 +704,7 @@ namespace cn.sharesdk.unity3d
 		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
 		public string app_secret = "1a5bd421ae089c3";
 		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -720,7 +720,7 @@ namespace cn.sharesdk.unity3d
 		public string app_id = "yx0d9a9f9088ea44d78680f3274da1765f";
 		public string app_secret = "1a5bd421ae089c3";
 		public string redirect_uri = "https://open.yixin.im/resource/oauth2_callback.html";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 		
@@ -785,7 +785,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.QQPlatform;
 		public string app_id = "100371282";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
-		public string auth_type = "both";  //can pass "both","sso",or "web" 
+//		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
 	}
 
@@ -800,7 +800,7 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
 		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
 		public string redirect_uri = "http://www.mob.com/oauth";
-		public string auth_type = "both";   //can pass "both","sso",or "web" 
+//		public string auth_type = "both";   //can pass "both","sso",or "web" 
 		#endif
 	}
 

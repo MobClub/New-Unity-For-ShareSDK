@@ -2864,7 +2864,7 @@ extern "C" {
                 else
                 {
                     NSMutableDictionary *dic = platformsRegister.platformsInfo;
-                    dic[key] = platformInfo;
+                    dic[key] = platformInfo.mutableCopy;
                 }
             }
         }];
