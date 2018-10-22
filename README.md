@@ -3,7 +3,7 @@
 **supported original ShareSDK version:**
 
 - Android - V3.1.4
-- iOS - V4.1.1
+- iOS - V4.2.0
 
 **中文集成文档**
 
