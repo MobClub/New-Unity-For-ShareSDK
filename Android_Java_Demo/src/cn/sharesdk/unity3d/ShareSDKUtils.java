@@ -201,6 +201,9 @@ public class ShareSDKUtils implements Callback{
 		
 		String name = ShareSDK.platformIdToName(platform);
 		Platform plat = ShareSDK.getPlatform(name);
+		if(plat == null){
+			return "error:platform is invaild";
+		}
 		Hashon hashon = new Hashon();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(plat.isAuthValid()){
@@ -251,9 +254,12 @@ public class ShareSDKUtils implements Callback{
 				paListener.setReqID(msg.arg2);
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(name);
-				plat.setPlatformActionListener(paListener);
-				plat.SSOSetting(disableSSO);
-				plat.authorize();
+				if(plat != null){
+					plat.setPlatformActionListener(paListener);
+					plat.SSOSetting(disableSSO);
+					plat.authorize();
+				}
+
 			}
 			break;
 			case MSG_SHOW_USER: {
@@ -262,9 +268,11 @@ public class ShareSDKUtils implements Callback{
 				paListener.setReqID(msg.arg2);
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(name);
-				plat.setPlatformActionListener(paListener);
-				plat.SSOSetting(disableSSO);
-				plat.showUser(null);
+				if(plat != null) {
+					plat.setPlatformActionListener(paListener);
+					plat.SSOSetting(disableSSO);
+					plat.showUser(null);
+				}
 			}
 			break;
 			case MSG_SHARE: {
@@ -274,34 +282,36 @@ public class ShareSDKUtils implements Callback{
 				String content = (String) msg.obj;
 				String pName = ShareSDK.platformIdToName(platformID);
 				Platform plat = ShareSDK.getPlatform(pName);
-				plat.setPlatformActionListener(paListener);
-				plat.SSOSetting(disableSSO);
-				try {
-					Hashon hashon = new Hashon();
-					if (DEBUG) {
-						System.out.println("share content ==>>" + content);
-					}
-					HashMap<String, Object> data = hashon.fromJson(content);
-					ShareParams sp = new ShareParams(data);
-					if (data.containsKey("customizeShareParams")) {
-						final HashMap<String, String> customizeSP = (HashMap<String, String>) data.get("customizeShareParams");
-						if (customizeSP.size() > 0) {
-							String pID = String.valueOf(platformID);
-							if (customizeSP.containsKey(pID)) {
-								String cSP = customizeSP.get(pID);
-								if (DEBUG) {
-									System.out.println("share content ==>>" + cSP);
-								}
-								data = hashon.fromJson(cSP);
-								for (String key : data.keySet()) {
-									sp.set(key, data.get(key));
-								}
-							}								
+				if(plat != null) {
+					plat.setPlatformActionListener(paListener);
+					plat.SSOSetting(disableSSO);
+					try {
+						Hashon hashon = new Hashon();
+						if (DEBUG) {
+							System.out.println("share content ==>>" + content);
 						}
+						HashMap<String, Object> data = hashon.fromJson(content);
+						ShareParams sp = new ShareParams(data);
+						if (data.containsKey("customizeShareParams")) {
+							final HashMap<String, String> customizeSP = (HashMap<String, String>) data.get("customizeShareParams");
+							if (customizeSP.size() > 0) {
+								String pID = String.valueOf(platformID);
+								if (customizeSP.containsKey(pID)) {
+									String cSP = customizeSP.get(pID);
+									if (DEBUG) {
+										System.out.println("share content ==>>" + cSP);
+									}
+									data = hashon.fromJson(cSP);
+									for (String key : data.keySet()) {
+										sp.set(key, data.get(key));
+									}
+								}
+							}
+						}
+						plat.share(sp);
+					} catch (Throwable t) {
+						paListener.onError(plat, Platform.ACTION_SHARE, t);
 					}
-					plat.share(sp);
-				} catch (Throwable t) {
-					paListener.onError(plat, Platform.ACTION_SHARE, t);
 				}
 			}
 			break;
@@ -418,9 +428,11 @@ public class ShareSDKUtils implements Callback{
 				int count = msg.getData().getInt("count");
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(name);
-				plat.setPlatformActionListener(paListener);
-				plat.SSOSetting(disableSSO);
-				plat.listFriend(count, page, null);
+				if(plat != null) {
+					plat.setPlatformActionListener(paListener);
+					plat.SSOSetting(disableSSO);
+					plat.listFriend(count, page, null);
+				}
 			}
 			break;
 			case MSG_FOLLOW_FRIEND:{
@@ -430,9 +442,11 @@ public class ShareSDKUtils implements Callback{
 				String account = (String) msg.obj;
 				String name = ShareSDK.platformIdToName(platform);
 				Platform plat = ShareSDK.getPlatform(name);
-				plat.setPlatformActionListener(paListener);
-				plat.SSOSetting(disableSSO);
-				plat.followFriend(account);
+				if(plat != null) {
+					plat.setPlatformActionListener(paListener);
+					plat.SSOSetting(disableSSO);
+					plat.followFriend(account);
+				}
 			}
 			break;
 		}
