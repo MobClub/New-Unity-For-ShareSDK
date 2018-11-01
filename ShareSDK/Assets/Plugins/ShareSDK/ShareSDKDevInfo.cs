@@ -157,8 +157,8 @@ namespace cn.sharesdk.unity3d
 		public string MiniprogramType = "0";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChat;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		public string app_id = "wx617c77c82218ea2c";
+		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
 		#endif
 	}
 
@@ -173,8 +173,8 @@ namespace cn.sharesdk.unity3d
 		public bool BypassApproval = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChatMoments;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		public string app_id = "wx617c77c82218ea2c";
+		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
 		#endif
 	}
 
@@ -188,8 +188,8 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChatFavorites;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		public string app_id = "wx617c77c82218ea2c";
+		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
 		#endif
 	}
 
@@ -770,8 +770,8 @@ namespace cn.sharesdk.unity3d
 		//对于安卓端，请在类Wechat,WechatMoments或WechatFavorite中配置相关信息↑	
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WechatPlatform;
-		public string app_id = "wx4868b35061f87885";
-		public string app_secret = "64020361b8ec4c99936c0e3999a9f249";
+		public string app_id = "wx617c77c82218ea2c";
+		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
 		#endif
 	}
 

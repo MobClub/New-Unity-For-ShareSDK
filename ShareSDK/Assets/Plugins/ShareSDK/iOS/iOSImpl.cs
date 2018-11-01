@@ -57,6 +57,9 @@ namespace cn.sharesdk.unity3d
 		[DllImport("__Internal")]
 		private static extern void __iosShareSDKShowShareViewWithContentName (int reqID, int platform, string contentName, string customFields, string observer);
 
+		[DllImport("__Internal")]
+		private static extern bool __iosShareSDKOpenMiniProgram (String userName, String path, int miniProgramType);
+
 		private string _callbackObjectName = "Main Camera";
 		private string _appKey;
 		public iOSImpl (GameObject go) 
@@ -206,7 +209,11 @@ namespace cn.sharesdk.unity3d
 			// no this interface on iOS
 			Console.WriteLine ("#waring : no this interface on iOS");
 		}
-		
+
+		public override bool openMiniProgram (String userName, String path, int miniProgramType)
+		{
+			return __iosShareSDKOpenMiniProgram (userName, path, miniProgramType);
+		}
 		
 	}
 	#endif

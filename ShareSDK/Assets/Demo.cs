@@ -138,7 +138,8 @@ public class Demo : MonoBehaviour {
 		{
 			//获取新浪微博好友，第一页，每页15条数据
 			print ("Click Btn Of Get Friends SinaWeibo");
-			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
+//			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
+			ssdk.openMiniProgram("gh_afb25ac019c9","pages/index/index",0);
 		}
 
 		btnTop += btnHeight + 20 * scale;

@@ -16,6 +16,7 @@
 #import <ShareSDKConfigFile/ShareSDK+XML.h>
 #import <MOBFoundation/MOBFoundation.h>
 #import <ShareSDK/NSMutableDictionary+SSDKShare.h>
+#import <objc/message.h>
 
 static UIView *_refView = nil;
 #if defined (__cplusplus)
@@ -191,6 +192,17 @@ extern "C" {
                                                           void *contentName,
                                                           void *customHashtable,
                                                           void *observer);
+    
+    
+    /**
+     打开小程序
+
+     @param userName 小程序userName
+     @param path 路径
+     @param miniProgramType 版本
+     @return 是否成功打开
+     */
+    extern bool __iosShareSDKOpenMiniProgram(void *userName, void *path, int miniProgramType);
     
 #if defined (__cplusplus)
 }
@@ -3692,6 +3704,33 @@ extern "C" {
             UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
             
         }];
+    }
+    
+    bool __iosShareSDKOpenMiniProgram(void *userName, void *path, int miniProgramType)
+    {
+        NSString *userNameStr = nil;
+        NSString *pathStr = nil;
+        
+        if (userName != NULL)
+        {
+            userNameStr = [NSString stringWithCString:userName encoding:NSUTF8StringEncoding];
+        }
+        
+        if (path != NULL)
+        {
+            pathStr = [NSString stringWithCString:path encoding:NSUTF8StringEncoding];
+        }
+        
+        NSLog(@"%@,%@,%d",userNameStr,pathStr,miniProgramType);
+        
+        Class WeChatConnector = NSClassFromString(@"WeChatConnector");
+        
+        if (WeChatConnector == NULL)
+        {
+            NSLog(@"Warn: WeChatConnector not exsit ！");
+        }
+        
+        return ((BOOL(*)(id,SEL,NSString *,NSString *,NSInteger))objc_msgSend)(WeChatConnector,NSSelectorFromString(@"openMiniProgramWithUserName:path:miniProgramType:"),userNameStr,pathStr,miniProgramType);
     }
     
 #if defined (__cplusplus)

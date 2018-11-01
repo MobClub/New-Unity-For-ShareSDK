@@ -176,6 +176,12 @@ namespace cn.sharesdk.unity3d
 			Debug.Log("#WARING : Do not support this feature in Android temporarily" );
 		}
 
+		public override bool openMiniProgram (String userName, String path, int miniProgramType)
+		{
+			// wait for implementation
+			return false;
+		}
+
 	}
 	#endif
 }

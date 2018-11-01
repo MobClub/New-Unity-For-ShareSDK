@@ -105,6 +105,11 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		public abstract void DisableSSO (Boolean disable);
 
+		/// <summary>
+		/// Open Wechat miniProgram
+		/// </summary>
+		public abstract bool openMiniProgram (String userName, String path, int miniProgramType);
+
 	}
 }
 

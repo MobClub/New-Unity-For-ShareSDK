@@ -539,6 +539,14 @@ namespace cn.sharesdk.unity3d
 		{
 			shareSDKUtils.DisableSSO (open);			
 		}
+
+		/// <summary>
+		/// Open Wechat miniProgram, 0:正式版; 1:开发版; 2:体验版
+		/// </summary>
+		public bool openMiniProgram (String userName, String path, int miniProgramType)
+		{
+			return shareSDKUtils.openMiniProgram (userName,path,miniProgramType);
+		}
 			
 		/// <summary>
 		/// Event result listener.
