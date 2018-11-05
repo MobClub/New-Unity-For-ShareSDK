@@ -855,6 +855,16 @@ namespace cn.sharesdk.unity3d
         public string AppId = "300011860247";
         public string AppKey = "2D464D8BFCE73A44B4F9DF95A2FDBE1C";
    }
+   
+    [Serializable]
+    public class Reddit : DevInfo
+    {
+        public string SortId = "56";
+        public const int type = (int) PlatformType.Reddit;
+        public string Id = "56";
+        public string AppKey = "MExDxPuTCtFiRw";
+        public string RedirectUrl = "http://www.sharesdk.cn";
+    }
     
     #elif UNITY_IPHONE
 	[Serializable]		
