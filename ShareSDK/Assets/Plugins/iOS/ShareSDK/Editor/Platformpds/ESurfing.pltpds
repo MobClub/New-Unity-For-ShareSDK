@@ -1,0 +1,4 @@
+{
+    "folders" : ["/SDK/ShareSDK/Support/PlatformSDK/ESurfingSDK"],
+    "framework" : ["/SDK/ShareSDK/Support/PlatformConnector/ESurfingConnector.framework"]
+}

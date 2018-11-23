@@ -6,7 +6,7 @@
 //  Copyright © 2018年 掌淘科技. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <MOBFoundation/MOBFDataModel.h>
 #import "SSDKTypeDefine.h"
 
 @interface SSDKRegister : NSObject
@@ -345,5 +345,16 @@
  */
 - (void)setupRedditByAppKey:(NSString *)appkey
                 redirectUri:(NSString *)redirectUri;
+
+/**
+ 设置天翼应用信息
+
+ @param appkey 应用标识
+ @param appSecret 应用密钥
+ @param appName 应用名称
+ */
+- (void)setupESurfingByAppKey:(NSString *)appkey
+                    appSecret:(NSString *)appSecret
+                      appName:(NSString *)appName;
 
 @end

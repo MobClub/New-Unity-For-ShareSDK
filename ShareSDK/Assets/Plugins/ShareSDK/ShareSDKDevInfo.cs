@@ -60,7 +60,10 @@ namespace cn.sharesdk.unity3d
 		public QQSeries qqSeries;								//iOS端QQ系列,  可直接配置QQ系列两个子平台		[仅支持iOS端]
 		public KakaoSeries kakaoSeries;							//iOS端Kakao系列, 可直接配置Kakao系列两个子平台	[仅支持iOS端]
 		public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
-		public Telegram telegram;									
+		public Telegram telegram;
+        public ESurfing eSurfing;
+        public FacebookAccount facebookAccount;//iOS端无需配置
+       
 		#endif
 
 	}
@@ -890,6 +893,24 @@ namespace cn.sharesdk.unity3d
 		public string redirect_uri = "https://www.mob.com/reddit_callback";
 		public const int type = (int) PlatformType.Reddit;
 	}
+
+    [Serializable]
+    public class ESurfing : DevInfo
+    {
+        public string app_key = "8148612606";
+        public string app_secret = "mCltrhUqwshFa86egDTs0491ibaAulKA";
+        public string app_name = "shareSDK";
+        public const int type = (int)PlatformType.ESurfing;
+    }
+
+    [Serializable]
+    public class FacebookAccount : DevInfo
+    {
+        public string app_id = "1412473428822331";
+        //iOS平台 请到FacebookAccount.pltpds 设置AccountKitClientToken值 当前默认为测试
+        public string client_token = "c30c08723aa8c48fbd5e01d1c3103891";
+        public const int type = (int)PlatformType.FacebookAccount;
+    }
     #endif
 
 }

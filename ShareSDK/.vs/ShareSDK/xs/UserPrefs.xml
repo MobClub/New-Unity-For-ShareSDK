@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs">
+    <Files>
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="93" Column="3" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="910" Column="35" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="33" Column="21" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" Line="113" Column="9" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="69" Column="69" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" Line="383" Column="14" />
+      <File FileName="Assets/Demo.cs" Line="75" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
