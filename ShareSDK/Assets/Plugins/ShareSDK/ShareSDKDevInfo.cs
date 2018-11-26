@@ -838,46 +838,53 @@ namespace cn.sharesdk.unity3d
 		public string app_key = "1089867596";
 		#endif
 	}
-	
-	//[Serializable]		
-	//public class Telegram : DevInfo		
-	//{		
-	//	#if UNITY_ANDROID		
-	//	public string SortId = "47";		
-	//	public const int type = (int) PlatformType.Telegram;		
-	//	#elif UNITY_IPHONE		
-	//	#endif		
-	//}
 
-    #if UNITY_ANDROID
+    //[Serializable]		
+    //public class Telegram : DevInfo		
+    //{		
+    //	#if UNITY_ANDROID		
+    //	public string SortId = "47";		
+    //	public const int type = (int) PlatformType.Telegram;		
+    //	#elif UNITY_IPHONE		
+    //	#endif		
+    //}
+
     [Serializable]
     public class CMCC : DevInfo
     {
+#if UNITY_ANDROID
         public string SortId = "55";
-        public const int type = (int) PlatformType.CMCC;
+        public const int type = (int)PlatformType.CMCC;
         public string AppId = "300011860247";
         public string AppKey = "2D464D8BFCE73A44B4F9DF95A2FDBE1C";
-   }
-   
+#elif UNITY_IPHONE
+        public string app_id = "300011862498";
+        public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
+        public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
+        public const int type = (int)PlatformType.CMCC;
+#endif
+    }
+
     [Serializable]
     public class Reddit : DevInfo
     {
+#if UNITY_ANDROID
         public string SortId = "56";
-        public const int type = (int) PlatformType.Reddit;
+        public const int type = (int)PlatformType.Reddit;
         public string Id = "56";
         public string AppKey = "MExDxPuTCtFiRw";
         public string RedirectUrl = "http://www.sharesdk.cn";
+#elif UNITY_IPHONE
+        public string app_key = "ObzXn50T7Cg0Xw";
+        public string redirect_uri = "https://www.mob.com/reddit_callback";
+        public const int type = (int)PlatformType.Reddit;
+#endif
     }
+
+#if UNITY_ANDROID
+
     
-    #elif UNITY_IPHONE
-	[Serializable]		
-	public class CMCC : DevInfo		
-	{		
-		public string app_id = "300011862498";
-		public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
-		public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
-		public const int type = (int) PlatformType.CMCC;
-	}
+#elif UNITY_IPHONE
 
 	[Serializable]
 	public class Telegram : DevInfo		
@@ -886,13 +893,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Telegram;
 	}
 
-	[Serializable]
-	public class Reddit : DevInfo		
-	{
-		public string app_key = "ObzXn50T7Cg0Xw";
-		public string redirect_uri = "https://www.mob.com/reddit_callback";
-		public const int type = (int) PlatformType.Reddit;
-	}
+	
 
     [Serializable]
     public class ESurfing : DevInfo
@@ -911,6 +912,6 @@ namespace cn.sharesdk.unity3d
         public string client_token = "c30c08723aa8c48fbd5e01d1c3103891";
         public const int type = (int)PlatformType.FacebookAccount;
     }
-    #endif
+#endif
 
 }
