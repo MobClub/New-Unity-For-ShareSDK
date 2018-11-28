@@ -74,6 +74,8 @@
 	<string name="ssdk_telegram">Telegram</string>
 	<string name="ssdk_cmcc">中国移动</string>
 	<string name="ssdk_reddit">reddit</string>
+	<string name="ssdk_telecom">中国电信</string>
+	<string name="ssdk_accountkit">Accountkit</string>
 	<string name="ssdk_share_to_qzone">分享到QQ空间</string>
 	<string name="ssdk_share_to_qq">分享到QQ</string>
 	<string name="ssdk_share_to_facebook">分享到Facebook</string>
