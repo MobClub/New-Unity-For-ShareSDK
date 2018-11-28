@@ -51,7 +51,7 @@ namespace cn.sharesdk.unity3d
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
-		//public Telegram telegram;//安卓配置印象笔记国内与国际版直接在Evernote中配置
+		public Telegram telegramAndroid;//安卓配置印象笔记国内与国际版直接在Evernote中配置
         public Telecom telecom; //中国电信
         public Accountkit accountkit; //FacebookAccountkit
 		#elif UNITY_IPHONE
@@ -841,16 +841,6 @@ namespace cn.sharesdk.unity3d
 		#endif
 	}
 
-    //[Serializable]		
-    //public class Telegram : DevInfo		
-    //{		
-    //	#if UNITY_ANDROID		
-    //	public string SortId = "47";		
-    //	public const int type = (int) PlatformType.Telegram;		
-    //	#elif UNITY_IPHONE		
-    //	#endif		
-    //}
-
     [Serializable]
     public class CMCC : DevInfo
     {
@@ -884,6 +874,14 @@ namespace cn.sharesdk.unity3d
     }
 
 #if UNITY_ANDROID
+    [Serializable]		
+    public class Telegram : DevInfo		
+    {		
+    	public string SortId = "47";
+        public string AppKey="782826033";
+		public string RedirectUrl="http://www.mob.com";
+    }
+
     [Serializable]
     public class Telecom : DevInfo
     {   public string SortId = "57";

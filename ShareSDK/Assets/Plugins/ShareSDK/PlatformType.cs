@@ -68,7 +68,7 @@ namespace cn.sharesdk.unity3d
 		WechatPlatform = 22,  
 		QQPlatform = 24,
 		YixinPlatform = 38,
-		//Telegram = 47,         //Telegram
+		Telegram = 47,         //Telegram
         CMCC = 55,               //中国移动
         Telecom = 57,                 //中国电信
         Accountkit = 58              //FacebookAccount
