@@ -73,6 +73,8 @@
 	<string name="ssdk_telegram">Telegram</string>
 	<string name="ssdk_cmcc">Cmcc</string>
 	<string name="ssdk_reddit">reddit</string>
+	<string name="ssdk_telecom">China Telecom</string>
+	<string name="ssdk_accountkit">Accountkit</string>
 
 	<string name="ssdk_share_to_qzone">Share To QZone</string>
 	<string name="ssdk_share_to_qq">Share To QQ</string>
