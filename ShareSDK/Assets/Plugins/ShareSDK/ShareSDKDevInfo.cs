@@ -51,7 +51,9 @@ namespace cn.sharesdk.unity3d
 
 		#if UNITY_ANDROID
 		public FourSquare fourSquare;
-		//public Telegram telegram;//安卓配置印象笔记国内与国际版直接在Evernote中配置		
+		//public Telegram telegram;//安卓配置印象笔记国内与国际版直接在Evernote中配置
+        public Telecom telecom; //中国电信
+        public Accountkit accountkit; //FacebookAccountkit
 		#elif UNITY_IPHONE
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
@@ -882,7 +884,22 @@ namespace cn.sharesdk.unity3d
     }
 
 #if UNITY_ANDROID
+    [Serializable]
+    public class Telecom : DevInfo
+    {   public string SortId = "57";
+		public string AppKey = "8148612606";
+        public string AppSecret= "mCltrhUqwshFa86egDTs0491ibaAulKA";
+        public string RedirectUrl = "http://www.sharesdk.cn";
 
+    }
+
+    [Serializable]
+    public class Accountkit : DevInfo
+    {   public string SortId = "58";
+		public string AppKey = "579465512480462";
+		public string AppSecret = "8a6383652dd9f23fb0994f03d350d0ca";
+		public string RedirectUrl = "http://www.sharesdk.cn/"; 
+    }
     
 #elif UNITY_IPHONE
 

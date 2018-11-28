@@ -69,7 +69,10 @@ namespace cn.sharesdk.unity3d
 		QQPlatform = 24,
 		YixinPlatform = 38,
 		//Telegram = 47,         //Telegram
-        CMCC = 55               //中国移动
+        CMCC = 55,               //中国移动
+        Telecom = 57,                 //中国电信
+        Accountkit = 58              //FacebookAccount
+
        
 #elif UNITY_IPHONE
 		Telegram = 47, 			//Telegram
