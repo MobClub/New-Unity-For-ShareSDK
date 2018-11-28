@@ -400,6 +400,8 @@
 	<Telegram
 		Id="47"
 		SortId="47"
+		AppKey="782826033"
+		RedirectUrl="http://www.mob.com"
 		Enable="true"/>
 
 	<Cmcc
@@ -407,12 +409,30 @@
 		SortId="55"
 		AppId="300011860247"
 		AppKey="2D464D8BFCE73A44B4F9DF95A2FDBE1C"
-		Eneble="true"/>
-		
+		Enable="true"/>
+
 	<Reddit
 		Id="56"
 		SortId="56"
 		AppKey="MExDxPuTCtFiRw"
 		RedirectUrl="http://www.sharesdk.cn" />
+
+	<Telecom
+		Id="57"
+		SortId="57"
+		AppKey="8148612606"
+		AppSecret="mCltrhUqwshFa86egDTs0491ibaAulKA"
+		RedirectUrl="http://www.sharesdk.cn"
+		Enable="true" />
+
+	<!-- app_secret的值为Account Kit 应用密匙 ，不是客户端口令-->
+	<Accountkit
+		Id="58"
+		SortId="58"
+		AppKey="579465512480462"
+		AppSecret="8a6383652dd9f23fb0994f03d350d0ca"
+		RedirectUrl="http://www.sharesdk.cn/"
+		Enable="true"
+	/>
 	
 </DevInfor>
