@@ -55,35 +55,32 @@ namespace cn.sharesdk.unity3d
 		KakaoTalk = 44,         //KakaoTalk
 		KakaoStory = 45,        //KakaoStory 
 		FacebookMessenger = 46, //FacebookMessenger
-		Bluetooth = 48,         //Bluetooth
+        Telegram = 47,         //Telegram
+        Bluetooth = 48,         //Bluetooth
 		AliSocial = 50,            //AliSocial
 		AliSocialMoments = 51,     //AliSocialMoments
 		Dingding = 52,			//DingTalk 钉钉
 		Youtube = 53,			//youtube
 		MeiPai = 54,            //美拍
+        CMCC = 55,               //中国移动
         Reddit = 56,            //Reddit
+        ESurfing = 57,          //天翼
 #if UNITY_ANDROID
 		KakaoPlatform = 44,    
 		EvernoteInternational = 12,
 		WechatPlatform = 22,  
 		QQPlatform = 24,
 		YixinPlatform = 38,
-		Telegram = 47,         //Telegram
-        CMCC = 55,               //中国移动
-        Telecom = 57,                 //中国电信
-        Accountkit = 58              //FacebookAccount
+        FacebookAccount = 58,              //FacebookAccount
 
        
 #elif UNITY_IPHONE
-		Telegram = 47, 			//Telegram
-        CMCC = 55,               //中国移动
 		//Reddit = 56,			//Reddit
 		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series
 		QQPlatform = 998,		//QQ Series
-        ESurfing = 57,          //天翼
         FacebookAccount = 58,   //FacebookAccount
 #endif
 

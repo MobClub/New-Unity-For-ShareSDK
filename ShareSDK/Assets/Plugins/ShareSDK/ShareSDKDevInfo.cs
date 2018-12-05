@@ -48,13 +48,14 @@ namespace cn.sharesdk.unity3d
 		public MeiPai meiPai;
         public CMCC cmcc;
 		public Reddit reddit;
+        public Telegram telegram;
+        public ESurfing eSurfing; //中国电信
+        public FacebookAccount facebookAccount;//iOS端无需配置
 
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		public FourSquare fourSquare;
-		public Telegram telegramAndroid;//安卓配置印象笔记国内与国际版直接在Evernote中配置
-        public Telecom telecom; //中国电信
-        public Accountkit accountkit; //FacebookAccountkit
-		#elif UNITY_IPHONE
+		//安卓配置印象笔记国内与国际版直接在Evernote中配置
+#elif UNITY_IPHONE
 		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
 		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
@@ -62,15 +63,11 @@ namespace cn.sharesdk.unity3d
 		public QQSeries qqSeries;								//iOS端QQ系列,  可直接配置QQ系列两个子平台		[仅支持iOS端]
 		public KakaoSeries kakaoSeries;							//iOS端Kakao系列, 可直接配置Kakao系列两个子平台	[仅支持iOS端]
 		public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
-		public Telegram telegram;
-        public ESurfing eSurfing;
-        public FacebookAccount facebookAccount;//iOS端无需配置
-       
-		#endif
+#endif
 
-	}
+    }
 
-	public class DevInfo 
+    public class DevInfo 
 	{	
 		public bool Enable = true;
 	}
@@ -844,89 +841,81 @@ namespace cn.sharesdk.unity3d
     [Serializable]
     public class CMCC : DevInfo
     {
-#if UNITY_ANDROID
+    #if UNITY_ANDROID
         public string SortId = "55";
         public const int type = (int)PlatformType.CMCC;
         public string AppId = "300011860247";
         public string AppKey = "2D464D8BFCE73A44B4F9DF95A2FDBE1C";
-#elif UNITY_IPHONE
+    #elif UNITY_IPHONE
         public string app_id = "300011862498";
         public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
         public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
         public const int type = (int)PlatformType.CMCC;
-#endif
+    #endif
     }
 
     [Serializable]
     public class Reddit : DevInfo
     {
-#if UNITY_ANDROID
+    #if UNITY_ANDROID
         public string SortId = "56";
         public const int type = (int)PlatformType.Reddit;
         public string Id = "56";
         public string AppKey = "MExDxPuTCtFiRw";
         public string RedirectUrl = "http://www.sharesdk.cn";
-#elif UNITY_IPHONE
+    #elif UNITY_IPHONE
         public string app_key = "ObzXn50T7Cg0Xw";
         public string redirect_uri = "https://www.mob.com/reddit_callback";
         public const int type = (int)PlatformType.Reddit;
-#endif
-    }
-
-#if UNITY_ANDROID
-    [Serializable]		
-    public class Telegram : DevInfo		
-    {		
-    	public string SortId = "47";
-        public string AppKey="782826033";
-		public string RedirectUrl="http://www.mob.com";
+    #endif
     }
 
     [Serializable]
-    public class Telecom : DevInfo
-    {   public string SortId = "57";
-		public string AppKey = "8148612606";
-        public string AppSecret= "mCltrhUqwshFa86egDTs0491ibaAulKA";
-        public string RedirectUrl = "http://www.sharesdk.cn";
-
-    }
-
-    [Serializable]
-    public class Accountkit : DevInfo
-    {   public string SortId = "58";
-		public string AppKey = "579465512480462";
-		public string AppSecret = "8a6383652dd9f23fb0994f03d350d0ca";
-		public string RedirectUrl = "http://www.sharesdk.cn/"; 
-    }
-    
-#elif UNITY_IPHONE
-
-	[Serializable]
-	public class Telegram : DevInfo		
-	{	public string bot_token = "600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ";
+    public class Telegram : DevInfo
+    {
+    #if UNITY_ANDROID
+        public string SortId = "47";
+        public string AppKey = "782826033";
+        public string RedirectUrl = "http://www.mob.com";
+    #elif UNITY_IPHONE
+        public string bot_token = "600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ";
 		public string bot_domain = "http://127.0.0.1";
 		public const int type = (int) PlatformType.Telegram;
-	}
-
-	
+    #endif
+    }
 
     [Serializable]
     public class ESurfing : DevInfo
     {
+#if UNITY_ANDROID
+        public string SortId = "57";
+        public string AppKey = "8148612606";
+        public string AppSecret = "mCltrhUqwshFa86egDTs0491ibaAulKA";
+        public string RedirectUrl = "http://www.sharesdk.cn";
+#elif UNITY_IPHONE
         public string app_key = "8148612606";
         public string app_secret = "mCltrhUqwshFa86egDTs0491ibaAulKA";
         public string app_name = "shareSDK";
         public const int type = (int)PlatformType.ESurfing;
+#endif
     }
+
 
     [Serializable]
     public class FacebookAccount : DevInfo
     {
+#if UNITY_ANDROID
+        public string SortId = "58";
+		public string AppKey = "579465512480462";
+		public string AppSecret = "8a6383652dd9f23fb0994f03d350d0ca";
+		public string RedirectUrl = "http://www.sharesdk.cn/"; 
+#elif UNITY_IPHONE
         public string app_id = "1412473428822331";
         //iOS平台 请到FacebookAccount.pltpds 设置AccountKitClientToken值 当前默认为测试
         public string client_token = "c30c08723aa8c48fbd5e01d1c3103891";
         public const int type = (int)PlatformType.FacebookAccount;
-    }
 #endif
+    }
 
-}
+
+    }
