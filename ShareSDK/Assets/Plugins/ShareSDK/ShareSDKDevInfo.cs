@@ -841,47 +841,48 @@ namespace cn.sharesdk.unity3d
     [Serializable]
     public class CMCC : DevInfo
     {
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
         public string SortId = "55";
         public const int type = (int)PlatformType.CMCC;
         public string AppId = "300011860247";
         public string AppKey = "2D464D8BFCE73A44B4F9DF95A2FDBE1C";
-    #elif UNITY_IPHONE
+#elif UNITY_IPHONE
         public string app_id = "300011862498";
         public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
         public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
         public const int type = (int)PlatformType.CMCC;
-    #endif
+#endif
     }
 
     [Serializable]
     public class Reddit : DevInfo
     {
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
         public string SortId = "56";
         public const int type = (int)PlatformType.Reddit;
         public string Id = "56";
         public string AppKey = "MExDxPuTCtFiRw";
         public string RedirectUrl = "http://www.sharesdk.cn";
-    #elif UNITY_IPHONE
+#elif UNITY_IPHONE
         public string app_key = "ObzXn50T7Cg0Xw";
         public string redirect_uri = "https://www.mob.com/reddit_callback";
         public const int type = (int)PlatformType.Reddit;
-    #endif
+#endif
     }
 
     [Serializable]
     public class Telegram : DevInfo
     {
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
         public string SortId = "47";
         public string AppKey = "782826033";
         public string RedirectUrl = "http://www.mob.com";
-    #elif UNITY_IPHONE
+        public const int type = (int) PlatformType.Telegram;
+#elif UNITY_IPHONE
         public string bot_token = "600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ";
 		public string bot_domain = "http://127.0.0.1";
 		public const int type = (int) PlatformType.Telegram;
-    #endif
+#endif
     }
 
     [Serializable]
@@ -892,6 +893,7 @@ namespace cn.sharesdk.unity3d
         public string AppKey = "8148612606";
         public string AppSecret = "mCltrhUqwshFa86egDTs0491ibaAulKA";
         public string RedirectUrl = "http://www.sharesdk.cn";
+        public const int type = (int)PlatformType.ESurfing;
 #elif UNITY_IPHONE
         public string app_key = "8148612606";
         public string app_secret = "mCltrhUqwshFa86egDTs0491ibaAulKA";
@@ -908,7 +910,8 @@ namespace cn.sharesdk.unity3d
         public string SortId = "58";
 		public string AppKey = "579465512480462";
 		public string AppSecret = "8a6383652dd9f23fb0994f03d350d0ca";
-		public string RedirectUrl = "http://www.sharesdk.cn/"; 
+		public string RedirectUrl = "http://www.sharesdk.cn/";
+        public const int type = (int)PlatformType.FacebookAccount;
 #elif UNITY_IPHONE
         public string app_id = "1412473428822331";
         //iOS平台 请到FacebookAccount.pltpds 设置AccountKitClientToken值 当前默认为测试
@@ -918,4 +921,4 @@ namespace cn.sharesdk.unity3d
     }
 
 
-    }
+}
