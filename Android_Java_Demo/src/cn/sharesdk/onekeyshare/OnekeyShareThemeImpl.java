@@ -1,10 +1,21 @@
+//#if def{lang} == cn
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
  * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- *
+ * 
  * Copyright (c) 2013年 mob.com. All rights reserved.
  */
+//#elif def{lang} == en
+/*
+ * Offical Website:http://www.mob.com
+ * Support QQ: 4006852216
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. 
+ * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
+ * 
+ * Copyright (c) 2013 mob.com. All rights reserved.
+ */
+//#endif
 
 package cn.sharesdk.onekeyshare;
 
@@ -31,7 +42,11 @@ import cn.sharesdk.framework.Platform.ShareParams;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 
+//#if def{lang} == cn
 /** 快捷分享的主题样式的实现父类 */
+//#elif def{lang} == en
+/** the abstract class of onekeyshare theme */  
+//#endif
 public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Callback {
 	protected boolean dialogMode;
 	protected HashMap<String, Object> shareParamsMap;
@@ -47,27 +62,27 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 	public OnekeyShareThemeImpl() {
 		callback = this;
 	}
-
+	
 	public final void setDialogMode(boolean dialogMode) {
 		this.dialogMode = dialogMode;
 	}
-
+	
 	public final void setShareParamsMap(HashMap<String, Object> shareParamsMap) {
 		this.shareParamsMap = shareParamsMap;
 	}
-
+	
 	public final void setSilent(boolean silent) {
 		this.silent = silent;
 	}
-
+	
 	public final void setCustomerLogos(ArrayList<CustomerLogo> customerLogos) {
 		this.customerLogos = customerLogos;
 	}
-
+	
 	public final void setHiddenPlatforms(HashMap<String, String> hiddenPlatforms) {
 		this.hiddenPlatforms = hiddenPlatforms;
 	}
-
+		
 	public final void setPlatformActionListener(PlatformActionListener callback) {
 		this.callback = callback == null ? this : callback;
 	}
@@ -79,13 +94,19 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 	public final void disableSSO() {
 		disableSSO = true;
 	}
-
+	
 	public final void show(Context context) {
 		this.context = context;
-
+		
+		//#if def{lang} == cn
 		// 显示方式是由platform和silent两个字段控制的
 		// 如果platform设置了，则无须显示九宫格，否则都会显示；
 		// 如果silent为true，表示不进入编辑页面，否则会进入。
+		//#elif def{lang} == en
+		// the display mode is controlled by the field of platform and silent,
+		// if platform is set, the platform logos grid won't be display, and the share content editor will pop up directly
+		// if silent is true, the share content editor also will be skipped
+		//#endif
 		if (shareParamsMap.containsKey("platform")) {
 			String name = String.valueOf(shareParamsMap.get("platform"));
 			Platform platform = ShareSDK.getPlatform(name);
@@ -101,13 +122,17 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 		}
 	}
 
+	//#if def{lang} == cn
 	/** 判断指定平台是否只能使用客户端分享 */
+	//#elif def{lang} == en
+	/** Determine whether the platform shares by its client or not */
+	//#endif
 	final boolean isUseClientToShare(Platform platform) {
 		String name = platform.getName();
 		if ("SinaWeibo".equals(name) || "Wechat".equals(name) || "WechatMoments".equals(name)
-				|| "WechatFavorite".equals(name) || "ShortMessage".equals(name)
-				|| "Email".equals(name) || "Qzone".equals(name)
-				|| "QQ".equals(name) || "Pinterest".equals(name)
+				|| "WechatFavorite".equals(name) || "ShortMessage".equals(name) 
+				|| "Email".equals(name) || "Qzone".equals(name) 
+				|| "QQ".equals(name) || "Pinterest".equals(name) 
 				|| "Instagram".equals(name) || "Yixin".equals(name)
 				|| "YixinMoments".equals(name) || "QZone".equals(name)
 				|| "Mingdao".equals(name) || "Line".equals(name)
@@ -115,10 +140,10 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 				|| "Bluetooth".equals(name) || "WhatsApp".equals(name)
 				|| "BaiduTieba".equals(name) || "Laiwang".equals(name)
 				|| "LaiwangMoments".equals(name) || "Alipay".equals(name)
-				|| "AlipayMoments".equals(name) || "FacebookMessenger".equals(name)
-				|| "GooglePlus".equals(name) || "Dingding".equals(name)
+				|| "AlipayMoments".equals(name) || "FacebookMessenger".equals(name) 
+				|| "GooglePlus".equals(name) || "Dingding".equals(name) 
 				|| "Youtube".equals(name) || "Meipai".equals(name)
-				|| "Telegram".equals(name)
+				|| "Telegram".equals(name) || "Douyin".equals(name)
 				) {
 			return true;
 		} else if ("Evernote".equals(name)) {
@@ -135,7 +160,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 		}
 		return false;
 	}
-
+	
 	final void shareSilently(Platform platform) {
 		if (formateShareData(platform)) {
 			ShareParams sp = shareDataToShareParams(platform);
@@ -154,12 +179,16 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			}
 		}
 	}
-
+	
 	private void prepareForEditPage(Platform platform) {
 		if (formateShareData(platform)) {
 			ShareParams sp = shareDataToShareParams(platform);
 			if (sp != null) {
+				//#if def{lang} == cn
 				// 编辑分享内容的统计
+				//#elif def{lang} == en
+				// a statistics of Sharing
+				//#endif
 				ShareSDK.logDemoEvent(3, platform);
 				sp.setOpenCustomEven(true);
 				if (customizeCallback != null) {
@@ -170,51 +199,51 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			}
 		}
 	}
-
+	
 	final boolean formateShareData(Platform plat) {
 		String name = plat.getName();
-
+		
 		boolean isAlipay = "Alipay".equals(name) || "AlipayMoments".equals(name);
 		if (isAlipay && !plat.isClientValid()) {
 			toast("ssdk_alipay_client_inavailable");
 			return false;
 		}
-
+		
 		boolean isKakaoTalk = "KakaoTalk".equals(name);
 		if (isKakaoTalk && !plat.isClientValid()) {
 			toast("ssdk_kakaotalk_client_inavailable");
 			return false;
 		}
-
+		
 		boolean isKakaoStory = "KakaoStory".equals(name);
 		if (isKakaoStory && !plat.isClientValid()) {
 			toast("ssdk_kakaostory_client_inavailable");
 			return false;
 		}
-
+		
 		boolean isLine = "Line".equals(name);
 		if (isLine && !plat.isClientValid()) {
 			toast("ssdk_line_client_inavailable");
 			return false;
 		}
-
+		
 		boolean isWhatsApp = "WhatsApp".equals(name);
 		if (isWhatsApp && !plat.isClientValid()) {
 			toast("ssdk_whatsapp_client_inavailable");
 			return false;
 		}
-
+		
 		boolean isPinterest = "Pinterest".equals(name);
 		if (isPinterest && !plat.isClientValid()) {
 			toast("ssdk_pinterest_client_inavailable");
 			return false;
 		}
-
+		
 		if ("Instagram".equals(name) && !plat.isClientValid()) {
 			toast("ssdk_instagram_client_inavailable");
 			return false;
 		}
-
+		
 		if ("QZone".equals(name) && !plat.isClientValid()) {
 			toast("ssdk_qq_client_inavailable");
 			return false;
@@ -228,19 +257,19 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 				return false;
 			}
 		}
-
+		
 		boolean isYixin = "YixinMoments".equals(name) || "Yixin".equals(name);
 		if (isYixin && !plat.isClientValid()) {
 			toast("ssdk_yixin_client_inavailable");
 			return false;
 		}
-
+		
 		boolean isWechat = "WechatFavorite".equals(name) || "Wechat".equals(name) || "WechatMoments".equals(name);
 		if (isWechat && !plat.isClientValid()) {
 			toast("ssdk_wechat_client_inavailable");
 			return false;
 		}
-
+		
 		if ("FacebookMessenger".equals(name) && !plat.isClientValid()) {
 			toast("ssdk_facebookmessenger_client_inavailable");
 			return false;
@@ -250,7 +279,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			toast("ssdk_telegram_client_inavailable");
 			return false;
 		}
-
+		
 		if (!shareParamsMap.containsKey("shareType")) {
 			int shareType = Platform.SHARE_TEXT;
 			String imagePath = String.valueOf(shareParamsMap.get("imagePath"));
@@ -304,16 +333,16 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			}
 			shareParamsMap.put("shareType", shareType);
 		}
-
+		
 		return true;
 	}
-
+	
 	final ShareParams shareDataToShareParams(Platform plat) {
 		if (plat == null || shareParamsMap == null) {
 			toast("ssdk_oks_share_failed");
 			return null;
 		}
-
+		
 		try {
 			String imagePath = ResHelper.forceCast(shareParamsMap.get("imagePath"));
 			Bitmap viewToShare = ResHelper.forceCast(shareParamsMap.get("viewToShare"));
@@ -331,10 +360,10 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			toast("ssdk_oks_share_failed");
 			return null;
 		}
-
+		
 		return new ShareParams(shareParamsMap);
 	}
-
+	
 	private void toast(final String resOrName) {
 		UIHandler.sendEmptyMessage(0, new Callback() {
 			public boolean handleMessage(Message msg) {
@@ -348,33 +377,37 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 			}
 		});
 	}
-
+	
 	protected abstract void showPlatformPage(Context context);
-
+	
 	protected abstract void showEditPage(Context context, Platform platform, ShareParams sp);
 
 	public final void onComplete(Platform platform, int action,
-			HashMap<String, Object> res) {
+                                 HashMap<String, Object> res) {
 		Message msg = new Message();
 		msg.arg1 = 1;
 		msg.arg2 = action;
 		msg.obj = platform;
 		UIHandler.sendMessage(msg, this);
 	}
-
+	
 	public final void onError(Platform platform, int action, Throwable t) {
 		t.printStackTrace();
-
+		
 		Message msg = new Message();
 		msg.arg1 = 2;
 		msg.arg2 = action;
 		msg.obj = t;
 		UIHandler.sendMessage(msg, this);
-
+		
+		//#if def{lang} == cn
 		// 分享失败的统计
+		//#elif def{lang} == en
+		// a statistics of cancel sharing
+		//#endif
 		ShareSDK.logDemoEvent(4, platform);
 	}
-
+	
 	public final void onCancel(Platform platform, int action) {
 		Message msg = new Message();
 		msg.arg1 = 3;
@@ -382,23 +415,35 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 		msg.obj = platform;
 		UIHandler.sendMessage(msg, this);
 
+		//#if def{lang} == cn
 		// 分享失败的统计
+		//#elif def{lang} == en
+		// a statistics of cancel sharing
+		//#endif
 		ShareSDK.logDemoEvent(5, platform);
 	}
-
+	
 	public final boolean handleMessage(Message msg) {
 		switch (msg.arg1) {
 			case 1: {
+				//#if def{lang} == cn
 				// 成功
+				//#elif def{lang} == en
+				// success
+				//#endif
 				int resId = ResHelper.getStringRes(context, "ssdk_oks_share_completed");
 				if (resId > 0) {
 					toast(context.getString(resId));
 				}
 			} break;
 			case 2: {
+				//#if def{lang} == cn
 				// 失败
+				//#elif def{lang} == en
+				// failed
+				//#endif
 				String expName = msg.obj.getClass().getSimpleName();
-				if ("WechatClientNotExistException".equals(expName)
+				if ("WechatClientNotExistException".equals(expName) 
 						|| "WechatTimelineNotSupportedException".equals(expName)
 						|| "WechatFavoriteNotSupportedException".equals(expName)) {
 					toast("ssdk_wechat_client_inavailable");
@@ -406,7 +451,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 					toast("ssdk_google_plus_client_inavailable");
 				} else if ("QQClientNotExistException".equals(expName)) {
 					toast("ssdk_qq_client_inavailable");
-				} else if ("YixinClientNotExistException".equals(expName)
+				} else if ("YixinClientNotExistException".equals(expName) 
 						|| "YixinTimelineNotSupportedException".equals(expName)) {
 					toast("ssdk_yixin_client_inavailable");
 				} else if ("KakaoTalkClientNotExistException".equals(expName)) {
@@ -422,11 +467,15 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 				}
 			} break;
 			case 3: {
+				//#if def{lang} == cn
 				// 取消
+				//#elif def{lang} == en
+				// canceled
+				//#endif
 				toast("ssdk_oks_share_canceled");
 			} break;
 		}
 		return false;
 	}
-
+	
 }

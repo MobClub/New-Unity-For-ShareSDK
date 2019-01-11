@@ -1,14 +1,24 @@
+//#if def{lang} == cn
 /*
  * 官网地站:http://www.mob.com
  * 技术支持QQ: 4006852216
  * 官方微信:ShareSDK   （如果发布新版本的话，我们将会第一时间通过微信将版本更新内容推送给您。如果使用过程中有任何问题，也可以通过微信与我们取得联系，我们将会在24小时内给予回复）
- *
+ * 
  * Copyright (c) 2013年 mob.com. All rights reserved.
  */
+//#elif def{lang} == en
+/*
+ * Offical Website:http://www.mob.com
+ * Support QQ: 4006852216
+ * Offical Wechat Account:ShareSDK   (We will inform you our updated news at the first time by Wechat, if we release a new version. 
+ * If you get any problem, you can also contact us with Wechat, we will reply you within 24 hours.)
+ * 
+ * Copyright (c) 2013 mob.com. All rights reserved.
+ */
+//#endif
 
 package cn.sharesdk.onekeyshare.themes.classic;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -49,7 +59,7 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 	private OnekeyShareThemeImpl impl;
 	protected Platform platform;
 	protected ShareParams sp;
-
+	
 	protected LinearLayout llPage;
 	protected RelativeLayout rlTitle;
 	protected ScrollView svContent;
@@ -57,25 +67,29 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 	protected TextView tvCancel;
 	protected TextView tvShare;
 	protected RelativeLayout rlThumb;
+	//#if def{lang} == cn
 	/** 异步加载图片的控件 */
+	//#elif def{lang} == en
+	/** the view of loading picture asynchronously */
+	//#endif
 	protected AsyncImageView aivThumb;
 	protected XView xvRemove;
 	protected LinearLayout llBottom;
 	protected TextView tvAt;
 	protected TextView tvTextCouter;
-
+	
 	protected Bitmap thumb;
 	protected int maxBodyHeight;
-
+	
 	public EditPage(OnekeyShareThemeImpl impl) {
 		super(impl);
 		this.impl = impl;
 	}
-
+	
 	public void setPlatform(Platform platform) {
 		this.platform = platform;
 	}
-
+	
 	public void setShareParams(ShareParams sp) {
 		this.sp = sp;
 	}
@@ -96,25 +110,37 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		}
 		return super.onSetTheme(resid, atLaunch);
 	}
-
+	
 	public void onCreate() {
 		activity.getWindow().setBackgroundDrawable(new ColorDrawable(0xfff3f3f3));
 	}
-
+	
+	//#if def{lang} == cn
 	/** 取消分享时，执行的方法 */
+	//#elif def{lang} == en
+	/** the method of cacel share */
+	//#endif
 	private void cancelAndFinish() {
+		//#if def{lang} == cn
 		// 分享失败的统计
+		//#elif def{lang} == en
+		// a statistics of cancel sharing
+		//#endif
 		ShareSDK.logDemoEvent(5, platform);
 		finish();
 	}
-
+	
+	//#if def{lang} == cn
 	/** 执行分享时的方法 */
+	//#elif def{lang} == en
+	/** the method of share */
+	//#endif
 	private void shareAndFinish() {
 		int resId = ResHelper.getStringRes(activity, "ssdk_oks_sharing");
 		if (resId > 0) {
 			Toast.makeText(activity, resId, Toast.LENGTH_SHORT).show();
 		}
-
+		
 		if (isDisableSSO()) {
 			platform.SSOSetting(true);
 		}
@@ -123,8 +149,12 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		impl.callback = null;
 		finish();
 	}
-
+	
+	//#if def{lang} == cn
 	/** 编辑界面，显示的图片 */
+	//#elif def{lang} == en
+	/** show the big picture in editpage */
+	//#endif
 	private void showThumb(Bitmap pic) {
 		PicViewerPage page = new PicViewerPage(impl);
 		page.setImageBitmap(pic);
@@ -137,8 +167,12 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		sp.setImagePath(null);
 		sp.setImageUrl(null);
 	}
-
+	
+	//#if def{lang} == cn
 	/** @ 好友时，展示的好友列表 */
+	//#elif def{lang} == en
+	/** show the friend list when click the ‘@’ in edit page */
+	//#endif
 	private void showFriendList() {
 		FriendListPage page;
 		int orientation = activity.getResources().getConfiguration().orientation;
@@ -150,14 +184,14 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		page.setPlatform(platform);
 		page.showForResult(MobSDK.getContext(), null, this);
 	}
-
+	
 	public void onResult(HashMap<String, Object> data) {
 		String atText = getJoinSelectedUser(data);
 		if(!TextUtils.isEmpty(atText)) {
 			etContent.append(atText);
 		}
 	}
-
+	
 	private String getJoinSelectedUser(HashMap<String, Object> data) {
 		if (data != null && data.containsKey("selected")) {
 			@SuppressWarnings("unchecked")
@@ -174,14 +208,14 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 		}
 		return null;
 	}
-
+	
 	protected boolean isShowAtUserLayout(String platformName) {
-		return "SinaWeibo".equals(platformName)
+		return "SinaWeibo".equals(platformName) 
 				|| "TencentWeibo".equals(platformName)
-				|| "Facebook".equals(platformName)
+				|| "Facebook".equals(platformName) 
 				|| "Twitter".equals(platformName);
 	}
-
+	
 	public void onClick(View v) {
 		if (v.equals(tvCancel)) {
 			cancelAndFinish();
@@ -200,20 +234,24 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 			showFriendList();
 		}
 	}
-
+	
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		tvTextCouter.setText(String.valueOf(s.length()));
-
+	
 		if (maxBodyHeight == 0) {
 			maxBodyHeight = llPage.getHeight() - rlTitle.getHeight() - llBottom.getHeight();
 		}
-
+		
 		if (maxBodyHeight > 0) {
 			svContent.post(this);
 		}
 	}
-
+	
+	//#if def{lang} == cn
 	/** 动态适配编辑界面的高度 */
+	//#elif def{lang} == en
+	/** calculate the height of edit view */
+	//#endif
 	public void run() {
 		int height = svContent.getChildAt(0).getHeight();
 		RelativeLayout.LayoutParams lp = ResHelper.forceCast(svContent.getLayoutParams());
@@ -225,18 +263,18 @@ public class EditPage extends OnekeySharePage implements OnClickListener, TextWa
 			svContent.setLayoutParams(lp);
 		}
 	}
-
+	
 	public void afterTextChanged(Editable s) {
-
+		
 	}
-
+	
 	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+		
 	}
-
+	
 	public void onPause() {
 		DeviceHelper.getInstance(activity).hideSoftInput(getContentView());
 		super.onPause();
 	}
-
+	
 }
