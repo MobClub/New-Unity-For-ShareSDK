@@ -72,6 +72,7 @@ namespace cn.sharesdk.unity3d
 		QQPlatform = 24,
 		YixinPlatform = 38,
         FacebookAccount = 58,              //FacebookAccount
+        Douyin = 59,
 
        
 #elif UNITY_IPHONE

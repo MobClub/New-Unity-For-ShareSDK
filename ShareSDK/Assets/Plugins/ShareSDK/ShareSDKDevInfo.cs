@@ -54,6 +54,7 @@ namespace cn.sharesdk.unity3d
 
 #if UNITY_ANDROID
 		public FourSquare fourSquare;
+        public Douyin douyin;
 		//安卓配置印象笔记国内与国际版直接在Evernote中配置
 #elif UNITY_IPHONE
 		public Copy copy;
@@ -920,5 +921,13 @@ namespace cn.sharesdk.unity3d
 #endif
     }
 
+#if UNITY_ANDROID
+    [Serializable]
+    public class Douyin : DevInfo
+    {
+       public string SortId = "59";
+       public const int type = (int)PlatformType.Douyin;
+    }
+#endif
 
 }

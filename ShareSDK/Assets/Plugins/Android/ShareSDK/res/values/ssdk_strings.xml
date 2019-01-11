@@ -47,6 +47,7 @@
 	<string name="ssdk_dropbox">Dropbox</string>
 	<string name="ssdk_vkontakte">VK</string>
 	<string name="ssdk_instagram">Instagram</string>
+	<string name="ssdk_douyin">抖音</string>
 	<string name="ssdk_yixin">易信</string>
 	<string name="ssdk_yixinmoments">易信朋友圈</string>
 	<string name="ssdk_mingdao">明道</string>
