@@ -46,6 +46,7 @@
 	<string name="ssdk_dropbox">Dropbox</string>
 	<string name="ssdk_vkontakte">VK</string>
 	<string name="ssdk_instagram">Instagram</string>
+	<string name="ssdk_douyin">TikTok</string>
 	<string name="ssdk_yixin">Yixin</string>
 	<string name="ssdk_yixinmoments">Yixin Moments</string>
 	<string name="ssdk_mingdao">Mingdao</string>
