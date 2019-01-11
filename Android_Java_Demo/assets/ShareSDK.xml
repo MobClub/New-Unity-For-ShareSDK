@@ -435,4 +435,9 @@
 		Enable="true"
 	/>
 	
+	<Douyin
+		Id="59"
+		SortId="59"
+		Enable="true" />
+	
 </DevInfor>
