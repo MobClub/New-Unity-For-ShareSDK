@@ -3,8 +3,8 @@
 
 **supported original ShareSDK version:**
 
-- [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.2.1
-- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
+- [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.1
+- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.2
 
 **Document Language :** **[中文](https://github.com/MobClub/New-Unity-For-ShareSDK)** | **English**
 
