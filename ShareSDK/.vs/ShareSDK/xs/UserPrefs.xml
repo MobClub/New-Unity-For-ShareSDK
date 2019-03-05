@@ -1,18 +1,16 @@
 ﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs">
     <Files>
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="35" Column="39" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="887" Column="19" />
-      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="33" Column="21" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" Line="113" Column="9" />
-      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="144" Column="12" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" Line="382" Column="23" />
-      <File FileName="Assets/Demo.cs" Line="228" Column="4" />
-      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="77" Column="21" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="45" Column="34" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="193" Column="34" />
+      <File FileName="Assets/Demo.cs" Line="221" Column="15" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="477" Column="15" />
       <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/ResponseState.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="379" Column="25" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="55" Column="36" />
+      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="120" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

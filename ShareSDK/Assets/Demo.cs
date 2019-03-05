@@ -220,6 +220,23 @@ public class Demo : MonoBehaviour {
 			shareContent.SetShareContentCustomize (PlatformType.WeChat, content);
 			ssdk.ShareContent (PlatformType.WeChat, shareContent);
 		}
+
+        btnTop += btnHeight + 20 * scale;
+        if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Sina LinkCard"))
+        {
+            ShareContent content = new ShareContent();
+            content.SetText("sina LinkCard");
+            content.SetUrl("http://www.mob.com");
+            content.SetImageUrl("http://www.mob.com/assets/images/ShareSDK_pic_1-09d293a6.png");//必须为网络图片
+            content.SetSinaLinkCard(true);
+            content.SetSinaCardTitle("这是Title");
+            content.SetSinaCardSummary("这是Summary");
+            content.SetShareType(ContentType.Webpage);
+
+            ShareContent shareContent = new ShareContent();
+            shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
+            ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
+        }
 	}
 	
 	void OnAuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)

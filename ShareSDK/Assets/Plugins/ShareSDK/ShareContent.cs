@@ -459,6 +459,20 @@ namespace cn.sharesdk.unity3d
 			shareParams["sr"] = subreddit;
 		}
 
+        // 新浪微博LinkCard 分享效果参数
+        public void SetSinaLinkCard(bool enable)
+        {
+            shareParams["sina_linkCard"] = enable;
+        }
+        public void SetSinaCardTitle(String title)
+        {
+            shareParams["sina_cardTitle"] = title;
+        }
+        public void SetSinaCardSummary(String summary)
+        {
+            shareParams["sina_cardSummary"] = summary;
+        }
+
 		//不同平台分享不同内容
 		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
 			customizeShareParams [(int)platform] = content.GetShareParamsStr();

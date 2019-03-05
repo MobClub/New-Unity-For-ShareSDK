@@ -778,6 +778,10 @@ extern "C" {
                     NSString *video = nil;
                     SSDKContentType type = SSDKContentTypeWebPage;
                     
+                    BOOL linkCard = NO;
+                    NSString *cardTitle = nil;
+                    NSString *cardSummary = nil;
+                    
                     if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
                         text = [value objectForKey:@"text"];
@@ -824,17 +828,40 @@ extern "C" {
                         [images addObjectsFromArray:[imagesStr componentsSeparatedByString:@","]];
                     }
                     
-                    [params SSDKSetupSinaWeiboShareParamsByText:text
-                                                          title:title
-                                                         images:images
-                                                          video:video
-                                                            url:[NSURL URLWithString:url]
-                                                       latitude:lat
-                                                      longitude:lng
-                                                       objectID:objID
-                                                 isShareToStory:NO
-                                                           type:type];
+                    if ([[value objectForKey:@"sina_linkCard"] isKindOfClass:[NSNumber class]])
+                    {
+                        linkCard = [[value objectForKey:@"sina_linkCard"] integerValue]>0?YES:NO;
+                    }
+                    if ([[value objectForKey:@"sina_cardTitle"] isKindOfClass:[NSString class]])
+                    {
+                        cardTitle = [value objectForKey:@"sina_cardTitle"];
+                    }
+                    if ([[value objectForKey:@"sina_cardSummary"] isKindOfClass:[NSString class]])
+                    {
+                        cardSummary = [value objectForKey:@"sina_cardSummary"];
+                    }
                     
+                    if (linkCard == YES)
+                    {
+                        [params SSDKSetupSinaWeiboLinkCardShareParamsByText:text
+                                                                  cardTitle:cardTitle
+                                                                cardSummary:cardSummary
+                                                                     images:images
+                                                                        url:[NSURL URLWithString:url]];
+                    }
+                    else
+                    {
+                        [params SSDKSetupSinaWeiboShareParamsByText:text
+                                                              title:title
+                                                             images:images
+                                                              video:video
+                                                                url:[NSURL URLWithString:url]
+                                                           latitude:lat
+                                                          longitude:lng
+                                                           objectID:objID
+                                                     isShareToStory:NO
+                                                               type:type];
+                    }
                 }
                 //腾讯微博
                 value  = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]]];

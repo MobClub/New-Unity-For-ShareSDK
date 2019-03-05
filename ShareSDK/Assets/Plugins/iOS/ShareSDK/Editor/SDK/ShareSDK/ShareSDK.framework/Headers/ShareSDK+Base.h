@@ -62,6 +62,13 @@
  */
 + (void)enableAutomaticRecordingEvent:(BOOL)record;
 
+/**
+ 是否开启设备tags获取，如果开启，则在用户授权成功时在user的tags字段返回设备标签
+
+ @param enable 是否开启，默认关闭
+ */
++ (void)enableGetTags:(BOOL)enable;
+
 
 #pragma mark - Deprecated
 
