@@ -122,7 +122,7 @@
         AppId="100371282"
         AppKey="aed9b0303e3ed1e27bae87c33761161d"
 		BypassApproval="false"
-        ShareByAppClient="true"
+		ShareByAppClient="true"
         Enable="true" />
 
 
@@ -133,7 +133,7 @@
 		ConsumerKey="1412473428822331"
 		ConsumerSecret="a42f4f3f867dc947b9ed6020c2e93558"
 		RedirectUrl="https://mob.com"
-		ShareByAppClient="false"
+		ShareByAppClient="true"
 		Enable="true" />
 
     <Twitter
@@ -310,12 +310,15 @@
         AppSecret="5EDE59F37B3EFA8F65EEFB9976A4E933"
         RedirectUri="http://sharesdk.cn"
         Enable="true" />
-	
+
+
+	<!-- RedirectUri = "intent://result#Intent;package=cn.sharesdk.demo;scheme=lineauth;end" -->
 	<Line
 	    Id="32"
         SortId="32"
-        ChannelID = "1477692153"
-        ChannelSecret ="f30c036370f2e04ade71c52eef73a9af"
+        ChannelID = "1639219273"
+        ChannelSecret ="58faad55ffce8bf8f63b59fe6fb702ae"
+		RedirectUri = "https://www.mob.com/"
         Enable="true" />
 	
 	<KakaoTalk
@@ -434,7 +437,7 @@
 		RedirectUrl="http://www.sharesdk.cn/"
 		Enable="true"
 	/>
-	
+
 	<Douyin
 		Id="59"
 		SortId="59"
