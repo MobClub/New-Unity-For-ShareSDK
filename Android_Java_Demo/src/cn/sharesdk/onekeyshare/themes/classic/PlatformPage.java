@@ -187,7 +187,8 @@ public abstract class PlatformPage extends OnekeySharePage {
 
 	private boolean isCanShare(Platform platform){
 		String name = platform.getName();
-		if ("Cmcc".equals(name) || "Accountkit".equals(name) || "Telecom".equals(name)) {
+		if ("Cmcc".equals(name) || "Accountkit".equals(name) || "Telecom".equals(name) ||
+				"GooglePlus".equals(name)) {
 			return false;
 		}
 		return true;
