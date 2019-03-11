@@ -1,6 +1,6 @@
 {
     "framework" : ["/SDK/ShareSDK/Support/PlatformConnector/FacebookConnector.framework"],
-    "LSApplicationQueriesSchemes":["fbauth","fbauth2","fbapi20130214"],
+    "LSApplicationQueriesSchemes":["fbauth","fbauth2","fbapi20130214","fbapi"],
     "URLSchemes" : {
     				"CFBundleURLSchemes" :["fb{appkey}"],
     				"CFBundleURLName" : "facebook"
