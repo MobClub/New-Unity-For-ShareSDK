@@ -12,6 +12,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LitJson;
 namespace cn.sharesdk.unity3d
 {
 	/// <summary>
@@ -470,11 +471,38 @@ namespace cn.sharesdk.unity3d
         }
         public void SetSinaCardSummary(String summary)
         {
-            shareParams["sina_cardSummary"] = summary;
+            #if UNITY_ANDROID
+			    shareParams["lc_summary"] = summary;
+            #elif UNITY_IPHONE
+			    shareParams["sina_cardSummary"] = summary;
+            #endif
         }
 
-		//不同平台分享不同内容
-		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
+        public void SetSinaCardImageAndroid(JsonData jsonobject)
+        {
+            shareParams["lc_image"] = jsonobject;
+        }
+        public void SetSinaCardTypeAndroid(String type)
+        {
+            shareParams["lc_object_type"] = type;
+        }
+        public void SetSinaCardDisplayNameAndroid(String displayname)
+        {
+            shareParams["lc_display_name"] = displayname;
+        }
+        public void SetSinaCardCreateAtAndroid(String createtime)
+        {
+            shareParams["lc_create_at"] = createtime;
+        }
+        public void SetSinaCardURLAndroid(String url)
+        {
+            shareParams["lc_url"] = url;
+        }
+
+
+
+        //不同平台分享不同内容
+        public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
 			customizeShareParams [(int)platform] = content.GetShareParamsStr();
 		}
 

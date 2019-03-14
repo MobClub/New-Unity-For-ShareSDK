@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using cn.sharesdk.unity3d;
-
+using LitJson;
 public class Demo : MonoBehaviour {
 
 	public GUISkin demoSkin;
@@ -224,6 +224,7 @@ public class Demo : MonoBehaviour {
         btnTop += btnHeight + 20 * scale;
         if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Sina LinkCard"))
         {
+            #if UNITY_IPHONE
             ShareContent content = new ShareContent();
             content.SetText("sina LinkCard");
             content.SetUrl("http://www.mob.com");
@@ -236,6 +237,26 @@ public class Demo : MonoBehaviour {
             ShareContent shareContent = new ShareContent();
             shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
             ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
+
+
+            #elif UNITY_ANDROID
+            JsonData jsonData = new JsonData();
+            jsonData["url"] = "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg";
+            jsonData["width"] = "120";
+            jsonData["height"] = "120";
+
+
+            ShareContent content = new ShareContent();
+            content.SetText("sina LinkCard");
+            content.SetSinaCardCreateAtAndroid("2019-01-24");
+            content.SetSinaCardDisplayNameAndroid("displayName测试");
+            content.SetSinaCardImageAndroid(jsonData);
+            content.SetSinaCardSummary("Summary测试");
+            content.SetSinaCardURLAndroid("http://www.mob.com/");
+            content.SetSinaCardTypeAndroid("webpage");
+            content.SetEnableClientShare(true);
+            ssdk.ShareContent(PlatformType.SinaWeibo, content);
+            #endif
         }
 	}
 	
