@@ -1,16 +1,18 @@
 ﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Demo.cs">
     <Files>
-      <File FileName="Assets/Demo.cs" Line="221" Column="15" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="477" Column="15" />
-      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/ResponseState.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="379" Column="25" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="55" Column="36" />
-      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="120" Column="22" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="836" Column="50" />
+      <File FileName="Assets/Plugins/ShareSDK/Android/AndroidImpl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="162" Column="35" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" Line="199" Column="17" />
+      <File FileName="Assets/Demo.cs" Line="125" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="64" Column="3" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="529" Column="20" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="50" Column="24" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="523" Column="15" />
+      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="164" Column="4" />
+      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="20" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

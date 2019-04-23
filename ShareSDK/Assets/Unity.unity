@@ -72,7 +72,7 @@ LightmapSettings:
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
-    m_BakeBackend: 0
+    m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
@@ -113,21 +113,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1900725046
+--- !u!1 &144932304
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1900725052}
-  - component: {fileID: 1900725051}
-  - component: {fileID: 1900725050}
-  - component: {fileID: 1900725049}
-  - component: {fileID: 1900725047}
-  - component: {fileID: 1900725048}
-  - component: {fileID: 1900725053}
-  - component: {fileID: 1900725054}
+  - component: {fileID: 144932307}
+  - component: {fileID: 144932306}
+  - component: {fileID: 144932305}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -135,50 +130,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1900725047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 407cf781ee62c49e4a45b9d2fc3988c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  demoSkin: {fileID: 0}
-  ssdk: {fileID: 0}
---- !u!114 &1900725048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5bc554b7daf941e9a398153af79cf46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!81 &1900725049
+--- !u!81 &144932305
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
+  m_GameObject: {fileID: 144932304}
   m_Enabled: 1
---- !u!124 &1900725050
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
-  m_Enabled: 1
---- !u!20 &1900725051
+--- !u!20 &144932306
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
+  m_GameObject: {fileID: 144932304}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -213,12 +177,12 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1900725052
+--- !u!4 &144932307
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
+  m_GameObject: {fileID: 144932304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -226,26 +190,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1900725053
+--- !u!1 &1351339921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351339925}
+  - component: {fileID: 1351339924}
+  - component: {fileID: 1351339923}
+  - component: {fileID: 1351339922}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1351339922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
+  m_GameObject: {fileID: 1351339921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14f361f06da74f559ae3bfacd2b60d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1900725054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ada20e7882e744e2b9b5c1772410d98, type: 3}
+  m_Script: {fileID: 11500000, guid: 11817e30a4b424d04aae4e7f0e1b0edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   appKey: moba6b6c6d6
@@ -422,6 +393,19 @@ MonoBehaviour:
       Enable: 1
       app_key: ObzXn50T7Cg0Xw
       redirect_uri: https://www.mob.com/reddit_callback
+    telegram:
+      Enable: 1
+      bot_token: 600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ
+      bot_domain: http://127.0.0.1
+    eSurfing:
+      Enable: 1
+      app_key: 8148612606
+      app_secret: mCltrhUqwshFa86egDTs0491ibaAulKA
+      app_name: shareSDK
+    facebookAccount:
+      Enable: 1
+      app_id: 1412473428822331
+      client_token: c30c08723aa8c48fbd5e01d1c3103891
     copy:
       Enable: 1
     yixinFavorites:
@@ -452,41 +436,25 @@ MonoBehaviour:
       consumer_key: sharesdk-7807
       consumer_secret: d05bf86993836004
       isSandBox: 0
-    telegram:
-      Enable: 1
-      bot_token: 600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ
-      bot_domain: http://127.0.0.1
-    eSurfing:
-      Enable: 1
-      app_key: 8148612606
-      app_secret: mCltrhUqwshFa86egDTs0491ibaAulKA
-      app_name: shareSDK
-    facebookAccount:
-      Enable: 1
-      app_id: 1412473428822331
-      client_token: c30c08723aa8c48fbd5e01d1c3103891
---- !u!1 &1900725526
-GameObject:
+--- !u!114 &1351339923
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1900725528}
-  - component: {fileID: 1900725527}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &1900725527
+  m_GameObject: {fileID: 1351339921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407cf781ee62c49e4a45b9d2fc3988c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  demoSkin: {fileID: 0}
+  ssdk: {fileID: 0}
+--- !u!108 &1351339924
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725526}
+  m_GameObject: {fileID: 1351339921}
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
@@ -518,12 +486,12 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!4 &1900725528
+--- !u!4 &1351339925
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1900725526}
+  m_GameObject: {fileID: 1351339921}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

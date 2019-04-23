@@ -65,24 +65,22 @@ namespace cn.sharesdk.unity3d
         CMCC = 55,               //中国移动
         Reddit = 56,            //Reddit
         ESurfing = 57,          //天翼
+        FacebookAccount = 58,              //FacebookAccount
+        Douyin = 59,            //抖音
 #if UNITY_ANDROID
 		KakaoPlatform = 44,    
 		EvernoteInternational = 12,
 		WechatPlatform = 22,  
 		QQPlatform = 24,
 		YixinPlatform = 38,
-        FacebookAccount = 58,              //FacebookAccount
-        Douyin = 59,
-
        
 #elif UNITY_IPHONE
-		//Reddit = 56,			//Reddit
-		YixinPlatform = 994,    //Yixin series
+        //Reddit = 56,			//Reddit
+        YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series
 		QQPlatform = 998,		//QQ Series
-        FacebookAccount = 58,   //FacebookAccount
 #endif
 
     }

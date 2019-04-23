@@ -51,10 +51,9 @@ namespace cn.sharesdk.unity3d
         public Telegram telegram;
         public ESurfing eSurfing; //中国电信
         public FacebookAccount facebookAccount;//iOS端无需配置
-
+        public Douyin douyin; //抖音
 #if UNITY_ANDROID
 		public FourSquare fourSquare;
-        public Douyin douyin;
 		//安卓配置印象笔记国内与国际版直接在Evernote中配置
 #elif UNITY_IPHONE
 		public Copy copy;
@@ -921,13 +920,20 @@ namespace cn.sharesdk.unity3d
 #endif
     }
 
-#if UNITY_ANDROID
+
     [Serializable]
     public class Douyin : DevInfo
     {
+#if UNITY_ANDROID
        public string SortId = "59";
        public const int type = (int)PlatformType.Douyin;
-    }
+#elif UNITY_IPHONE
+        public string app_key = "aw9ivykfjvi4hpwo";
+        public string app_secret = "42b4caa6bda60bd49f05f06d0a4956e1";
+        public const int type = (int)PlatformType.Douyin;
 #endif
+
+    }
+
 
 }

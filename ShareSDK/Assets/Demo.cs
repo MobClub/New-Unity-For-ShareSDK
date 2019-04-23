@@ -49,12 +49,12 @@ public class Demo : MonoBehaviour {
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Authorize"))
 		{
 			print(ssdk == null);
-			ssdk.Authorize(PlatformType.QQ);
+            ssdk.Authorize(PlatformType.Douyin);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
 		{
-			ssdk.GetUserInfo(PlatformType.QQ);
+            ssdk.GetUserInfo(PlatformType.Douyin);
 		}
 
 		btnTop += btnHeight + 20 * scale;
@@ -64,7 +64,7 @@ public class Demo : MonoBehaviour {
 
 			//(Android only) 隐藏九宫格里面不需要用到的平台（仅仅是不显示平台）
 			//(Android only) 也可以把jar包删除或者把Enabl属性e改成false（对应平台的全部功能将用不了）
-			String[] platfsList = {((int)PlatformType.QQ).ToString(), ((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString()};
+            String[] platfsList = {((int)PlatformType.QQ).ToString(), ((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString()};
 			content.SetHidePlatforms (platfsList);
 
 			content.SetText("this is a test string.");
@@ -130,8 +130,8 @@ public class Demo : MonoBehaviour {
 			content.SetUrl("http://qjsj.youzu.com/jycs/");
 //			content.SetComment("test description");
 //			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-			content.SetShareType(ContentType.Webpage);
-			ssdk.ShareContent (PlatformType.WeChat, content);
+            content.SetShareType(ContentType.Image);
+            ssdk.ShareContent (PlatformType.Douyin, content);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
@@ -290,7 +290,7 @@ public class Demo : MonoBehaviour {
 		{
 			print ("get user info result :");
 			print (MiniJSON.jsonEncode(result));
-			print ("AuthInfo:" + MiniJSON.jsonEncode (ssdk.GetAuthInfo (PlatformType.QQ)));
+            print ("AuthInfo:" + MiniJSON.jsonEncode (ssdk.GetAuthInfo (type)));
 			print ("Get userInfo success !Platform :" + type );
 		}
 		else if (state == ResponseState.Fail)
