@@ -60,44 +60,45 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Show Share Menu"))
 		{
-			ShareContent content = new ShareContent();
+            	ShareContent content = new ShareContent();
 
-			//(Android only) 隐藏九宫格里面不需要用到的平台（仅仅是不显示平台）
-			//(Android only) 也可以把jar包删除或者把Enabl属性e改成false（对应平台的全部功能将用不了）
-            String[] platfsList = {((int)PlatformType.QQ).ToString(), ((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString()};
-			content.SetHidePlatforms (platfsList);
+            //	//(Android only) 隐藏九宫格里面不需要用到的平台（仅仅是不显示平台）
+            //	//(Android only) 也可以把jar包删除或者把Enabl属性e改成false（对应平台的全部功能将用不了）
+                String[] platfsList = {((int)PlatformType.QQ).ToString(), ((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString()};
+            	content.SetHidePlatforms (platfsList);
 
-			content.SetText("this is a test string.");
-			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
-			content.SetTitle("test title");
+            	content.SetText("this is a test string.");
+            	content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
+            	content.SetTitle("test title");
 
-			//(Android only) 针对Android绕过审核的多图分享，传图片String数组 
-			String[] imageArray =  {"/sdcard/test.jpg", "http://f1.webshare.mob.com/dimgs/1c950a7b02087bf41bc56f07f7d3572c11dfcf36.jpg", "/sdcard/test.jpg"};
-			content.SetImageArray (imageArray);
+            //(Android only) 针对Android绕过审核的多图分享，传图片String数组 
+            	String[] imageArray =  {"/sdcard/test.jpg", "http://f1.webshare.mob.com/dimgs/1c950a7b02087bf41bc56f07f7d3572c11dfcf36.jpg", "/sdcard/test.jpg"};
+            	content.SetImageArray (imageArray);
 
-			content.SetTitleUrl("http://www.mob.com");
-			content.SetSite("Mob-ShareSDK");
-			content.SetSiteUrl("http://www.mob.com");
-			content.SetUrl("http://www.mob.com");
-			content.SetComment("test description");
-			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-			content.SetShareType(ContentType.Image);
+            	content.SetTitleUrl("http://www.mob.com");
+            	content.SetSite("Mob-ShareSDK");
+            	content.SetSiteUrl("http://www.mob.com");
+            	content.SetUrl("http://www.mob.com");
+            	content.SetComment("test description");
+            	content.SetMusicUrl("http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT");
+            	content.SetShareType(ContentType.Image);
 
-			//不同平台分享不同内容
-			ShareContent customizeShareParams = new ShareContent();
-			customizeShareParams.SetText("Sina share content");
-			customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
-			customizeShareParams.SetShareType(ContentType.Text);
-			customizeShareParams.SetObjectID("SinaID");
-			content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
-			//优先客户端分享
-			// content.SetEnableClientShare(true);
+                //不同平台分享不同内容
+            	ShareContent customizeShareParams = new ShareContent();
+            	customizeShareParams.SetText("Sina share content");
+            	customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
+            	customizeShareParams.SetShareType(ContentType.Text);
+            	customizeShareParams.SetObjectID("SinaID");
+            	content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
+                //优先客户端分享
+                content.SetEnableClientShare(true);
 
-			//使用微博API接口应用内分享 iOS only
-			 // content.SetEnableSinaWeiboAPIShare(true);
+                //使用微博API接口应用内分享 iOS only
+                content.SetEnableSinaWeiboAPIShare(true);
 
-			//通过分享菜单分享
-			ssdk.ShowPlatformList (null, content, 100, 100);
+                //通过分享菜单分享
+                ssdk.ShowPlatformList (null, content, 100, 100);
+
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Show Share View"))
@@ -120,21 +121,34 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Share Content"))
 		{
-			ShareContent content = new ShareContent();
-			content.SetText("this is a test string.");
-			content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
-			content.SetTitle("test title");
-//			content.SetTitleUrl("http://www.mob.com");
-//			content.SetSite("Mob-ShareSDK");
-			// content.SetSiteUrl("http://www.mob.com");
-			content.SetUrl("http://qjsj.youzu.com/jycs/");
-//			content.SetComment("test description");
-//			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-            content.SetShareType(ContentType.Image);
-            ssdk.ShareContent (PlatformType.Douyin, content);
-		}
-			
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
+            	ShareContent content = new ShareContent();
+            	content.SetText("this is a test string.");
+            	content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
+            	content.SetTitle("test title");
+            	//content.SetTitleUrl("http://www.mob.com");
+            	//content.SetSite("Mob-ShareSDK");
+            	//content.SetSiteUrl("http://www.mob.com");
+            	content.SetUrl("http://qjsj.youzu.com/jycs/");
+            	//content.SetComment("test description");
+            	//content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+                content.SetShareType(ContentType.Image);
+                ssdk.ShareContent (PlatformType.QQ, content);
+
+
+//            //  开发者要自己传入Activity 在9.0及其以上的系统
+//            //  AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+//            //  AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
+//            //  content.SetActivity(jo);
+//            //  Debug.Log("QQQ 测试传入的activity  ==================>>> " + jo);
+
+//                ShareContent content = new ShareContent();
+//                content.SetFilePath("/storage/emulated/0/douyin.mp4");
+//                content.SetShareType(ContentType.Video);
+//                ssdk.ShareContent (PlatformType.Douyin, content);
+
+        }
+
+        if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
 		{
 			//获取新浪微博好友，第一页，每页15条数据
 			print ("Click Btn Of Get Friends SinaWeibo");
@@ -224,7 +238,7 @@ public class Demo : MonoBehaviour {
         btnTop += btnHeight + 20 * scale;
         if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Sina LinkCard"))
         {
-            #if UNITY_IPHONE
+#if UNITY_IPHONE
             ShareContent content = new ShareContent();
             content.SetText("sina LinkCard");
             content.SetUrl("http://www.mob.com");
@@ -239,7 +253,7 @@ public class Demo : MonoBehaviour {
             ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
 
 
-            #elif UNITY_ANDROID
+#elif UNITY_ANDROID
             JsonData jsonData = new JsonData();
             jsonData["url"] = "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg";
             jsonData["width"] = "120";
@@ -249,16 +263,20 @@ public class Demo : MonoBehaviour {
             ShareContent content = new ShareContent();
             content.SetText("sina LinkCard");
             content.SetSinaCardCreateAtAndroid("2019-01-24");
-            content.SetSinaCardDisplayNameAndroid("displayName测试");
-            content.SetSinaCardImageAndroid(jsonData);
-            content.SetSinaCardSummary("Summary测试");
+            content.SetSinaCardDisplayNameAndroid("displayName");
+            content.SetSinaCardSummary("Summary");
             content.SetSinaCardURLAndroid("http://www.mob.com/");
             content.SetSinaCardTypeAndroid("webpage");
+            content.SetSinaCardImageAndroid(jsonData);
             content.SetEnableClientShare(true);
-            ssdk.ShareContent(PlatformType.SinaWeibo, content);
-            #endif
+
+            ShareContent shareContent = new ShareContent();
+            shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
+            
+            ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
+#endif
         }
-	}
+    }
 	
 	void OnAuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
 	{
