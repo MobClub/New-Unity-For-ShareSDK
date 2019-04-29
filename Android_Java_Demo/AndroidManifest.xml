@@ -19,9 +19,22 @@
 	
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
 
-    
+    <!-- 抖音需要的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 中国电信平台需要权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!--
+    蓝牙分享所需的权限
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    -->
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
