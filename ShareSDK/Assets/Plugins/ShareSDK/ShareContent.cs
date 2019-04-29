@@ -471,16 +471,17 @@ namespace cn.sharesdk.unity3d
         }
         public void SetSinaCardSummary(String summary)
         {
-            #if UNITY_ANDROID
+#if UNITY_ANDROID
 			    shareParams["lc_summary"] = summary;
-            #elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			    shareParams["sina_cardSummary"] = summary;
-            #endif
+#endif
         }
 
         public void SetSinaCardImageAndroid(JsonData jsonobject)
         {
             shareParams["lc_image"] = jsonobject;
+            Debug.Log("jsonobject  ==================>>> " + jsonobject);
         }
         public void SetSinaCardTypeAndroid(String type)
         {
@@ -499,6 +500,11 @@ namespace cn.sharesdk.unity3d
             shareParams["lc_url"] = url;
         }
 
+        /** 抖音视频9.0及其以上版本系统需要传的activity **/
+        public void SetActivity(AndroidJavaObject activity) {
+            shareParams["activity"] = activity;
+            Debug.Log("QQQ activity  ==================>>> " + activity);
+        }
 
 
         //不同平台分享不同内容

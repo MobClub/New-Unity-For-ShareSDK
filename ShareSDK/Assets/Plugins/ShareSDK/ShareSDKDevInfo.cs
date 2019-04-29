@@ -927,6 +927,8 @@ namespace cn.sharesdk.unity3d
 #if UNITY_ANDROID
        public string SortId = "59";
        public const int type = (int)PlatformType.Douyin;
+       public string AppKey = "aw9ivykfjvi4hpwo";
+       public string AppSecret = "42b4caa6bda60bd49f05f06d0a4956e1";
 #elif UNITY_IPHONE
         public string app_key = "aw9ivykfjvi4hpwo";
         public string app_secret = "42b4caa6bda60bd49f05f06d0a4956e1";
