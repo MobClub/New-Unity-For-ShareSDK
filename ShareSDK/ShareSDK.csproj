@@ -305,19 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\ShareSDK\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_platform_cell_back.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_oks_classic_progressbar.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_weibo_retry_btn_default.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_weibo_retry_btn_press.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\drawable\ssdk_weibo_retry_btn_selector.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_country_arrays.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_oks_strings.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values-en\ssdk_strings.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_country_arrays.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_instapaper_strings.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_color_drawables.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_oks_strings.xml" />
-    <None Include="Assets\Plugins\Android\ShareSDK\res\values\ssdk_strings.xml" />
     <None Include="Assets\Plugins\iOS\ShareSDK\Editor\SDK\ShareSDK\Support\Optional\ShareSDKConfigFile.bundle\ShareContent.xml" />
     <None Include="Assets\Plugins\iOS\ShareSDK\Editor\SDK\ShareSDK\Support\Optional\ShareSDKConfigFile.bundle\ShareSDK.xml" />
     <None Include="Assets\Plugins\iOS\ShareSDK\Editor\SDK\ShareSDK\Support\PlatformSDK\ESurfingSDK\HTMLResource.bundle\md5values.txt" />
