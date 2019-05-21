@@ -584,8 +584,9 @@ namespace cn.sharesdk.unity3d
 		public string ChannelSecret = "f30c036370f2e04ade71c52eef73a9af";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Line;
-		#endif
-	}
+        public string channel_id = "1521201864";
+        #endif
+    }
 
 	[Serializable]
 	public class KakaoTalk : DevInfo 
