@@ -428,14 +428,26 @@ namespace cn.sharesdk.unity3d
 			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
 		}
 
-		//android only    Reddit平台板块参数
-		public void SetSubreddit(string subreddit)
-		{
-			shareParams["sr"] = subreddit;
-		}
+        //android only    Reddit平台板块参数
+        public void SetSubreddit(string subreddit)
+        {
+            shareParams["sr"] = subreddit;
+        }
 
-		//不同平台分享不同内容
-		public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
+        //android only    Facebook平台引文分享参数
+        public void setQuote(string quote)
+        {
+            shareParams["QUOTE"] = quote;
+        }
+
+        //android only    Facebook平台话题分享参数
+        public void setHashtag(string hashtag)
+        {
+            shareParams["HASHTAG"] = hashtag;
+        }
+
+        //不同平台分享不同内容
+        public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
 			customizeShareParams [(int)platform] = content.GetShareParamsStr();
 		}
 
