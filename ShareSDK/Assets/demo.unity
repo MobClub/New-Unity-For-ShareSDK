@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 1632721932}
   - component: {fileID: 1632721931}
   - component: {fileID: 1632721930}
+  - component: {fileID: 1632721935}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -423,6 +424,12 @@ MonoBehaviour:
       SortId: 55
       AppId: 300011860247
       AppKey: 2D464D8BFCE73A44B4F9DF95A2FDBE1C
+    reddit:
+      Enable: 1
+      SortId: 56
+      Id: 56
+      AppKey: MExDxPuTCtFiRw
+      RedirectUrl: http://www.sharesdk.cn
     fourSquare:
       Enable: 1
       SortId: 20
@@ -440,8 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407cf781ee62c49e4a45b9d2fc3988c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demoSkin: {fileID: 0}
-  ssdk: {fileID: 0}
 --- !u!81 &1632721932
 AudioListener:
   m_ObjectHideFlags: 0
@@ -502,3 +507,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1632721935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1632721929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32995e328c796214fac47f56f059ff2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  demoSkin: {fileID: 0}
+  ssdk: {fileID: 0}
