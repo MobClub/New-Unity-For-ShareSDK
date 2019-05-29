@@ -395,18 +395,26 @@ namespace cn.sharesdk.unity3d
 			shareParams ["templateId"] = templateId;
 		}
 
-		/*iOS Only - facebook*/
+		/*iOS/android - facebook*/
 		public void SetFacebookHashtag(String hashtag){
-			shareParams ["hashtag"] = hashtag;
-		}
+            #if UNITY_ANDROID
+                shareParams ["HASHTAG"] = hashtag;
+            #elif UNITY_IPHONE
+			    shareParams ["hashtag"] = hashtag;
+            #endif
+        }
 
-		/*iOS Only - facebook*/
-		public void SetFacebookQuote(String quote){
-			shareParams ["quote"] = quote;
-		}
+        /*iOS/android - facebook*/
+        public void SetFacebookQuote(String quote){
+            #if UNITY_ANDROID
+                shareParams ["QUOTE"] = quote;
+            #elif UNITY_IPHONE
+			    shareParams ["quote"] = quote;
+            #endif
+        }
 
-		/*iOS Only - facebookMessenger*/
-		public void SetMessengerGif(String gif){
+        /*iOS Only - facebookMessenger*/
+        public void SetMessengerGif(String gif){
 			shareParams ["gif"] = gif;
 		}
 
