@@ -18,6 +18,7 @@ namespace cn.mob.unity3d.sdkporter
 		public ArrayList sysFrameworks;
 		public Hashtable fileFlags;
 		Hashtable platformConfList;
+        public ArrayList platformJsList;
 
 		public ArrayList URLSchemes;
 		ArrayList comparisonURLSchemes;
@@ -37,7 +38,10 @@ namespace cn.mob.unity3d.sdkporter
 			sysFrameworks = new ArrayList ();
 			fileFlags = new Hashtable ();
 			SetPlatformConfList ();
-		}
+
+            platformJsList = new ArrayList();
+
+        }
 
 		//for shareSDK
 		private void SetPlatformConfList()
@@ -187,6 +191,7 @@ namespace cn.mob.unity3d.sdkporter
 				{
 //					Debug.LogWarning (key);
 					string fileName = (string)platformConfList[key];
+                    platformJsList.Add(fileName + ".js");
 //					Debug.LogWarning (fileName);
 					var files = System.IO.Directory.GetFiles(Application.dataPath , fileName + ".pltpds", System.IO.SearchOption.AllDirectories);
 
@@ -367,5 +372,5 @@ namespace cn.mob.unity3d.sdkporter
 				}
 			}
 		}
-	}
+    }
 }

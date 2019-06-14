@@ -13,10 +13,11 @@ using UnityEditor.iOS.Xcode;
 
 public class MOBPostProcessBuild 
 {
+    static ArrayList platformJsList; 
 
-	//[PostProcessBuild]
-	#if UNITY_IOS
-	[PostProcessBuildAttribute(88)]
+    //[PostProcessBuild]
+    #if UNITY_IOS
+    [PostProcessBuildAttribute(88)]
 	public static void onPostProcessBuild(BuildTarget target,string targetPath)
 	{
 		if (target != BuildTarget.iOS) 
@@ -27,8 +28,9 @@ public class MOBPostProcessBuild
 		//拉取配置文件中的数据
 		MOBXCodeEditorModel xcodeModel = new  MOBXCodeEditorModel ();
 		xcodeModel.LoadMobpds ();
-		//导入文件
-		PBXProject xcodeProj = new PBXProject();
+        platformJsList = xcodeModel.platformJsList;
+        //导入文件
+        PBXProject xcodeProj = new PBXProject();
 		string xcodeProjPath = targetPath + "/Unity-iPhone.xcodeproj/project.pbxproj";
 		xcodeProj.ReadFromFile(xcodeProjPath);
 		//xcode Target
@@ -355,7 +357,17 @@ public class MOBPostProcessBuild
 				{
 					name = name.Replace (".mobjs",".js");
 				}
-				fi.CopyTo(Path.Combine(target.ToString(), name), true);
+
+                if(source.ToString().Contains("ShareSDK.bundle/ScriptCore/platforms") && !platformJsList.Contains(name))
+                {
+
+                }
+                else
+                {
+                    fi.CopyTo(Path.Combine(target.ToString(), name), true);
+                }
+
+				
 			}
 		}
 		// Copy each subdirectory using recursion.
