@@ -157,7 +157,7 @@ and defination for callback:
 
 ii. now you can make an Authorization:
 
-        ssdk.Authorize(reqID, PlatformType.SinaWeibo);
+        ssdk.Authorize(PlatformType.SinaWeibo);
 
 #### About Get User's information
 
@@ -186,7 +186,7 @@ and defination for callback:
 
 ii. now you can get the user's info:
 
-        ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);
+        ssdk.GetUserInfo(PlatformType.SinaWeibo);
 
 ### *Integration for iOS* (if you don't need iOS ,please ignore this)
 
