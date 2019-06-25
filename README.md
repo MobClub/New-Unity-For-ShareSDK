@@ -138,7 +138,7 @@ void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashta
 ```
 ii. 进行授权:
 ```
-ssdk.Authorize(reqID, PlatformType.SinaWeibo);
+ssdk.Authorize(PlatformType.SinaWeibo);
 ```
 
 ##### 获取用户信息
@@ -169,7 +169,7 @@ void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type
 
 ii. 获取用户信息:
 ```
-ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);
+ssdk.GetUserInfo(PlatformType.SinaWeibo);
 ```
 
 ### *关于 iOS*

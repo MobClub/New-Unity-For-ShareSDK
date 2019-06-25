@@ -146,7 +146,7 @@ void AuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashta
 ```
 ii. now you can make an Authorization:
 ```
-ssdk.Authorize(reqID, PlatformType.SinaWeibo);
+ssdk.Authorize(PlatformType.SinaWeibo);
 ```
 
 ##### About Get User's information
@@ -177,7 +177,7 @@ void GetUserInfoResultHandler (int reqID, ResponseState state, PlatformType type
 
 ii. now you can get the user's info:
 ```
-ssdk.GetUserInfo(reqID, PlatformType.SinaWeibo);
+ssdk.GetUserInfo(PlatformType.SinaWeibo);
 ```
 
 ### *About iOS*
