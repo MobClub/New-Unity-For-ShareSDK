@@ -223,7 +223,7 @@ MonoBehaviour:
       app_secret: 38053202e1a5fe26c80c753071f0b573
       display_name: ShareSDK
     twitter:
-      Enable: 0
+      Enable: 1
       consumer_key: viOnkeLpHBKs6KXV7MPpeGyzE
       consumer_secret: NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey
       redirect_uri: http://mob.com
@@ -317,7 +317,7 @@ MonoBehaviour:
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth
     qq:
-      Enable: 0
+      Enable: 1
       app_id: 100371282
       app_key: aed9b0303e3ed1e27bae87c33761161d
     qzone:

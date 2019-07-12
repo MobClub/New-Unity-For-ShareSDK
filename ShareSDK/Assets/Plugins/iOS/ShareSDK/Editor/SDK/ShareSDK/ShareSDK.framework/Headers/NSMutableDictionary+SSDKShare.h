@@ -685,7 +685,7 @@
  *  @param url        分享链接
  *  @param title      标题
  *  @param urlDesc    链接的相关描述
- *  @param visibility 可见性，可以传入anyone或者connections-only，默认为anyone
+ *  @param visibility 可见性，可以传入PUBLIC、CONNECTIONS，默认Text分享使用PUBLIC，默认WebPage分享使用CONNECTIONS
  *  @param type       分享类型,仅支持Text和WebPage
  */
 - (void)SSDKSetupLinkedInParamsByText:(NSString *)text
@@ -883,6 +883,25 @@
                                 audio:(id)audio
                                 video:(id)video
                      menuDisplayPoint:(CGPoint)point
+                                 type:(SSDKContentType)type;
+
+/**
+ *  设置WhatsApp分享参数
+ *
+ *  @param text  分享文本
+ *  @param image 分享图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage。
+ *  @param audio 分享音频, 可以为NSData、NSString、NSURL（文件路径）、SSDKData、注：只允许指定本地资源
+ *  @param video 分享视频, 可以为NSData、NSString、NSURL（文件路径）、SSDKData、注：只允许指定本地资源
+ *  @param point 分享菜单的显示位置，仅用于iPad版
+ *  @param useSystem 是否使用系统提供的分享模块只针对分享文本，其他类型目前只有系统提供分享
+ *  @param type  分享类型，仅支持Text、Image、Audio、Video
+ */
+- (void)SSDKSetupWhatsAppParamsByText:(NSString *)text
+                                image:(id)image
+                                audio:(id)audio
+                                video:(id)video
+                     menuDisplayPoint:(CGPoint)point
+                            useSystem:(BOOL)useSystem
                                  type:(SSDKContentType)type;
 
 

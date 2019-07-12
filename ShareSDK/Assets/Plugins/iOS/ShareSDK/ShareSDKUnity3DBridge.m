@@ -3037,7 +3037,10 @@ extern "C" {
              }
              if (state == SSDKResponseStateSuccess && user)
              {
-                 [resultDict setObject:[user rawData] forKey:@"res"];
+                 NSMutableDictionary *userData = [user rawData].mutableCopy;
+                 userData[@"credential"] = [[user credential] rawData];
+                 resultDict[@"res"] = userData;
+//                 [resultDict setObject:[user rawData] forKey:@"res"];
              }
              
              NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];

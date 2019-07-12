@@ -15,7 +15,7 @@
 @interface ShareSDK (Extension)
 
 /**
- *  是否安装客户端（支持平台：微博、微信、QQ、QZone、Facebook）
+ *  是否安装客户端（支持平台：微博、微信、QQ、QZone、Facebook、FBMessage、抖音、Twitter、AliSocial、instagram、whatsapp、Line、pinterest、kakao、kakaoStory、易信、钉钉、美拍、youube、telegram、VKontakte、Pocket）
  *
  *  @param platformType 平台类型
  *
@@ -71,7 +71,7 @@
  *  @param stateChangedHandler 状态变更回调处理
  */
 + (void)getFriends:(SSDKPlatformType)platformType
-            cursor:(NSUInteger)cursor
+            cursor:(NSInteger)cursor
               size:(NSUInteger)size
     onStateChanged:(SSDKGetFriendsStateChangedHandler)stateChangedHandler;
 
@@ -96,5 +96,14 @@
         headers:(NSMutableDictionary *)headers
  onStateChanged:(SSDKCallApiStateChangedHandler)stateChangedHandler;
 
+
+/**
+ * 生成链接地址的二维码图片
+ *
+ * @param URL 链接地址
+ * @param size 二维码宽度
+ * @return 二维码图片 UIImage
+ */
++ (UIImage *)getQRCodeWithURL:(NSURL *)URL withSize:(CGFloat)size;
 
 @end
