@@ -302,7 +302,7 @@ MonoBehaviour:
       Enable: 0
       client_id: 4797078908495202393
     mingdao:
-      Enable: 0
+      Enable: 1
       app_key: EEEE9578D1D431D3215D8C21BF5357E3
       app_secret: 5EDE59F37B3EFA8F65EEFB9976A4E933
       redirect_uri: http://sharesdk.cn
@@ -337,12 +337,12 @@ MonoBehaviour:
       app_id: wx617c77c82218ea2c
       app_secret: c7253e5289986cf4c4c74d1ccc185fb1
     yixin:
-      Enable: 0
+      Enable: 1
       app_id: yx0d9a9f9088ea44d78680f3274da1765f
       app_secret: 1a5bd421ae089c3
       redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
     yixinMoments:
-      Enable: 0
+      Enable: 1
       app_id: yx0d9a9f9088ea44d78680f3274da1765f
       app_secret: 1a5bd421ae089c3
       redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
@@ -354,10 +354,10 @@ MonoBehaviour:
       consumer_key: 4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA
       consumer_secret: GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe
     aliSocial:
-      Enable: 0
+      Enable: 1
       app_id: 2015072400185895
     aliSocialMoments:
-      Enable: 0
+      Enable: 1
       app_id: 2015072400185895
     dingTalk:
       Enable: 0

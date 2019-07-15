@@ -12,7 +12,7 @@
       <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="168" Column="29" />
       <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="20" Column="22" />
       <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" Line="377" Column="23" />
-      <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" Line="22" Column="22" />
+      <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" Line="30" Column="36" />
       <File FileName="Assets/Plugins/ShareSDK/ResponseState.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPathModel.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="72" Column="15" />
