@@ -213,6 +213,10 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypeDouyin              = 59,
     /**
+     * 企业微信
+     */
+    SSDKPlatformTypeWework              = 60,
+    /**
      *  易信
      */
     SSDKPlatformTypeYiXin               = 994,

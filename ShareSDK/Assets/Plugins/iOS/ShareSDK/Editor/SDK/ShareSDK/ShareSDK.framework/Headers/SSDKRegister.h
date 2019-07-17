@@ -367,4 +367,17 @@
 - (void)setupDouyinByAppKey:(NSString *)appKey
                   appSecret:(NSString *)appSecret;
 
+/**
+ 设置企业微信应用信息
+ 
+ @param appSchema 应用schema
+ @param corpId 企业ID
+ @param agentId 应用编号
+ @param appSecret 应用密钥
+ */
+- (void)setupWeWorkByAppKey:(NSString *)appKey
+                     corpId:(NSString *)corpId
+                    agentId:(NSString *)agentId
+                  appSecret:(NSString *)appSecret;
+
 @end

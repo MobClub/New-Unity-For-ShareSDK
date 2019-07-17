@@ -1012,6 +1012,42 @@
 - (void)SSDKSetupDouyinParamesByAssetLocalIds:(NSArray<NSString *> *)assetLocalIds
                                          type:(SSDKContentType)type;
 
+/**
+ *  设置企业微信分享参数
+ *
+ *  @param text                 文本
+ *  @param title                标题
+ *  @param url                  分享链接
+ *  @param thumbImage           缩略图，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage
+ *  @param image                图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage，如为图片路径只支持本地沙盒路径
+ *  @param fileData             文件数据，可以为NSData、UIImage、NSString、NSURL（文件路径）、SSDKData、SSDKImage，文件路径只支持本地沙盒路径
+ *  @param type                 分享类型，支持SSDKContentTypeText、SSDKContentTypeImage、SSDKContentTypeWebPage、SSDKContentTypeFile和SSDKContentTypeVideo
+ *
+ *  分享文本时：
+ *  设置type为SSDKContentTypeText, 并填入text参数
+ *
+ *  分享图片时：
+ *  设置type为SSDKContentTypeImage, 填入title(自定义图片名称及后缀)和image参数
+ *
+ *  分享网页时：
+ *  设置type为SSDKContentTypeWebPage, 并设置text、title、url以及thumbImage参数，如果尚未设置thumbImage则会从image参数中读取图片并对图片进行缩放操作。
+ *
+ *  分享视频时：
+ *  设置type为SSDKContentTypeVideo，并设置title(自定义视频名称及后缀)、video参数
+ *
+ *  分享文件时：
+ *  设置type为SSDKContentTypeFile， 并设置title(自定义文件名称及后缀)、fileData参数
+ 
+ */
+- (void)SSDKSetupWeWorkParamsByText:(NSString *)text
+                              title:(NSString *)title
+                                url:(NSURL *)url
+                         thumbImage:(id)thumbImage
+                              image:(id)image
+                              video:(id)video
+                           fileData:(id)fileData
+                               type:(SSDKContentType)type;
+
 #pragma mark - Deprecated
 
 - (void)SSDKEnableUseClientShare __deprecated_msg("Discard form v4.2.0");
