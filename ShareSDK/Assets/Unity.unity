@@ -307,12 +307,12 @@ MonoBehaviour:
       app_secret: 5EDE59F37B3EFA8F65EEFB9976A4E933
       redirect_uri: http://sharesdk.cn
     kakaoTalk:
-      Enable: 0
+      Enable: 1
       app_key: 48d3f524e4a636b08d81b3ceb50f1003
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth
     kakaoStory:
-      Enable: 0
+      Enable: 1
       app_key: 48d3f524e4a636b08d81b3ceb50f1003
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth
@@ -417,7 +417,7 @@ MonoBehaviour:
       app_id: 100371282
       app_key: aed9b0303e3ed1e27bae87c33761161d
     kakaoSeries:
-      Enable: 0
+      Enable: 1
       app_key: 48d3f524e4a636b08d81b3ceb50f1003
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth
