@@ -219,9 +219,9 @@ MonoBehaviour:
       redirect_uri: http://sharesdk.cn
     facebook:
       Enable: 1
-      api_key: 107704292745179
-      app_secret: 38053202e1a5fe26c80c753071f0b573
-      display_name: ShareSDK
+      api_key: 1412473428822331
+      app_secret: a42f4f3f867dc947b9ed6020c2e93558
+      display_name: shareSDK
     twitter:
       Enable: 1
       consumer_key: viOnkeLpHBKs6KXV7MPpeGyzE

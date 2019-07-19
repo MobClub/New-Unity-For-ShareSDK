@@ -49,7 +49,7 @@ public class Demo : MonoBehaviour {
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Authorize"))
 		{
 			print(ssdk == null);
-            ssdk.Authorize(PlatformType.Douyin);
+            ssdk.Authorize(PlatformType.Facebook);
 		}
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
