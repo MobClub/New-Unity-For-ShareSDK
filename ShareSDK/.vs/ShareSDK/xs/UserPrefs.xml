@@ -1,23 +1,24 @@
 ﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Demo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/ShareSDKRestoreScene.cs">
     <Files>
       <File FileName="Assets/Plugins/ShareSDK/Android/AndroidImpl.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="149" Column="14" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" Line="194" Column="58" />
-      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="20" Column="47" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="51" Column="24" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="60" Column="70" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="27" Column="4" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" Line="45" Column="44" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="80" Column="32" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="575" Column="27" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="113" Column="9" />
       <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="505" Column="10" />
-      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="168" Column="29" />
+      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="219" Column="1" />
       <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="20" Column="22" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" Line="377" Column="23" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" Line="483" Column="16" />
       <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" Line="30" Column="36" />
       <File FileName="Assets/Plugins/ShareSDK/ResponseState.cs" Line="1" Column="1" />
       <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPathModel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="72" Column="15" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="963" Column="28" />
       <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/SDK/ShareSDK/Support/Optional/ShareSDKConfigFile.bundle/ShareSDK.xml" Line="85" Column="9" />
-      <File FileName="Assets/Demo.cs" Line="52" Column="51" />
+      <File FileName="Assets/Demo.cs" Line="14" Column="12" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKRestoreScene.cs" Line="10" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

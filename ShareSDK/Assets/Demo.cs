@@ -17,7 +17,10 @@ public class Demo : MonoBehaviour {
 		ssdk.showUserHandler = OnGetUserInfoResultHandler;
 		ssdk.getFriendsHandler = OnGetFriendsResultHandler;
 		ssdk.followFriendHandler = OnFollowFriendResultHandler;
-	}
+
+        ShareSDKRestoreScene.setRestoreSceneListener(OnRestoreScene);
+
+    }
 
 	// Update is called once per frame
 	void Update () 
@@ -386,4 +389,10 @@ public class Demo : MonoBehaviour {
 			print ("cancel !");
 		}
 	}
+
+    protected static void OnRestoreScene(Hashtable sceneInfo)
+    {
+       //根据scene开发者自己处理场景转换
+        //SceneManager.LoadScene("SceneA");
+    }
 }

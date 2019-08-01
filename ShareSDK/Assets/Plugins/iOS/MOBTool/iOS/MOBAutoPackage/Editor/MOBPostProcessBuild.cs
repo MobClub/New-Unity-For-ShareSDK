@@ -13,21 +13,27 @@ using UnityEditor.iOS.Xcode;
 
 public class MOBPostProcessBuild 
 {
-    static ArrayList platformJsList; 
+    static ArrayList platformJsList;
+    static string MobAppKey;
 
     //[PostProcessBuild]
-    #if UNITY_IOS
+#if UNITY_IOS
     [PostProcessBuildAttribute(88)]
 	public static void onPostProcessBuild(BuildTarget target,string targetPath)
 	{
+        MobAppKey = "";
 		if (target != BuildTarget.iOS) 
 		{
 			Debug.LogWarning ("Target is not iPhone. XCodePostProcess will not run");
 			return;
 		}
-		//拉取配置文件中的数据
-		MOBXCodeEditorModel xcodeModel = new  MOBXCodeEditorModel ();
-		xcodeModel.LoadMobpds ();
+
+        initMobAppKeyInfo();
+
+        //拉取配置文件中的数据
+        MOBXCodeEditorModel xcodeModel = new  MOBXCodeEditorModel ();
+        xcodeModel.MobAppKey = MobAppKey;
+        xcodeModel.LoadMobpds ();
         platformJsList = xcodeModel.platformJsList;
         //导入文件
         PBXProject xcodeProj = new PBXProject();
@@ -74,10 +80,35 @@ public class MOBPostProcessBuild
 		//加入 xcodeModel.frameworks 中指定的 framework
 		AddXcodeModelFrameworks (xcodeModel,xcodeProj,xcodeTargetGuid,targetPath);
 		xcodeProj.WriteToFile(xcodeProjPath);
-	}
 
-	//添加系统Framework
-	private static void AddSysFrameworks(MOBXCodeEditorModel xcodeModel,PBXProject xcodeProj,string xcodeTargetGuid,string xcodeTargetPath)
+        AddCapability(xcodeModel, xcodeProj, xcodeTargetGuid, targetPath);
+    }
+
+    private static void initMobAppKeyInfo()
+    {
+        var files = System.IO.Directory.GetFiles(Application.dataPath, "MOB.keypds", System.IO.SearchOption.AllDirectories);
+        string filePath = files[0];
+        FileInfo projectFileInfo = new FileInfo(filePath);
+        if (projectFileInfo.Exists)
+        {
+            StreamReader sReader = projectFileInfo.OpenText();
+            string contents = sReader.ReadToEnd();
+            sReader.Close();
+            sReader.Dispose();
+            Hashtable datastore = (Hashtable)MiniJSON.jsonDecode(contents);
+            string appKey = (string)datastore["MobAppKey"];
+            //string appSecret = (string)datastore["MobAppSecret"];
+            MobAppKey = appKey;
+
+        }
+        else
+        {
+            Debug.LogWarning("MOB.keypds no find");
+        }
+    }
+
+    //添加系统Framework
+    private static void AddSysFrameworks(MOBXCodeEditorModel xcodeModel,PBXProject xcodeProj,string xcodeTargetGuid,string xcodeTargetPath)
 	{
 		foreach (string sysFramework in xcodeModel.sysFrameworks) 
 		{
@@ -322,8 +353,14 @@ public class MOBPostProcessBuild
 
 				string saveFrameworkPath = frameworkPath.Substring (0,tempIndex);
 
-				//将 framework copy到指定目录AddURLSchemes
-				DirectoryInfo frameworkInfo = new DirectoryInfo(lastFilePath);
+
+                if (frameworkPath.Contains("ShareSDK/Support/Optional/MobLinkPro.framework"))
+                {
+                    continue;
+                }
+
+                //将 framework copy到指定目录AddURLSchemes
+                DirectoryInfo frameworkInfo = new DirectoryInfo(lastFilePath);
 				DirectoryInfo saveFrameworkInfo = new DirectoryInfo(savePath);
 				CopyAll (frameworkInfo,saveFrameworkInfo);
 				//将 framework 加入 proj中
@@ -466,5 +503,48 @@ public class MOBPostProcessBuild
 			}
 		}
 	}
-	#endif
+
+    private static void AddCapability(MOBXCodeEditorModel xcodeModel, PBXProject xcodeProj, string xcodeTargetGuid, string xcodeTargetPath)
+    {
+
+        string projectPath = PBXProject.GetPBXProjectPath(xcodeTargetPath);
+        if (xcodeModel.isOpenRestoreScene)
+        {
+            string entitlementsPath = xcodeModel.entitlementsPath;
+            if (entitlementsPath == null || entitlementsPath == "" || !xcodeModel.entitlementsPath.Contains(".entitlements"))
+            {
+                string[] s = UnityEditor.PlayerSettings.applicationIdentifier.Split('.');
+                string productname = s[s.Length - 1];
+                entitlementsPath = "Unity-iPhone/" + productname + ".entitlements";
+            }
+            ProjectCapabilityManager capManager = new ProjectCapabilityManager(projectPath, entitlementsPath, PBXProject.GetUnityTargetName());
+
+            if (xcodeModel.associatedDomains.Count > 0)
+            {
+                string[] domains = new string[xcodeModel.associatedDomains.Count];
+                int index = 0;
+                foreach (string domainStr in xcodeModel.associatedDomains)
+                {
+                    domains[index] = domainStr;
+                    index++;
+                }
+                capManager.AddAssociatedDomains(domains);
+                //推送
+                //capManager.AddPushNotifications(true);
+                //内购
+                //capManager.AddInAppPurchase();
+                capManager.WriteToFile();
+                //Debug.Log("AddCapabilityAssociatedDomains");
+                //Debug.Log("xcodeTargetGuid：" + xcodeTargetGuid);
+                //Debug.Log("xcodeTargetPath：" + xcodeTargetPath);
+                //Debug.Log("projectPath：" + projectPath);
+                //Debug.Log("GetUnityTargetName：" + PBXProject.GetUnityTargetName());
+                //Debug.Log("bundleIdentifier：" + UnityEditor.PlayerSettings.applicationIdentifier);
+                //Debug.Log("productName：" + UnityEditor.PlayerSettings.productName);
+                xcodeProj.AddCapability(xcodeTargetGuid, PBXCapabilityType.AssociatedDomains, xcodeTargetPath + "/" + xcodeModel.entitlementsPath, true);
+            }
+        }
+    }
+
+#endif
 }

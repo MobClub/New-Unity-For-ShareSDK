@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &50577332
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.106746
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.16500872
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.09768422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c6deb5a6dc0b4ccfaeab59ff0d7f11d, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1900725046
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11817e30a4b424d04aae4e7f0e1b0edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appKey: moba6b6c6d6
-  appSecret: b89d2427a3bc7ad1aea1e1e8c1d36bf3
+  appKey: moba0b0c0d0
+  appSecret: 5713f0d88511f9f4cf100cade0610a34
   devInfo:
     sinaweibo:
       Enable: 1
@@ -219,9 +261,9 @@ MonoBehaviour:
       redirect_uri: http://sharesdk.cn
     facebook:
       Enable: 1
-      api_key: 1412473428822331
-      app_secret: a42f4f3f867dc947b9ed6020c2e93558
-      display_name: shareSDK
+      api_key: 107704292745179
+      app_secret: 38053202e1a5fe26c80c753071f0b573
+      display_name: ShareSDK
     twitter:
       Enable: 1
       consumer_key: viOnkeLpHBKs6KXV7MPpeGyzE
@@ -302,17 +344,17 @@ MonoBehaviour:
       Enable: 0
       client_id: 4797078908495202393
     mingdao:
-      Enable: 1
+      Enable: 0
       app_key: EEEE9578D1D431D3215D8C21BF5357E3
       app_secret: 5EDE59F37B3EFA8F65EEFB9976A4E933
       redirect_uri: http://sharesdk.cn
     kakaoTalk:
-      Enable: 1
+      Enable: 0
       app_key: 48d3f524e4a636b08d81b3ceb50f1003
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth
     kakaoStory:
-      Enable: 1
+      Enable: 0
       app_key: 48d3f524e4a636b08d81b3ceb50f1003
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth
@@ -321,7 +363,7 @@ MonoBehaviour:
       app_id: 100371282
       app_key: aed9b0303e3ed1e27bae87c33761161d
     qzone:
-      Enable: 0
+      Enable: 1
       app_id: 100371282
       app_key: aed9b0303e3ed1e27bae87c33761161d
     wechat:
@@ -329,20 +371,20 @@ MonoBehaviour:
       app_id: wx617c77c82218ea2c
       app_secret: c7253e5289986cf4c4c74d1ccc185fb1
     wechatMoments:
-      Enable: 0
+      Enable: 1
       app_id: wx617c77c82218ea2c
       app_secret: c7253e5289986cf4c4c74d1ccc185fb1
     wechatFavorites:
-      Enable: 0
+      Enable: 1
       app_id: wx617c77c82218ea2c
       app_secret: c7253e5289986cf4c4c74d1ccc185fb1
     yixin:
-      Enable: 1
+      Enable: 0
       app_id: yx0d9a9f9088ea44d78680f3274da1765f
       app_secret: 1a5bd421ae089c3
       redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
     yixinMoments:
-      Enable: 1
+      Enable: 0
       app_id: yx0d9a9f9088ea44d78680f3274da1765f
       app_secret: 1a5bd421ae089c3
       redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
@@ -354,10 +396,10 @@ MonoBehaviour:
       consumer_key: 4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA
       consumer_secret: GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe
     aliSocial:
-      Enable: 1
+      Enable: 0
       app_id: 2015072400185895
     aliSocialMoments:
-      Enable: 1
+      Enable: 0
       app_id: 2015072400185895
     dingTalk:
       Enable: 0
@@ -384,7 +426,7 @@ MonoBehaviour:
       bot_token: 600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ
       bot_domain: http://127.0.0.1
     eSurfing:
-      Enable: 1
+      Enable: 0
       app_key: 8148612606
       app_secret: mCltrhUqwshFa86egDTs0491ibaAulKA
       app_name: shareSDK
@@ -393,9 +435,15 @@ MonoBehaviour:
       app_id: 1412473428822331
       client_token: c30c08723aa8c48fbd5e01d1c3103891
     douyin:
-      Enable: 1
+      Enable: 0
       app_key: aw9ivykfjvi4hpwo
       app_secret: 42b4caa6bda60bd49f05f06d0a4956e1
+    wework:
+      Enable: 1
+      corp_id: wwa21eaecf93f0e3ba
+      app_secret: dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s
+      agent_id: 1000012
+      app_key: wwautha21eaecf93f0e3ba000012
     copy:
       Enable: 0
     yixinFavorites:
@@ -413,11 +461,11 @@ MonoBehaviour:
       app_id: wx617c77c82218ea2c
       app_secret: c7253e5289986cf4c4c74d1ccc185fb1
     qqSeries:
-      Enable: 0
+      Enable: 1
       app_id: 100371282
       app_key: aed9b0303e3ed1e27bae87c33761161d
     kakaoSeries:
-      Enable: 1
+      Enable: 0
       app_key: 48d3f524e4a636b08d81b3ceb50f1003
       rest_api_key: ac360fa50b5002637590d24108e6cb10
       redirect_uri: http://www.mob.com/oauth

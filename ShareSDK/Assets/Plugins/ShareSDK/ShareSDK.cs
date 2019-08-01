@@ -20,8 +20,8 @@ namespace cn.sharesdk.unity3d
 		public string appKey = "moba6b6c6d6";
 		public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
 		 #elif UNITY_IPHONE
-		public string appKey = "moba6b6c6d6";
-		public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
+		public string appKey = "moba0b0c0d0";
+		public string appSecret = "5713f0d88511f9f4cf100cade0610a34";
 		 #endif
 
 		public DevInfoSet devInfo;
@@ -33,7 +33,7 @@ namespace cn.sharesdk.unity3d
 		public EventHandler getFriendsHandler;
 		public EventHandler followFriendHandler;
 
-		void Awake()
+        void Awake()
 		{				
 			Type type = devInfo.GetType();
 			Hashtable platformConfigs = new Hashtable();
@@ -547,11 +547,11 @@ namespace cn.sharesdk.unity3d
 		{
 			return shareSDKUtils.openMiniProgram (userName,path,miniProgramType);
 		}
-			
-		/// <summary>
-		/// Event result listener.
-		/// </summary>
-		public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
+
+        /// <summary>
+        /// Event result listener.
+        /// </summary>
+        public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
 
 	}
 }

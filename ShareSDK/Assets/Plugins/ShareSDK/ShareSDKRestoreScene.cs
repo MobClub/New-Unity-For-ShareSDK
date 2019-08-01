@@ -1,0 +1,67 @@
+﻿using UnityEngine;
+using System;
+using System.Collections;
+
+namespace cn.sharesdk.unity3d
+{
+	public class ShareSDKRestoreScene : MonoBehaviour {
+
+        // 场景还原功能
+        public RestoreSceneConfigure restoreSceneConfig;
+
+        // 第一步：定义委托
+        public delegate void RestoreSceneHandler(Hashtable scene);
+
+        // 第二步：创建委托对象
+		private static event RestoreSceneHandler onRestoreScene;
+
+		private static bool isInit;
+		private static ShareSDKRestoreScene _instance;
+		private static ShareSDKRestoreSceneImpl restoreSceneUtils;
+
+		void Awake()
+		{
+			if (!isInit) 
+			{
+#if UNITY_ANDROID
+				//restoreSceneUtils = new ShareSDKRestoreSceneImpl();
+#elif UNITY_IPHONE
+                //restoreSceneUtils = new ShareSDKRestoreSceneImpl();
+#endif
+				isInit = true;
+			}
+
+			if (_instance != null) 
+			{
+				DestroyObject (_instance.gameObject);
+			}
+			_instance = this;
+
+			DontDestroyOnLoad(this.gameObject);
+		}
+
+        public static void setRestoreSceneListener(cn.sharesdk.unity3d.ShareSDKRestoreScene.RestoreSceneHandler sceneHandler)
+        {
+            restoreSceneUtils.setRestoreSceneListener();
+            onRestoreScene += sceneHandler;
+        }
+
+        private void _RestoreCallBack(string data)
+        {
+            Debug.Log("[sharesdk-unity]_RestoreCallBack：" + data);
+            Hashtable res = (Hashtable)MiniJSON.jsonDecode(data);
+            if (res == null || res.Count <= 0)
+            {
+                return;
+            }
+            string path = res["path"].ToString();
+            Hashtable customParams = (Hashtable)res["params"];
+
+            onRestoreScene(res);
+        }
+
+    }
+
+}
+
+

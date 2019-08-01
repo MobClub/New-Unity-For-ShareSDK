@@ -36,7 +36,14 @@ namespace cn.sharesdk.unity3d
 			appSecret = obj.appSecret;
 			Save ();
 			checkPlatforms (obj.devInfo);
-			Debug.LogWarning ("ShareSDK OnDisable");
+
+            var restoreSceneObj = target as ShareSDKRestoreScene;
+            if (restoreSceneObj != null)
+            {
+                checkRestoreScene(restoreSceneObj.restoreSceneConfig);
+            }
+
+            Debug.LogWarning ("ShareSDK OnDisable");
 		}
 
 		private void SetPlatformConfList()
@@ -68,6 +75,7 @@ namespace cn.sharesdk.unity3d
             platformConfList.Add ((int)PlatformType.Line,"channel_id");
             platformConfList.Add((int)PlatformType.FacebookAccount, "app_id");
             platformConfList.Add((int)PlatformType.Douyin, "app_key");
+            platformConfList.Add((int)PlatformType.WeWork, "app_key");
 
 		}
 
@@ -175,7 +183,52 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		private string GetValueByName(DevInfo devInfoField,string valueName)
+        private void checkRestoreScene(RestoreSceneConfigure restoreSceneConfig)
+        {
+            
+            Hashtable enableRestoreScene = new Hashtable();
+            if (restoreSceneConfig != null && restoreSceneConfig.Enable)
+            {
+                enableRestoreScene.Add("open", "1");
+                if (restoreSceneConfig.capabilititesAssociatedDomain != null)
+                {
+                    enableRestoreScene.Add("Capabilitites_AssociatedDomain", restoreSceneConfig.capabilititesAssociatedDomain);
+                    enableRestoreScene.Add("Capabilitites_EntitlementsPath", restoreSceneConfig.capabilititesEntitlementsPathInXcode);
+                }
+                else
+                {
+                    enableRestoreScene.Add("Capabilitites_AssociatedDomain", "");
+                    enableRestoreScene.Add("Capabilitites_EntitlementsPath", "");
+                }
+            }
+
+            var files = System.IO.Directory.GetFiles(Application.dataPath, "ShareSDK.mobpds", System.IO.SearchOption.AllDirectories);
+            string filePath = files[0];
+            FileInfo projectFileInfo = new FileInfo(filePath);
+            if (projectFileInfo.Exists)
+            {
+                StreamReader sReader = projectFileInfo.OpenText();
+                string contents = sReader.ReadToEnd();
+                sReader.Close();
+                sReader.Dispose();
+                Hashtable datastore = (Hashtable)MiniJSON.jsonDecode(contents);
+                if (datastore.ContainsKey("ShareSDKRestoreScene"))
+                {
+                    datastore["ShareSDKRestoreScene"] = enableRestoreScene;
+                }
+                else
+                {
+                    datastore.Add("ShareSDKRestoreScene", enableRestoreScene);
+                }
+                var json = MiniJSON.jsonEncode(datastore);
+                StreamWriter sWriter = new StreamWriter(filePath);
+                sWriter.WriteLine(json);
+                sWriter.Close();
+                sWriter.Dispose();
+            }
+        }
+
+        private string GetValueByName(DevInfo devInfoField,string valueName)
 		{
 			return (string)devInfoField.GetType ().GetField (valueName).GetValue (devInfoField);
 		}

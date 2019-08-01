@@ -7,7 +7,9 @@ namespace cn.mob.unity3d.sdkporter
 {
 	public class MOBXCodeEditorModel
 	{
-		public Hashtable permissions;
+        public string MobAppKey;
+
+        public Hashtable permissions;
 		public ArrayList folders;
 		ArrayList comparisonFolders;
 		public Hashtable buildSettings;
@@ -23,9 +25,15 @@ namespace cn.mob.unity3d.sdkporter
 		public ArrayList URLSchemes;
 		ArrayList comparisonURLSchemes;
 
-		public MOBXCodeEditorModel ()
+        public bool isOpenRestoreScene;
+        public ArrayList associatedDomains;
+        public string entitlementsPath;
+
+        public MOBXCodeEditorModel ()
 		{
-			infoPlistSet = new Hashtable ();
+            MobAppKey = "";
+
+            infoPlistSet = new Hashtable ();
 			permissions = new Hashtable ();
 			folders = new ArrayList ();
 			comparisonFolders = new ArrayList ();
@@ -41,6 +49,9 @@ namespace cn.mob.unity3d.sdkporter
 
             platformJsList = new ArrayList();
 
+            isOpenRestoreScene = false;
+            associatedDomains = new ArrayList();
+            entitlementsPath = "";
         }
 
 		//for shareSDK
@@ -119,7 +130,10 @@ namespace cn.mob.unity3d.sdkporter
 				AddPlatformConf(datastore,savefilePath);
 				//添加 fileFlags 一些需要特殊设置编译标签的文件 如ARC下MRC
 				AddFileFlags(datastore);
-			}
+
+                //添加场景还原
+                AddRestoreScene(datastore, savefilePath);
+            }
 		}
 
 		//文件路径debug.log
@@ -372,5 +386,41 @@ namespace cn.mob.unity3d.sdkporter
 				}
 			}
 		}
+
+        //场景还原 开关及XCode下Capabilities->AssociatedDomains
+        private void AddRestoreScene(Hashtable dataSource, string savefilePath)
+        {
+            string dataKey = "ShareSDKRestoreScene";
+            if (dataSource.ContainsKey(dataKey))
+            {
+                Hashtable restoreSceneInfo = (Hashtable)dataSource[dataKey];
+                if (restoreSceneInfo.ContainsKey("open") && int.Parse((string)restoreSceneInfo["open"]) == 1)
+                {
+                    isOpenRestoreScene = true;
+
+                    var files = System.IO.Directory.GetFiles(Application.dataPath, "restoreScene.rspds", System.IO.SearchOption.AllDirectories);
+
+                    if (files.Length > 0)
+                    {
+                        string filePath = files[0];
+
+                        string appkey = MobAppKey;
+                        //读取配置
+                        ReadMobpds(filePath, appkey, savefilePath);
+                    }
+
+                    if (restoreSceneInfo.ContainsKey("Capabilitites_EntitlementsPath"))
+                    {
+                        entitlementsPath = (string)restoreSceneInfo["Capabilitites_EntitlementsPath"];
+                    }
+
+                    if (restoreSceneInfo.ContainsKey("Capabilitites_AssociatedDomain"))
+                    {
+                        associatedDomains.Add((string)restoreSceneInfo["Capabilitites_AssociatedDomain"]);
+                    }
+                }
+
+            }
+        }
     }
 }

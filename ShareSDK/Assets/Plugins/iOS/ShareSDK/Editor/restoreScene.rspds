@@ -1,0 +1,7 @@
+{
+    "framework" : ["/SDK/ShareSDK/Support/Optional/MobLinkPro.framework"],
+    "URLSchemes" : {
+    				"CFBundleURLSchemes" :["ssdkmob{appkey}"],
+    				"CFBundleURLName" : "mobRestoreScene"
+    				}
+}

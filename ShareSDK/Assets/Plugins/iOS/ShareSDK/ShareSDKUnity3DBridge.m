@@ -18,6 +18,10 @@
 #import <ShareSDK/NSMutableDictionary+SSDKShare.h>
 #import <objc/message.h>
 
+#import <ShareSDKExtension/SSERestoreSceneHeader.h>
+#import <MOBFoundation/MOBFJson.h>
+
+static ShareSDKUnityRestoreSceneCallback *_callback = nil;
 static UIView *_refView = nil;
 #if defined (__cplusplus)
 extern "C" {
@@ -2831,6 +2835,67 @@ extern "C" {
                     
                     [params SSDKSetupMeiPaiParamsByUrl:[NSURL URLWithString:videoPath] contentType:type];
                 }
+                
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWework]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString *text = nil;
+                    NSMutableArray *images = [NSMutableArray array];
+                    NSString *image = nil;
+                    NSString *title = nil;
+                    NSString *url = nil;
+                    NSString *video = nil;
+                    NSString *thumbImg = nil;
+                    NSData *fileData = nil;
+                    SSDKContentType type = SSDKContentTypeText;
+                    
+                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
+                    {
+                        text = [value objectForKey:@"text"];
+                    }
+                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
+                    {
+                        NSString * image =  [value objectForKey:@"imageUrl"];
+                        if (image)
+                        {
+                            [images addObject:image];
+                        }
+                    }
+                    if ([[value objectForKey:@"imageArray"] isKindOfClass:[NSString class]])
+                    {
+                        NSString *imagesStr = value[@"imageArray"];
+                        [images addObjectsFromArray:[imagesStr componentsSeparatedByString:@","]];
+                    }
+                    
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
+                        url = [value objectForKey:@"url"];
+                    }
+                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
+                    {
+                        video = [value objectForKey:@"videoPath"];
+                    }
+                    if ([[value objectForKey:@"thumbImageUrl"] isKindOfClass:[NSString class]])
+                    {
+                        thumbImg = [value objectForKey:@"thumbImageUrl"];
+                    }
+                    if ([[value objectForKey:@"filePath"] isKindOfClass:[NSString class]])
+                    {
+                        fileData = [NSData dataWithContentsOfFile:[value objectForKey:@"filePath"]];
+                    }
+                    [params SSDKSetupWeWorkParamsByText:text
+                                                  title:title
+                                                    url:[NSURL URLWithString:url]
+                                             thumbImage:thumbImg
+                                                  image:images
+                                                  video:video
+                                                fileData:fileData
+                                                    type:type];
+                }
             }
         }
         return params;
@@ -3767,5 +3832,54 @@ extern "C" {
 }
 #endif
 @implementation ShareSDKUnity3DBridge
+
+@end
+
+@implementation UnityAppController (ShareSDKRestoreSceneInit)
+
++ (void)initialize
+{
+    [ShareSDK setRestoreSceneDelegate:[ShareSDKUnityRestoreSceneCallback defaultCallBack]];
+}
+
+@end
+
+@implementation ShareSDKUnityRestoreSceneCallback
+
++ (ShareSDKUnityRestoreSceneCallback *)defaultCallBack
+{
+    static ShareSDKUnityRestoreSceneCallback * _instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[ShareSDKUnityRestoreSceneCallback alloc] init];
+    });
+    return _instance;
+}
+
+#pragma mark - ISSERestoreSceneDelegate
+
+- (void)ISSEWillRestoreScene:(SSERestoreScene *)scene Restore:(void (^)(BOOL))restoreHandler
+{
+    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+    
+    if (scene.path.length > 0)
+    {
+        resultDict[@"path"] = scene.path;
+    }
+    
+    if (scene.params && scene.params.count > 0)
+    {
+        resultDict[@"params"] = scene.params;
+    }
+    
+    NSString *resultStr  = @"";
+    if (resultDict.count > 0)
+    {
+        resultStr = [MOBFJson jsonStringFromObject:resultDict];
+    }
+    
+    UnitySendMessage([@"ShareSDKRestoreScene" UTF8String], "_RestoreCallBack", [resultStr UTF8String]);
+}
+
 
 @end

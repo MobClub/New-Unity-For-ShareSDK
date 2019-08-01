@@ -8,6 +8,7 @@
 
 #import <ShareSDK/ShareSDK.h>
 #import "SSETypeDefine.h"
+#import <ShareSDKExtension/SSERestoreSceneHeader.h>
 
 /**
  *  ShareSDK扩展类目
@@ -105,5 +106,13 @@
  * @return 二维码图片 UIImage
  */
 + (UIImage *)getQRCodeWithURL:(NSURL *)URL withSize:(CGFloat)size;
+
+
+/**
+ 场景还原功能
+
+ @param delegate 场景还原设置代理
+ */
++ (void)setRestoreSceneDelegate:(id<ISSERestoreSceneDelegate>)delegate;
 
 @end

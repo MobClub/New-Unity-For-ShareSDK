@@ -214,7 +214,6 @@ namespace cn.sharesdk.unity3d
 		{
 			return __iosShareSDKOpenMiniProgram (userName, path, miniProgramType);
 		}
-		
-	}
+    }
 	#endif
 }

@@ -67,6 +67,7 @@ namespace cn.sharesdk.unity3d
         ESurfing = 57,          //天翼
         FacebookAccount = 58,              //FacebookAccount
         Douyin = 59,            //抖音
+        WeWork = 60,            //企业微信
 #if UNITY_ANDROID
 		KakaoPlatform = 44,    
 		EvernoteInternational = 12,

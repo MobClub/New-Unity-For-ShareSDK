@@ -10,7 +10,14 @@
 using System;
 using System.Collections;
 namespace cn.sharesdk.unity3d{
-	public abstract class ShareSDKImpl{
+    public abstract class ShareSDKRestoreSceneImpl
+    {
+        public virtual void setRestoreSceneListener()
+        { 
+        }
+    }
+
+    public abstract class ShareSDKImpl{
 
 		/// <summary>
 		/// Init the ShareSDK.

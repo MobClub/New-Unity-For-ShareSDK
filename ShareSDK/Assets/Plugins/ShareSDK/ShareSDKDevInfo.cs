@@ -52,11 +52,12 @@ namespace cn.sharesdk.unity3d
         public ESurfing eSurfing; //中国电信
         public FacebookAccount facebookAccount;//iOS端无需配置
         public Douyin douyin; //抖音
+        public WeWork wework; //企业微信
 #if UNITY_ANDROID
 		public FourSquare fourSquare;
 		//安卓配置印象笔记国内与国际版直接在Evernote中配置
 #elif UNITY_IPHONE
-		public Copy copy;
+        public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
 		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
 		public WechatSeries wechatSeries;						//iOS端微信系列, 可直接配置微信三个子平台 		[仅支持iOS端]
@@ -936,6 +937,38 @@ namespace cn.sharesdk.unity3d
         public const int type = (int)PlatformType.Douyin;
 #endif
 
+    }
+
+    [Serializable]
+    public class WeWork : DevInfo
+    {
+#if UNITY_ANDROID
+        public string SortId = "60";
+        public const int type = (int)PlatformType.WeWork;
+        public string AppKey = "wwa21eaecf93f0e3ba";                                    //对应企业id
+        public string AppSecret = "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s";
+        public string AgentId = "1000012";                                              //对应企业内部id
+        public string Schema = "wwautha21eaecf93f0e3ba000012";                          //对应企业微信SCHEMA
+#elif UNITY_IPHONE
+        public const int type = (int)PlatformType.WeWork;
+        public string corp_id = "wwa21eaecf93f0e3ba";                                   //对应企业id
+        public string app_secret = "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s";
+        public string agent_id = "1000012";                                             //对应企业内部id
+        public string app_key = "wwautha21eaecf93f0e3ba000012";                         //对应企业微信SCHEMA
+#endif
+    }
+
+
+    [Serializable]
+    public class RestoreSceneConfigure
+    {
+        public bool Enable = false;
+#if UNITY_ANDROID
+
+#elif UNITY_IPHONE
+        public string capabilititesAssociatedDomain = "applinks:ahmn.t4m.cn";
+        public string capabilititesEntitlementsPathInXcode = "Unity-iPhone/Base.entitlements";
+#endif
     }
 
 
