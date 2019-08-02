@@ -10,7 +10,7 @@ namespace cn.sharesdk.unity3d
         public RestoreSceneConfigure restoreSceneConfig;
 
         // 第一步：定义委托
-        public delegate void RestoreSceneHandler(Hashtable scene);
+        public delegate void RestoreSceneHandler(RestoreSceneInfo scene);
 
         // 第二步：创建委托对象
 		private static event RestoreSceneHandler onRestoreScene;
@@ -26,7 +26,7 @@ namespace cn.sharesdk.unity3d
 #if UNITY_ANDROID
 				//restoreSceneUtils = new ShareSDKRestoreSceneImpl();
 #elif UNITY_IPHONE
-                //restoreSceneUtils = new ShareSDKRestoreSceneImpl();
+                //restoreSceneUtils = new ShareSDKRestoreSceneImpl();//iOS不需要
 #endif
 				isInit = true;
 			}
@@ -42,8 +42,13 @@ namespace cn.sharesdk.unity3d
 
         public static void setRestoreSceneListener(cn.sharesdk.unity3d.ShareSDKRestoreScene.RestoreSceneHandler sceneHandler)
         {
-            restoreSceneUtils.setRestoreSceneListener();
+#if UNITY_ANDROID
+            //restoreSceneUtils.setRestoreSceneListener();
+#elif UNITY_IPHONE
+            //restoreSceneUtils.setRestoreSceneListener();//iOS不需要
+#endif
             onRestoreScene += sceneHandler;
+
         }
 
         private void _RestoreCallBack(string data)
@@ -54,10 +59,11 @@ namespace cn.sharesdk.unity3d
             {
                 return;
             }
-            string path = res["path"].ToString();
-            Hashtable customParams = (Hashtable)res["params"];
+            string path = res ["path"].ToString();
+            Hashtable customParams = (Hashtable)res ["params"];
+            RestoreSceneInfo scene = new RestoreSceneInfo (path, customParams);
 
-            onRestoreScene(res);
+            onRestoreScene(scene);
         }
 
     }

@@ -390,9 +390,19 @@ public class Demo : MonoBehaviour {
 		}
 	}
 
-    protected static void OnRestoreScene(Hashtable sceneInfo)
+    public static void OnRestoreScene(RestoreSceneInfo scene)
     {
-       //根据scene开发者自己处理场景转换
+        Hashtable customParams = scene.customParams; 
+        if (customParams != null)
+        {
+            Debug.Log("[sharesdk-unity-Demo]OnRestoreScen(). path:" + scene.path.ToString() + ", params:" + scene.customParams.toJson());
+        }
+        else
+        {
+            Debug.Log("[sharesdk-unity-Demo]OnRestoreScen(). path:" + scene.path.ToString() + ", params:null");
+        }
+
+        //根据scene开发者自己处理场景转换
         //SceneManager.LoadScene("SceneA");
     }
 }

@@ -32,10 +32,13 @@ namespace cn.sharesdk.unity3d
 		public void OnDisable() 
 		{
 			var obj = target as ShareSDK;
-			appKey = obj.appKey;
-			appSecret = obj.appSecret;
-			Save ();
-			checkPlatforms (obj.devInfo);
+            if (obj != null)
+            {
+                appKey = obj.appKey;
+                appSecret = obj.appSecret;
+                Save();
+                checkPlatforms(obj.devInfo);
+            }
 
             var restoreSceneObj = target as ShareSDKRestoreScene;
             if (restoreSceneObj != null)

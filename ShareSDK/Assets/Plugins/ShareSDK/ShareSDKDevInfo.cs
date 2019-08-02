@@ -959,6 +959,13 @@ namespace cn.sharesdk.unity3d
     }
 
 
+
+
+
+
+
+    // 下列为闭环分享相关类
+
     [Serializable]
     public class RestoreSceneConfigure
     {
@@ -969,6 +976,25 @@ namespace cn.sharesdk.unity3d
         public string capabilititesAssociatedDomain = "applinks:ahmn.t4m.cn";
         public string capabilititesEntitlementsPathInXcode = "Unity-iPhone/Base.entitlements";
 #endif
+    }
+
+
+    public class RestoreSceneInfo
+    {
+        public string path;
+        public Hashtable customParams;
+
+        public RestoreSceneInfo(string scenePath, Hashtable sceneCustomParams)
+        {
+            try 
+            {
+                this.path = scenePath;
+                this.customParams = sceneCustomParams;
+            } catch(Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e); 
+            }
+        }
     }
 
 
