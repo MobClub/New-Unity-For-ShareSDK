@@ -5,7 +5,7 @@
 								"wtloginmqq2","mqzone","mqzoneopensdk","mqzoneopensdkapi","mqzoneopensdkapi19","mqzoneopensdkapiV2","mqqapiwallet","mqqopensdkfriend",
 								"mqqopensdkdataline","mqqgamebindinggroup","mqqopensdkgrouptribeshare","tencentapi.qq.reqContent","tencentapi.qzone.reqContent","tim",
 								"timapi","timopensdkfriend","timwpa","timgamebindinggroup","timapiwallet","timOpensdkSSoLogin","wtlogintim","timopensdkgrouptribeshare",
-								"timopensdkapiV4","timgamebindinggroup","timopensdkdataline","wtlogintimV1","timapiV1"],
+								"timopensdkapiV4","timgamebindinggroup","timopensdkdataline","wtlogintimV1","timapiV1","mqqopensdkminiapp"],
     "URLSchemes" : {
     				"CFBundleURLSchemes" :["tencent{appkey}","QQ{appkey16}"],
     				"CFBundleURLName" : "QQ"

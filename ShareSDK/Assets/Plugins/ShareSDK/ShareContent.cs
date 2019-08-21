@@ -437,14 +437,20 @@ namespace cn.sharesdk.unity3d
 			shareParams ["isShareToStory"] = enalble;
 		}
 
-		// iOS/Android 分享小程序的ID
+		// iOS/Android 分享微信小程序的ID
 		public void SetMiniProgramUserName(String userName){
 			shareParams ["wxUserName"] = userName;
 		}
 
-		// iOS/Android 微信小程序的页面路径
-		public void SetMiniProgramPath(String path){
+        // iOS/Android 分享QQ小程序的应用id
+        public void SetMiniProgramAppID(string appID){
+            shareParams["qqMiniProgramAppID"] = appID;
+         }
+
+        // iOS/Android 微信、QQ小程序的页面路径
+        public void SetMiniProgramPath(String path){
 			shareParams ["wxPath"] = path;
+            shareParams ["qqMiniProgramPath"] = path;
 		}
 
 		// iOS/Android 微信小程序 withTicket开关
@@ -452,18 +458,24 @@ namespace cn.sharesdk.unity3d
 			shareParams ["wxWithShareTicket"] = enalble;
 		}
 
-		// iOS/Android 分享小程序的版本（0-正式，1-开发，2-体验）
-		public void SetMiniProgramType(int type){
+        // iOS/Android 分享微信小程序的版本（0-正式，1-开发，2-体验），QQ小程序(3-正式版,1-测试版,4-预览版)
+        public void SetMiniProgramType(int type){
 			shareParams ["wxMiniProgramType"] = type;
+            shareParams ["qqMiniprogramType"] = type;
 		}
 
-		// iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k
+		// iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k,QQ小程序
 		public void SetMiniProgramHdThumbImage(string hdThumbImage){
 			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
-		}
+            shareParams["qqMiniProgramHdThumbImage"] = hdThumbImage;
+        }
 
-		//android only    Reddit平台板块参数
-		public void SetSubreddit(string subreddit)
+        public void SetMiniProgramWebpageUrl(string webpageUrl) {
+            shareParams["qqMiniProgramWebpageUrl"] = webpageUrl;
+        }
+
+        //android only    Reddit平台板块参数
+        public void SetSubreddit(string subreddit)
 		{
 			shareParams["sr"] = subreddit;
 		}

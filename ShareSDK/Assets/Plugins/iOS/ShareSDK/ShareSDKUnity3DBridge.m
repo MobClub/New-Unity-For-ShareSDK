@@ -432,16 +432,72 @@ extern "C" {
             }
         }
         
-        [params SSDKSetupQQParamsByText:text
-                                  title:title
-                                    url:[NSURL URLWithString:url]
-                          audioFlashURL:[NSURL URLWithString:audioUrl]
-                          videoFlashURL:[NSURL URLWithString:videoUrl]
-                             thumbImage:thumbImg
-                                 images:images
-                                   type:type
-                     forPlatformSubType:subType];
         
+        //小程序参数
+        NSString *miniProgramPath = nil;
+        NSString *miniProgramHdThumbImage = nil;
+        NSString *miniProgramAppID = nil;
+        NSString *miniProgramWebpageUrl = nil;
+        int miniProgramType = 3;
+        if ([[value objectForKey:@"qqMiniProgramPath"] isKindOfClass:[NSString class]])
+        {
+            miniProgramPath = [value objectForKey:@"qqMiniProgramPath"];
+        }
+        
+        if ([[value objectForKey:@"qqMiniProgramHdThumbImage"] isKindOfClass:[NSString class]])
+        {
+            miniProgramHdThumbImage = [value objectForKey:@"qqMiniProgramHdThumbImage"];
+        }
+        if (miniProgramHdThumbImage == nil)
+        {
+            if (images.count > 0 && [images[0] isKindOfClass:[NSString class]])
+            {
+                miniProgramHdThumbImage = images[0];
+            }
+            else
+            {
+                miniProgramHdThumbImage = thumbImg;
+            }
+        }
+        if ([[value objectForKey:@"qqMiniProgramAppID"] isKindOfClass:[NSString class]])
+        {
+            miniProgramAppID = [value objectForKey:@"qqMiniProgramAppID"];
+        }
+        if ([[value objectForKey:@"qqMiniProgramWebpageUrl"] isKindOfClass:[NSString class]])
+        {
+            miniProgramWebpageUrl = [value objectForKey:@"qqMiniProgramWebpageUrl"];
+        }
+        if ([[value objectForKey:@"qqMiniprogramType"] isKindOfClass:[NSNumber class]])
+        {
+            miniProgramType = [[value objectForKey:@"qqMiniprogramType"] intValue];
+        }
+        
+        
+        if (type == SSDKContentTypeMiniProgram)
+        {
+            [params SSDKSetupQQMiniProgramShareParamsByTitle:title
+                                                 description:text
+                                                  webpageUrl:[NSURL URLWithString:url]
+                                                hdThumbImage:miniProgramHdThumbImage
+                                                   miniAppID:miniProgramAppID
+                                                    miniPath:miniProgramPath
+                                              miniWebpageUrl:miniProgramWebpageUrl
+                                             miniProgramType:miniProgramType
+                                          forPlatformSubType:subType];
+        }
+        else
+        {
+        
+            [params SSDKSetupQQParamsByText:text
+                                      title:title
+                                        url:[NSURL URLWithString:url]
+                              audioFlashURL:[NSURL URLWithString:audioUrl]
+                              videoFlashURL:[NSURL URLWithString:videoUrl]
+                                 thumbImage:thumbImg
+                                     images:images
+                                       type:type
+                         forPlatformSubType:subType];
+        }
         
     }
     

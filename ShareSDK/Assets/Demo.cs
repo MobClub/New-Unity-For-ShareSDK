@@ -193,9 +193,9 @@ public class Demo : MonoBehaviour {
 			ssdk.ShareWithContentName(PlatformType.SinaWeibo, "ShareSDK", customFields);		
 		}
 
-		btnWidth += 80 * scale;
+        float btnWidth2 = btnWidth + 80 * scale;
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "ShowShareMenuWithContentName"))
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "ShowShareMenuWithContentName"))
 		{
 			Hashtable customFields = new Hashtable ();
 			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
@@ -204,7 +204,7 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "ShowShareViewWithContentName"))
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "ShowShareViewWithContentName"))
 		{
 			Hashtable customFields = new Hashtable ();
 			//根据配置文件展示编辑界面分享【本接口功能仅暂时支持iOS】
@@ -213,13 +213,13 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "SMS Authorize"))
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "SMS Authorize"))
 		{
 			ssdk.Authorize(PlatformType.SMS);		
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share wxMiniProgram (ios only)"))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Share wxMiniProgram"))
 		{
 			ShareContent content = new ShareContent ();
 			content.SetTitle ("MiniProgram");
@@ -230,7 +230,8 @@ public class Demo : MonoBehaviour {
 			content.SetMiniProgramHdThumbImage ("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522154322305&di=7f4bf3d0803fe8c2c66c140f0a6ea0b4&imgtype=0&src=http%3A%2F%2Fa4.topitme.com%2Fo%2F201007%2F29%2F12803876734174.jpg");
 			content.SetMiniProgramUserName ("gh_afb25ac019c9");
 			content.SetMiniProgramWithShareTicket (true);
-			content.SetMiniProgramType (0);
+            // iOS/Android 微信小程序的版本（0-正式，1-开发，2-体验）
+            content.SetMiniProgramType (0);
 			content.SetShareType (ContentType.MiniProgram);
 
 			ShareContent shareContent = new ShareContent ();
@@ -238,8 +239,28 @@ public class Demo : MonoBehaviour {
 			ssdk.ShareContent (PlatformType.WeChat, shareContent);
 		}
 
+        if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Share qqMiniProgram"))
+        {
+            ShareContent content = new ShareContent();
+            content.SetTitle("MiniProgram");
+            content.SetText("test MiniProgram");
+            content.SetUrl("http://www.mob.com");
+            content.SetThumbImageUrl("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
+            content.SetMiniProgramPath("pages/index/index");
+            content.SetMiniProgramHdThumbImage("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
+            content.SetMiniProgramAppID("1108318575");
+            content.SetMiniProgramWebpageUrl("www.qq.com");
+            //iOS/Android QQ小程序的类型，默认正式版(3)，可选测试版(1)、预览版(4)
+            content.SetMiniProgramType(3);
+            content.SetShareType(ContentType.MiniProgram);
+
+            ShareContent shareContent = new ShareContent();
+            shareContent.SetShareContentCustomize(PlatformType.QQ, content);
+            ssdk.ShareContent(PlatformType.QQ, shareContent);
+        }
+
         btnTop += btnHeight + 20 * scale;
-        if (GUI.Button(new Rect((Screen.width - btnWidth) / 2, btnTop, btnWidth, btnHeight), "Share Sina LinkCard"))
+        if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Share Sina LinkCard"))
         {
 #if UNITY_IPHONE
             ShareContent content = new ShareContent();
