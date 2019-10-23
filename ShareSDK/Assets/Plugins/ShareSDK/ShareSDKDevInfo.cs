@@ -68,6 +68,7 @@ namespace cn.sharesdk.unity3d
 
     }
 
+    [Serializable]
     public class DevInfo 
 	{	
 		public bool Enable = true;
@@ -82,7 +83,7 @@ namespace cn.sharesdk.unity3d
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
-		public bool ShareByAppClient = false;
+		public bool ShareByAppClient = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SinaWeibo;
 		public string app_key = "568898243";
@@ -112,21 +113,34 @@ namespace cn.sharesdk.unity3d
 	[Serializable]
 	public class QQ : DevInfo 
 	{
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		public const int type = (int) PlatformType.QQ;
 		public string SortId = "2";
 		public string AppId = "100371282";
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
 		public bool ShareByAppClient = true;
-		#elif UNITY_IPHONE
+
+        //========================================================
+        //when you test QQ miniprogram, you should use this params
+        //At the same time, the package name and signature should 
+        //correspond to the package name signature of the specific 
+        //QQ sharing small program applied in the background of tencent
+        //========================================================
+        //public const int type = (int) PlatformType.QQ;
+		//public string SortId = "2";
+		//public string AppId = "222222";
+		//public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
+		//public bool ShareByAppClient = true;
+        //========================================================
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQ;
 		public string app_id = "100371282";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 //		public string auth_type = "both";  //can pass "both","sso",or "web" 
-		#endif
-	}
+#endif
+    }
 
-	[Serializable]
+    [Serializable]
 	public class QZone : DevInfo 
 	{
 		#if UNITY_ANDROID
@@ -162,8 +176,9 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-		#endif
-	}
+        public string app_universalLink = "https://www.sandslee.com/";
+        #endif
+    }
 
 	[Serializable]
 	public class WeChatMoments : DevInfo 
@@ -178,8 +193,9 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-		#endif
-	}
+        public string app_universalLink = "https://www.sandslee.com/";
+        #endif
+    }
 
 	[Serializable]
 	public class WeChatFavorites : DevInfo 
@@ -193,8 +209,9 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatFavorites;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-		#endif
-	}
+        public string app_universalLink = "https://www.sandslee.com/";
+        #endif
+    }
 
 	[Serializable]
 	public class Facebook : DevInfo 

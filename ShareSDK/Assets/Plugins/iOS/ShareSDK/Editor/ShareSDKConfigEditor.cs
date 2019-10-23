@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
 using UnityEngine;
@@ -11,14 +13,16 @@ namespace cn.sharesdk.unity3d
 {
 	#if UNITY_IOS	
 	[CustomEditor(typeof(ShareSDK))]
-	[ExecuteInEditMode]
+    [ExecuteInEditMode]
 	public class ShareSDKConfigEditor : Editor 
 	{
 		string appKey = "";
 		string appSecret = "";
 		Hashtable platformConfList;
 
-		public ShareSDKConfigEditor()
+        List<string> associatedDomains = new List<string>();
+
+        public ShareSDKConfigEditor()
 		{
 			SetPlatformConfList ();
 		}
@@ -34,16 +38,15 @@ namespace cn.sharesdk.unity3d
 			var obj = target as ShareSDK;
             if (obj != null)
             {
+                if (obj.customAssociatedDomains != null && obj.customAssociatedDomains.Count > 0)
+                {
+                    associatedDomains.AddRange(obj.customAssociatedDomains);
+                }
+
                 appKey = obj.appKey;
                 appSecret = obj.appSecret;
                 Save();
                 checkPlatforms(obj.devInfo);
-            }
-
-            var restoreSceneObj = target as ShareSDKRestoreScene;
-            if (restoreSceneObj != null)
-            {
-                checkRestoreScene(restoreSceneObj.restoreSceneConfig);
             }
 
             Debug.LogWarning ("ShareSDK OnDisable");
@@ -158,7 +161,38 @@ namespace cn.sharesdk.unity3d
 					int platformId = (int) info.GetType().GetField("type").GetValue(info);
 					string appkey = GetAPPKey (info,platformId);
 					enablePlatforms.Add (platformId,appkey);
-				}
+
+                    if (info.GetType().GetField("app_universalLink") != null)
+                    {
+                        string app_universalLink = GetValueByName(info, "app_universalLink");
+                        if (app_universalLink != null && app_universalLink.Length > 0)
+                        {
+
+                            app_universalLink = app_universalLink.Trim().TrimEnd('/');
+
+                            if (app_universalLink.Contains("://"))
+                            {
+                                string[] links = app_universalLink.Split(new[] { "://" }, StringSplitOptions.None);
+                                app_universalLink = "applinks:" + links[1];
+                                associatedDomains.Add(app_universalLink);
+                            }
+                            else
+                            {
+                                if (app_universalLink.Contains(":"))
+                                {
+                                    associatedDomains.Add(app_universalLink);
+                                }
+                                else
+                                {
+                                    app_universalLink = "applinks:" + app_universalLink;
+                                    associatedDomains.Add(app_universalLink);
+                                }
+
+                            }
+
+                        }
+                    }
+                }
 			}
 			var files = System.IO.Directory.GetFiles(Application.dataPath , "ShareSDK.mobpds", System.IO.SearchOption.AllDirectories);
 			string filePath = files [0];
@@ -178,7 +212,26 @@ namespace cn.sharesdk.unity3d
 				{
 					datastore.Add ("ShareSDKPlatforms",enablePlatforms);
 				}
-				var json = MiniJSON.jsonEncode(datastore);
+
+                //Debug.LogWarning("=======================");
+                Debug.LogWarning(associatedDomains.ToArray());
+                //if (associatedDomains.Count > 0)
+                //{
+                    var associatedDomains_t = associatedDomains.Distinct();
+                   
+                    if (datastore.ContainsKey("AssociatedDomains"))
+                    {
+
+                        datastore["AssociatedDomains"] = associatedDomains_t.ToArray();
+                    }
+                    else
+                    {
+                        datastore.Add("AssociatedDomains", associatedDomains_t.ToArray());
+                    }
+                //}
+
+
+                var json = MiniJSON.jsonEncode(datastore);
 				StreamWriter sWriter = new StreamWriter(filePath);
 				sWriter.WriteLine(json);
 				sWriter.Close();
@@ -186,9 +239,51 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
+        private string GetValueByName(DevInfo devInfoField,string valueName)
+		{
+			return (string)devInfoField.GetType ().GetField (valueName).GetValue (devInfoField);
+		}
+
+		private string GetAPPKey (DevInfo devInfoField, int platformId)
+		{
+			string valueName = (string)platformConfList[platformId];
+			if(valueName == null)
+			{
+				return "";
+			}
+			return GetValueByName (devInfoField, valueName);
+		}
+	}
+
+    [CustomEditor(typeof(ShareSDKRestoreScene))]
+    [ExecuteInEditMode]
+    public class ShareSDKRestoreSceneEditor : Editor
+    {
+        public ShareSDKRestoreSceneEditor()
+        {
+           
+        }
+
+        void Awake()
+        {
+
+        }
+
+        //导出时会自动触发一次此方法
+        public void OnDisable()
+        {
+            var restoreSceneObj = target as ShareSDKRestoreScene;
+            if (restoreSceneObj != null)
+            {
+                checkRestoreScene(restoreSceneObj.restoreSceneConfig);
+
+            }
+            Debug.LogWarning("ShareSDKRestoreScene OnDisable");
+        }
+
         private void checkRestoreScene(RestoreSceneConfigure restoreSceneConfig)
         {
-            
+
             Hashtable enableRestoreScene = new Hashtable();
             if (restoreSceneConfig != null && restoreSceneConfig.Enable)
             {
@@ -230,21 +325,6 @@ namespace cn.sharesdk.unity3d
                 sWriter.Dispose();
             }
         }
-
-        private string GetValueByName(DevInfo devInfoField,string valueName)
-		{
-			return (string)devInfoField.GetType ().GetField (valueName).GetValue (devInfoField);
-		}
-
-		private string GetAPPKey (DevInfo devInfoField, int platformId)
-		{
-			string valueName = (string)platformConfList[platformId];
-			if(valueName == null)
-			{
-				return "";
-			}
-			return GetValueByName (devInfoField, valueName);
-		}
-	}
-	#endif
+    }
+#endif
 }

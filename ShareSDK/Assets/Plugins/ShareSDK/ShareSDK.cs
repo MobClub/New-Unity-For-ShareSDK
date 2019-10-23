@@ -14,17 +14,21 @@ namespace cn.sharesdk.unity3d
 	public class ShareSDK : MonoBehaviour 
 	{
 		private int reqID;
-		//配置ShareSDK AppKey
-		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
-		 #if UNITY_ANDROID
-		public string appKey = "moba6b6c6d6";
-		public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
-		 #elif UNITY_IPHONE
+        //配置ShareSDK AppKey
+        //注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
+#if UNITY_ANDROID
+		//public string appKey = "moba6b6c6d6";
+		//public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
+        
+        public string appKey = "moba0b0c0d0";
+		public string appSecret = "5713f0d88511f9f4cf100cade0610a34";
+#elif UNITY_IPHONE
 		public string appKey = "moba0b0c0d0";
 		public string appSecret = "5713f0d88511f9f4cf100cade0610a34";
-		 #endif
+        public List<string> customAssociatedDomains = new List<string>();
+#endif
 
-		public DevInfoSet devInfo;
+        public DevInfoSet devInfo;
 		public ShareSDKImpl shareSDKUtils;
 
 		public EventHandler authHandler;
@@ -32,6 +36,8 @@ namespace cn.sharesdk.unity3d
 		public EventHandler showUserHandler;
 		public EventHandler getFriendsHandler;
 		public EventHandler followFriendHandler;
+
+        //public OnLoopShareCallBack onLoopsharecallback;
 
         void Awake()
 		{				
@@ -50,21 +56,33 @@ namespace cn.sharesdk.unity3d
 						continue;
 					} else if ("Enable".EndsWith(field.Name) || "ShareByAppClient".EndsWith(field.Name) || "BypassApproval".EndsWith(field.Name) || "WithShareTicket".EndsWith(field.Name)) {
 						table.Add(field.Name, Convert.ToString(field.GetValue(info)).ToLower());
-					} else {
-						table.Add(field.Name, Convert.ToString(field.GetValue(info)));
-					}
-				}
-				platformConfigs.Add(platformId, table);
-			}
 
-			#if UNITY_ANDROID
+                        //Debug.Log("======================platformConfigs table info 1:" + Convert.ToString(field.GetValue(info)).ToLower());
+
+                    } else {
+						table.Add(field.Name, Convert.ToString(field.GetValue(info)));
+                        //Debug.Log("======================platformConfigs table info 2:" + Convert.ToString(field.GetValue(info)));
+                    }
+				}
+
+                //Debug.Log("======================platformConfigs platformId:" + platformId);
+                //Debug.Log("======================platformConfigs table:" + table);
+                platformConfigs.Add(platformId, table);
+			}
+            //Debug.Log("======================platformConfigs:" + platformConfigs);
+#if UNITY_ANDROID
 			shareSDKUtils = new AndroidImpl(gameObject);
 			shareSDKUtils.InitSDK(appKey,appSecret);
-			#elif UNITY_IPHONE
-			shareSDKUtils = new iOSImpl(gameObject);
-			#endif
+            
+            //add listener for loopshare
+            shareSDKUtils.PrepareLoopShare();
+            shareSDKUtils.setChannelId();
+			
+#elif UNITY_IPHONE
+            shareSDKUtils = new iOSImpl(gameObject);
+#endif
 
-			shareSDKUtils.SetPlatformConfig(platformConfigs);
+            shareSDKUtils.SetPlatformConfig(platformConfigs);
 		}
 		
 		/// <summary>
@@ -98,14 +116,20 @@ namespace cn.sharesdk.unity3d
 					Console.WriteLine(data);
 					Hashtable resp = (Hashtable) res["res"];
 					OnComplete(reqID, platform, action, resp);
-					break;
+
+                    //LoopShareOnComplete(action, resp);
+
+                    break;
 				} 
 				case 2: 
 				{
 					Console.WriteLine(data);
 					Hashtable throwable = (Hashtable) res["res"];
 					OnError(reqID, platform, action, throwable);
-					break;
+
+                    //LoopShareOnError(action, throwable);
+
+                    break;
 				} 
 				case 3: 
 				{
@@ -115,13 +139,28 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		/// <summary>
-		/// Raises the error event.
-		/// </summary>
-		/// <param name="platform">Platform.</param>
-		/// <param name="action">Action.</param>
-		/// <param name="throwable">Throwable.</param>
-		public void OnError (int reqID, PlatformType platform, int action, Hashtable throwable) 
+        //public void LoopShareOnError(int action, Hashtable throwable)
+        //{
+            //switch (action)
+            //{
+                //case 10:
+                    //{ // 10 == loopshare result
+                        //if (onLoopsharecallback != null)
+                        //{
+                            //onLoopsharecallback(throwable);
+                        //}
+                        //break;
+                    //}
+            //}
+        //}
+
+        /// <summary>
+        /// Raises the error event.
+        /// </summary>
+        /// <param name="platform">Platform.</param>
+        /// <param name="action">Action.</param>
+        /// <param name="throwable">Throwable.</param>
+        public void OnError (int reqID, PlatformType platform, int action, Hashtable throwable) 
 		{
 			switch (action) 
 			{
@@ -164,9 +203,26 @@ namespace cn.sharesdk.unity3d
 					shareHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
-			} 
 			}
+
+            }
 		}
+
+        //public void LoopShareOnComplete(int action, Hashtable res)
+        //{
+            //switch (action)
+            //{
+                //case 10:
+                    //{ // 10 == loopshare result
+                        //if (onLoopsharecallback != null)
+                        //{
+                            //onLoopsharecallback(res);
+                        //}
+                        //break;
+                    //}
+            //}
+        //}
+
 
 		/// <summary>
 		/// Raises the success event.
@@ -218,6 +274,7 @@ namespace cn.sharesdk.unity3d
 				}
 				break;
 			}
+
 			}
 		}
 
@@ -552,6 +609,8 @@ namespace cn.sharesdk.unity3d
         /// Event result listener.
         /// </summary>
         public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
+
+        //public delegate void OnLoopShareCallBack (Hashtable data);
 
 	}
 }

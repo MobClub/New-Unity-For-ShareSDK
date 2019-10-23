@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace cn.sharesdk.unity3d
 {
-	#if UNITY_ANDROID
+#if UNITY_ANDROID
 	public class AndroidImpl : ShareSDKImpl
 	{
 		private AndroidJavaObject ssdk;
@@ -36,6 +36,24 @@ namespace cn.sharesdk.unity3d
 				ssdk.Call("initSDK", appKey,appSecret);
 			}
 		}
+
+        public override void PrepareLoopShare()
+        {
+            Debug.Log("AndroidImpl  ===>>>  PrepareLoopShare ");
+            if (ssdk != null) 
+			{			
+				ssdk.Call("prepareLoopShare");
+			}
+        }
+
+        public override void setChannelId() 
+        {
+            Debug.Log("AndroidImpl  ===>>>  SetChannelId ");
+            if (ssdk != null) 
+			{			
+				ssdk.Call("setChannelId");
+			}
+        }
 
 		public override void SetPlatformConfig (Hashtable configs) 
 		{
@@ -183,5 +201,5 @@ namespace cn.sharesdk.unity3d
 		}
 
 	}
-	#endif
+#endif
 }

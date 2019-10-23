@@ -23,14 +23,15 @@ namespace cn.sharesdk.unity3d
 		public const int Video = 6;				//视频分享 
 		public const int App = 7; 				//应用分享
 		public const int File = 8;				//附件分享
-		public const int Emoji = 9;				//表情分享
+		public const int Emoji = 9;             //表情分享
 
-		#if UNITY_ANDROID
-		public const int MiniProgram = 11;      //微信小程序 v3.6.3
-		#elif UNITY_IPHONE
-		public const int MiniProgram = 10;      //微信小程序 v3.6.3
-		#endif
-		public const int OpenMiniProgram = 12;      //打开微信小程序 v3.6.3
+#if UNITY_ANDROID
+		public const int MiniProgram = 11;              //微信小程序 v3.6.3
+        public const int QQ_MINI_PROGRAM = 15;          //qq小程序
+#elif UNITY_IPHONE
+		public const int MiniProgram = 10;              //微信小程序 v3.6.3
+#endif
+        public const int OpenMiniProgram = 12;          //打开微信小程序 v3.6.3
 	}
 
 }

@@ -1,5 +1,4 @@
 *.class
-*.apk
 bin/
 gen/
 .settings/

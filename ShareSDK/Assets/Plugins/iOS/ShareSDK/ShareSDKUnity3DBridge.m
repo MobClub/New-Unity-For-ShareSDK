@@ -2992,7 +2992,7 @@ extern "C" {
                     type == SSDKPlatformSubTypeWechatTimeline ||
                     type == SSDKPlatformSubTypeWechatFav)
                 {
-                    [platformsRegister setupWeChatWithAppId:platformInfo[@"app_id"] appSecret:platformInfo[@"app_secret"]];
+                    [platformsRegister setupWeChatWithAppId:platformInfo[@"app_id"] appSecret:platformInfo[@"app_secret"] universalLink:platformInfo[@"app_universalLink"]];
                 }
                 else if  (type == SSDKPlatformTypeQQ ||
                     type == SSDKPlatformSubTypeQZone ||
@@ -3937,5 +3937,27 @@ extern "C" {
     UnitySendMessage([@"ShareSDKRestoreScene" UTF8String], "_RestoreCallBack", [resultStr UTF8String]);
 }
 
+- (void)ISSEWillRestoreScene:(SSERestoreScene *)scene error:(NSError *)error
+{
+    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+    
+    if (scene.path.length > 0)
+    {
+        resultDict[@"path"] = scene.path;
+    }
+    
+    if (scene.params && scene.params.count > 0)
+    {
+        resultDict[@"params"] = scene.params;
+    }
+    
+    NSString *resultStr  = @"";
+    if (resultDict.count > 0)
+    {
+        resultStr = [MOBFJson jsonStringFromObject:resultDict];
+    }
+    
+    UnitySendMessage([@"ShareSDKRestoreScene" UTF8String], "_RestoreCallBack", [resultStr UTF8String]);
+}
 
 @end

@@ -44,7 +44,9 @@ public class Demo : MonoBehaviour {
 		
 		//float btnWidth = 165 * scale;
 		float btnWidth= Screen.width / 5 * 2;
-		float btnHeight = Screen.height / 25;
+        float btnWidth2 = btnWidth + 80 * scale;
+
+        float btnHeight = Screen.height / 25;
 		float btnTop = 30 * scale;
 		float btnGap = 20 * scale;
 		GUI.skin.button.fontSize = Convert.ToInt32(13 * scale);
@@ -57,8 +59,10 @@ public class Demo : MonoBehaviour {
 			
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
 		{
-            ssdk.GetUserInfo(PlatformType.Douyin);
-		}
+            //ssdk.GetUserInfo(PlatformType.Douyin);
+
+            print("share result :" + ssdk.GetUserInfo(PlatformType.QQ));
+        }
 
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Show Share Menu"))
@@ -67,7 +71,7 @@ public class Demo : MonoBehaviour {
 
             //	//(Android only) 隐藏九宫格里面不需要用到的平台（仅仅是不显示平台）
             //	//(Android only) 也可以把jar包删除或者把Enabl属性e改成false（对应平台的全部功能将用不了）
-                String[] platfsList = {((int)PlatformType.QQ).ToString(), ((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString()};
+                String[] platfsList = {((int)PlatformType.Facebook).ToString(), ((int)PlatformType.TencentWeibo).ToString()};
             	content.SetHidePlatforms (platfsList);
 
             	content.SetText("this is a test string.");
@@ -122,7 +126,7 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Share Content"))
+        if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Share Content"))
 		{
             	ShareContent content = new ShareContent();
             	content.SetText("this is a test string.");
@@ -135,7 +139,7 @@ public class Demo : MonoBehaviour {
             	//content.SetComment("test description");
             	//content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
                 content.SetShareType(ContentType.Image);
-                ssdk.ShareContent (PlatformType.QQ, content);
+                ssdk.ShareContent (PlatformType.WeChat, content);
 
 
 //            //  开发者要自己传入Activity 在9.0及其以上的系统
@@ -151,41 +155,41 @@ public class Demo : MonoBehaviour {
 
         }
 
-        if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
-		{
+        //if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
+		//{
 			//获取新浪微博好友，第一页，每页15条数据
-			print ("Click Btn Of Get Friends SinaWeibo");
+			//print ("Click Btn Of Get Friends SinaWeibo");
 //			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
-			ssdk.openMiniProgram("gh_afb25ac019c9","pages/index/index",0);
-		}
+			//ssdk.openMiniProgram("gh_afb25ac019c9","pages/index/index",0);
+		//}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Get Token SinaWeibo "))
+        if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Get Token "))
 		{
-			Hashtable authInfo = ssdk.GetAuthInfo (PlatformType.SinaWeibo);			
+			Hashtable authInfo = ssdk.GetAuthInfo (PlatformType.QQ);			
 			print ("share result :");
 			print (MiniJSON.jsonEncode(authInfo));
 		}
 			
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap , btnTop, btnWidth, btnHeight), "Close SSO Auth"))
-		{
-			ssdk.DisableSSO (true);			
-		}
+		//if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap , btnTop, btnWidth, btnHeight), "Close SSO Auth"))
+		//{
+			//ssdk.DisableSSO (true);			
+		//}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Remove Authorize "))
+        if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Remove Authorize "))
 		{
-			ssdk.CancelAuthorize (PlatformType.SinaWeibo);			
-		}
-			
-		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Add Friend "))
-		{
-			//关注新浪微博
-			ssdk.AddFriend (PlatformType.SinaWeibo, "3189087725");			
+			ssdk.CancelAuthorize (PlatformType.QQ);			
 		}
 
-		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth) / 2 , btnTop, btnWidth, btnHeight), "ShareWithContentName"))
+        //if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Add Friend "))
+        //{
+        //关注新浪微博
+        //ssdk.AddFriend (PlatformType.SinaWeibo, "3189087725");			
+        //}
+
+        btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2 , btnTop, btnWidth2, btnHeight), "ShareWithContentName(IOS only)"))
 		{
 			Hashtable customFields = new Hashtable ();
 			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
@@ -193,9 +197,8 @@ public class Demo : MonoBehaviour {
 			ssdk.ShareWithContentName(PlatformType.SinaWeibo, "ShareSDK", customFields);		
 		}
 
-        float btnWidth2 = btnWidth + 80 * scale;
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "ShowShareMenuWithContentName"))
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "ShowShareMenuWithContentName(IOS only)"))
 		{
 			Hashtable customFields = new Hashtable ();
 			customFields["imgUrl"] = "http://ww1.sinaimg.cn/mw690/006dJESWgw1f6iyb8bzraj31kw0v67a2.jpg";
@@ -204,7 +207,7 @@ public class Demo : MonoBehaviour {
 		}
 
 		btnTop += btnHeight + 20 * scale;
-		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "ShowShareViewWithContentName"))
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "ShowShareViewWithContentName(IOS only)"))
 		{
 			Hashtable customFields = new Hashtable ();
 			//根据配置文件展示编辑界面分享【本接口功能仅暂时支持iOS】
@@ -221,7 +224,8 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Share wxMiniProgram"))
 		{
-			ShareContent content = new ShareContent ();
+#if UNITY_IPHONE
+            ShareContent content = new ShareContent ();
 			content.SetTitle ("MiniProgram");
 			content.SetText ("test MiniProgram");
 			content.SetUrl("http://www.mob.com");
@@ -232,15 +236,33 @@ public class Demo : MonoBehaviour {
 			content.SetMiniProgramWithShareTicket (true);
             // iOS/Android 微信小程序的版本（0-正式，1-开发，2-体验）
             content.SetMiniProgramType (0);
-			content.SetShareType (ContentType.MiniProgram);
+			//content.SetShareType (ContentType.MiniProgram);
 
 			ShareContent shareContent = new ShareContent ();
 			shareContent.SetShareContentCustomize (PlatformType.WeChat, content);
 			ssdk.ShareContent (PlatformType.WeChat, shareContent);
-		}
+#elif UNITY_ANDROID
+            ShareContent content = new ShareContent ();
+            content.SetTitle ("MiniProgram");
+            content.SetText ("test MiniProgram");
+            content.SetUrl("http://www.mob.com");
+            content.SetMiniProgramType (0);
+            content.SetMiniProgramUserName ("gh_52568203455c");
+            content.SetImageUrl("http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg");
+            content.SetShareType (ContentType.MiniProgram);
+            
+            ShareContent shareContent = new ShareContent ();
+			shareContent.SetShareContentCustomize (PlatformType.WeChat, content);
+			ssdk.ShareContent (PlatformType.WeChat, shareContent);
+#endif
+        }
 
-        if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Share qqMiniProgram"))
+
+
+        //
+        if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Share qqMiniProgram(IOS only)"))
         {
+#if UNITY_IPHONE
             ShareContent content = new ShareContent();
             content.SetTitle("MiniProgram");
             content.SetText("test MiniProgram");
@@ -257,49 +279,70 @@ public class Demo : MonoBehaviour {
             ShareContent shareContent = new ShareContent();
             shareContent.SetShareContentCustomize(PlatformType.QQ, content);
             ssdk.ShareContent(PlatformType.QQ, shareContent);
-        }
-
-        btnTop += btnHeight + 20 * scale;
-        if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Share Sina LinkCard"))
-        {
-#if UNITY_IPHONE
-            ShareContent content = new ShareContent();
-            content.SetText("sina LinkCard");
-            content.SetUrl("http://www.mob.com");
-            content.SetImageUrl("http://www.mob.com/assets/images/ShareSDK_pic_1-09d293a6.png");//必须为网络图片
-            content.SetSinaLinkCard(true);
-            content.SetSinaCardTitle("这是Title");
-            content.SetSinaCardSummary("这是Summary");
-            content.SetShareType(ContentType.Webpage);
-
-            ShareContent shareContent = new ShareContent();
-            shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
-            ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
-
-
 #elif UNITY_ANDROID
-            JsonData jsonData = new JsonData();
-            jsonData["url"] = "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg";
-            jsonData["width"] = "120";
-            jsonData["height"] = "120";
+            //===============================================================
+            //when you test QQ miniprogram, you should use this params
+            //At the same time, the package name and signature should 
+            //correspond to the package name signature of the specific 
+            //QQ sharing small program applied in the background of tencent
+            //===============================================================
+            //ShareContent content = new ShareContent();
+            //content.SetTitle("MiniProgram");
+            //content.SetText("test MiniProgram");
+            //content.SetTitleUrl("http://www.mob.com");
+            //content.SetImageUrl("http://www.3wyu.com/wp-content/uploads/6e0eaf15gy1fvr5tnm2dfj20f108gtad.jpg");//必须为网络图片
+            //content.SetShareType(ContentType.QQ_MINI_PROGRAM);
+            //content.SetMiniProgramAppID("1108318575");
+            //content.SetMiniProgramPath("page/share/index.html?share_name=QQ%E9%9F%B3%E4%B9%90&share_key=5aIqFGg&from=disk");
+            //content.SetQQMiniProgramType("");
 
-
-            ShareContent content = new ShareContent();
-            content.SetText("sina LinkCard");
-            content.SetSinaCardCreateAtAndroid("2019-01-24");
-            content.SetSinaCardDisplayNameAndroid("displayName");
-            content.SetSinaCardSummary("Summary");
-            content.SetSinaCardURLAndroid("http://www.mob.com/");
-            content.SetSinaCardTypeAndroid("webpage");
-            content.SetSinaCardImageAndroid(jsonData);
-            content.SetEnableClientShare(true);
-
-            ShareContent shareContent = new ShareContent();
-            shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
-            
-            ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
+            //ShareContent shareContent = new ShareContent();
+            //shareContent.SetShareContentCustomize(PlatformType.QQ, content);
+            //ssdk.ShareContent(PlatformType.QQ, shareContent);
 #endif
         }
+
+        //btnTop += btnHeight + 20 * scale;
+        //if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Share Sina LinkCard"))
+        //{
+//#if UNITY_IPHONE
+            //ShareContent content = new ShareContent();
+            //content.SetText("sina LinkCard");
+            //content.SetUrl("http://www.mob.com");
+            //content.SetImageUrl("http://www.mob.com/assets/images/ShareSDK_pic_1-09d293a6.png");//必须为网络图片
+            //content.SetSinaLinkCard(true);
+            //content.SetSinaCardTitle("这是Title");
+            //content.SetSinaCardSummary("这是Summary");
+            //content.SetShareType(ContentType.Webpage);
+
+            //ShareContent shareContent = new ShareContent();
+            //shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
+            //ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
+
+
+//#elif UNITY_ANDROID
+            //JsonData jsonData = new JsonData();
+            //jsonData["url"] = "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg";
+            //jsonData["width"] = "120";
+            //jsonData["height"] = "120";
+
+
+            //ShareContent content = new ShareContent();
+            //content.SetText("sina LinkCard");
+            //content.SetSinaCardCreateAtAndroid("2019-01-24");
+            //content.SetSinaCardDisplayNameAndroid("displayName");
+            //content.SetSinaCardSummary("Summary");
+            //content.SetSinaCardURLAndroid("http://www.mob.com/");
+            //content.SetSinaCardTypeAndroid("webpage");
+            //content.SetSinaCardImageAndroid(jsonData);
+            //content.SetEnableClientShare(true);
+
+            //ShareContent shareContent = new ShareContent();
+            //shareContent.SetShareContentCustomize(PlatformType.SinaWeibo, content);
+            
+            //ssdk.ShareContent(PlatformType.SinaWeibo, shareContent);
+//#endif
+        //}
     }
 	
 	void OnAuthResultHandler(int reqID, ResponseState state, PlatformType type, Hashtable result)
@@ -314,11 +357,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
-			#if UNITY_ANDROID
+#if UNITY_ANDROID
 			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
-			#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-			#endif
+#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -337,11 +380,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
-			#if UNITY_ANDROID
+#if UNITY_ANDROID
 			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
-			#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-			#endif
+#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -358,11 +401,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
-			#if UNITY_ANDROID
+#if UNITY_ANDROID
 			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
-			#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-			#endif
+#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -379,11 +422,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
-			#if UNITY_ANDROID
+#if UNITY_ANDROID
 			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
-			#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-			#endif
+#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{
@@ -399,11 +442,11 @@ public class Demo : MonoBehaviour {
 		}
 		else if (state == ResponseState.Fail)
 		{
-			#if UNITY_ANDROID
+#if UNITY_ANDROID
 			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
-			#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			print ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
-			#endif
+#endif
 		}
 		else if (state == ResponseState.Cancel) 
 		{

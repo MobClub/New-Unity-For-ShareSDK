@@ -444,32 +444,54 @@ namespace cn.sharesdk.unity3d
 
         // iOS/Android 分享QQ小程序的应用id
         public void SetMiniProgramAppID(string appID){
-            shareParams["qqMiniProgramAppID"] = appID;
-         }
+            #if UNITY_ANDROID
+                shareParams["mini_program_appid"] = appID;
+            #elif UNITY_IPHONE
+                shareParams["qqMiniProgramAppID"] = appID;
+            #endif
+        }
 
         // iOS/Android 微信、QQ小程序的页面路径
         public void SetMiniProgramPath(String path){
 			shareParams ["wxPath"] = path;
-            shareParams ["qqMiniProgramPath"] = path;
-		}
 
-		// iOS/Android 微信小程序 withTicket开关
-		public void SetMiniProgramWithShareTicket(bool enalble){
+            #if UNITY_ANDROID
+                shareParams["mini_program_path"] = path;
+            #elif UNITY_IPHONE
+                shareParams["qqMiniProgramPath"] = path;
+            #endif
+
+        }
+
+        // iOS/Android 微信小程序 withTicket开关
+        public void SetMiniProgramWithShareTicket(bool enalble){
 			shareParams ["wxWithShareTicket"] = enalble;
 		}
 
-        // iOS/Android 分享微信小程序的版本（0-正式，1-开发，2-体验），QQ小程序(3-正式版,1-测试版,4-预览版)
+        // iOS/Android 分享微信小程序的版本（0-正式，1-开发，2-体验），IOS 分享QQ小程序(3-正式版,1-测试版,4-预览版)
         public void SetMiniProgramType(int type){
 			shareParams ["wxMiniProgramType"] = type;
-            shareParams ["qqMiniprogramType"] = type;
-		}
-
-		// iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k,QQ小程序
-		public void SetMiniProgramHdThumbImage(string hdThumbImage){
-			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
-            shareParams["qqMiniProgramHdThumbImage"] = hdThumbImage;
+            shareParams["qqMiniprogramType"] = type;  
         }
 
+
+        //Android分享QQ小程序的版本 默认传入一个空的字符串就好
+        public void SetQQMiniProgramType(String type) {
+            shareParams["mini_program_type"] = type;
+        }
+
+
+        // iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k,QQ小程序
+        public void SetMiniProgramHdThumbImage(string hdThumbImage){
+			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
+            
+            #if UNITY_ANDROID
+            #elif UNITY_IPHONE
+                shareParams["qqMiniProgramHdThumbImage"] = hdThumbImage;
+            #endif
+        }
+
+        //IOS only
         public void SetMiniProgramWebpageUrl(string webpageUrl) {
             shareParams["qqMiniProgramWebpageUrl"] = webpageUrl;
         }

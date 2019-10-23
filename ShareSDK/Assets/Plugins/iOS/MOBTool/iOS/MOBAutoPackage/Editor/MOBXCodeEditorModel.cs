@@ -133,8 +133,11 @@ namespace cn.mob.unity3d.sdkporter
 
                 //添加场景还原
                 AddRestoreScene(datastore, savefilePath);
+
+                //添加associatedDomains
+                AddAssociatedDomains(datastore, savefilePath);
             }
-		}
+        }
 
 		//文件路径debug.log
 		private void AddFileFlags(Hashtable dataSource)
@@ -422,5 +425,19 @@ namespace cn.mob.unity3d.sdkporter
 
             }
         }
+        //XCode下Capabilities->AssociatedDomains
+        private void AddAssociatedDomains(Hashtable dataSource, string savefilePath)
+        {
+            string dataKey = "AssociatedDomains";
+            if (dataSource.ContainsKey(dataKey))
+            {
+                ArrayList tempArrayList = (ArrayList)dataSource[dataKey];
+                foreach (string value in tempArrayList)
+                {
+                    associatedDomains.Add(value);
+                }
+            }
+        }
+
     }
 }

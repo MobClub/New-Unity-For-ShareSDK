@@ -214,6 +214,17 @@ namespace cn.sharesdk.unity3d
 		{
 			return __iosShareSDKOpenMiniProgram (userName, path, miniProgramType);
 		}
+
+        public override void PrepareLoopShare()
+        {
+            throw new NotImplementedException();
+        }
+
+		public override void setChannelId()
+        {
+            throw new NotImplementedException();
+        }
+        
     }
-	#endif
+#endif
 }

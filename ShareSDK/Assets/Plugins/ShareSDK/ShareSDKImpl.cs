@@ -26,10 +26,20 @@ namespace cn.sharesdk.unity3d{
 
 		public abstract void InitSDK (String appKey,String screct);
 
-		/// <summary>
-		/// Sets the platform config.
-		/// </summary>
-		public abstract void SetPlatformConfig (Hashtable configs);
+        /// <summary>
+        /// add listener for loopshare
+        /// </summary>
+        public abstract void PrepareLoopShare();
+
+        /// <summary>
+        /// set channel Id
+        /// </summary>
+        public abstract void setChannelId();
+
+        /// <summary>
+        /// Sets the platform config.
+        /// </summary>
+        public abstract void SetPlatformConfig (Hashtable configs);
 		
 		/// <summary>
 		/// Authorize the specified platform.

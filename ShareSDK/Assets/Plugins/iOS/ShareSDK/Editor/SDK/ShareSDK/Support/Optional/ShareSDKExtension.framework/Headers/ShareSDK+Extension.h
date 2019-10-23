@@ -9,7 +9,6 @@
 #import <ShareSDK/ShareSDK.h>
 #import "SSETypeDefine.h"
 #import <ShareSDKExtension/SSERestoreSceneHeader.h>
-
 /**
  *  ShareSDK扩展类目
  */
@@ -114,5 +113,7 @@
  @param delegate 场景还原设置代理
  */
 + (void)setRestoreSceneDelegate:(id<ISSERestoreSceneDelegate>)delegate;
+
+
 
 @end

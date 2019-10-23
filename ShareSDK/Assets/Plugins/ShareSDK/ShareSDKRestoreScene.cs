@@ -54,6 +54,8 @@ namespace cn.sharesdk.unity3d
         private void _RestoreCallBack(string data)
         {
             Debug.Log("[sharesdk-unity]_RestoreCallBack：" + data);
+            Debug.Log("QQQ " + data);
+
             Hashtable res = (Hashtable)MiniJSON.jsonDecode(data);
             if (res == null || res.Count <= 0)
             {
