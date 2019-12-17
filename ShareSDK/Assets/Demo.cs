@@ -17,7 +17,7 @@ public class Demo : MonoBehaviour {
 		ssdk.showUserHandler = OnGetUserInfoResultHandler;
 		ssdk.getFriendsHandler = OnGetFriendsResultHandler;
 		ssdk.followFriendHandler = OnFollowFriendResultHandler;
-
+        ssdk.wxRequestHandler = GetWXRequestTokenResultHandler;
         ShareSDKRestoreScene.setRestoreSceneListener(OnRestoreScene);
 
     }
@@ -263,22 +263,23 @@ public class Demo : MonoBehaviour {
         if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Share qqMiniProgram(IOS only)"))
         {
 #if UNITY_IPHONE
-            ShareContent content = new ShareContent();
-            content.SetTitle("MiniProgram");
-            content.SetText("test MiniProgram");
-            content.SetUrl("http://www.mob.com");
-            content.SetThumbImageUrl("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
-            content.SetMiniProgramPath("pages/index/index");
-            content.SetMiniProgramHdThumbImage("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
-            content.SetMiniProgramAppID("1108318575");
-            content.SetMiniProgramWebpageUrl("www.qq.com");
-            //iOS/Android QQ小程序的类型，默认正式版(3)，可选测试版(1)、预览版(4)
-            content.SetMiniProgramType(3);
-            content.SetShareType(ContentType.MiniProgram);
+            //ShareContent content = new ShareContent();
+            //content.SetTitle("MiniProgram");
+            //content.SetText("test MiniProgram");
+            //content.SetUrl("http://www.mob.com");
+            //content.SetThumbImageUrl("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
+            //content.SetMiniProgramPath("pages/index/index");
+            //content.SetMiniProgramHdThumbImage("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
+            //content.SetMiniProgramAppID("1108318575");
+            //content.SetMiniProgramWebpageUrl("www.qq.com");
+            ////iOS/Android QQ小程序的类型，默认正式版(3)，可选测试版(1)、预览版(4)
+            //content.SetMiniProgramType(3);
+            //content.SetShareType(ContentType.MiniProgram);
 
-            ShareContent shareContent = new ShareContent();
-            shareContent.SetShareContentCustomize(PlatformType.QQ, content);
-            ssdk.ShareContent(PlatformType.QQ, shareContent);
+            //ShareContent shareContent = new ShareContent();
+            //shareContent.SetShareContentCustomize(PlatformType.QQ, content);
+            //ssdk.ShareContent(PlatformType.QQ, shareContent);
+            ssdk.getWXRequestToken();
 #elif UNITY_ANDROID
             //===============================================================
             //when you test QQ miniprogram, you should use this params
@@ -469,4 +470,19 @@ public class Demo : MonoBehaviour {
         //根据scene开发者自己处理场景转换
         //SceneManager.LoadScene("SceneA");
     }
+
+    public static void GetWXRequestTokenResultHandler(String authcode, sendWXRequestToken send)
+    {
+        Debug.Log("[GetWXRequestTokenResultHandler:" + authcode);
+        send("11", "22");
+    }
+
+    public static void GetWXRefreshTokenResultHandler(String uid, sendWXRefreshToken send)
+    {
+        send("11");
+    }
+
+
+
+
 }

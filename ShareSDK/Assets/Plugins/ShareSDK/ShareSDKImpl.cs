@@ -16,6 +16,7 @@ namespace cn.sharesdk.unity3d{
         { 
         }
     }
+    
 
     public abstract class ShareSDKImpl{
 
@@ -127,6 +128,21 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		public abstract bool openMiniProgram (String userName, String path, int miniProgramType);
 
-	}
+
+
+        //intercept the WechatRequestToken
+
+        public abstract void getWXRequestToken();
+
+
+        //When the WeChat token expires, refresh in this block and execute getUserInfo to continue
+
+        public abstract void getWXRefreshToken();
+
+        public abstract void sendWXRefreshToken(String token);
+
+        public abstract void sendWXRequestToken(String uid, String token);
+
+    }
 }
 

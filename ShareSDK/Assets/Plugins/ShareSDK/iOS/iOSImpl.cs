@@ -60,7 +60,19 @@ namespace cn.sharesdk.unity3d
 		[DllImport("__Internal")]
 		private static extern bool __iosShareSDKOpenMiniProgram (String userName, String path, int miniProgramType);
 
-		private string _callbackObjectName = "Main Camera";
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRequestSendTokenToGetUser(String uid, String token);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRequestToken(String observer);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRefreshSendTokenToGetUser(String token);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRefreshRequestToken(String observer);
+
+        private string _callbackObjectName = "Main Camera";
 		private string _appKey;
 		public iOSImpl (GameObject go) 
 		{
@@ -214,6 +226,26 @@ namespace cn.sharesdk.unity3d
 		{
 			return __iosShareSDKOpenMiniProgram (userName, path, miniProgramType);
 		}
+
+        public override void getWXRefreshToken()
+        {
+            __iosShareSDKWXRefreshRequestToken(_callbackObjectName);
+        }
+
+        public override void getWXRequestToken()
+        {
+            __iosShareSDKWXRequestToken(_callbackObjectName);
+        }
+
+        public override void sendWXRefreshToken(string token)
+        {
+            __iosShareSDKWXRefreshSendTokenToGetUser(token);
+        }
+
+        public override void sendWXRequestToken(string uid, string token)
+        {
+            __iosShareSDKWXRequestSendTokenToGetUser(uid, token);
+        }
 
         public override void PrepareLoopShare()
         {

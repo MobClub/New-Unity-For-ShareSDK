@@ -8,10 +8,14 @@ using System.Reflection;
 
 namespace cn.sharesdk.unity3d
 {
-	/// <summary>
-	/// ShareSDK.
-	/// </summary>
-	public class ShareSDK : MonoBehaviour 
+    /// <summary>
+    /// ShareSDK.
+    /// </summary>
+
+    public delegate void sendWXRequestToken(String uid, String token);
+    public delegate void sendWXRefreshToken(String token);
+
+    public class ShareSDK : MonoBehaviour 
 	{
 		private int reqID;
         //配置ShareSDK AppKey
@@ -36,7 +40,8 @@ namespace cn.sharesdk.unity3d
 		public EventHandler showUserHandler;
 		public EventHandler getFriendsHandler;
 		public EventHandler followFriendHandler;
-
+        public GetWXRequestTokenHanlerEvent wxRequestHandler;
+        public GetWXRefreshTokenHanlerEvent wxRefreshTokenHandler;
         //public OnLoopShareCallBack onLoopsharecallback;
 
         void Awake()
@@ -107,6 +112,7 @@ namespace cn.sharesdk.unity3d
 			int status = Convert.ToInt32(res["status"]);
 			int reqID = Convert.ToInt32(res["reqID"]);
 			PlatformType platform = (PlatformType)Convert.ToInt32(res["platform"]);
+            
 			int action = Convert.ToInt32(res["action"]);
 			// Success = 1, Fail = 2, Cancel = 3
 			switch(status) 
@@ -274,6 +280,19 @@ namespace cn.sharesdk.unity3d
 				}
 				break;
 			}
+             case 10: {
+                        int isRefresh = Convert.ToInt32(res["isRefreshToken"]);
+                        if (isRefresh == 1)
+                        {
+                            //String uid = Convert.ToString(res["uid"]);
+                            //wxRefreshTokenHandler(uid, sendWXRefreshTokenMethod);
+                        }
+                        else {
+                            //String authCode = Convert.ToString(res["authCode"]);
+                            //wxRequestHandler(authCode, sendWXRequestTokenMehtod);
+                        }
+                        break;
+                    }
 
 			}
 		}
@@ -329,10 +348,10 @@ namespace cn.sharesdk.unity3d
 			}
 			}
 		}
-		
-		/// <summary>
-		/// init the ShareSDK.
-		/// </summary>
+
+        /// <summary>
+        /// init the ShareSDK.
+        /// </summary>
 		public void InitSDK (String appKey)
 		{			
 			// if you don't add ShareSDK.xml in your assets folder, use the following line
@@ -605,12 +624,37 @@ namespace cn.sharesdk.unity3d
 			return shareSDKUtils.openMiniProgram (userName,path,miniProgramType);
 		}
 
+        public void getWXRequestToken()
+        {
+            shareSDKUtils.getWXRequestToken();
+        }
+
+        public void sendWXRequestTokenMehtod(String uid, String token)
+        {
+            shareSDKUtils.sendWXRequestToken(uid, token);
+        }
+
+        public void getWXRefreshToken()
+        {
+            shareSDKUtils.getWXRefreshToken();
+        }
+
+        public void sendWXRefreshTokenMethod(String token)
+        {
+            shareSDKUtils.sendWXRefreshToken(token);
+        }
+
         /// <summary>
         /// Event result listener.
         /// </summary>
         public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
 
+
+
+        public delegate void GetWXRequestTokenHanlerEvent(String authCode, sendWXRequestToken send);
+        public delegate void GetWXRefreshTokenHanlerEvent(String uid, sendWXRefreshToken send);
         //public delegate void OnLoopShareCallBack (Hashtable data);
 
-	}
+
+    }
 }

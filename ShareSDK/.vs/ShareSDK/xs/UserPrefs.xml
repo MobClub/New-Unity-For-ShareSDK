@@ -1,29 +1,57 @@
 ﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/ShareSDK.cs">
     <Files>
-      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" Line="88" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" Line="117" Column="17" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="4" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKRestoreScene.cs" Line="10" Column="38" />
-      <File FileName="Assets/Demo.cs" Line="21" Column="37" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" Line="71" Column="18" />
-      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="22" Column="12" />
-      <File FileName="Assets/Plugins/ShareSDK/Android/AndroidImpl.cs" Line="44" Column="8" />
-      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" Line="160" Column="5" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" Line="77" Column="5" />
-      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" Line="198" Column="48" />
-      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPathModel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" Line="1" Column="1" />
-      <File FileName="Assets/Plugins/ShareSDK/ResponseState.cs" Line="1" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" Line="37" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKRestoreScene.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/MiniJSON.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ResponseState.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" />
+      <File FileName="Assets/Demo.cs" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPathModel.cs" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBXCodeEditorModel.cs" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ShareSDK" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Plugins" expanded="True">
+                <Node name="iOS" expanded="True">
+                  <Node name="MOBTool" expanded="True">
+                    <Node name="iOS" expanded="True">
+                      <Node name="MOBAutoPackage" expanded="True">
+                        <Node name="Editor" expanded="True" />
+                      </Node>
+                    </Node>
+                  </Node>
+                  <Node name="ShareSDK" expanded="True">
+                    <Node name="Editor" expanded="True" />
+                  </Node>
+                </Node>
+                <Node name="ShareSDK" expanded="True">
+                  <Node name="iOS" expanded="True" />
+                  <Node name="ShareSDK.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.ShareSDK PreferredExecutionTarget="a9499d24-38ce-4272-a03e-e824468db422" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3ec2fd03-95f4-4fc8-86f1-30064b032367" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>

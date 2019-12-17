@@ -354,7 +354,7 @@ public class MOBPostProcessBuild
 				string saveFrameworkPath = frameworkPath.Substring (0,tempIndex);
 
 
-                if (frameworkPath.Contains("ShareSDK/Support/Optional/MobLinkPro.framework"))
+                if (frameworkPath.Contains("ShareSDK/Support/Optional/ShareSDKLink.framework"))
                 {
                     continue;
                 }

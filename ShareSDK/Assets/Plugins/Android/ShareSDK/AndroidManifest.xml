@@ -154,31 +154,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:launchMode="singleTop"/>
 
-		<!-- QQ平台新增的配置 -->
-        <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true" >
-            <!--<intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                &lt;!&ndash;注意，这里的222222要换成app自己的appid&ndash;&gt;
-                <data android:scheme="tencent100371282" />
-                &lt;!&ndash; 100380359 100381104 222222 &ndash;&gt;
-            </intent-filter>-->
-        </activity>
-
-        <activity
-            android:name="com.tencent.connect.common.AssistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="behind"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
 
         <provider
             android:name="cn.sharesdk.framework.utils.ShareSDKFileProvider"
-            android:authorities="${applicationId}.cn.sharesdk.ShareSDKFileProvider"
+            android:authorities="cn.sharesdk.demo.cn.sharesdk.ShareSDKFileProvider"
             android:exported="false"
             android:grantUriPermissions="true"
             >

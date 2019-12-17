@@ -20,7 +20,7 @@
 
 #import <ShareSDKExtension/SSERestoreSceneHeader.h>
 #import <MOBFoundation/MOBFJson.h>
-
+#import <MOBFoundation/MOBFoundation.h>
 static ShareSDKUnityRestoreSceneCallback *_callback = nil;
 static UIView *_refView = nil;
 #if defined (__cplusplus)
@@ -208,6 +208,10 @@ extern "C" {
      */
     extern bool __iosShareSDKOpenMiniProgram(void *userName, void *path, int miniProgramType);
     
+    extern void __iosShareSDKWXRefreshRequestToken(void *observer);
+    extern void __iosShareSDKWXRefreshSendTokenToGetUser(void *token);
+    extern void __iosShareSDKWXRequestToken(void *observer);
+    extern void __iosShareSDKWXRequestSendTokenToGetUser(void * uid, void *token);
 #if defined (__cplusplus)
 }
 #endif
@@ -3884,6 +3888,63 @@ extern "C" {
         return ((BOOL(*)(id,SEL,NSString *,NSString *,NSInteger))objc_msgSend)(WeChatConnector,NSSelectorFromString(@"openMiniProgramWithUserName:path:miniProgramType:"),userNameStr,pathStr,miniProgramType);
     }
     
+    
+    state void (^ __iosShareSDKRequestTokenGetUserInfo) (NSString *, NSString *) = nil;
+    
+    void __iosShareSDKWXRequestSendTokenToGetUser(void * uid, void *token){
+        if (__iosShareSDKRequestTokenGetUserInfo) {
+            NSString *ocUid = [NSString stringWithCString:uid encoding:NSUTF8StringEncoding];
+            NSString *ocToken = [NSString stringWithCString:token encoding:NSUTF8StringEncoding];
+            __iosShareSDKRequestTokenGetUserInfo(ocUid,ocToken);
+        }
+        __iosShareSDKRequestTokenGetUserInfo = nil;
+    }
+    void __iosShareSDKWXRequestToken(void *observer){
+        Class wechatConnectorClass = NSClassFromString(@"WechatConnector");
+        if (wechatConnectorClass) {
+            __iosShareSDKRequestTokenGetUserInfo = nil;
+            void(^block)(id,id) = ^(NSString *authCode, void(^getUserInfo)(NSString *uid,NSString *token)) {
+                __iosShareSDKRequestTokenGetUserInfo = getUserInfo;
+                NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
+                NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+                [resultDict setObject:[NSNumber numberWithInteger:10] forKey:@"action"];
+                [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"status"];
+                [resultDict setObject:[NSNumber numberWithInteger:0] forKey:@"isRefreshToken"];
+                [resultDict setObject:authCode forKey:@"authCode"];
+                NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+                UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+            };
+            ((void (*)(id, SEL,id))objc_msgSend)(wechatConnectorClass,sel_registerName("setRequestAuthTokenOperation:"), block);
+        }
+    }
+    state void (^ __iosShareSDKRefreshTokenGetUserInfo) (NSString *) = nil;
+    
+    void __iosShareSDKWXRefreshSendTokenToGetUser(void *token){
+        if (__iosShareSDKRefreshTokenGetUserInfo) {
+            NSString *ocToken = [NSString stringWithCString:token encoding:NSUTF8StringEncoding];
+            __iosShareSDKRefreshTokenGetUserInfo(ocToken);
+        }
+        __iosShareSDKRefreshTokenGetUserInfo = nil;
+    }
+    void __iosShareSDKWXRefreshRequestToken(void *observer){
+        Class wechatConnectorClass = NSClassFromString(@"WechatConnector");
+        if (wechatConnectorClass) {
+            __iosShareSDKRefreshTokenGetUserInfo = nil;
+            void(^block)(id,id) = ^(NSString *uid, void(^getUserInfo)(NSString *token)) {
+                NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
+                __iosShareSDKWXRefreshSendTokenToGetUser = getUserInfo;
+                NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+                [resultDict setObject:[NSNumber numberWithInteger:10] forKey:@"action"];
+                [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"status"];
+                [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"isRefreshToken"];
+                [resultDict setObject:uid forKey:@"uid"];
+                NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+                UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+            };
+            ((void (*)(id, SEL,id))objc_msgSend)(wechatConnectorClass,sel_registerName("setRefreshAuthTokenOperation:"), block);
+        }
+    }
+    
 #if defined (__cplusplus)
 }
 #endif
@@ -3961,3 +4022,13 @@ extern "C" {
 }
 
 @end
+__attribute__((constructor)) static void _SSDKUnityiOSApplicationExcImp(){
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SEL sel = sel_registerName("addChannelWithSdkName:channel:");
+        Method method = class_getClassMethod([MobSDK class],sel) ;
+        if (method && method_getImplementation(method) != _objc_msgForward) {
+        ((void (*)(id, SEL,id,id))objc_msgSend)([MobSDK class],sel,@"SHARESDK",@"2");
+        }
+    });
+}

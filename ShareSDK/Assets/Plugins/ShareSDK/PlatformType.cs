@@ -77,6 +77,7 @@ namespace cn.sharesdk.unity3d
        
 #elif UNITY_IPHONE
         //Reddit = 56,			//Reddit
+        Apple = 61,            //苹果登录
         YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition

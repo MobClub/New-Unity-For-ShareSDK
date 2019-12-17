@@ -53,6 +53,7 @@ namespace cn.sharesdk.unity3d
         public FacebookAccount facebookAccount;//iOS端无需配置
         public Douyin douyin; //抖音
         public WeWork wework; //企业微信
+        public Apple apple;//苹果
 #if UNITY_ANDROID
 		public FourSquare fourSquare;
 		//安卓配置印象笔记国内与国际版直接在Evernote中配置
@@ -406,8 +407,8 @@ namespace cn.sharesdk.unity3d
 
 		#endif
 	}
-
-	[Serializable]
+    
+    [Serializable]
 	public class GooglePlus : DevInfo 
 	{
 		#if UNITY_ANDROID
@@ -793,6 +794,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WechatPlatform;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
+        public string app_universalLink = "https://www.sandslee.com/";
 		#endif
 	}
 
@@ -976,7 +978,15 @@ namespace cn.sharesdk.unity3d
     }
 
 
-
+    [Serializable]
+    public class Apple : DevInfo
+    {
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
+        public const int type = (int) PlatformType.Apple;
+#endif
+    }
 
 
 
