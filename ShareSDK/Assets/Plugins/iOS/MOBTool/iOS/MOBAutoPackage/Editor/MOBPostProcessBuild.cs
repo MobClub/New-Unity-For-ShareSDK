@@ -508,7 +508,9 @@ public class MOBPostProcessBuild
     {
 
         string projectPath = PBXProject.GetPBXProjectPath(xcodeTargetPath);
-        if (xcodeModel.isOpenRestoreScene)
+        
+
+        if (xcodeModel.isOpenRestoreScene || xcodeModel.isHaveApple)
         {
             string entitlementsPath = xcodeModel.entitlementsPath;
             if (entitlementsPath == null || entitlementsPath == "" || !xcodeModel.entitlementsPath.Contains(".entitlements"))
@@ -519,7 +521,10 @@ public class MOBPostProcessBuild
             }
             ProjectCapabilityManager capManager = new ProjectCapabilityManager(projectPath, entitlementsPath, PBXProject.GetUnityTargetName());
 
-            if (xcodeModel.associatedDomains.Count > 0)
+
+     
+
+            if (xcodeModel.associatedDomains.Count > 0 || xcodeModel.isHaveApple)
             {
                 string[] domains = new string[xcodeModel.associatedDomains.Count];
                 int index = 0;
@@ -529,6 +534,10 @@ public class MOBPostProcessBuild
                     index++;
                 }
                 capManager.AddAssociatedDomains(domains);
+
+                string[] apple = new string[1];
+                apple[0] = "Default";
+                capManager.AddSignInWithApple();
                 //推送
                 //capManager.AddPushNotifications(true);
                 //内购

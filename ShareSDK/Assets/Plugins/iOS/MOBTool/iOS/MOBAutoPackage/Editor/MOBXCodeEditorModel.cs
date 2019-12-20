@@ -27,6 +27,7 @@ namespace cn.mob.unity3d.sdkporter
 
         public bool isOpenRestoreScene;
         public ArrayList associatedDomains;
+        public bool isHaveApple;
         public string entitlementsPath;
 
         public MOBXCodeEditorModel ()
@@ -94,6 +95,9 @@ namespace cn.mob.unity3d.sdkporter
 		private void ReadMobpds(string filePath,string appkey,string savefilePath)
 		{
 			FileInfo fileInfo = new FileInfo( filePath );
+            if (filePath.Contains("Apple")) {
+                isHaveApple = true;
+            }
 			if(fileInfo.Exists)
 			{
 				StreamReader sReader = fileInfo.OpenText();
@@ -422,7 +426,6 @@ namespace cn.mob.unity3d.sdkporter
                         associatedDomains.Add((string)restoreSceneInfo["Capabilitites_AssociatedDomain"]);
                     }
                 }
-
             }
         }
         //XCode下Capabilities->AssociatedDomains

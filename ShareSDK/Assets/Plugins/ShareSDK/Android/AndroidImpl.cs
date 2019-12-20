@@ -181,23 +181,43 @@ namespace cn.sharesdk.unity3d
 
 		public override void ShareWithContentName (int reqId, PlatformType platform, string contentName, Hashtable customFields)
 		{
-			Debug.Log("#WARING : Do not support this feature in Android temporarily" );
+			Debug.Log("#WARING : Do not support this feature in Android " );
 		}
 		
 		public override void ShowPlatformListWithContentName (int reqId, string contentName, Hashtable customFields, PlatformType[] platforms, int x, int y)
 		{
-			Debug.Log("#WARING : Do not support this feature in Android temporarily" );
+			Debug.Log("#WARING : Do not support this feature in Android " );
 		}
 
 		public override void ShowShareContentEditorWithContentName (int reqId, PlatformType platform, string contentName, Hashtable customFields)
 		{
-			Debug.Log("#WARING : Do not support this feature in Android temporarily" );
+			Debug.Log("#WARING : Do not support this feature in Android " );
 		}
 
 		public override bool openMiniProgram (String userName, String path, int miniProgramType)
 		{
 			// wait for implementation
 			return false;
+		}
+		
+		public override void getWXRequestToken()
+		{
+			Debug.Log("#WARING : Do not support this feature in Android" );
+		}
+		
+		public override void getWXRefreshToken()
+		{
+			Debug.Log("#WARING : Do not support this feature in Android" );
+		}
+		
+		public override void sendWXRefreshToken(String token)
+		{
+			Debug.Log("#WARING : Do not support this feature in Android" );
+		}
+		
+		public override void sendWXRequestToken(String uid, String token)
+		{
+			Debug.Log("#WARING : Do not support this feature in Android" );
 		}
 
 	}

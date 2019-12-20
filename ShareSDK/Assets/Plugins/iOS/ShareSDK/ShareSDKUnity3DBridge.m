@@ -28,9 +28,9 @@ extern "C" {
 #endif
     
     /**
-     *	@brief	配置SDK并初始化
+     *    @brief    配置SDK并初始化
      *
-     *	@param 	appKey      ShareSDK的AppKey
+     *    @param     appKey      ShareSDK的AppKey
      *  @param  configInfo  配置信息
      */
     extern void __iosShareSDKRegisterAppAndSetPltformsConfig (void *appKey, void*configInfo);
@@ -45,77 +45,77 @@ extern "C" {
     extern void __iosShareSDKAuthorize (int reqID, int platType, void *observer);
     
     /**
-     *	@brief	取消用户授权
+     *    @brief    取消用户授权
      *
-     *	@param 	platType 	平台类型
+     *    @param     platType     平台类型
      */
     extern void __iosShareSDKCancelAuthorize (int platType);
     
     /**
-     *	@brief	判断用户是否授权
+     *    @brief    判断用户是否授权
      *
-     *	@param 	platType 	平台类型
+     *    @param     platType     平台类型
      *
-     *	@return	YES 表示已经授权，NO 表示尚未授权
+     *    @return    YES 表示已经授权，NO 表示尚未授权
      */
     extern bool __iosShareSDKHasAuthorized (int platType);
     
     /**
-     *	@brief	检测是否安装客户端
+     *    @brief    检测是否安装客户端
      *
-     *	@param 	platType 	平台类型
+     *    @param     platType     平台类型
      *
-     *	@return	YES 表示已经安装，NO 表示尚未安装
+     *    @return    YES 表示已经安装，NO 表示尚未安装
      */
     extern bool __iosShareSDKIsClientInstalled (int platType);
     
     /**
-     *	@brief	获取用户信息
+     *    @brief    获取用户信息
      *
      *  @param  reqID       流水号
-     *	@param 	platType 	平台类型
+     *    @param     platType     平台类型
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKGetUserInfo (int reqID, int platType, void *observer);
     
     /**
-     *	@brief	分享内容
+     *    @brief    分享内容
      *
      *  @param  reqID       流水号
-     *	@param 	platType 	平台类型
-     *	@param 	content 	分享内容
+     *    @param     platType     平台类型
+     *    @param     content     分享内容
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKShare (int reqID, int platType, void *content, void *observer);
     
     /**
-     *	@brief	一键分享内容
+     *    @brief    一键分享内容
      *
      *  @param  reqID       流水号
-     *	@param 	platTypes 	平台类型列表
-     *	@param 	content 	分享内容
+     *    @param     platTypes     平台类型列表
+     *    @param     content     分享内容
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKOneKeyShare (int reqID, void *platTypes, void *content, void *observer);
     
     /**
-     *	@brief	显示分享菜单
+     *    @brief    显示分享菜单
      *
      *  @param  reqID       流水号
-     *	@param 	platTypes 	平台类型列表
-     *	@param 	content 	分享内容
-     *	@param 	x 	弹出菜单的箭头的横坐标，仅用于iPad
-     *	@param 	y 	弹出菜单的箭头的纵坐标，仅用于iPad
+     *    @param     platTypes     平台类型列表
+     *    @param     content     分享内容
+     *    @param     x     弹出菜单的箭头的横坐标，仅用于iPad
+     *    @param     y     弹出菜单的箭头的纵坐标，仅用于iPad
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKShowShareMenu (int reqID, void *platTypes, void *content, int x, int y, void *observer);
     
     /**
-     *	@brief	显示分享编辑界面
+     *    @brief    显示分享编辑界面
      *
      *  @param  reqID       流水号
-     *	@param 	platType 	平台类型
-     *	@param 	content 	分享内容
+     *    @param     platType     平台类型
+     *    @param     content     分享内容
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKShowShareView (int reqID, int platType, void *content, void *observer);
@@ -132,17 +132,17 @@ extern "C" {
     extern void __iosShareSDKGetFriendsList (int reqID, int platType, int count , int page, void *observer);
     
     /**
-     *	@brief	获取授权信息
+     *    @brief    获取授权信息
      *
-     *	@param 	platType 	平台类型
+     *    @param     platType     平台类型
      *  @param  observer    观察回调对象名称
      */
     extern const char* __iosShareSDKGetCredential (int platType);
     
     /**
-     *	@brief	关注/添加好友
+     *    @brief    关注/添加好友
      *
-     *	@param 	platType 	平台类型
+     *    @param     platType     平台类型
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKFollowFriend (int reqID, int platType, void *account, void *observer);
@@ -169,9 +169,9 @@ extern "C" {
      *  @param reqID            流水号
      *  @param contentName      配置文件节点标识
      *  @param customHashtable  自定义字段表
-     *  @param 	platTypes 	平台类型列表
-     *  @param 	x 	弹出菜单的箭头的横坐标，仅用于iPad
-     *	@param 	y 	弹出菜单的箭头的纵坐标，仅用于iPad
+     *  @param     platTypes     平台类型列表
+     *  @param     x     弹出菜单的箭头的横坐标，仅用于iPad
+     *    @param     y     弹出菜单的箭头的纵坐标，仅用于iPad
      *  @param observer         观察回调对象名称
      */
     extern void __iosShareSDKShowShareMenuWithContentName(int reqID,
@@ -2901,7 +2901,6 @@ extern "C" {
                 {
                     NSString *text = nil;
                     NSMutableArray *images = [NSMutableArray array];
-                    NSString *image = nil;
                     NSString *title = nil;
                     NSString *url = nil;
                     NSString *video = nil;
@@ -3889,7 +3888,7 @@ extern "C" {
     }
     
     
-    state void (^ __iosShareSDKRequestTokenGetUserInfo) (NSString *, NSString *) = nil;
+    static void (^ __iosShareSDKRequestTokenGetUserInfo) (NSString *, NSString *) = nil;
     
     void __iosShareSDKWXRequestSendTokenToGetUser(void * uid, void *token){
         if (__iosShareSDKRequestTokenGetUserInfo) {
@@ -3900,24 +3899,26 @@ extern "C" {
         __iosShareSDKRequestTokenGetUserInfo = nil;
     }
     void __iosShareSDKWXRequestToken(void *observer){
-        Class wechatConnectorClass = NSClassFromString(@"WechatConnector");
+        Class wechatConnectorClass = NSClassFromString(@"WeChatConnector");
         if (wechatConnectorClass) {
+            
             __iosShareSDKRequestTokenGetUserInfo = nil;
+            __block NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
             void(^block)(id,id) = ^(NSString *authCode, void(^getUserInfo)(NSString *uid,NSString *token)) {
                 __iosShareSDKRequestTokenGetUserInfo = getUserInfo;
-                NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
                 NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
                 [resultDict setObject:[NSNumber numberWithInteger:10] forKey:@"action"];
                 [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"status"];
                 [resultDict setObject:[NSNumber numberWithInteger:0] forKey:@"isRefreshToken"];
                 [resultDict setObject:authCode forKey:@"authCode"];
+                [resultDict setObject:[resultDict copy] forKey:@"res"];
                 NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
                 UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
             };
             ((void (*)(id, SEL,id))objc_msgSend)(wechatConnectorClass,sel_registerName("setRequestAuthTokenOperation:"), block);
         }
     }
-    state void (^ __iosShareSDKRefreshTokenGetUserInfo) (NSString *) = nil;
+    static void (^ __iosShareSDKRefreshTokenGetUserInfo) (NSString *) = nil;
     
     void __iosShareSDKWXRefreshSendTokenToGetUser(void *token){
         if (__iosShareSDKRefreshTokenGetUserInfo) {
@@ -3927,17 +3928,18 @@ extern "C" {
         __iosShareSDKRefreshTokenGetUserInfo = nil;
     }
     void __iosShareSDKWXRefreshRequestToken(void *observer){
-        Class wechatConnectorClass = NSClassFromString(@"WechatConnector");
+        Class wechatConnectorClass = NSClassFromString(@"WeChatConnector");
         if (wechatConnectorClass) {
             __iosShareSDKRefreshTokenGetUserInfo = nil;
+            __block NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
             void(^block)(id,id) = ^(NSString *uid, void(^getUserInfo)(NSString *token)) {
-                NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
-                __iosShareSDKWXRefreshSendTokenToGetUser = getUserInfo;
+                __iosShareSDKRefreshTokenGetUserInfo = getUserInfo;
                 NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
                 [resultDict setObject:[NSNumber numberWithInteger:10] forKey:@"action"];
                 [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"status"];
                 [resultDict setObject:[NSNumber numberWithInteger:1] forKey:@"isRefreshToken"];
                 [resultDict setObject:uid forKey:@"uid"];
+                [resultDict setObject:[resultDict copy] forKey:@"res"];
                 NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
                 UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
             };
