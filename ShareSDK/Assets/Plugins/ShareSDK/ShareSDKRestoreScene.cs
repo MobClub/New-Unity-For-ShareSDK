@@ -33,7 +33,7 @@ namespace cn.sharesdk.unity3d
 
 			if (_instance != null) 
 			{
-				DestroyObject (_instance.gameObject);
+				Destroy(_instance.gameObject);
 			}
 			_instance = this;
 

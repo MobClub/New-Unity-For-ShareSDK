@@ -2995,7 +2995,12 @@ extern "C" {
                     type == SSDKPlatformSubTypeWechatTimeline ||
                     type == SSDKPlatformSubTypeWechatFav)
                 {
-                    [platformsRegister setupWeChatWithAppId:platformInfo[@"app_id"] appSecret:platformInfo[@"app_secret"] universalLink:platformInfo[@"app_universalLink"]];
+                    NSString *appsecret = platformInfo[@"app_secret"];
+                    if ([appsecret isKindOfClass:[NSString class]] && appsecret.length == 0) {
+                        appsecret = nil;
+                    }
+
+                    [platformsRegister setupWeChatWithAppId:platformInfo[@"app_id"] appSecret:appsecret universalLink:platformInfo[@"app_universalLink"]];
                 }
                 else if  (type == SSDKPlatformTypeQQ ||
                     type == SSDKPlatformSubTypeQZone ||
@@ -3900,6 +3905,7 @@ extern "C" {
     }
     void __iosShareSDKWXRequestToken(void *observer){
         Class wechatConnectorClass = NSClassFromString(@"WeChatConnector");
+
         if (wechatConnectorClass) {
             
             __iosShareSDKRequestTokenGetUserInfo = nil;

@@ -177,7 +177,7 @@ namespace cn.sharesdk.unity3d
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx617c77c82218ea2c";
-		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
+        public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
         public string app_universalLink = "https://www.sandslee.com/";
         #endif
     }

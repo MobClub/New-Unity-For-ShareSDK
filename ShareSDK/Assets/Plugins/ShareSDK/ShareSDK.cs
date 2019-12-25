@@ -40,10 +40,14 @@ namespace cn.sharesdk.unity3d
 		public EventHandler showUserHandler;
 		public EventHandler getFriendsHandler;
 		public EventHandler followFriendHandler;
+
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
         public GetWXRequestTokenHanlerEvent wxRequestHandler;
         public GetWXRefreshTokenHanlerEvent wxRefreshTokenHandler;
         //public OnLoopShareCallBack onLoopsharecallback;
-
+#endif
         void Awake()
 		{				
 			Type type = devInfo.GetType();
@@ -280,19 +284,25 @@ namespace cn.sharesdk.unity3d
 				}
 				break;
 			}
-             case 10: {
+
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
+            case 10: {
+
                         int isRefresh = Convert.ToInt32(res["isRefreshToken"]);
                         if (isRefresh == 1)
                         {
-                            //String uid = Convert.ToString(res["uid"]);
-                            //wxRefreshTokenHandler(uid, sendWXRefreshTokenMethod);
+                            String uid = Convert.ToString(res["uid"]);
+                            wxRefreshTokenHandler(uid, sendWXRefreshTokenMethod);
                         }
                         else {
-                            //String authCode = Convert.ToString(res["authCode"]);
-                            //wxRequestHandler(authCode, sendWXRequestTokenMehtod);
+                            String authCode = Convert.ToString(res["authCode"]);
+                            wxRequestHandler(authCode, sendWXRequestTokenMehtod);
                         }
                         break;
                     }
+#endif
 
 			}
 		}
@@ -623,7 +633,9 @@ namespace cn.sharesdk.unity3d
 		{
 			return shareSDKUtils.openMiniProgram (userName,path,miniProgramType);
 		}
-
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
         public void getWXRequestToken()
         {
             shareSDKUtils.getWXRequestToken();
@@ -643,16 +655,21 @@ namespace cn.sharesdk.unity3d
         {
             shareSDKUtils.sendWXRefreshToken(token);
         }
-
+#endif
         /// <summary>
         /// Event result listener.
         /// </summary>
         public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
 
 
-
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
         public delegate void GetWXRequestTokenHanlerEvent(String authCode, sendWXRequestToken send);
         public delegate void GetWXRefreshTokenHanlerEvent(String uid, sendWXRefreshToken send);
+#endif
+
+
         //public delegate void OnLoopShareCallBack (Hashtable data);
 
 

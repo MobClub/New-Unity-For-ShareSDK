@@ -95,9 +95,7 @@ namespace cn.mob.unity3d.sdkporter
 		private void ReadMobpds(string filePath,string appkey,string savefilePath)
 		{
 			FileInfo fileInfo = new FileInfo( filePath );
-            if (filePath.Contains("Apple")) {
-                isHaveApple = true;
-            }
+            
 			if(fileInfo.Exists)
 			{
 				StreamReader sReader = fileInfo.OpenText();
@@ -113,9 +111,10 @@ namespace cn.mob.unity3d.sdkporter
 					savefilePath = savefilePath.Substring (0,index);
 
 				}
-//				Debug.LogWarning (savefilePath);
-				//permissionsreplaceAppKeydebug.logdebug.log
-				AddPrmissions (datastore);
+                
+                
+                //permissionsreplaceAppKeydebug.logdebug.log
+                AddPrmissions (datastore);
 				//LSApplicationQueriesSchemes
 				AddLSApplicationQueriesSchemes (datastore,appkey);
 				//folders
@@ -213,11 +212,15 @@ namespace cn.mob.unity3d.sdkporter
 //					Debug.LogWarning (key);
 					string fileName = (string)platformConfList[key];
                     platformJsList.Add(fileName + ".js");
-//					Debug.LogWarning (fileName);
-					var files = System.IO.Directory.GetFiles(Application.dataPath , fileName + ".pltpds", System.IO.SearchOption.AllDirectories);
-
+                    Debug.LogWarning(fileName);
+                    var files = System.IO.Directory.GetFiles(Application.dataPath , fileName + ".pltpds", System.IO.SearchOption.AllDirectories);
+                    if (fileName.Equals("Apple"))
+                    {
+                        isHaveApple = true;
+                    }
 					if (files.Length > 0) 
 					{
+
 						string filePath = files [0];
 
 						string appkey = (string)platforms[key];

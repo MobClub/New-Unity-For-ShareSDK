@@ -193,7 +193,7 @@ public class MOBPostProcessBuild
 				string savePath = xcodeTargetPath + otherFilePath;
 				fileInfo.CopyTo (savePath,true);
 				//将.a 加入 proj中
-				Debug.LogWarning(savePath);
+				//Debug.LogWarning(savePath);
 				if (fileFlags.ContainsKey (fileName)) 
 				{
 					string flag = (string)fileFlags[fileName];
@@ -535,9 +535,11 @@ public class MOBPostProcessBuild
                 }
                 capManager.AddAssociatedDomains(domains);
 
-                string[] apple = new string[1];
-                apple[0] = "Default";
-                capManager.AddSignInWithApple();
+                if (xcodeModel.isHaveApple && capManager.GetType().GetMethod("AddSignInWithApple") != null)
+                {
+                    capManager.GetType().GetMethod("AddSignInWithApple").Invoke(capManager,null);
+                }
+                
                 //推送
                 //capManager.AddPushNotifications(true);
                 //内购
