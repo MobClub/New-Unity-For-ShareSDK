@@ -197,7 +197,7 @@ public class MOBPostProcessBuild
 				if (fileFlags.ContainsKey (fileName)) 
 				{
 					string flag = (string)fileFlags[fileName];
-					Debug.Log(flag);
+					//Debug.Log(flag);
 					xcodeProj.AddFileToBuildWithFlags (xcodeTargetGuid,xcodeProj.AddFile(savePath, "MOB"+otherFilePath, PBXSourceTree.Source),flag);
 				} 
 				else 
@@ -394,7 +394,7 @@ public class MOBPostProcessBuild
 				{
 					name = name.Replace (".mobjs",".js");
 				}
-
+				//Debug.Log(name);
                 if(source.ToString().Contains("ShareSDK.bundle/ScriptCore/platforms") && !platformJsList.Contains(name))
                 {
 
@@ -510,7 +510,7 @@ public class MOBPostProcessBuild
         string projectPath = PBXProject.GetPBXProjectPath(xcodeTargetPath);
         
 
-        if (xcodeModel.isOpenRestoreScene || xcodeModel.isHaveApple)
+        if (xcodeModel.isOpenRestoreScene || xcodeModel.isHaveApple || xcodeModel.associatedDomains.Count > 0)
         {
             string entitlementsPath = xcodeModel.entitlementsPath;
             if (entitlementsPath == null || entitlementsPath == "" || !xcodeModel.entitlementsPath.Contains(".entitlements"))

@@ -207,23 +207,27 @@ namespace cn.mob.unity3d.sdkporter
 			if (dataSource.ContainsKey (dataKey)) 
 			{
 				Hashtable platforms = (Hashtable)dataSource[dataKey];
+				
 				foreach (var key in platforms.Keys) 
 				{
-//					Debug.LogWarning (key);
+					
+					//Debug.Log(key);
 					string fileName = (string)platformConfList[key];
-                    platformJsList.Add(fileName + ".js");
-                    Debug.LogWarning(fileName);
+					platformJsList.Add(fileName + ".js");
+                    
                     var files = System.IO.Directory.GetFiles(Application.dataPath , fileName + ".pltpds", System.IO.SearchOption.AllDirectories);
+
                     if (fileName.Equals("Apple"))
                     {
                         isHaveApple = true;
                     }
-					if (files.Length > 0) 
+					if ( files.Length > 0) 
 					{
 
 						string filePath = files [0];
 
 						string appkey = (string)platforms[key];
+						
 						//读取配置
 						ReadMobpds (filePath,appkey,savefilePath);
 					}
@@ -260,6 +264,7 @@ namespace cn.mob.unity3d.sdkporter
 				Hashtable tempHashtable = (Hashtable)dataSource[dataKey];
 				foreach (string key in tempHashtable.Keys) 
 				{
+					
 					if(!infoPlistSet.ContainsKey(key))
 					{
 						var value = tempHashtable[key];
@@ -298,8 +303,9 @@ namespace cn.mob.unity3d.sdkporter
 					ArrayList formetArray = new ArrayList ();
 					foreach(string url in urlArray)
 					{
+						
 						string urlStr = replaceAppKey (url,appkey);
-						formetArray.Add (urlStr);
+						formetArray.Add(urlStr);
 					}
 					tempHashtable ["CFBundleURLSchemes"] = formetArray;
 					URLSchemes.Add (tempHashtable);

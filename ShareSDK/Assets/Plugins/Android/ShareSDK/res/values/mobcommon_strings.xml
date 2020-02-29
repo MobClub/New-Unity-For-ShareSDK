@@ -1,0 +1,7 @@
+<resources>
+	<!-- 隐私二次确认框 -->
+	<string name="mobcommon_authorize_dialog_title">服务授权</string>
+	<string name="mobcommon_authorize_dialog_content"><![CDATA[为了给您提供Mobservice相关产品服务，请您详细查看我们的隐私政策，详见<a href="http://www.mob.com/about/policy">http://www.mob.com/about/policy</a>。如您同意我们的隐私政策，请点击“接受”，如您不同意我们的隐私政策，请点击“拒绝”。]]></string>
+	<string name="mobcommon_authorize_dialog_reject">拒绝</string>
+	<string name="mobcommon_authorize_dialog_accept">接受</string>
+</resources>

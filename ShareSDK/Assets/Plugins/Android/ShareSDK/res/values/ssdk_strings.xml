@@ -18,7 +18,8 @@
     <string name="ssdk_facebookmessenger_client_inavailable">目前您的FacebookMessenger版本过低或未安装，需要安装才能使用</string>
 	<string name="ssdk_telegram_client_inavailable">目前您的Telegram版本过低或未安装，需要安装才能使用</string>
 	<string name="ssdk_dont_keep_activitys_client">由于您已开启 不保留活动 ,导致授权功能无法正常使用.我们建议您点击左下方 设置 按钮,在 开发者选项 中关闭 不保留活动 功能.</string>
-    
+
+	<string name="ssdk_oasis">绿洲</string>
 	<string name="ssdk_sinaweibo">新浪微博</string>
 	<string name="ssdk_tencentweibo">腾讯微博</string>
 	<string name="ssdk_qzone">QQ空间</string>
@@ -48,6 +49,7 @@
 	<string name="ssdk_vkontakte">VK</string>
 	<string name="ssdk_instagram">Instagram</string>
 	<string name="ssdk_douyin">抖音</string>
+	<string name="ssdk_wework">企业微信</string>
 	<string name="ssdk_yixin">易信</string>
 	<string name="ssdk_yixinmoments">易信朋友圈</string>
 	<string name="ssdk_mingdao">明道</string>
@@ -77,6 +79,7 @@
 	<string name="ssdk_reddit">reddit</string>
 	<string name="ssdk_telecom">中国电信</string>
 	<string name="ssdk_accountkit">Accountkit</string>
+	<string name="ssdk_hwaccount">华为</string>
 	<string name="ssdk_share_to_qzone">分享到QQ空间</string>
 	<string name="ssdk_share_to_qq">分享到QQ</string>
 	<string name="ssdk_share_to_facebook">分享到Facebook</string>
@@ -173,4 +176,9 @@
 	<item name="ssdk_sms_id_llSearch" type="id" />
 	<item name="ssdk_sms_id_et_put_identify" type="id" />
 	<item name="ssdk_sms_id_iv_clear" type="id" />
+
+	<!-- 隐私策略 -->
+	<string name="mobdemo_authorize_dialog_content"><![CDATA[为了给您提供Mobservice相关产品服务，请您详细查看我们的隐私政策，详见<a href="http://www.mob.com/about/policy">http://www.mob.com/about/policy</a>。如您同意我们的隐私政策，请点击“接受”，如您不同意我们的隐私政策，请点击“拒绝”。]]></string>
+	<string name="mobdemo_authorize_dialog_title">服务授权</string>
+
 </resources>

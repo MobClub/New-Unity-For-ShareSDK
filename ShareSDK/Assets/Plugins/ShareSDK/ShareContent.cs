@@ -136,7 +136,10 @@ namespace cn.sharesdk.unity3d
 			shareParams ["author"] = author;
 			#endif
 		}
-		
+
+
+
+
 		/*iOS/Android - Flickr*/
 		public void SetSafetyLevel(int safetyLevel){
 			shareParams ["safetyLevel"] = safetyLevel;
@@ -190,7 +193,7 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 		
-		/*iOS/Android - WhatsApp/Youtube/ MeiPai/Sina(the path must be an assetUrl path in iOS)*/
+		/*iOS/Android - WhatsApp/Youtube/ MeiPai/Sina/Oasis(the path must be an assetUrl path in iOS)*/
 		public void SetVideoPath(String videoPath){
 			#if UNITY_ANDROID
 			shareParams["filePath"] = videoPath;
@@ -235,9 +238,15 @@ namespace cn.sharesdk.unity3d
 			shareParams["extInfoPath"] = extInfoPath;
 		}
 
-		/*iOS Only - Wechat*/ 
+		/*iOS Only - Wecha，Oasis*/ 
 		public void SetSourceFileExtension(String sourceFileExtension){
 			shareParams["sourceFileExtension"] = sourceFileExtension;
+		}
+
+		/*iOS Only - Oasis,多个用,分割*/
+		public void SetAssetLocalIds(String assetLocalIds)
+		{
+			shareParams["assetLocalIds"] = assetLocalIds;
 		}
 
 		/*iOS Only - Wechat*/
@@ -412,6 +421,10 @@ namespace cn.sharesdk.unity3d
 			    shareParams ["quote"] = quote;
             #endif
         }
+        /*iOS only - facebook shareType 1:native 2:sheet */
+		public void setFacebookShareType(int type) {
+			shareParams["facebook_shareType"] = type;
+        }
 
         /*iOS Only - facebookMessenger*/
         public void SetMessengerGif(String gif){
@@ -548,7 +561,10 @@ namespace cn.sharesdk.unity3d
             Debug.Log("QQQ activity  ==================>>> " + activity);
         }
 
+		
 
+
+        
         //不同平台分享不同内容
         public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
 			customizeShareParams [(int)platform] = content.GetShareParamsStr();

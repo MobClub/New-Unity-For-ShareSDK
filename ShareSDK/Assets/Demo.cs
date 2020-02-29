@@ -8,6 +8,9 @@ public class Demo : MonoBehaviour {
 
 	public GUISkin demoSkin;
 	public ShareSDK ssdk;
+	
+	public MobSDK mobsdk;
+	
 	// Use this for initialization
 	void Start ()
 	{	
@@ -17,12 +20,14 @@ public class Demo : MonoBehaviour {
 		ssdk.showUserHandler = OnGetUserInfoResultHandler;
 		ssdk.getFriendsHandler = OnGetFriendsResultHandler;
 		ssdk.followFriendHandler = OnFollowFriendResultHandler;
+		mobsdk = gameObject.GetComponent<MobSDK>();
         #if UNITY_ANDROID
 		
-#elif UNITY_IPHONE
+        #elif UNITY_IPHONE
+		mobsdk.getPolicy = OnFollowGetPolicy;
         ssdk.wxRequestHandler = GetWXRequestTokenResultHandler;
         ShareSDKRestoreScene.setRestoreSceneListener(OnRestoreScene);
-#endif
+        #endif
 
     }
 
@@ -62,11 +67,11 @@ public class Demo : MonoBehaviour {
 #if UNITY_ANDROID
 		    ssdk.Authorize(PlatformType.SinaWeibo);
 #elif UNITY_IPHONE
-            ssdk.Authorize(PlatformType.SinaWeibo);
+            ssdk.Authorize(PlatformType.Facebook);
 #endif
-        }
+		}
 
-        if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
+		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get User Info"))
 		{
             //ssdk.GetUserInfo(PlatformType.Douyin);
 
@@ -148,7 +153,7 @@ public class Demo : MonoBehaviour {
             	//content.SetComment("test description");
             	//content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
                 content.SetShareType(ContentType.Image);
-                ssdk.ShareContent (PlatformType.WeChat, content);
+                ssdk.ShareContent (PlatformType.Oasis, content);
 
 
 //            //  开发者要自己传入Activity 在9.0及其以上的系统
@@ -230,6 +235,31 @@ public class Demo : MonoBehaviour {
 			ssdk.Authorize(PlatformType.SMS);		
 		}
 
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "submitPolicyGrantResult"))
+		{
+			
+			Debug.Log("ssdk ======> " + ssdk);
+			Debug.Log("mobsdk ======> " + mobsdk);
+			
+			mobsdk.submitPolicyGrantResult(true);
+		}
+
+		btnTop += btnHeight + 20 * scale;
+		if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "getPrivacyPolicy"))
+		{
+			
+			Debug.Log("ssdk ======> " + ssdk);
+			Debug.Log("mobsdk ======> " + mobsdk);
+			#if UNITY_IPHONE
+            mobsdk.getPrivacyPolicy(true);
+#elif UNITY_ANDROID
+			mobsdk.getPrivacyPolicy(true);
+			Debug.Log("mobsdk getPrivacyPolicy======> " + mobsdk.getPrivacyPolicy(true));
+#endif
+		}
+
+        
 		btnTop += btnHeight + 20 * scale;
 		if (GUI.Button(new Rect((Screen.width - btnGap) / 2 - btnWidth, btnTop, btnWidth, btnHeight), "Share wxMiniProgram"))
 		{
@@ -494,4 +524,9 @@ public class Demo : MonoBehaviour {
         send("11");
     }
 #endif
+    //隐私协议回调
+	public static void OnFollowGetPolicy(string url)
+	{
+		Debug.Log("[OnFollowGetPolicy:" + url);
+	}
 }

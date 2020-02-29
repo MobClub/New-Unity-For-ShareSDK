@@ -82,7 +82,7 @@ namespace cn.sharesdk.unity3d
             platformConfList.Add((int)PlatformType.FacebookAccount, "app_id");
             platformConfList.Add((int)PlatformType.Douyin, "app_key");
             platformConfList.Add((int)PlatformType.WeWork, "app_key");
-
+			platformConfList.Add((int)PlatformType.Oasis, "app_key");
 		}
 
 		private void Prepare()

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -53,12 +53,13 @@ namespace cn.sharesdk.unity3d
         public FacebookAccount facebookAccount;//iOS端无需配置
         public Douyin douyin; //抖音
         public WeWork wework; //企业微信
-        
+		public Oasis oasis; //绿洲
+
 #if UNITY_ANDROID
 		public FourSquare fourSquare;
 		//安卓配置印象笔记国内与国际版直接在Evernote中配置
 #elif UNITY_IPHONE
-        public Copy copy;
+		public Copy copy;
 		public YixinFavorites yixinFavorites;					//易信收藏，仅iOS端支持							[仅支持iOS端]
 		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
 		public WechatSeries wechatSeries;						//iOS端微信系列, 可直接配置微信三个子平台 		[仅支持iOS端]
@@ -178,7 +179,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx617c77c82218ea2c";
         public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://www.sandslee.com/";
+        public string app_universalLink = "https://ybpre.share2dlink.com/";
         #endif
     }
 
@@ -195,7 +196,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://www.sandslee.com/";
+        public string app_universalLink = "https://ybpre.share2dlink.com/";
         #endif
     }
 
@@ -211,7 +212,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatFavorites;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://www.sandslee.com/";
+        public string app_universalLink = "https://ybpre.share2dlink.com/";
         #endif
     }
 
@@ -227,7 +228,7 @@ namespace cn.sharesdk.unity3d
 		public bool ShareByAppClient = false;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Facebook;
-		public string api_key = "107704292745179";
+		public string api_key = "1412473428822331";
 		public string app_secret = "38053202e1a5fe26c80c753071f0b573";
 //		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		public string display_name = "ShareSDK";//如果需要使用客户端分享，必填且需与FB 后台配置一样
@@ -795,7 +796,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WechatPlatform;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://www.sandslee.com/";
+        public string app_universalLink = "https://ybpre.share2dlink.com/";
 		#endif
 	}
 
@@ -979,6 +980,21 @@ namespace cn.sharesdk.unity3d
     }
 
 
+	[Serializable]
+	public class Oasis : DevInfo
+	{
+#if UNITY_ANDROID
+		public string SortId = "64";
+		public const int type = (int)PlatformType.Oasis;
+		public string AppKey = "568898243";                                    //对应企业id
+		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
+		public string RedirectUrl = "http://www.sharesdk.cn"; 
+#elif UNITY_IPHONE
+        public string app_key = "568898243";
+        public const int type = (int)PlatformType.Oasis;
+#endif
+	}
+
     [Serializable]
     public class Apple : DevInfo
     {
@@ -989,12 +1005,8 @@ namespace cn.sharesdk.unity3d
 #endif
     }
 
-
-
-
-    // 下列为闭环分享相关类
-
-    [Serializable]
+	// 下列为闭环分享相关类
+	[Serializable]
     public class RestoreSceneConfigure
     {
         public bool Enable = false;

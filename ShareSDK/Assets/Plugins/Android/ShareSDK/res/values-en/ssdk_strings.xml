@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="ssdk_weibo_oauth_regiseter">Authorization</string>
     <string name="ssdk_website">http://www.mob.com</string>
     <string name="ssdk_weibo_upload_content">分享图片</string>
@@ -17,7 +17,8 @@
     <string name="ssdk_alipay_client_inavailable">Alipay client not exists or the version is too low</string>
     <string name="ssdk_facebookmessenger_client_inavailable">Facebookmessenger client not exists or the version is too low</string>
 	<string name="ssdk_telegram_client_inavailable">Telegram client not exists or the version is too low</string>
-    
+	<string name="ssdk_oasis" tools:ignore="ExtraTranslation">Oasis</string>
+
 	<string name="ssdk_sinaweibo">Sina Weibo</string>
 	<string name="ssdk_tencentweibo">Tencent Weibo</string>
 	<string name="ssdk_qzone">QZone</string>
@@ -36,7 +37,7 @@
 	<string name="ssdk_youdao">Youdao</string>
 	<string name="ssdk_evernote">Evernote</string>
 	<string name="ssdk_linkedin">Linked in</string>
-	<string name="ssdk_googleplus">Google+</string>
+	<string name="ssdk_googleplus">Google</string>
 	<string name="ssdk_foursquare">FourSquare</string>
 	<string name="ssdk_qq">QQ</string>
 	<string name="ssdk_sohusuishenkan">Sohu Suishenkan</string>
@@ -47,6 +48,7 @@
 	<string name="ssdk_vkontakte">VK</string>
 	<string name="ssdk_instagram">Instagram</string>
 	<string name="ssdk_douyin">TikTok</string>
+	<string name="ssdk_wework">wework</string>
 	<string name="ssdk_yixin">Yixin</string>
 	<string name="ssdk_yixinmoments">Yixin Moments</string>
 	<string name="ssdk_mingdao">Mingdao</string>
@@ -76,6 +78,7 @@
 	<string name="ssdk_reddit">reddit</string>
 	<string name="ssdk_telecom">China Telecom</string>
 	<string name="ssdk_accountkit">Accountkit</string>
+	<string name="ssdk_hwaccount">HuaweiAccount</string>
 
 	<string name="ssdk_share_to_qzone">Share To QZone</string>
 	<string name="ssdk_share_to_qq">Share To QQ</string>
@@ -166,4 +169,7 @@
 	<string name="ssdk_cmcc_quick_login">Quick login</string>
 	<string name="ssdk_cmcc_loading_text">Verifying your identity, please wait...</string>
 
+	<!-- policy -->
+	<string name="mobdemo_authorize_dialog_content"><![CDATA[In order to provide you with Mobservice related products and services, please check our privacy policy in detail, see details<a href="http://www.mob.com/about/policy">http://www.mob.com/about/policy</a>.If you agree with our privacy policy, please click "accept". If you disagree with our privacy policy, please click "reject".]]></string>
+	<string name="mobdemo_authorize_dialog_title">service authority</string>
 </resources>
