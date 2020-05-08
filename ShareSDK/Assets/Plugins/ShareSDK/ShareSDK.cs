@@ -74,8 +74,8 @@ namespace cn.sharesdk.unity3d
                     }
 				}
 
-                //Debug.Log("======================platformConfigs platformId:" + platformId);
-                //Debug.Log("======================platformConfigs table:" + table);
+                Debug.Log("======================platformConfigs platformId:" + platformId);
+                Debug.Log("======================platformConfigs table:" + table);
                 platformConfigs.Add(platformId, table);
 			}
             //Debug.Log("======================platformConfigs:" + platformConfigs);

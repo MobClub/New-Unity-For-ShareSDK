@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.IO;
@@ -89,10 +89,10 @@ namespace cn.mob.unity3d.sdkporter
 		}
 		private void ReadMobpds(string filePath)
 		{
-			ReadMobpds (filePath,"",null);
+			ReadMobpds (filePath,"",null,null);
 		}
 		//读取配置debug.logdebug.log
-		private void ReadMobpds(string filePath,string appkey,string savefilePath)
+		private void ReadMobpds(string filePath,string appkey,string savefilePath, Hashtable deviceInfo)
 		{
 			FileInfo fileInfo = new FileInfo( filePath );
             
@@ -103,9 +103,14 @@ namespace cn.mob.unity3d.sdkporter
 				sReader.Close();
 				sReader.Dispose();
 				Hashtable datastore = (Hashtable)MiniJSON.jsonDecode( contents );
-				//savefilePath
-				int index = filePath.LastIndexOf ("/");
-				if(savefilePath == null)
+                //savefilePath
+
+                
+                int index = filePath.LastIndexOf("\\");
+                if (index == -1) {
+                    index = filePath.LastIndexOf("/");
+                }
+                if (savefilePath == null)
 				{
 					savefilePath = filePath;
 					savefilePath = savefilePath.Substring (0,index);
@@ -116,7 +121,7 @@ namespace cn.mob.unity3d.sdkporter
                 //permissionsreplaceAppKeydebug.logdebug.log
                 AddPrmissions (datastore);
 				//LSApplicationQueriesSchemes
-				AddLSApplicationQueriesSchemes (datastore,appkey);
+				AddLSApplicationQueriesSchemes (datastore,appkey,deviceInfo);
 				//folders
 				AddFolders (datastore,savefilePath);
 				//buildSettings
@@ -126,9 +131,9 @@ namespace cn.mob.unity3d.sdkporter
 				//添加非系统 Framework 配置需要设置指定参数
 				AddFrameworks (datastore,savefilePath);
 				//添加 URLSchemes
-				AddURLSchemes(datastore,appkey);
+				AddURLSchemes(datastore,appkey,deviceInfo);
 				//添加 InfoPlistSet
-				AddInfoPlistSet(datastore,appkey);
+				AddInfoPlistSet(datastore,appkey, deviceInfo);
 				//子平台
 				AddPlatformConf(datastore,savefilePath);
 				//添加 fileFlags 一些需要特殊设置编译标签的文件 如ARC下MRC
@@ -216,10 +221,11 @@ namespace cn.mob.unity3d.sdkporter
 					platformJsList.Add(fileName + ".js");
                     
                     var files = System.IO.Directory.GetFiles(Application.dataPath , fileName + ".pltpds", System.IO.SearchOption.AllDirectories);
-
+                    
                     if (fileName.Equals("Apple"))
                     {
                         isHaveApple = true;
+                      
                     }
 					if ( files.Length > 0) 
 					{
@@ -227,9 +233,10 @@ namespace cn.mob.unity3d.sdkporter
 						string filePath = files [0];
 
 						string appkey = (string)platforms[key];
-						
+
+                        Hashtable deviceInfo = (Hashtable)dataSource["ShareSDKDeviceInfo"];
 						//读取配置
-						ReadMobpds (filePath,appkey,savefilePath);
+						ReadMobpds (filePath,appkey,savefilePath, (Hashtable)deviceInfo[key]);
 					}
 						
 				}
@@ -237,29 +244,55 @@ namespace cn.mob.unity3d.sdkporter
 		}
 
 		//需要补充 appkey
-		private string replaceAppKey(string dataStr ,string appkey)
+		private string replaceAppKey(string dataStr ,string appkey, Hashtable datastore)
 		{
-			if(dataStr.Contains("{appkey}"))
+
+			if (dataStr.Contains("{appkey}"))
 			{
-				return dataStr.Replace ("{appkey}",appkey);
+				return dataStr.Replace("{appkey}", appkey);
 			}
-			else if(dataStr.Contains("{appkey16}"))
+			else if (dataStr.Contains("{appkey16}"))
 			{
 				int intAppkey = int.Parse(appkey);
-				string temp = Convert.ToString(intAppkey, 16); 
-				while(temp.Length < 8)
+				string temp = Convert.ToString(intAppkey, 16);
+				while (temp.Length < 8)
 				{
 					temp = "0" + temp;
 				}
-				return dataStr.Replace ("{appkey16}",temp.ToUpper());
+				return dataStr.Replace("{appkey16}", temp.ToUpper());
+			}
+			else if (dataStr.Contains("{universalLink}"))
+			{
+				if (datastore != null)
+				{
+					string universalLink = (string)datastore["universalLink"];
+					if (universalLink == null)
+					{
+						universalLink = "";
+					}
+					return universalLink;
+				}
+			}
+			else if (dataStr.Contains("{redirect_uri}")) {
+				string redirect_uri = (string)datastore["redirect_uri"];
+				if (redirect_uri == null)
+				{
+					redirect_uri = "";
+                }else
+                {
+					int index = redirect_uri.IndexOf("://");
+					redirect_uri = redirect_uri.Substring(0,index);
+                }
+				return redirect_uri;
 			}
 			return dataStr;
 		}
 
-		private void AddInfoPlistSet(Hashtable dataSource,string appkey)
+		private void AddInfoPlistSet(Hashtable dataSource,string appkey, Hashtable deviceInfo)
 		{
 			string dataKey = "infoPlistSet";
-			if (dataSource.ContainsKey (dataKey)) 
+           
+            if (dataSource.ContainsKey (dataKey)) 
 			{
 				Hashtable tempHashtable = (Hashtable)dataSource[dataKey];
 				foreach (string key in tempHashtable.Keys) 
@@ -269,19 +302,21 @@ namespace cn.mob.unity3d.sdkporter
 					{
 						var value = tempHashtable[key];
 						if (value.GetType ().Equals (typeof(string))) {
-							string valueStr = replaceAppKey ((string)value, appkey);
+							string valueStr = replaceAppKey ((string)value, appkey, deviceInfo);
 							infoPlistSet.Add (key, valueStr);
 						} else if (value.GetType ().Equals (typeof(Hashtable))) 
 						{
 							Hashtable temp = (Hashtable)value;
 							Hashtable saveHashtable = new Hashtable ();
-							foreach (string tempKey in temp.Keys) {
+                            foreach (string tempKey in temp.Keys) {
 								//暂时只支持1层dict
 								string valueStr = (string)temp [tempKey];
-								valueStr = replaceAppKey (valueStr, appkey);
+                                
+								valueStr = replaceAppKey (valueStr, appkey, deviceInfo);
 								saveHashtable.Add (tempKey,valueStr);
 							}
-							infoPlistSet.Add (key, saveHashtable);
+                           
+                            infoPlistSet.Add (key, saveHashtable);
 						}
 					}
 				}
@@ -289,7 +324,7 @@ namespace cn.mob.unity3d.sdkporter
 		}
 
 		//添加 URLSchemes
-		private void AddURLSchemes(Hashtable dataSource,string appkey)
+		private void AddURLSchemes(Hashtable dataSource,string appkey, Hashtable deviceInfo)
 		{
 			string dataKey = "URLSchemes";
 			if (dataSource.ContainsKey (dataKey)) 
@@ -304,7 +339,7 @@ namespace cn.mob.unity3d.sdkporter
 					foreach(string url in urlArray)
 					{
 						
-						string urlStr = replaceAppKey (url,appkey);
+						string urlStr = replaceAppKey (url,appkey,deviceInfo);
 						formetArray.Add(urlStr);
 					}
 					tempHashtable ["CFBundleURLSchemes"] = formetArray;
@@ -314,7 +349,7 @@ namespace cn.mob.unity3d.sdkporter
 		}
 
 		//添加 LSApplicationQueriesSchemes
-		private void AddLSApplicationQueriesSchemes(Hashtable dataSource,string appkey)
+		private void AddLSApplicationQueriesSchemes(Hashtable dataSource,string appkey, Hashtable deviceInfo)
 		{
 			string dataKey = "LSApplicationQueriesSchemes";
 			if(dataSource.ContainsKey(dataKey))
@@ -322,7 +357,7 @@ namespace cn.mob.unity3d.sdkporter
 				ArrayList tempArray = (ArrayList)dataSource[dataKey];
 				foreach (string str in tempArray)
 				{
-					string dataStr = replaceAppKey (str,appkey);
+					string dataStr = replaceAppKey (str,appkey,deviceInfo);
 					if(!LSApplicationQueriesSchemes.Contains(dataStr))
 					{
 						LSApplicationQueriesSchemes.Add (dataStr);
@@ -422,7 +457,7 @@ namespace cn.mob.unity3d.sdkporter
 
                         string appkey = MobAppKey;
                         //读取配置
-                        ReadMobpds(filePath, appkey, savefilePath);
+                        ReadMobpds(filePath, appkey, savefilePath,null);
                     }
 
                     if (restoreSceneInfo.ContainsKey("Capabilitites_EntitlementsPath"))

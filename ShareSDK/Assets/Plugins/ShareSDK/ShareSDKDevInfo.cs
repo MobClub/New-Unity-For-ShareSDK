@@ -64,8 +64,9 @@ namespace cn.sharesdk.unity3d
 		public YixinSeries yixinSeries;							//iOS端易信系列, 可直接配置易信三个子平台			[仅支持iOS端]
 		public WechatSeries wechatSeries;						//iOS端微信系列, 可直接配置微信三个子平台 		[仅支持iOS端]
 		public QQSeries qqSeries;								//iOS端QQ系列,  可直接配置QQ系列两个子平台		[仅支持iOS端]
-		public KakaoSeries kakaoSeries;							//iOS端Kakao系列, 可直接配置Kakao系列两个子平台	[仅支持iOS端]
-		public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
+		public KakaoSeries kakaoSeries;                         //iOS端Kakao系列, 可直接配置Kakao系列两个子平台	[仅支持iOS端]
+        public SnapChat snapChat;
+        public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
 		public Apple apple;//苹果
 #endif
 
@@ -96,8 +97,8 @@ namespace cn.sharesdk.unity3d
 		#endif
 	}
 
-	[Serializable]
-	public class TencentWeiboDevInfo : DevInfo 
+    [Serializable]
+    public class TencentWeiboDevInfo : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public const int type = (int) PlatformType.TencentWeibo;
@@ -605,7 +606,8 @@ namespace cn.sharesdk.unity3d
 		public string ChannelSecret = "f30c036370f2e04ade71c52eef73a9af";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Line;
-        public string channel_id = "1521201864";
+        public string channel_id = "1639219273";
+        public string app_universalLink = "https://ybpre.share2dlink.com/line-auth/";
         #endif
     }
 
@@ -994,17 +996,26 @@ namespace cn.sharesdk.unity3d
         public const int type = (int)PlatformType.Oasis;
 #endif
 	}
+	
+	[Serializable]
+	public class SnapChat : DevInfo
+	{
+#if UNITY_ANDROID
+		 
+#elif UNITY_IPHONE
+		public string client_id = "dc8e6068-0578-41b8-8392-4da009519725";
+		public string redirect_uri = "ssdkmoba0b0c0d0://mob";
+        public const int type = (int)PlatformType.SnapChat;
+#endif
+	}
 
-    [Serializable]
+#if UNITY_IPHONE
+	[Serializable]
     public class Apple : DevInfo
     {
-#if UNITY_ANDROID
-		
-#elif UNITY_IPHONE
-        public const int type = (int) PlatformType.Apple;
-#endif
+	    public const int type = (int) PlatformType.Apple;
     }
-
+#endif
 	// 下列为闭环分享相关类
 	[Serializable]
     public class RestoreSceneConfigure

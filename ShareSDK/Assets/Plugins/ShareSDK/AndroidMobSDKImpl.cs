@@ -18,7 +18,7 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		public override string getPrivacyPolicy (bool url) {
+		public override string getPrivacyPolicy(bool url, string language){
 			Debug.Log("AndroidMobSDKImpl  ===>>>  getPrivacyPolicy === ");
 			if(javaObj != null){
 				String str = javaObj.Call<string> ("getPrivacyPolicy", url);
@@ -47,6 +47,10 @@ namespace cn.sharesdk.unity3d
 				javaObj.Call ("setPolicyUi", backgroundColorRes, positiveBtnColorRes, negativeBtnColorRes);
 			}
 		}
+        public override string getDeviceCurrentLanguage()
+        {
+            return null;
+        }
 	}
 #endif
 }

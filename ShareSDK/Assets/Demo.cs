@@ -22,6 +22,7 @@ public class Demo : MonoBehaviour {
 		ssdk.followFriendHandler = OnFollowFriendResultHandler;
 		mobsdk = gameObject.GetComponent<MobSDK>();
         #if UNITY_ANDROID
+		ShareSDKRestoreScene.setRestoreSceneListener(OnRestoreScene);
 		
         #elif UNITY_IPHONE
 		mobsdk.getPolicy = OnFollowGetPolicy;
@@ -67,7 +68,7 @@ public class Demo : MonoBehaviour {
 #if UNITY_ANDROID
 		    ssdk.Authorize(PlatformType.SinaWeibo);
 #elif UNITY_IPHONE
-            ssdk.Authorize(PlatformType.Facebook);
+            ssdk.Authorize(PlatformType.Line);
 #endif
 		}
 
@@ -113,7 +114,7 @@ public class Demo : MonoBehaviour {
             	content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
                 //优先客户端分享
                 content.SetEnableClientShare(true);
-
+                
                 //使用微博API接口应用内分享 iOS only
                 content.SetEnableSinaWeiboAPIShare(true);
 
@@ -252,10 +253,10 @@ public class Demo : MonoBehaviour {
 			Debug.Log("ssdk ======> " + ssdk);
 			Debug.Log("mobsdk ======> " + mobsdk);
 			#if UNITY_IPHONE
-            mobsdk.getPrivacyPolicy(true);
+            mobsdk.getPrivacyPolicy(true,mobsdk.getDeviceCurrentLanguage());
 #elif UNITY_ANDROID
-			mobsdk.getPrivacyPolicy(true);
-			Debug.Log("mobsdk getPrivacyPolicy======> " + mobsdk.getPrivacyPolicy(true));
+			mobsdk.getPrivacyPolicy(true, "en");
+			Debug.Log("mobsdk getPrivacyPolicy======> " + mobsdk.getPrivacyPolicy(true, "en"));
 #endif
 		}
 

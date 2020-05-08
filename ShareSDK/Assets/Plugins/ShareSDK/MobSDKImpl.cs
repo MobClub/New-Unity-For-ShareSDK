@@ -5,8 +5,12 @@ namespace cn.sharesdk.unity3d {
 		/// <summary>
 		/// 获取MobSDK隐私协议内容, url为true时返回MobTech隐私协议链接，false返回协议的内容
 		/// </summary>
-		public abstract string getPrivacyPolicy (bool url);
+		public abstract string getPrivacyPolicy (bool url, string language);
 
+        /// <summary>
+		/// 获取设备语言
+		/// </summary>
+        public abstract string getDeviceCurrentLanguage();
 		/// <summary>
 		/// 提交用户授权结果给MobSDK
 		/// </summary>

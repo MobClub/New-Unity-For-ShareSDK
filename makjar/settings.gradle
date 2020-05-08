@@ -1,0 +1,3 @@
+rootProject.name='makeUnity3d'
+include ':app'
+include ':mylibrary'

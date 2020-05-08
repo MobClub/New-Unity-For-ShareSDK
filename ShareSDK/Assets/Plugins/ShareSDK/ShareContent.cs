@@ -137,8 +137,30 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 
-
-
+        //snapchat
+		public void setSnapStickerAnimated(bool stickerAnimated) {
+#if UNITY_ANDROID
+			//shareParams["address"] = author;
+#elif UNITY_IPHONE
+			shareParams["stickerAnimated"] = stickerAnimated;
+#endif
+		}
+		public void setSnapStickerRotation(float rotation)
+		{
+#if UNITY_ANDROID
+			//shareParams["address"] = author;
+#elif UNITY_IPHONE
+			shareParams["stickerRotation"] = rotation;
+#endif
+		}
+		public void setSnapStickerImage(string image)
+		{
+#if UNITY_ANDROID
+			//shareParams["address"] = author;
+#elif UNITY_IPHONE
+			shareParams["stickerImage"] = image;
+#endif
+		}
 
 		/*iOS/Android - Flickr*/
 		public void SetSafetyLevel(int safetyLevel){
@@ -253,6 +275,8 @@ namespace cn.sharesdk.unity3d
 		public void SetSourceFilePath(String sourceFilePath){
 			shareParams["sourceFilePath"] = sourceFilePath;
 		}
+
+        
 
 		/*iOS Only - QQ/Wechat/Yixin*/
 		public void SetThumbImageUrl(String thumbImageUrl){
@@ -412,14 +436,29 @@ namespace cn.sharesdk.unity3d
 			    shareParams ["hashtag"] = hashtag;
             #endif
         }
+        /*iOS - facebook*/
+        public void SetFacebookAssetsArray(String[] imageAsset, String videoAsset)
+        {
+#if UNITY_ANDROID
+            
+#elif UNITY_IPHONE
+            if (imageAsset != null)
+            {
+                shareParams["facebook_imageasset"] = String.Join(",", imageAsset);
+            }
+            if (videoAsset != null) {
+                shareParams["facebook_videoasset"] = videoAsset;
+            }
+#endif
+        }
 
         /*iOS/android - facebook*/
         public void SetFacebookQuote(String quote){
-            #if UNITY_ANDROID
+#if UNITY_ANDROID
                 shareParams ["QUOTE"] = quote;
-            #elif UNITY_IPHONE
+#elif UNITY_IPHONE
 			    shareParams ["quote"] = quote;
-            #endif
+#endif
         }
         /*iOS only - facebook shareType 1:native 2:sheet */
 		public void setFacebookShareType(int type) {
@@ -457,22 +496,22 @@ namespace cn.sharesdk.unity3d
 
         // iOS/Android 分享QQ小程序的应用id
         public void SetMiniProgramAppID(string appID){
-            #if UNITY_ANDROID
+#if UNITY_ANDROID
                 shareParams["mini_program_appid"] = appID;
-            #elif UNITY_IPHONE
+#elif UNITY_IPHONE
                 shareParams["qqMiniProgramAppID"] = appID;
-            #endif
+#endif
         }
 
         // iOS/Android 微信、QQ小程序的页面路径
         public void SetMiniProgramPath(String path){
 			shareParams ["wxPath"] = path;
 
-            #if UNITY_ANDROID
+#if UNITY_ANDROID
                 shareParams["mini_program_path"] = path;
-            #elif UNITY_IPHONE
+#elif UNITY_IPHONE
                 shareParams["qqMiniProgramPath"] = path;
-            #endif
+#endif
 
         }
 
@@ -498,10 +537,10 @@ namespace cn.sharesdk.unity3d
         public void SetMiniProgramHdThumbImage(string hdThumbImage){
 			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
             
-            #if UNITY_ANDROID
-            #elif UNITY_IPHONE
+#if UNITY_ANDROID
+#elif UNITY_IPHONE
                 shareParams["qqMiniProgramHdThumbImage"] = hdThumbImage;
-            #endif
+#endif
         }
 
         //IOS only

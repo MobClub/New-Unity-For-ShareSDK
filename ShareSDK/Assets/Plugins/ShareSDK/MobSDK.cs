@@ -32,10 +32,15 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		///
 #if UNITY_IPHONE
-        public void getPrivacyPolicy (bool url){
-			mobSDKImpl.getPrivacyPolicy(url);
+        public void getPrivacyPolicy (bool url, string language)
+        {
+			mobSDKImpl.getPrivacyPolicy(url,language);
         }
 
+
+        public string getDeviceCurrentLanguage() {
+            return mobSDKImpl.getDeviceCurrentLanguage();
+         }
         private void _Callback (string data){
             if (data == null) 
 			{
@@ -83,8 +88,8 @@ namespace cn.sharesdk.unity3d{
 			}
         }
 #elif UNITY_ANDROID
-		public string getPrivacyPolicy (bool url) {
-            string urlString =  mobSDKImpl.getPrivacyPolicy (url);
+		public string getPrivacyPolicy (bool url, string language) {
+            string urlString =  mobSDKImpl.getPrivacyPolicy (url,language);
 			return urlString;
 		}
 #endif

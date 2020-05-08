@@ -19,7 +19,7 @@ namespace cn.sharesdk.unity3d
 		string appKey = "";
 		string appSecret = "";
 		Hashtable platformConfList;
-
+       
         List<string> associatedDomains = new List<string>();
 
         public ShareSDKConfigEditor()
@@ -83,7 +83,9 @@ namespace cn.sharesdk.unity3d
             platformConfList.Add((int)PlatformType.Douyin, "app_key");
             platformConfList.Add((int)PlatformType.WeWork, "app_key");
 			platformConfList.Add((int)PlatformType.Oasis, "app_key");
-		}
+            platformConfList.Add((int)PlatformType.SnapChat, "client_id");
+
+        }
 
 		private void Prepare()
 		{
@@ -146,55 +148,80 @@ namespace cn.sharesdk.unity3d
 				Debug.LogException (e);
 			}
 		}
+        private void savePlatformInfoWithId(int platformId, DevInfo info, Hashtable deviceInfo) {
 
-		//shareSDK
-		private void checkPlatforms(DevInfoSet devInfo)
+            if (platformId == (int)PlatformType.Line)
+            {
+                Hashtable platformInfo = (Hashtable)deviceInfo[platformId];
+                if (deviceInfo.ContainsKey(platformId) == false)
+                {
+                    platformInfo = new Hashtable();
+
+                    deviceInfo.Add(platformId, platformInfo);
+                }
+
+                string universalLink = (string)info.GetType().GetField("app_universalLink").GetValue(info);
+
+                platformInfo.Add("universalLink", universalLink);
+            } else if (platformId == (int)PlatformType.SnapChat) {
+                Hashtable platformInfo = (Hashtable)deviceInfo[platformId];
+                if (deviceInfo.ContainsKey(platformId) == false)
+                {
+                    platformInfo = new Hashtable();
+
+                    deviceInfo.Add(platformId, platformInfo);
+                }
+
+                string redirect_uri = (string)info.GetType().GetField("redirect_uri").GetValue(info);
+                Debug.Log(redirect_uri);
+                platformInfo.Add("redirect_uri", redirect_uri);
+            }
+        }
+        //shareSDK
+        private void checkPlatforms(DevInfoSet devInfo)
 		{
 			Type type = devInfo.GetType();
 			FieldInfo[] devInfoFields = type.GetFields();
 			Hashtable enablePlatforms = new Hashtable();
-			foreach (FieldInfo devInfoField in devInfoFields) 
+            Hashtable deviceInfoPlatforms = new Hashtable();
+            
+            foreach (FieldInfo devInfoField in devInfoFields) 
 			{
 				DevInfo info = (DevInfo) devInfoField.GetValue(devInfo);
-				if(info.Enable)
+
+                if (info.Enable)
 				{
 					int platformId = (int) info.GetType().GetField("type").GetValue(info);
+
 					string appkey = GetAPPKey (info,platformId);
 					enablePlatforms.Add (platformId,appkey);
-
+                    
+                    
+                    
+                    savePlatformInfoWithId(platformId, info, deviceInfoPlatforms);
+                    
                     if (info.GetType().GetField("app_universalLink") != null)
                     {
                         string app_universalLink = GetValueByName(info, "app_universalLink");
                         if (app_universalLink != null && app_universalLink.Length > 0)
                         {
 
-                            app_universalLink = app_universalLink.Trim().TrimEnd('/');
-
-                            if (app_universalLink.Contains("://"))
+                            Uri uri = new Uri(app_universalLink);
+                            var appLinkHost = uri.Host;
+                            string totalLink = "applinks:" + appLinkHost;
+                            
+                            if (associatedDomains.Contains(totalLink) == false)
                             {
-                                string[] links = app_universalLink.Split(new[] { "://" }, StringSplitOptions.None);
-                                app_universalLink = "applinks:" + links[1];
-                                associatedDomains.Add(app_universalLink);
-                            }
-                            else
-                            {
-                                if (app_universalLink.Contains(":"))
-                                {
-                                    associatedDomains.Add(app_universalLink);
-                                }
-                                else
-                                {
-                                    app_universalLink = "applinks:" + app_universalLink;
-                                    associatedDomains.Add(app_universalLink);
-                                }
-
+                                associatedDomains.Add(totalLink);
                             }
 
                         }
+                         
                     }
                 }
 			}
-			var files = System.IO.Directory.GetFiles(Application.dataPath , "ShareSDK.mobpds", System.IO.SearchOption.AllDirectories);
+            
+            var files = System.IO.Directory.GetFiles(Application.dataPath , "ShareSDK.mobpds", System.IO.SearchOption.AllDirectories);
 			string filePath = files [0];
 			FileInfo projectFileInfo = new FileInfo( filePath );
 			if (projectFileInfo.Exists) 
@@ -213,10 +240,17 @@ namespace cn.sharesdk.unity3d
 					datastore.Add ("ShareSDKPlatforms",enablePlatforms);
 				}
 
-                //Debug.LogWarning("=======================");
+                if (datastore.ContainsKey("ShareSDKDeviceInfo"))
+                {
+                    datastore["ShareSDKDeviceInfo"] = deviceInfoPlatforms;
+                }
+                else
+                {
+                    datastore.Add("ShareSDKDeviceInfo", deviceInfoPlatforms);
+                }
+                
                 Debug.LogWarning(associatedDomains.ToArray());
-                //if (associatedDomains.Count > 0)
-                //{
+                
                     var associatedDomains_t = associatedDomains.Distinct();
                    
                     if (datastore.ContainsKey("AssociatedDomains"))
@@ -228,7 +262,7 @@ namespace cn.sharesdk.unity3d
                     {
                         datastore.Add("AssociatedDomains", associatedDomains_t.ToArray());
                     }
-                //}
+               
 
 
                 var json = MiniJSON.jsonEncode(datastore);
@@ -241,7 +275,8 @@ namespace cn.sharesdk.unity3d
 
         private string GetValueByName(DevInfo devInfoField,string valueName)
 		{
-			return (string)devInfoField.GetType ().GetField (valueName).GetValue (devInfoField);
+            
+            return (string)devInfoField.GetType ().GetField (valueName).GetValue (devInfoField);
 		}
 
 		private string GetAPPKey (DevInfo devInfoField, int platformId)
@@ -278,7 +313,7 @@ namespace cn.sharesdk.unity3d
                 checkRestoreScene(restoreSceneObj.restoreSceneConfig);
 
             }
-            Debug.LogWarning("ShareSDKRestoreScene OnDisable");
+            //Debug.LogWarning("ShareSDKRestoreScene OnDisable");
         }
 
         private void checkRestoreScene(RestoreSceneConfigure restoreSceneConfig)

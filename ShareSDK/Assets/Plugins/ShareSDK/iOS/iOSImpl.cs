@@ -89,7 +89,7 @@ namespace cn.sharesdk.unity3d
 			_appKey = appKey;
 		}
 
-		public override void InitSDK (String appKey,String appSecret) 
+		public override void InitSDK (String appKey,String screct) 
 		{
 			_appKey = appKey;
 		}
