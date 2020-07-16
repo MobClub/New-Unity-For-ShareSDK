@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 掌淘科技. All rights reserved.
 //
 
-#import <MOBFoundation/MOBFDataModel.h>
+#import <Foundation/Foundation.h>
 
 /**
  *  授权类型
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, SSDKCredentialType)
 /**
  *  授权凭证
  */
-@interface SSDKCredential : MOBFDataModel
+@interface SSDKCredential : SSDKDataModel
 
 /**
  *  授权码，用于请求token,只在获取token条件不足时返回 （例：微信平台未配置appsecret）

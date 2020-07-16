@@ -40,9 +40,10 @@ namespace cn.sharesdk.unity3d
 			return "";
 		}
 
-		public override void submitPolicyGrantResult(bool granted)
+		public override bool submitPolicyGrantResult(bool granted)
 		{
 			__iosMobSDKSubmitPolicyGrantResult(granted);
+			return true;
 		}
         public override string getDeviceCurrentLanguage()
         {

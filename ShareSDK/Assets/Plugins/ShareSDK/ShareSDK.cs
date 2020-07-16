@@ -74,8 +74,7 @@ namespace cn.sharesdk.unity3d
                     }
 				}
 
-                Debug.Log("======================platformConfigs platformId:" + platformId);
-                Debug.Log("======================platformConfigs table:" + table);
+             
                 platformConfigs.Add(platformId, table);
 			}
             //Debug.Log("======================platformConfigs:" + platformConfigs);
@@ -90,7 +89,7 @@ namespace cn.sharesdk.unity3d
 #elif UNITY_IPHONE
             shareSDKUtils = new iOSImpl(gameObject);
 #endif
-			Debug.Log("===================" + platformConfigs + "===================");
+			
 			shareSDKUtils.SetPlatformConfig(platformConfigs);
 		}
 		

@@ -7,21 +7,19 @@
 //
 
 #import "ShareSDKUnity3DBridge.h"
+#import <objc/message.h>
 #import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDK/ShareSDK+Base.h>
+#import <MOBFoundation/MOBFJson.h>
+#import <MOBFoundation/MOBFoundation.h>
+#import <MOBFoundation/MobSDK+Privacy.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <ShareSDKExtension/SSEFriendsPaging.h>
-#import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDKExtension/SSEShareHelper.h>
 #import <ShareSDKConfigFile/ShareSDK+XML.h>
-#import <MOBFoundation/MOBFoundation.h>
 #import <ShareSDK/NSMutableDictionary+SSDKShare.h>
-#import <objc/message.h>
-
 #import <ShareSDKExtension/SSERestoreSceneHeader.h>
-#import <MOBFoundation/MOBFJson.h>
-#import <MOBFoundation/MobSDK+Privacy.h>
-#import <MOBFoundation/MOBFoundation.h>
 static ShareSDKUnityRestoreSceneCallback *_callback = nil;
 static UIView *_refView = nil;
 #if defined (__cplusplus)
@@ -829,9 +827,15 @@ extern "C" {
                 type = __convertContentType([[shareParamsDic objectForKey:@"shareType"] integerValue]);
             }
             
+            NSURL *urlPath;
+            if ([url containsString:@"http://"] || [url containsString:@"https://"]) {
+                urlPath = [NSURL URLWithString:url];
+            }else if(url != nil){
+                urlPath = [NSURL fileURLWithPath:url];
+            }
             [params SSDKSetupShareParamsByText:text
                                         images:imageArray
-                                           url:[NSURL URLWithString:url]
+                                           url:urlPath
                                          title:title
                                           type:type];
             
@@ -1184,7 +1188,7 @@ extern "C" {
                     NSString *hashtag = nil;
                     NSInteger shareType  = 1;
                     SSDKContentType type = SSDKContentTypeText;
-                    
+                    NSArray *shareTypes = nil;
                     if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
                     {
                         text = [value objectForKey:@"text"];
@@ -1237,19 +1241,36 @@ extern "C" {
                     {
                         shareType = [[value objectForKey:@"facebook_shareType"] integerValue];
                     }
+                    if ([[value objectForKey:@"facebook_shareTypes"] isKindOfClass:[NSArray class]])
+                    {
+                        shareTypes = [value objectForKey:@"facebook_shareTypes"];
+                    }
+                    if (!shareTypes) {
+                        [params SSDKSetupFacebookParamsByText:text
+                                 image:images
+                                   url:[NSURL URLWithString:url]
+                              urlTitle:title
+                               urlName:urlDesc
+                        attachementUrl:[NSURL URLWithString:attachmentPath]
+                               hashtag:hashtag
+                                 quote:quote
+                             shareType:shareType
+                                  type:type];
+                    }else{
+                        [params SSDKSetupFacebookParamsByText:text
+                                 image:images
+                                   url:[NSURL URLWithString:url]
+                              urlTitle:title
+                               urlName:urlDesc
+                        attachementUrl:[NSURL URLWithString:attachmentPath]
+                               hashtag:hashtag
+                                 quote:quote
+                             sortShareTypes:shareTypes
+                                  type:type];
+                    }
+
                     
                     
-                    
-                    [params SSDKSetupFacebookParamsByText:text
-                                                    image:images
-                                                      url:[NSURL URLWithString:url]
-                                                 urlTitle:title
-                                                  urlName:urlDesc
-                                           attachementUrl:[NSURL URLWithString:attachmentPath]
-                                                  hashtag:hashtag
-                                                    quote:quote
-                                                shareType:shareType
-                                                     type:type];
                     NSArray * imageAssets = nil;
                     if ([[value objectForKey:@"facebook_imageasset"] isKindOfClass:[NSString class]]) {
                         imageAssets = [(NSString *)[value objectForKey:@"facebook_imageasset"] componentsSeparatedByString:@","];
@@ -3249,6 +3270,10 @@ extern "C" {
                  {
                      NSMutableDictionary *userData = [user rawData].mutableCopy;
                      userData[@"credential"] = [[user credential] rawData];
+                     if (platType == SSDKPlatformTypeAppleAccount) {
+                         userData[@"identify"] = user.credential.token;
+                         userData[@"code"] = user.credential.authCode;
+                     }
                      resultDict[@"res"] = userData;
                  }
                  

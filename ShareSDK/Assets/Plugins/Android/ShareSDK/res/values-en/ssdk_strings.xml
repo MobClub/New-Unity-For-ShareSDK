@@ -79,6 +79,9 @@
 	<string name="ssdk_telecom">China Telecom</string>
 	<string name="ssdk_accountkit">Accountkit</string>
 	<string name="ssdk_hwaccount">HuaweiAccount</string>
+	<string name="ssdk_xmaccount">XMAccount</string>
+	<string name="ssdk_snapchat">SnapChat</string>
+
 
 	<string name="ssdk_share_to_qzone">Share To QZone</string>
 	<string name="ssdk_share_to_qq">Share To QQ</string>
@@ -170,6 +173,6 @@
 	<string name="ssdk_cmcc_loading_text">Verifying your identity, please wait...</string>
 
 	<!-- policy -->
-	<string name="mobdemo_authorize_dialog_content"><![CDATA[In order to provide you with Mobservice related products and services, please check our privacy policy in detail, see details<a href="http://www.mob.com/about/policy">http://www.mob.com/about/policy</a>.If you agree with our privacy policy, please click "accept". If you disagree with our privacy policy, please click "reject".]]></string>
+	<string name="mobdemo_authorize_dialog_content"><![CDATA[In order to provide you with Mobservice related products and services, please check our privacy policy in detail, see details<a href="http://www.mob.com/about/policy/en">http://www.mob.com/about/policy/en</a>.If you agree with our privacy policy, please click "accept". If you disagree with our privacy policy, please click "reject".]]></string>
 	<string name="mobdemo_authorize_dialog_title">service authority</string>
 </resources>

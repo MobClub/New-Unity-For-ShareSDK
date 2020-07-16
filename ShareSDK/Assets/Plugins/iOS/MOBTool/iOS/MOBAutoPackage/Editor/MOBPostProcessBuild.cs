@@ -11,7 +11,8 @@ using System;
 #if UNITY_IOS
 
 using UnityEditor.iOS.Xcode;
-#if UNITY_2019_3_OR_NEWER
+
+#if UNITY_2017_2_OR_NEWER
 using UnityEditor.iOS.Xcode.Extensions;
 #endif
 using System.Reflection;
@@ -21,7 +22,6 @@ public class MOBPostProcessBuild
 {
     static ArrayList platformJsList;
     static string MobAppKey;
-
     //[PostProcessBuild]
 #if UNITY_IOS
     [PostProcessBuildAttribute(88)]
@@ -84,7 +84,7 @@ public class MOBPostProcessBuild
 
         //添加 BuildSettings
         AddBuildSettings(xcodeModel, xcodeProj, xcodeTargetGuid);
-
+       
         //根据配置文件加载资源及xcode设置
         bool hasMobFramework = false;
 
@@ -97,13 +97,20 @@ public class MOBPostProcessBuild
             AddBundle(pathModel.filePath, targetPath, xcodeTargetGuid, pathModel, xcodeProj);
             AddOtherFile(pathModel.filePath, targetPath, xcodeTargetGuid, pathModel, xcodeProj, xcodeModel.fileFlags);
         }
+#if UNITY_2018_1_OR_NEWER
+        
+#else
+        AddCapability(xcodeModel, xcodeProj, xcodeTargetGuid, targetPath);
+#endif
         //加入系统Framework
         AddSysFrameworks(xcodeModel, xcodeProj, xcodeFrameworkTargetGuid, targetPath);
         //加入 xcodeModel.frameworks 中指定的 framework
         AddXcodeModelFrameworks(xcodeModel, xcodeProj, xcodeFrameworkTargetGuid, targetPath);
         xcodeProj.WriteToFile(xcodeProjPath);
-
+#if UNITY_2018_1_OR_NEWER
         AddCapability(xcodeModel, xcodeProj, xcodeTargetGuid, targetPath);
+#endif
+
     }
 
     private static void initMobAppKeyInfo()
@@ -160,7 +167,11 @@ public class MOBPostProcessBuild
                 DirectoryInfo saveFrameworkInfo = new DirectoryInfo(savePath);
                 CopyAll(frameworkInfo, saveFrameworkInfo);
                 //将 framework 加入 proj中
+#if UNITY_2017_1_OR_NEWER
+                xcodeProj.AddFileToBuildSection(xcodeTargetGuid, xcodeProj.AddFrameworksBuildPhase(xcodeTargetGuid), xcodeProj.AddFile(frameworkPath.Substring(1), "MOB" + frameworkPath, PBXSourceTree.Absolute));
+#else
                 xcodeProj.AddFileToBuild(xcodeTargetGuid, xcodeProj.AddFile(frameworkPath.Substring(1), "MOB" + frameworkPath, PBXSourceTree.Absolute));
+#endif
                 //将 build setting 设置
                 xcodeProj.AddBuildProperty(xcodeTargetGuid, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)" + saveFrameworkPath.Replace("\\", "/"));
             }
@@ -235,7 +246,12 @@ public class MOBPostProcessBuild
                 }
                 else
                 {
+#if UNITY_2017_1_OR_NEWER
+                    xcodeProj.AddFileToBuildSection(xcodeTargetGuid, xcodeProj.AddFrameworksBuildPhase(xcodeTargetGuid), xcodeProj.AddFile(otherFilePath.Substring(1), "MOB" + otherFilePath, PBXSourceTree.Absolute));
+
+#else
                     xcodeProj.AddFileToBuild(xcodeTargetGuid, xcodeProj.AddFile(otherFilePath.Substring(1), "MOB" + otherFilePath, PBXSourceTree.Absolute));
+#endif
                 }
             }
         }
@@ -273,7 +289,11 @@ public class MOBPostProcessBuild
                 string savePath = xcodeTargetPath + headerPath;
                 fileInfo.CopyTo(savePath, true);
                 //将.h 加入 proj中
-                xcodeProj.AddFileToBuild(xcodeTargetGuid, xcodeProj.AddFile(headerPath.Substring(1), "MOB" + headerPath, PBXSourceTree.Absolute));
+#if UNITY_2017_1_OR_NEWER
+                xcodeProj.AddFileToBuildSection(xcodeTargetGuid, xcodeProj.AddResourcesBuildPhase(xcodeTargetGuid),xcodeProj.AddFile(headerPath.Substring(1), "MOB" + headerPath, PBXSourceTree.Absolute));
+#else
+                xcodeProj.AddFileToBuild(xcodeTargetGuid,xcodeProj.AddFile(headerPath.Substring(1), "MOB" + headerPath, PBXSourceTree.Absolute));
+#endif
                 if (!savePathArray.Contains(saveHeaderPath))
                 {
                     savePathArray.Add(saveHeaderPath);
@@ -325,7 +345,11 @@ public class MOBPostProcessBuild
             string savePath = xcodeTargetPath + staticLibraryPath;
             fileInfo.CopyTo(savePath, true);
             //将.a 加入 proj中
+#if UNITY_2017_1_OR_NEWER
+            xcodeProj.AddFileToBuildSection(xcodeTargetGuid, xcodeProj.AddFrameworksBuildPhase(xcodeTargetGuid), xcodeProj.AddFile(staticLibraryPath.Substring(1), "MOB" + staticLibraryPath, PBXSourceTree.Absolute));
+#else
             xcodeProj.AddFileToBuild(xcodeTargetGuid, xcodeProj.AddFile(staticLibraryPath.Substring(1), "MOB" + staticLibraryPath, PBXSourceTree.Absolute));
+#endif
             //将 build setting 设置
             xcodeProj.AddBuildProperty(xcodeTargetGuid, "LIBRARY_SEARCH_PATHS", "$(SRCROOT)" + saveStaticLibraryPath.Replace("\\", "/"));
         }
@@ -359,7 +383,11 @@ public class MOBPostProcessBuild
             DirectoryInfo saveBundleInfo = new DirectoryInfo(savePath);
             CopyAll(bundleInfo, saveBundleInfo);
             //将 framework 加入 proj中
+#if UNITY_2017_1_OR_NEWER
+            xcodeProj.AddFileToBuildSection(xcodeTargetGuid, xcodeProj.AddResourcesBuildPhase(xcodeTargetGuid), xcodeProj.AddFile(bundlePath.Substring(1), "MOB" + bundlePath, PBXSourceTree.Absolute));
+#else
             xcodeProj.AddFileToBuild(xcodeTargetGuid, xcodeProj.AddFile(bundlePath.Substring(1), "MOB" + bundlePath, PBXSourceTree.Absolute));
+#endif
         }
     }
 
@@ -428,24 +456,36 @@ public class MOBPostProcessBuild
 
                 string[] dynamicframework = { "OasisSDK.framework", "SCSDKCreativeKit.framework", "SCSDKLoginKit.framework", "SCSDKCoreKit.framework" };
                 int dynamicIndex = Array.IndexOf(dynamicframework, frameworkName);
-                Debug.LogWarning("!!!!dynamicIndex 1:::::" + dynamicIndex + "frameworkname::" + frameworkName);
+                
                 if (dynamicIndex >= 0)
                 {
-                    Debug.LogWarning("===dynamicIndex 2:::::" + dynamicIndex + "frameworkname::" + frameworkName);
+                    
                     targetGuid = xcodeTargetGuid;
+#if UNITY_2017_1_OR_NEWER
+                    xcodeProj.AddFileToBuildSection(targetGuid, xcodeProj.AddFrameworksBuildPhase(targetGuid), fileGuid);
+#else
                     xcodeProj.AddFileToBuild(targetGuid, fileGuid);
-#if UNITY_2019_3_OR_NEWER
+#endif
+#if UNITY_2017_2_OR_NEWER
 
+                    xcodeProj.AddFileToEmbedFrameworks(targetGuid, fileGuid);
+#elif UNITY_2019_3_OR_NEWER
                     xcodeProj.AddFileToEmbedFrameworks(targetGuid, fileGuid, targetGuid);
 #endif
                 }
                 else
                 {
+#if UNITY_2017_1_OR_NEWER
+                    xcodeProj.AddFileToBuildSection(targetGuid, xcodeProj.AddFrameworksBuildPhase(targetGuid), fileGuid);
+#else
                     xcodeProj.AddFileToBuild(targetGuid, fileGuid);
+#endif
                 }
 
                 //将 build setting 设置
                 xcodeProj.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)" + saveFrameworkPath.Replace("\\", "/"));
+                
+             
             }
         }
     }
@@ -594,21 +634,24 @@ public class MOBPostProcessBuild
             string entitlementsPath = xcodeModel.entitlementsPath;
             if (entitlementsPath == null || entitlementsPath == "" || !xcodeModel.entitlementsPath.Contains(".entitlements"))
             {
+
                 string[] s = UnityEditor.PlayerSettings.applicationIdentifier.Split('.');
                 string productname = s[s.Length - 1];
                 entitlementsPath = "Unity-iPhone/" + productname + ".entitlements";
             }
-
+#if UNITY_2018_1_OR_NEWER
 #if UNITY_2019_3_OR_NEWER
             ProjectCapabilityManager capManager = new ProjectCapabilityManager(projectPath, entitlementsPath, null, xcodeTargetGuid);
 
 #else
-            ProjectCapabilityManager capManager = new ProjectCapabilityManager(projectPath, entitlementsPath, PBXProject.GetUnityTargetName());
+            ProjectCapabilityManager capManager = new ProjectCapabilityManager(projectPath , entitlementsPath, "Unity-iPhone");
 
 #endif
-
+            
+            
             if (xcodeModel.associatedDomains.Count > 0 || xcodeModel.isHaveApple)
             {
+
                 string[] domains = new string[xcodeModel.associatedDomains.Count];
                 int index = 0;
                 foreach (string domainStr in xcodeModel.associatedDomains)
@@ -617,11 +660,19 @@ public class MOBPostProcessBuild
                     domains[index] = domainStr;
                     index++;
                 }
-               
+                //Debug.Log("xcodeTargetGuid：" + xcodeTargetGuid);
+                //Debug.Log("xcodeTargetPath：" + xcodeTargetPath);
+                //Debug.Log("projectPath：" + projectPath);
+                //Debug.Log("GetUnityTargetName：" + PBXProject.GetUnityTargetName());
+                //Debug.Log("domainStr：" + MiniJSON.jsonEncode(domains));
                 if (capManager.GetType().GetMethod("AddAssociatedDomains") != null)
                 {
                     capManager.GetType().GetMethod("AddAssociatedDomains").Invoke(capManager, new object[] { domains });
                 }
+
+                
+                //Debug.Log("bundleIdentifier：" + UnityEditor.PlayerSettings.applicationIdentifier);
+                //Debug.Log("productName：" + UnityEditor.PlayerSettings.productName);
                 if (xcodeModel.isHaveApple && capManager.GetType().GetMethod("AddSignInWithApple") != null)
                 {
                     capManager.GetType().GetMethod("AddSignInWithApple").Invoke(capManager, null);
@@ -632,17 +683,50 @@ public class MOBPostProcessBuild
                 //内购
                 //capManager.AddInAppPurchase();
                 capManager.WriteToFile();
+
                 
-                //Debug.Log("xcodeTargetGuid：" + xcodeTargetGuid);
-                //Debug.Log("xcodeTargetPath：" + xcodeTargetPath);
-                //Debug.Log("projectPath：" + projectPath);
-                //Debug.Log("GetUnityTargetName：" + PBXProject.GetUnityTargetName());
-                //Debug.Log("bundleIdentifier：" + UnityEditor.PlayerSettings.applicationIdentifier);
-                //Debug.Log("productName：" + UnityEditor.PlayerSettings.productName);
-                xcodeProj.AddCapability(xcodeTargetGuid, PBXCapabilityType.AssociatedDomains, xcodeTargetPath + "/" + xcodeModel.entitlementsPath, true);
+                xcodeProj.AddCapability(xcodeTargetGuid, PBXCapabilityType.AssociatedDomains, xcodeTargetPath + "/" + entitlementsPath, true);
             }
+#else
+
+            var entitlementFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \" -//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version = \"1.0\"><dict>";
+
+            if (xcodeModel.associatedDomains.Count > 0 || xcodeModel.isHaveApple)
+            {
+
+                string[] domains = new string[xcodeModel.associatedDomains.Count];
+                int index = 0;
+                foreach (string domainStr in xcodeModel.associatedDomains)
+                {
+                    Debug.Log("AddCapabilityAssociatedDomains:" + domainStr);
+                    domains[index] = "<string>" + domainStr + "</string>";
+                    index++;
+                }
+                var associatedDomainsString = "";
+                if (domains.Length > 0) {
+                    associatedDomainsString = "<key>com.apple.developer.associated-domains</key><array>" + string.Join("", domains) + "</array>";
+                }
+                var appleString = "";
+                if (xcodeModel.isHaveApple) {
+                    appleString = "<key>com.apple.developer.applesignin</key><array><string> Default </string></array>";
+                }
+                entitlementFile = entitlementFile + associatedDomainsString + appleString + "</dict></plist>";
+
+            }
+            Debug.LogWarning(entitlementFile);
+            Debug.LogWarning(xcodeTargetPath + "/" + entitlementsPath);
+            Debug.LogWarning(xcodeTargetPath);
+            StreamWriter sWriter = new StreamWriter(xcodeTargetPath + "/" + entitlementsPath);
+            sWriter.WriteLine(entitlementFile);
+            sWriter.Close();
+            sWriter.Dispose();
+            xcodeProj.AddBuildProperty(xcodeTargetGuid, "CODE_SIGN_ENTITLEMENTS", entitlementsPath);
+            string fileGuid = (string)xcodeProj.AddFile(xcodeTargetPath + "/" + entitlementsPath, entitlementsPath, PBXSourceTree.Absolute);
+            xcodeProj.AddFileToBuild(xcodeTargetGuid, fileGuid);            
+#endif
         }
     }
 
+
 #endif
-}
+                }

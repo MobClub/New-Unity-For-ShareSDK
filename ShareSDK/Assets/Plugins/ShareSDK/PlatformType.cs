@@ -80,7 +80,9 @@ namespace cn.sharesdk.unity3d
         //Reddit = 56,			//Reddit
         Apple = 61,            //苹果登录
         SnapChat = 66,         //Snapchat
-        YixinPlatform = 994,    //Yixin series
+        KuaiShou = 68,         //快手
+		WatermelonVideo = 69,   //西瓜视频
+		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series
 		EvernoteInternational = 996,//Evernote InternationaL Edition
 		WechatPlatform = 997,   //Wechat Series

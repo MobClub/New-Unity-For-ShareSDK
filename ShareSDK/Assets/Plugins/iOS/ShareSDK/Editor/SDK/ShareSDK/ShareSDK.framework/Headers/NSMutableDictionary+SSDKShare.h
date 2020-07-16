@@ -314,6 +314,55 @@
                                  type:(SSDKContentType)type;
 
 /**
+*  设置Facebook分享参数
+*
+*  @param text             分享内容
+分享类型为Text类型时,作为文字主体内容
+分享类型为WebPage类型时,作为连接描述
+
+*  @param image            图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage
+分享类型为Image类型时,若使用客户端分享,可传入 单张/多张 的 本地/网络 图片;如果不使用客户端分享,仅支持单张的本地/网络图片
+分享类型为App（应用邀请）时 只支持网络图片链接
+*【Facebook通过客户端分享图片,可不需依赖任何权限;否则需要申请publish_actions权限】*
+分享类型为WebPage类型时,无论是否使用客户端,仅支持单张的网络图片
+
+*  @param url              链接
+分享类型为WebPage类型时,为链接地址
+[如果分享的连接是AppStore/GooglePlay/Facebook个人/公共主页,所对应的图片,标题,描述等参数可能不会生效,而实际生效的是FB通过爬虫网络根据连接搜刮而来的信息]
+分享类型为Video类型时,需传入视频地址且但必须是相册地址
+
+*  @param title            链接标题
+分享类型为WebPage类型时,为链接标题
+
+*  @param urlName          连接名称
+分享类型为WebPage类型时,为链接名称,仅在非客户端分享时生效
+
+*  @param attachementUrl   附件链接(附加的媒体文件（SWF 或 MP3）的网址。如果是 SWF，还必须指定image以提供视频的缩略图)
+分享类型为WebPage类型时,为链,仅在非客户端分享时生效
+
+*  @param hashtag 话题标签
+开发者指定的话题标签，将添加至分享内容中。用户可决定是否在分享对话框中移除这种话题标签。话题标签应包含#符号，例如#facebook，不能是纯数字
+
+*  @param quote 话题标签
+随分享的链接一同显示的引文由用户自行高亮选择，也可由开发者预先定义(例如文章的醒目引文) 此参数只适用于链接分享类型
+
+*  @param sortShareTypes 设置分享优先级顺序，如sheet->native->web， 传@[@(SSDKFacebookShareTypeShareSheet),@(SSDKFacebookShareTypeNative),@(SSDKFacebookShareTypeBrowser)  ]或sheet->web->native,@[@(SSDKFacebookShareTypeShareSheet),@(SSDKFacebookShareTypeBrowser),@(SSDKFacebookShareTypeNative)  ],如果数组的最后一个元素为-1, 则在分享链结束仍然是分享失败的情况下，会默认执行接下来内部的优先级顺序，否则就停止执行
+
+*  @param type             分享类型
+当使用客户端分享时,支持Image、WebPage,Video类型
+当不适用客户端分享是,支持Text、Image、WebPage、App(应用邀请)类型
+*/
+- (void)SSDKSetupFacebookParamsByText:(NSString *)text
+                                image:(id)image
+                                  url:(NSURL *)url
+                             urlTitle:(NSString *)title
+                              urlName:(NSString *)urlName
+                       attachementUrl:(NSURL *)attachementUrl
+                              hashtag:(NSString *)hashtag
+                                quote:(NSString *)quote
+                        sortShareTypes:(NSArray <NSNumber *>*)sortShareTypes
+                                 type:(SSDKContentType)type;
+/**
  Facebook 分享参数 SSDKSetupFacebookParamsByText:image:url:urlTitle:urlName:attachementUrl:hashtag:quote:shareType:type的扩展
  imageAsset 设置分享图片的PHAsset，为一个数组
  videoAsset  设置分享视频的PHAsset，或localIdentifier

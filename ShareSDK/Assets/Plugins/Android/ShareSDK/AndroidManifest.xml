@@ -169,7 +169,27 @@
             >
         </provider>
 
-        
+        <!-- google 授权需要的配置，这种谷歌授权方式是使用的谷歌原生的包，采用此种方式的授权，项目必须使用androidX-->
+		<activity
+		    android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar"
+		    android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+		    android:exported="false"
+		    android:excludeFromRecents="true" />
+		
+		<service
+		    android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+		    android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+		    android:exported="true" />
+		
+		<activity
+		    android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar"
+		    android:name="com.google.android.gms.common.api.GoogleApiActivity"
+		    android:exported="false" />
+		
+		<meta-data
+		    android:name="com.google.android.gms.version"
+		    android:value="12451000" />
+		
 
     </application>
 

@@ -234,6 +234,15 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      * SnapChat
      */
     SSDKPlatformTypeSnapChat              = 66,
+    
+    /**
+     * 快手
+     */
+    SSDKPlatformTypeKuaiShou              = 68,
+    /**
+     * 西瓜视频
+     */
+    SSDKPlatformTypeWatermelonVideo       = 69,
     /**
      *  易信
      */
@@ -432,13 +441,29 @@ typedef NS_ENUM(NSUInteger, SSDKPrivacyStatus){
 
 typedef NS_ENUM(NSUInteger, SSDKFacebookShareType){
     /**
-     * FacebookApp分享
+     * 进入facebook分享
      */
     SSDKFacebookShareTypeNative = 1,
     /**
       在app内分享
      */
     SSDKFacebookShareTypeShareSheet,
+    /**
+       Safari分享
+    */
+    SSDKFacebookShareTypeBrowser,
+    /**
+       WKWebView分享
+    */
+    SSDKFacebookShareTypeWeb,
+    /**
+       Safari提示对话框
+    */
+    SSDKFacebookShareTypeFeedBrowser,
+    /**
+        WKWebView提示对话框
+    */
+    SSDKFacebookShareTypeFeedWeb
 };
 /**
  *  授权状态变化回调处理器
@@ -464,10 +489,18 @@ typedef void(^SSDKGetUserStateChangedHandler) (SSDKResponseState state, SSDKUser
  *
  *  @param state            状态
  *  @param userData         附加数据, 返回状态以外的一些数据描述，如：邮件分享取消时，标识是否保存草稿等
+ *
  *  @param contentEntity    分享内容实体,当且仅当state为SSDKResponseStateSuccess时返回
  *  @param error            错误信息,当且仅当state为SSDKResponseStateFail时返回
  */
 typedef void(^SSDKShareStateChangedHandler) (SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity,  NSError *error);
 
+/**
+ * 当前分享处理的
+ * application:continueUserActivity:restorationHandler:或application:openURL:sourceApplication:annotation:或者application:handleOpenURL中的数据
+ * 类型为NSURL或NSUserActivity或字符串
+ * 当分享状态为取消时，此值为空，表明是用户自己返回app，如果此值不为空，表明是用户点取消返回app
+ */
+extern NSString * SSDKShareUserDataHandleOpenObjectKey;
 
 #endif

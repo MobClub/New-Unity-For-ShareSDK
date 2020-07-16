@@ -6,12 +6,12 @@
 //  Copyright (c) 2015年 掌淘科技. All rights reserved.
 //
 
-#import <MOBFoundation/MOBFDataModel.h>
+#import <Foundation/Foundation.h>
 
 /**
  *  内容实体
  */
-@interface SSDKContentEntity : MOBFDataModel
+@interface SSDKContentEntity : SSDKDataModel
 
 /**
  *  内容标识

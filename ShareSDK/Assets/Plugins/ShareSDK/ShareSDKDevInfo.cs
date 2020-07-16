@@ -68,6 +68,8 @@ namespace cn.sharesdk.unity3d
         public SnapChat snapChat;
         public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
 		public Apple apple;//苹果
+		public KuaiShou kuaishou;
+		public WatermelonVideo watermelonVideo;
 #endif
 
     }
@@ -173,7 +175,7 @@ namespace cn.sharesdk.unity3d
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string UserName = "gh_afb25ac019c9@app";
 		public string Path = "/page/API/pages/share/share";
-		public bool BypassApproval = true;
+		public bool BypassApproval = false;
 		public bool WithShareTicket = true;
 		public string MiniprogramType = "0";
 		#elif UNITY_IPHONE
@@ -417,9 +419,10 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "19";
 		public const int type = (int) PlatformType.GooglePlus;
-		public string ClientID = "682795613743-cfo3a8r4va0ujja7qofr54hobt2kv3cq.apps.googleusercontent.com";
+		public string ClientID = "236300675100-am5pm8km7md1memjevq8rl9pg5c4s4b8.apps.googleusercontent.com";
 		public string RedirectUrl = "http://localhost";
 		public bool	ShareByAppClient = false;
+		public string OfficialVersion = "default";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.GooglePlus;
 		public string client_id = "232554794995.apps.googleusercontent.com";
@@ -1015,6 +1018,16 @@ namespace cn.sharesdk.unity3d
     {
 	    public const int type = (int) PlatformType.Apple;
     }
+	[Serializable]
+	public class KuaiShou : DevInfo
+	{
+		public const int type = (int)PlatformType.KuaiShou;
+	}
+	[Serializable]
+	public class WatermelonVideo : DevInfo
+	{
+		public const int type = (int)PlatformType.WatermelonVideo;
+	}
 #endif
 	// 下列为闭环分享相关类
 	[Serializable]

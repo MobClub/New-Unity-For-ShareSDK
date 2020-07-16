@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MOBFoundation/MOBFDataModel.h>
 
-@interface SSDKUserQueryCondition : MOBFDataModel
+
+@interface SSDKUserQueryCondition : SSDKDataModel
 
 /**
  *  用户标志

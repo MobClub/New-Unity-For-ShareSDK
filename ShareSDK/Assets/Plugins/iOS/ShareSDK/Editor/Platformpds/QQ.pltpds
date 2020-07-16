@@ -6,6 +6,7 @@
 								"mqqopensdkdataline","mqqgamebindinggroup","mqqopensdkgrouptribeshare","tencentapi.qq.reqContent","tencentapi.qzone.reqContent","tim",
 								"timapi","timopensdkfriend","timwpa","timgamebindinggroup","timapiwallet","timOpensdkSSoLogin","wtlogintim","timopensdkgrouptribeshare",
 								"timopensdkapiV4","timgamebindinggroup","timopensdkdataline","wtlogintimV1","timapiV1","mqqopensdkminiapp"],
+    "sysFramework":["WebKit.framework"],
     "URLSchemes" : {
     				"CFBundleURLSchemes" :["tencent{appkey}","QQ{appkey16}"],
     				"CFBundleURLName" : "QQ"

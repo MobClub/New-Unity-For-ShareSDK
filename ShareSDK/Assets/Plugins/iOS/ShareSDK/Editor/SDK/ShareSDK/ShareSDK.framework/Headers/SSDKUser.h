@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 掌淘科技. All rights reserved.
 //
 
-#import <MOBFoundation/MOBFDataModel.h>
-#import <ShareSDK/SSDKTypeDefine.h>
+#import <Foundation/Foundation.h>
+
 
 @class SSDKCredential;
 
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, SSDKGender)
 /**
  *  用户信息
  */
-@interface SSDKUser : MOBFDataModel
+@interface SSDKUser : SSDKDataModel
 
 /**
  *  平台类型

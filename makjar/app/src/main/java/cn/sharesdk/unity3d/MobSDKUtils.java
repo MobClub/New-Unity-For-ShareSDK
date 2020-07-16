@@ -2,6 +2,7 @@ package cn.sharesdk.unity3d;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
@@ -48,18 +49,29 @@ public class MobSDKUtils {
      *
      * @param granted true表示用户已授权，false表示用户未授权
      */
-    public void submitPolicyGrantResult(boolean granted) {
+    public boolean submitPolicyGrantResult(boolean granted) {
+        final boolean[] result = {true};
         MobSDK.submitPolicyGrantResult(granted, new OperationCallback<Void>() {
             public void onComplete(Void data) {
-                if (!TextUtils.isEmpty(MobSDKUtils.u3dCallback))
-                    UnityPlayer.UnitySendMessage(MobSDKUtils.u3dGameObject, MobSDKUtils.u3dCallback, "true");
+//                if (!TextUtils.isEmpty(MobSDKUtils.u3dCallback)) {
+//                    UnityPlayer.UnitySendMessage(MobSDKUtils.u3dGameObject, MobSDKUtils.u3dCallback, "true");
+//                }
+                result[0] = true;
             }
 
             public void onFailure(Throwable t) {
-                if (!TextUtils.isEmpty(MobSDKUtils.u3dCallback))
-                    UnityPlayer.UnitySendMessage(MobSDKUtils.u3dGameObject, MobSDKUtils.u3dCallback, "false");
+//                if (!TextUtils.isEmpty(MobSDKUtils.u3dCallback)) {
+//                    UnityPlayer.UnitySendMessage(MobSDKUtils.u3dGameObject, MobSDKUtils.u3dCallback, "false");
+//                }
+                result[0] = false;
             }
         });
+        try {
+            return result[0];
+        } catch (Throwable t) {
+            Log.e("ShareSDK", "result catch: " + t);
+            return false;
+        }
     }
 
     /**

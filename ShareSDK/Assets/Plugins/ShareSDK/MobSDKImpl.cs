@@ -14,7 +14,7 @@ namespace cn.sharesdk.unity3d {
 		/// <summary>
 		/// 提交用户授权结果给MobSDK
 		/// </summary>
-		public abstract void submitPolicyGrantResult (bool granted);
+		public abstract Boolean submitPolicyGrantResult (bool granted);
 
 		/// <summary>
 		/// 是否允许展示二次确认框

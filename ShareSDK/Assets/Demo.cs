@@ -76,7 +76,8 @@ public class Demo : MonoBehaviour {
 		{
             //ssdk.GetUserInfo(PlatformType.Douyin);
 
-            print("share result :" + ssdk.GetUserInfo(PlatformType.QQ));
+            //print("share result :" + ssdk.GetUserInfo(PlatformType.QQ));
+			print("share result : " + ssdk.GetUserInfo(PlatformType.GooglePlus));
         }
 
 		btnTop += btnHeight + 20 * scale;
@@ -90,33 +91,34 @@ public class Demo : MonoBehaviour {
             	content.SetHidePlatforms (platfsList);
 
             	content.SetText("this is a test string.");
-            	content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
+            	content.SetImageUrl("http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg");
             	content.SetTitle("test title");
 
             //(Android only) 针对Android绕过审核的多图分享，传图片String数组 
-            	String[] imageArray =  {"/sdcard/test.jpg", "http://f1.webshare.mob.com/dimgs/1c950a7b02087bf41bc56f07f7d3572c11dfcf36.jpg", "/sdcard/test.jpg"};
-            	content.SetImageArray (imageArray);
+            //String[] imageArray =  {"/sdcard/test.jpg", "http://f1.webshare.mob.com/dimgs/1c950a7b02087bf41bc56f07f7d3572c11dfcf36.jpg", "/sdcard/test.jpg"};
+            //content.SetImageArray (imageArray);
 
-            	content.SetTitleUrl("http://www.mob.com");
-            	content.SetSite("Mob-ShareSDK");
-            	content.SetSiteUrl("http://www.mob.com");
-            	content.SetUrl("http://www.mob.com");
-            	content.SetComment("test description");
-            	content.SetMusicUrl("http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT");
-            	content.SetShareType(ContentType.Image);
+            //content.SetTitleUrl("https://www.baidu.com/");
+            //content.SetSite("Test site params test test");
+            //content.SetSiteUrl("https://www.baidu.com/");
+            //content.SetUrl("https://www.baidu.com/");
+            //content.SetComment("test description");
+            //content.SetMusicUrl("http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT");
+
+            content.SetShareType(ContentType.Image);
 
                 //不同平台分享不同内容
-            	ShareContent customizeShareParams = new ShareContent();
-            	customizeShareParams.SetText("Sina share content");
-            	customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
-            	customizeShareParams.SetShareType(ContentType.Text);
-            	customizeShareParams.SetObjectID("SinaID");
-            	content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
+            	//ShareContent customizeShareParams = new ShareContent();
+            	//customizeShareParams.SetText("Sina share content");
+            	//customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
+            	//customizeShareParams.SetShareType(ContentType.Text);
+            	//customizeShareParams.SetObjectID("SinaID");
+            	//content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
                 //优先客户端分享
                 content.SetEnableClientShare(true);
                 
                 //使用微博API接口应用内分享 iOS only
-                content.SetEnableSinaWeiboAPIShare(true);
+                //content.SetEnableSinaWeiboAPIShare(true);
 
                 //通过分享菜单分享
                 ssdk.ShowPlatformList (null, content, 100, 100);
@@ -150,11 +152,11 @@ public class Demo : MonoBehaviour {
             	//content.SetTitleUrl("http://www.mob.com");
             	//content.SetSite("Mob-ShareSDK");
             	//content.SetSiteUrl("http://www.mob.com");
-            	content.SetUrl("http://qjsj.youzu.com/jycs/");
+            	//content.SetUrl("http://qjsj.youzu.com/jycs/");
             	//content.SetComment("test description");
             	//content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
                 content.SetShareType(ContentType.Image);
-                ssdk.ShareContent (PlatformType.Oasis, content);
+                ssdk.ShareContent (PlatformType.WeChat, content);
 
 
 //            //  开发者要自己传入Activity 在9.0及其以上的系统
@@ -244,6 +246,7 @@ public class Demo : MonoBehaviour {
 			Debug.Log("mobsdk ======> " + mobsdk);
 			
 			mobsdk.submitPolicyGrantResult(true);
+			Debug.Log("mobsdk submitPolicyGrantResult======> " + mobsdk.submitPolicyGrantResult(true).ToString());
 		}
 
 		btnTop += btnHeight + 20 * scale;

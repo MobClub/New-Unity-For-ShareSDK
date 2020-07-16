@@ -27,11 +27,8 @@ namespace cn.sharesdk.unity3d
 			return "No get privacypolicy content";
 		}
 
-		public override void submitPolicyGrantResult (bool granted) {
-			Debug.Log("AndroidMobSDKImpl  ===>>>  submitPolicyGrantResult === ");
-			if(javaObj != null){
-				javaObj.Call ("submitPolicyGrantResult", granted);
-			}
+		public override Boolean submitPolicyGrantResult (bool granted) {
+			Debug.Log("AndroidMobSDKImpl  ===>>>  submitPolicyGrantResult === ");			if(javaObj != null){				Boolean result = javaObj.Call<Boolean> ("submitPolicyGrantResult", granted);                return result;			}            return false;
 		}
 
 		public override void setAllowDialog (bool allowDialog) {

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "SSDKRegister.h"
 #import "NSMutableDictionary+SSDKShare.h"
+#import "SSDKDataModel.h"
 #import "SSDKUser.h"
 #import "SSDKCredential.h"
 #import "SSDKSession.h"

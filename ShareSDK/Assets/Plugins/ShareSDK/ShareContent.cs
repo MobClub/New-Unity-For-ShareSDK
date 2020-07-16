@@ -465,8 +465,26 @@ namespace cn.sharesdk.unity3d
 			shareParams["facebook_shareType"] = type;
         }
 
-        /*iOS Only - facebookMessenger*/
-        public void SetMessengerGif(String gif){
+		/*
+       
+      
+     
+	   1. Native, 进入facebook分享
+       2. ShareSheet,在app内分享
+       3. Browser,Safari分享
+        4. Web, WKWebView分享
+        5. Browser,Safari提示对话框
+        6. FeedWeb WKWebView提示对话框
+
+        可以自己设置分享优先级，如果在优先级较高的失败之后，会再调用优先级较低的分享， 如 Sheet->web->native，传{2,3,4}。如果最后一个元素为-1，会先调用自定义书序，再调用sharesdk默认流程，默认流程为1->2->3->4->5->6
+		 */
+		public void setFacebookShareTypes(int[] type)
+		{
+			shareParams["facebook_shareTypes"] = type;
+		}
+
+		/*iOS Only - facebookMessenger*/
+		public void SetMessengerGif(String gif){
 			shareParams ["gif"] = gif;
 		}
 

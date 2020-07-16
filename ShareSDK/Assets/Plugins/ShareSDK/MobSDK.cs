@@ -96,8 +96,8 @@ namespace cn.sharesdk.unity3d{
 		/// <summary>
 		/// 提交用户授权结果给MobSDK
 		/// </summary>
-		public void submitPolicyGrantResult (bool granted) {
-			mobSDKImpl.submitPolicyGrantResult (granted);
+		public Boolean submitPolicyGrantResult (bool granted) {
+		    Boolean result = mobSDKImpl.submitPolicyGrantResult (granted);            return result;
 		}
 
 		/// <summary>

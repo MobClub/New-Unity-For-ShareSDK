@@ -80,6 +80,8 @@
 	<string name="ssdk_telecom">中国电信</string>
 	<string name="ssdk_accountkit">Accountkit</string>
 	<string name="ssdk_hwaccount">华为</string>
+	<string name="ssdk_xmaccount">小米</string>
+	<string name="ssdk_snapchat">snapchat</string>
 	<string name="ssdk_share_to_qzone">分享到QQ空间</string>
 	<string name="ssdk_share_to_qq">分享到QQ</string>
 	<string name="ssdk_share_to_facebook">分享到Facebook</string>
