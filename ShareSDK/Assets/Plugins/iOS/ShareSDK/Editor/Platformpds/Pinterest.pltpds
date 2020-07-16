@@ -3,5 +3,6 @@
     "URLSchemes" : {
     				"CFBundleURLSchemes" :["pdk{appkey}"],
     				"CFBundleURLName" : "pinterest"
-    				}
+    				},
+    "framework" : ["/SDK/ShareSDK/Support/PlatformConnector/PinterestConnector.framework"]
 }

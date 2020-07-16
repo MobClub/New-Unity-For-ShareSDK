@@ -10,7 +10,15 @@
 using System;
 using System.Collections;
 namespace cn.sharesdk.unity3d{
-	public abstract class ShareSDKImpl{
+    public abstract class ShareSDKRestoreSceneImpl
+    {
+        public virtual void setRestoreSceneListener()
+        { 
+        }
+    }
+    
+
+    public abstract class ShareSDKImpl{
 
 		/// <summary>
 		/// Init the ShareSDK.
@@ -19,10 +27,20 @@ namespace cn.sharesdk.unity3d{
 
 		public abstract void InitSDK (String appKey,String screct);
 
-		/// <summary>
-		/// Sets the platform config.
-		/// </summary>
-		public abstract void SetPlatformConfig (Hashtable configs);
+        /// <summary>
+        /// add listener for loopshare
+        /// </summary>
+        public abstract void PrepareLoopShare();
+
+        /// <summary>
+        /// set channel Id
+        /// </summary>
+        public abstract void setChannelId();
+
+        /// <summary>
+        /// Sets the platform config.
+        /// </summary>
+        public abstract void SetPlatformConfig (Hashtable configs);
 		
 		/// <summary>
 		/// Authorize the specified platform.
@@ -105,6 +123,26 @@ namespace cn.sharesdk.unity3d{
 		/// </summary>
 		public abstract void DisableSSO (Boolean disable);
 
-	}
+		/// <summary>
+		/// Open Wechat miniProgram
+		/// </summary>
+		public abstract bool openMiniProgram (String userName, String path, int miniProgramType);
+
+
+
+        //intercept the WechatRequestToken
+
+        public abstract void getWXRequestToken();
+
+
+        //When the WeChat token expires, refresh in this block and execute getUserInfo to continue
+
+        public abstract void getWXRefreshToken();
+
+        public abstract void sendWXRefreshToken(String token);
+
+        public abstract void sendWXRequestToken(String uid, String token);
+
+    }
 }
 

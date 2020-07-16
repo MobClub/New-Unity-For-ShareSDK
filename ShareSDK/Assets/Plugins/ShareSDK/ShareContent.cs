@@ -12,6 +12,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LitJson;
 namespace cn.sharesdk.unity3d
 {
 	/// <summary>
@@ -135,7 +136,32 @@ namespace cn.sharesdk.unity3d
 			shareParams ["author"] = author;
 			#endif
 		}
-		
+
+        //snapchat
+		public void setSnapStickerAnimated(bool stickerAnimated) {
+#if UNITY_ANDROID
+			//shareParams["address"] = author;
+#elif UNITY_IPHONE
+			shareParams["stickerAnimated"] = stickerAnimated;
+#endif
+		}
+		public void setSnapStickerRotation(float rotation)
+		{
+#if UNITY_ANDROID
+			//shareParams["address"] = author;
+#elif UNITY_IPHONE
+			shareParams["stickerRotation"] = rotation;
+#endif
+		}
+		public void setSnapStickerImage(string image)
+		{
+#if UNITY_ANDROID
+			//shareParams["address"] = author;
+#elif UNITY_IPHONE
+			shareParams["stickerImage"] = image;
+#endif
+		}
+
 		/*iOS/Android - Flickr*/
 		public void SetSafetyLevel(int safetyLevel){
 			shareParams ["safetyLevel"] = safetyLevel;
@@ -189,7 +215,7 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 		
-		/*iOS/Android - WhatsApp/Youtube/ MeiPai/Sina(the path must be an assetUrl path in iOS)*/
+		/*iOS/Android - WhatsApp/Youtube/ MeiPai/Sina/Oasis(the path must be an assetUrl path in iOS)*/
 		public void SetVideoPath(String videoPath){
 			#if UNITY_ANDROID
 			shareParams["filePath"] = videoPath;
@@ -234,15 +260,23 @@ namespace cn.sharesdk.unity3d
 			shareParams["extInfoPath"] = extInfoPath;
 		}
 
-		/*iOS Only - Wechat*/ 
+		/*iOS Only - Wecha，Oasis*/ 
 		public void SetSourceFileExtension(String sourceFileExtension){
 			shareParams["sourceFileExtension"] = sourceFileExtension;
+		}
+
+		/*iOS Only - Oasis,多个用,分割*/
+		public void SetAssetLocalIds(String assetLocalIds)
+		{
+			shareParams["assetLocalIds"] = assetLocalIds;
 		}
 
 		/*iOS Only - Wechat*/
 		public void SetSourceFilePath(String sourceFilePath){
 			shareParams["sourceFilePath"] = sourceFilePath;
 		}
+
+        
 
 		/*iOS Only - QQ/Wechat/Yixin*/
 		public void SetThumbImageUrl(String thumbImageUrl){
@@ -384,6 +418,76 @@ namespace cn.sharesdk.unity3d
 			shareParams ["ipadMarkParam"] = ipadMarkParam;
 		}
 
+		/*iOS Only - Kakao*/
+		public void SetTemplateArgs(Hashtable templateArgs){
+			shareParams ["templateArgs"] = templateArgs;
+		}
+
+		/*iOS Only - Kakao*/
+		public void SetTemplateId(String templateId){
+			shareParams ["templateId"] = templateId;
+		}
+
+		/*iOS/android - facebook*/
+		public void SetFacebookHashtag(String hashtag){
+            #if UNITY_ANDROID
+                shareParams ["HASHTAG"] = hashtag;
+            #elif UNITY_IPHONE
+			    shareParams ["hashtag"] = hashtag;
+            #endif
+        }
+        /*iOS - facebook*/
+        public void SetFacebookAssetsArray(String[] imageAsset, String videoAsset)
+        {
+#if UNITY_ANDROID
+            
+#elif UNITY_IPHONE
+            if (imageAsset != null)
+            {
+                shareParams["facebook_imageasset"] = String.Join(",", imageAsset);
+            }
+            if (videoAsset != null) {
+                shareParams["facebook_videoasset"] = videoAsset;
+            }
+#endif
+        }
+
+        /*iOS/android - facebook*/
+        public void SetFacebookQuote(String quote){
+#if UNITY_ANDROID
+                shareParams ["QUOTE"] = quote;
+#elif UNITY_IPHONE
+			    shareParams ["quote"] = quote;
+#endif
+        }
+        /*iOS only - facebook shareType 1:native 2:sheet */
+		public void setFacebookShareType(int type) {
+			shareParams["facebook_shareType"] = type;
+        }
+
+		/*
+       
+      
+     
+	   1. Native, 进入facebook分享
+       2. ShareSheet,在app内分享
+       3. Browser,Safari分享
+        4. Web, WKWebView分享
+        5. Browser,Safari提示对话框
+        6. FeedWeb WKWebView提示对话框
+
+        可以自己设置分享优先级，如果在优先级较高的失败之后，会再调用优先级较低的分享， 如 Sheet->web->native，传{2,3,4}。如果最后一个元素为-1，会先调用自定义书序，再调用sharesdk默认流程，默认流程为1->2->3->4->5->6
+		 */
+		public void setFacebookShareTypes(int[] type)
+		{
+			shareParams["facebook_shareTypes"] = type;
+		}
+
+		/*iOS Only - facebookMessenger*/
+		public void SetMessengerGif(String gif){
+			shareParams ["gif"] = gif;
+		}
+
 		public void SetEnableClientShare(bool enalble){
 			shareParams ["clientShare"] = enalble;
 		}
@@ -403,49 +507,121 @@ namespace cn.sharesdk.unity3d
 			shareParams ["isShareToStory"] = enalble;
 		}
 
-		// iOS/Android 分享小程序的ID
+		// iOS/Android 分享微信小程序的ID
 		public void SetMiniProgramUserName(String userName){
 			shareParams ["wxUserName"] = userName;
 		}
 
-		// iOS/Android 微信小程序的页面路径
-		public void SetMiniProgramPath(String path){
-			shareParams ["wxPath"] = path;
-		}
+        // iOS/Android 分享QQ小程序的应用id
+        public void SetMiniProgramAppID(string appID){
+#if UNITY_ANDROID
+                shareParams["mini_program_appid"] = appID;
+#elif UNITY_IPHONE
+                shareParams["qqMiniProgramAppID"] = appID;
+#endif
+        }
 
-		// iOS/Android 微信小程序 withTicket开关
-		public void SetMiniProgramWithShareTicket(bool enalble){
+        // iOS/Android 微信、QQ小程序的页面路径
+        public void SetMiniProgramPath(String path){
+			shareParams ["wxPath"] = path;
+
+#if UNITY_ANDROID
+                shareParams["mini_program_path"] = path;
+#elif UNITY_IPHONE
+                shareParams["qqMiniProgramPath"] = path;
+#endif
+
+        }
+
+        // iOS/Android 微信小程序 withTicket开关
+        public void SetMiniProgramWithShareTicket(bool enalble){
 			shareParams ["wxWithShareTicket"] = enalble;
 		}
 
-		// iOS/Android 分享小程序的版本（0-正式，1-开发，2-体验）
-		public void SetMiniProgramType(int type){
+        // iOS/Android 分享微信小程序的版本（0-正式，1-开发，2-体验），IOS 分享QQ小程序(3-正式版,1-测试版,4-预览版)
+        public void SetMiniProgramType(int type){
 			shareParams ["wxMiniProgramType"] = type;
-		}
+            shareParams["qqMiniprogramType"] = type;  
+        }
 
-		// iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k
-		public void SetMiniProgramHdThumbImage(string hdThumbImage){
+
+        //Android分享QQ小程序的版本 默认传入一个空的字符串就好
+        public void SetQQMiniProgramType(String type) {
+            shareParams["mini_program_type"] = type;
+        }
+
+
+        // iOS only 高清缩略图，建议长宽比是 5:4 ,6.5.9及以上版本微信客户端小程序类型分享使用 要求图片数据小于128k,QQ小程序
+        public void SetMiniProgramHdThumbImage(string hdThumbImage){
 			shareParams ["wxMiniProgramHdThumbImage"] = hdThumbImage;
-		}
+            
+#if UNITY_ANDROID
+#elif UNITY_IPHONE
+                shareParams["qqMiniProgramHdThumbImage"] = hdThumbImage;
+#endif
+        }
+
+        //IOS only
+        public void SetMiniProgramWebpageUrl(string webpageUrl) {
+            shareParams["qqMiniProgramWebpageUrl"] = webpageUrl;
+        }
 
         //android only    Reddit平台板块参数
         public void SetSubreddit(string subreddit)
+		{
+			shareParams["sr"] = subreddit;
+		}
+
+        // 新浪微博LinkCard 分享效果参数
+        public void SetSinaLinkCard(bool enable)
         {
-            shareParams["sr"] = subreddit;
+            shareParams["sina_linkCard"] = enable;
+        }
+        public void SetSinaCardTitle(String title)
+        {
+            shareParams["sina_cardTitle"] = title;
+        }
+        public void SetSinaCardSummary(String summary)
+        {
+#if UNITY_ANDROID
+			    shareParams["lc_summary"] = summary;
+#elif UNITY_IPHONE
+			    shareParams["sina_cardSummary"] = summary;
+#endif
         }
 
-        //android only    Facebook平台引文分享参数
-        public void setQuote(string quote)
+        public void SetSinaCardImageAndroid(JsonData jsonobject)
         {
-            shareParams["QUOTE"] = quote;
+            shareParams["lc_image"] = jsonobject;
+            Debug.Log("jsonobject  ==================>>> " + jsonobject);
+        }
+        public void SetSinaCardTypeAndroid(String type)
+        {
+            shareParams["lc_object_type"] = type;
+        }
+        public void SetSinaCardDisplayNameAndroid(String displayname)
+        {
+            shareParams["lc_display_name"] = displayname;
+        }
+        public void SetSinaCardCreateAtAndroid(String createtime)
+        {
+            shareParams["lc_create_at"] = createtime;
+        }
+        public void SetSinaCardURLAndroid(String url)
+        {
+            shareParams["lc_url"] = url;
         }
 
-        //android only    Facebook平台话题分享参数
-        public void setHashtag(string hashtag)
-        {
-            shareParams["HASHTAG"] = hashtag;
+        /** 抖音视频9.0及其以上版本系统需要传的activity **/
+        public void SetActivity(AndroidJavaObject activity) {
+            shareParams["activity"] = activity;
+            Debug.Log("QQQ activity  ==================>>> " + activity);
         }
 
+		
+
+
+        
         //不同平台分享不同内容
         public void SetShareContentCustomize(PlatformType platform, ShareContent content) {
 			customizeShareParams [(int)platform] = content.GetShareParamsStr();

@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
 #import "WBHttpRequest.h"
-
 
 typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
 {
@@ -19,12 +17,10 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
     WeiboSDKResponseStatusCodeSentFail              = -2,//发送失败
     WeiboSDKResponseStatusCodeAuthDeny              = -3,//授权失败
     WeiboSDKResponseStatusCodeUserCancelInstall     = -4,//用户取消安装微博客户端
-    WeiboSDKResponseStatusCodePayFail               = -5,//支付失败
     WeiboSDKResponseStatusCodeShareInSDKFailed      = -8,//分享失败 详情见response UserInfo
     WeiboSDKResponseStatusCodeUnsupport             = -99,//不支持的请求
     WeiboSDKResponseStatusCodeUnknown               = -100,
 };
-
 
 @protocol WeiboSDKDelegate;
 @protocol WBHttpRequestDelegate;
@@ -66,8 +62,6 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
  */
 + (BOOL)openWeiboApp;
 
-
-
 /**
  获取微博客户端程序的itunes安装地址
  @return 微博客户端程序的itunes安装地址
@@ -91,7 +85,6 @@ extern NSString * const WeiboSDKGetAidFailNotification;
  @return aid 用于广告的与设备信息相关的标识符
  */
 + (NSString *)getWeiboAid;
-
 
 /**
  向微博客户端程序注册第三方应用
@@ -156,6 +149,8 @@ extern NSString * const WeiboSDKGetAidFailNotification;
  有的话呼起微博客户端定位到对应界面；
  没有的话打开 webView 加载相应的微博H5页面；
  @param uid 用户id
+ @param mid 微博id
+ @param aid 文章id
 */
 
 //连接到指定用户的微博个人主页，连接后可进行加关注等互动
@@ -330,7 +325,6 @@ extern NSString * const WeiboSDKGetAidFailNotification;
  */
 @property (nonatomic, assign) BOOL shouldShowWebViewForAuthIfCannotSSO;
 
-
 @end
 
 
@@ -494,8 +488,8 @@ extern NSString * const WeiboSDKGetAidFailNotification;
 typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode)
 {
     WBSDKMediaTransferAlbumPermissionError              = 0,//相册权限
-    WBSDKMediaTransferAlbumWriteError               = 0,//相册写入错误
-    WBSDKMediaTransferAlbumAssetTypeError               = 0,//资源类型错误
+    WBSDKMediaTransferAlbumWriteError               = 1,//相册写入错误
+    WBSDKMediaTransferAlbumAssetTypeError               = 2,//资源类型错误
 };
 
 /**
@@ -521,7 +515,8 @@ typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode)
 @interface WBImageObject : NSObject
 
 /**
- 图片真实数据内容
+ 图片真实数据内容，图片数据与图片数组finalAssetArray只能存在一项，图片数据不能为空并且大小不能超过10M,
+ 网页分享使用图片数据
  
  @warning 大小不能超过10M
  */

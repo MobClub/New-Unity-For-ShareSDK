@@ -57,7 +57,22 @@ namespace cn.sharesdk.unity3d
 		[DllImport("__Internal")]
 		private static extern void __iosShareSDKShowShareViewWithContentName (int reqID, int platform, string contentName, string customFields, string observer);
 
-		private string _callbackObjectName = "Main Camera";
+		[DllImport("__Internal")]
+		private static extern bool __iosShareSDKOpenMiniProgram (String userName, String path, int miniProgramType);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRequestSendTokenToGetUser(String uid, String token);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRequestToken(String observer);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRefreshSendTokenToGetUser(String token);
+
+        [DllImport("__Internal")]
+        private static extern bool __iosShareSDKWXRefreshRequestToken(String observer);
+
+        private string _callbackObjectName = "Main Camera";
 		private string _appKey;
 		public iOSImpl (GameObject go) 
 		{
@@ -74,7 +89,7 @@ namespace cn.sharesdk.unity3d
 			_appKey = appKey;
 		}
 
-		public override void InitSDK (String appKey,String appSecret) 
+		public override void InitSDK (String appKey,String screct) 
 		{
 			_appKey = appKey;
 		}
@@ -206,8 +221,42 @@ namespace cn.sharesdk.unity3d
 			// no this interface on iOS
 			Console.WriteLine ("#waring : no this interface on iOS");
 		}
-		
-		
-	}
-	#endif
+
+		public override bool openMiniProgram (String userName, String path, int miniProgramType)
+		{
+			return __iosShareSDKOpenMiniProgram (userName, path, miniProgramType);
+		}
+
+        public override void getWXRefreshToken()
+        {
+            __iosShareSDKWXRefreshRequestToken(_callbackObjectName);
+        }
+
+        public override void getWXRequestToken()
+        {
+            __iosShareSDKWXRequestToken(_callbackObjectName);
+        }
+
+        public override void sendWXRefreshToken(string token)
+        {
+            __iosShareSDKWXRefreshSendTokenToGetUser(token);
+        }
+
+        public override void sendWXRequestToken(string uid, string token)
+        {
+            __iosShareSDKWXRequestSendTokenToGetUser(uid, token);
+        }
+
+        public override void PrepareLoopShare()
+        {
+            throw new NotImplementedException();
+        }
+
+		public override void setChannelId()
+        {
+            throw new NotImplementedException();
+        }
+        
+    }
+#endif
 }

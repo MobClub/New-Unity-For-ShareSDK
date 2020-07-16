@@ -79,7 +79,7 @@
 <!--    <Wechat-->
 <!--    Id="4"-->
 <!--    SortId="4"-->
-<!--    AppId="wx4868b35061f87885"-->
+<!--    AppId="wx617c77c82218ea2c"-->
 <!--    AppSecret="64020361b8ec4c99936c0e3999a9f249"-->
 <!--    BypassApproval="false"-->
 <!--    Enable="true" />-->
@@ -87,7 +87,7 @@
 <!--    <WechatMoments-->
 <!--    Id="5"-->
 <!--    SortId="5"-->
-<!--    AppId="wx4868b35061f87885"-->
+<!--    AppId="wx617c77c82218ea2c"-->
 <!--    AppSecret="64020361b8ec4c99936c0e3999a9f249"-->
 <!--    BypassApproval="false"-->
 <!--    Enable="true" />-->
@@ -95,7 +95,7 @@
 <!--    <WechatFavorite-->
 <!--    Id="6"-->
 <!--    SortId="6"-->
-<!--    AppId="wx4868b35061f87885"-->
+<!--    AppId="wx617c77c82218ea2c"-->
 <!--    AppSecret="64020361b8ec4c99936c0e3999a9f249"-->
 <!--    Enable="true" />-->
 
@@ -403,6 +403,13 @@
 <!--    Id="52"-->
 <!--    SortId="52"-->
 <!--    AppId="2015072400185895"-->
+<!--    Enable="true"/>-->
+
+<!--    <Telegram-->
+<!--    Id="47"-->
+<!--    SortId="47"-->
+<!--    BotToken="600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ"-->
+<!--    BotDomain="http://127.0.0.1"-->
 <!--    Enable="true"/>-->
 
 </DevInfor>

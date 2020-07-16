@@ -33,7 +33,12 @@ typedef NS_ENUM(NSUInteger, SSDKCredentialType)
 /**
  *  授权凭证
  */
-@interface SSDKCredential : NSObject
+@interface SSDKCredential : SSDKDataModel
+
+/**
+ *  授权码，用于请求token,只在获取token条件不足时返回 （例：微信平台未配置appsecret）
+ */
+@property (nonatomic, copy) NSString *authCode;
 
 /**
  *  用户标识
@@ -53,7 +58,7 @@ typedef NS_ENUM(NSUInteger, SSDKCredentialType)
 /**
  *  过期时间
  */
-@property (nonatomic, strong) NSDate *expired;
+@property (nonatomic, assign) NSTimeInterval expired;
 
 /**
  *  授权类型

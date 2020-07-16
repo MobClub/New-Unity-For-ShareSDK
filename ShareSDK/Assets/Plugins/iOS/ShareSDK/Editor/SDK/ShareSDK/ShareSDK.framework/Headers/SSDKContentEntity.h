@@ -7,18 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ShareSDK/IMOBFContentEntity.h>
-#import <MOBFoundation/MOBFDataModel.h>
 
 /**
  *  内容实体
  */
-@interface SSDKContentEntity : MOBFDataModel <IMOBFContentEntity>
+@interface SSDKContentEntity : SSDKDataModel
 
 /**
  *  内容标识
  */
-@property (nonatomic, copy) NSString *cid;
+@property (nonatomic, strong) id cid;
 
 /**
  *  分享文本
@@ -28,16 +26,16 @@
 /**
  *  分享图片列表,元素为SSDKImage
  */
-@property (nonatomic, retain) NSArray *images;
+@property (nonatomic, retain) NSMutableArray *images;
 
 /**
  *  分享链接列表,元素为NSURL
  */
-@property (nonatomic, retain) NSArray *urls;
+@property (nonatomic, retain) NSMutableArray *urls;
 
 /**
  *  原始数据
  */
-@property (nonatomic, retain) id rawData;
+@property (nonatomic, retain) NSDictionary *rawData;
 
 @end

@@ -47,13 +47,24 @@
 "ShareType_44" = "KakaoTalk";
 "ShareType_45" = "KakaoStory";
 "ShareType_46" = "Messenger";
+"ShareType_47" = "Telegram";
 "ShareType_50" = "支付宝好友";
 "ShareType_51" = "支付宝朋友圈";
 "ShareType_52" = "钉钉";
 "ShareType_53" = "YouTube";
 "ShareType_54" = "美拍";
 "ShareType_55" = "中国移动";
+"ShareType_56" = "Reddit";
+"ShareType_57" = "天翼";
+"ShareType_58" = "FacebookAccount";
+"ShareType_59" = "抖音";
+"ShareType_60" = "企业微信";
+"ShareType_61" = "Apple";
 
+"ShareType_64" = "绿洲";
+"ShareType_66" = "SnapChat";
+"ShareType_68" = "快手";
+"ShareType_69" = "西瓜视频";
 "ShareType_994" = "易信";
 "ShareType_995" = "Kakao";
 "ShareType_996" = "Evernote";

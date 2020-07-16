@@ -87,6 +87,15 @@
 + (NSData *)dataByBase64DecodeString:(NSString *)string;
 
 /**
+ *  使用BASE64进行解码
+ *
+ *  @param string 原始字符串
+ *
+ *  @return 解码后数据string
+ */
++ (NSString *)stringByBase64DecodeString:(NSString *)string;
+
+/**
  *  判断字符串中是否包含链接
  *
  *  @param string 原始字符串
@@ -112,5 +121,14 @@
  *	@return	二进制数据对象
  */
 + (NSData *)dataByHexString:(NSString *)string;
+
+
+/**
+ *  @brief    转换版本号
+ 
+ *  @param ver 版本号
+ *  @return 转换为5位整数表示。
+ */
++ (NSInteger)convertVersion:(NSString *)ver;
 
 @end

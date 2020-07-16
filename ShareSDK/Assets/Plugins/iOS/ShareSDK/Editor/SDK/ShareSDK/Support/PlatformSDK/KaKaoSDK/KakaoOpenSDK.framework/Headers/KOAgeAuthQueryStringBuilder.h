@@ -1,7 +1,5 @@
 /**
- * Copyright 2015-2016 Kakao Corp.
- *
- * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
+ * Copyright 2015 Kakao Corp.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +14,10 @@
  * limitations under the License.
  */
 
+/*!
+ @header KOAgeAuthQueryStringBuilder.h
+ @abstract 연령인증시 필요한 파라미터입니다.
+ */
 
 #ifndef KOAgeAuthQueryStringBuilder_h
 #define KOAgeAuthQueryStringBuilder_h
@@ -24,7 +26,7 @@
 
 /*!
  @class KOAgeAuthQueryStringBuilder
- @discussion 연령인증시 필요한 파라미터를 Builder pattern 을 이용해서 세팅한다.
+ @abstract 연령인증시 필요한 파라미터를 Builder pattern 을 이용해서 세팅한다.
  */
 @interface KOAgeAuthQueryStringBuilder : NSObject
 
@@ -41,10 +43,10 @@
 @property (nonatomic) KOAgeAuthLimit limit;
 
 /*!
- @property isWestrnAge
+ @property isWesternAge
  @abstract 나이의 기준이 한국식인지 외국식인지의 여부(optional, default false)
  */
-@property (nonatomic) BOOL isWesternAge;
+@property (nonatomic) BOOL isWesternAge DEPRECATED_MSG_ATTRIBUTE("만나이 기준으로 전체 변경되어 항상 true로 인식 됩니다.");
 
 /*!
  @property isSkipTerm
@@ -56,9 +58,15 @@
  @property authFrom
  @abstract 서비스 이름(optional, client_id or app_id or service_name)
  */
-@property (nonatomic, copy) NSString *authFrom;
+@property (nonatomic, copy, nullable) NSString *authFrom;
 
-- (NSString *) build;
+/*!
+ @property adultsOnly
+ @abstract 청소년 유해물 여부. true인 경우 여가부 가이드에 따라 서비스 이용 제한나이(age_limit)가 빨간색 텍스트/동그라미로 표시됨.
+ */
+@property (nonatomic) BOOL adultsOnly;
+
+- (nonnull NSString *) build;
 
 @end
 

@@ -8,23 +8,31 @@ using System.Reflection;
 
 namespace cn.sharesdk.unity3d
 {
-	/// <summary>
-	/// ShareSDK.
-	/// </summary>
-	public class ShareSDK : MonoBehaviour 
+    /// <summary>
+    /// ShareSDK.
+    /// </summary>
+
+    public delegate void sendWXRequestToken(String uid, String token);
+    public delegate void sendWXRefreshToken(String token);
+
+    public class ShareSDK : MonoBehaviour 
 	{
 		private int reqID;
-		//配置ShareSDK AppKey
-		//注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
-		 #if UNITY_ANDROID
-		public string appKey = "moba6b6c6d6";
-		public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
-		 #elif UNITY_IPHONE
-		public string appKey = "moba6b6c6d6";
-		public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
-		 #endif
+        //配置ShareSDK AppKey
+        //注:此处区分仅为demo测试而区分，实际使用时可以不区分安卓或iOS
+#if UNITY_ANDROID
+		//public string appKey = "moba6b6c6d6";
+		//public string appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
+        
+        public string appKey = "moba0b0c0d0";
+		public string appSecret = "5713f0d88511f9f4cf100cade0610a34";
+#elif UNITY_IPHONE
+		public string appKey = "moba0b0c0d0";
+		public string appSecret = "5713f0d88511f9f4cf100cade0610a34";
+        public List<string> customAssociatedDomains = new List<string>();
+#endif
 
-		public DevInfoSet devInfo;
+        public DevInfoSet devInfo;
 		public ShareSDKImpl shareSDKUtils;
 
 		public EventHandler authHandler;
@@ -33,7 +41,14 @@ namespace cn.sharesdk.unity3d
 		public EventHandler getFriendsHandler;
 		public EventHandler followFriendHandler;
 
-		void Awake()
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
+        public GetWXRequestTokenHanlerEvent wxRequestHandler;
+        public GetWXRefreshTokenHanlerEvent wxRefreshTokenHandler;
+        //public OnLoopShareCallBack onLoopsharecallback;
+#endif
+        void Awake()
 		{				
 			Type type = devInfo.GetType();
 			Hashtable platformConfigs = new Hashtable();
@@ -50,20 +65,31 @@ namespace cn.sharesdk.unity3d
 						continue;
 					} else if ("Enable".EndsWith(field.Name) || "ShareByAppClient".EndsWith(field.Name) || "BypassApproval".EndsWith(field.Name) || "WithShareTicket".EndsWith(field.Name)) {
 						table.Add(field.Name, Convert.ToString(field.GetValue(info)).ToLower());
-					} else {
-						table.Add(field.Name, Convert.ToString(field.GetValue(info)));
-					}
-				}
-				platformConfigs.Add(platformId, table);
-			}
 
-			#if UNITY_ANDROID
+                        //Debug.Log("======================platformConfigs table info 1:" + Convert.ToString(field.GetValue(info)).ToLower());
+
+                    } else {
+						table.Add(field.Name, Convert.ToString(field.GetValue(info)));
+                        //Debug.Log("======================platformConfigs table info 2:" + Convert.ToString(field.GetValue(info)));
+                    }
+				}
+
+             
+                platformConfigs.Add(platformId, table);
+			}
+            //Debug.Log("======================platformConfigs:" + platformConfigs);
+#if UNITY_ANDROID
 			shareSDKUtils = new AndroidImpl(gameObject);
 			shareSDKUtils.InitSDK(appKey,appSecret);
-			#elif UNITY_IPHONE
-			shareSDKUtils = new iOSImpl(gameObject);
-			#endif
-
+            
+            //add listener for loopshare
+            shareSDKUtils.PrepareLoopShare();
+            shareSDKUtils.setChannelId();
+			
+#elif UNITY_IPHONE
+            shareSDKUtils = new iOSImpl(gameObject);
+#endif
+			
 			shareSDKUtils.SetPlatformConfig(platformConfigs);
 		}
 		
@@ -89,6 +115,7 @@ namespace cn.sharesdk.unity3d
 			int status = Convert.ToInt32(res["status"]);
 			int reqID = Convert.ToInt32(res["reqID"]);
 			PlatformType platform = (PlatformType)Convert.ToInt32(res["platform"]);
+            
 			int action = Convert.ToInt32(res["action"]);
 			// Success = 1, Fail = 2, Cancel = 3
 			switch(status) 
@@ -98,14 +125,20 @@ namespace cn.sharesdk.unity3d
 					Console.WriteLine(data);
 					Hashtable resp = (Hashtable) res["res"];
 					OnComplete(reqID, platform, action, resp);
-					break;
+
+                    //LoopShareOnComplete(action, resp);
+
+                    break;
 				} 
 				case 2: 
 				{
 					Console.WriteLine(data);
 					Hashtable throwable = (Hashtable) res["res"];
 					OnError(reqID, platform, action, throwable);
-					break;
+
+                    //LoopShareOnError(action, throwable);
+
+                    break;
 				} 
 				case 3: 
 				{
@@ -115,13 +148,28 @@ namespace cn.sharesdk.unity3d
 			}
 		}
 
-		/// <summary>
-		/// Raises the error event.
-		/// </summary>
-		/// <param name="platform">Platform.</param>
-		/// <param name="action">Action.</param>
-		/// <param name="throwable">Throwable.</param>
-		public void OnError (int reqID, PlatformType platform, int action, Hashtable throwable) 
+        //public void LoopShareOnError(int action, Hashtable throwable)
+        //{
+            //switch (action)
+            //{
+                //case 10:
+                    //{ // 10 == loopshare result
+                        //if (onLoopsharecallback != null)
+                        //{
+                            //onLoopsharecallback(throwable);
+                        //}
+                        //break;
+                    //}
+            //}
+        //}
+
+        /// <summary>
+        /// Raises the error event.
+        /// </summary>
+        /// <param name="platform">Platform.</param>
+        /// <param name="action">Action.</param>
+        /// <param name="throwable">Throwable.</param>
+        public void OnError (int reqID, PlatformType platform, int action, Hashtable throwable) 
 		{
 			switch (action) 
 			{
@@ -164,9 +212,26 @@ namespace cn.sharesdk.unity3d
 					shareHandler(reqID, ResponseState.Fail, platform, throwable);
 				}
 				break;
-			} 
 			}
+
+            }
 		}
+
+        //public void LoopShareOnComplete(int action, Hashtable res)
+        //{
+            //switch (action)
+            //{
+                //case 10:
+                    //{ // 10 == loopshare result
+                        //if (onLoopsharecallback != null)
+                        //{
+                            //onLoopsharecallback(res);
+                        //}
+                        //break;
+                    //}
+            //}
+        //}
+
 
 		/// <summary>
 		/// Raises the success event.
@@ -218,6 +283,26 @@ namespace cn.sharesdk.unity3d
 				}
 				break;
 			}
+
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
+            case 10: {
+
+                        int isRefresh = Convert.ToInt32(res["isRefreshToken"]);
+                        if (isRefresh == 1)
+                        {
+                            String uid = Convert.ToString(res["uid"]);
+                            wxRefreshTokenHandler(uid, sendWXRefreshTokenMethod);
+                        }
+                        else {
+                            String authCode = Convert.ToString(res["authCode"]);
+                            wxRequestHandler(authCode, sendWXRequestTokenMehtod);
+                        }
+                        break;
+                    }
+#endif
+
 			}
 		}
 
@@ -272,10 +357,10 @@ namespace cn.sharesdk.unity3d
 			}
 			}
 		}
-		
-		/// <summary>
-		/// init the ShareSDK.
-		/// </summary>
+
+        /// <summary>
+        /// init the ShareSDK.
+        /// </summary>
 		public void InitSDK (String appKey)
 		{			
 			// if you don't add ShareSDK.xml in your assets folder, use the following line
@@ -539,11 +624,53 @@ namespace cn.sharesdk.unity3d
 		{
 			shareSDKUtils.DisableSSO (open);			
 		}
-			
-		/// <summary>
-		/// Event result listener.
-		/// </summary>
-		public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
 
-	}
+		/// <summary>
+		/// Open Wechat miniProgram, 0:正式版; 1:开发版; 2:体验版
+		/// </summary>
+		public bool openMiniProgram (String userName, String path, int miniProgramType)
+		{
+			return shareSDKUtils.openMiniProgram (userName,path,miniProgramType);
+		}
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
+        public void getWXRequestToken()
+        {
+            shareSDKUtils.getWXRequestToken();
+        }
+
+        public void sendWXRequestTokenMehtod(String uid, String token)
+        {
+            shareSDKUtils.sendWXRequestToken(uid, token);
+        }
+
+        public void getWXRefreshToken()
+        {
+            shareSDKUtils.getWXRefreshToken();
+        }
+
+        public void sendWXRefreshTokenMethod(String token)
+        {
+            shareSDKUtils.sendWXRefreshToken(token);
+        }
+#endif
+        /// <summary>
+        /// Event result listener.
+        /// </summary>
+        public delegate void EventHandler (int reqID, ResponseState state, PlatformType type, Hashtable data);
+
+
+#if UNITY_ANDROID
+		
+#elif UNITY_IPHONE
+        public delegate void GetWXRequestTokenHanlerEvent(String authCode, sendWXRequestToken send);
+        public delegate void GetWXRefreshTokenHanlerEvent(String uid, sendWXRefreshToken send);
+#endif
+
+
+        //public delegate void OnLoopShareCallBack (Hashtable data);
+
+
+    }
 }

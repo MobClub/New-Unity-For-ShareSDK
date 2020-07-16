@@ -1,8 +1,6 @@
 /**
  * Copyright 2015 Kakao Corp.
  *
- * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,8 +14,15 @@
  * limitations under the License.
  */
 
+/*!
+ @header KOFriend.h
+ @abstract 카카오톡, 카카오스토리 친구 정보 관련 기능을 정의합니다.
+ */
 #import <Foundation/Foundation.h>
 #import "KOUserInfo.h"
+#import "KOSession.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @abstract KOOSPropertyType 카카오톡 사용자의 디바이스 OS 타입
@@ -27,8 +32,8 @@
  */
 typedef NS_ENUM(NSInteger, KOOSPropertyType) {
     KOOSPropertyTypeUnknown = 0,
-    KOOSPropertyTypeIOS,
-    KOOSPropertyTypeAndroid
+    KOOSPropertyTypeIOS = 1,
+    KOOSPropertyTypeAndroid = 2
 };
 
 /*!
@@ -39,15 +44,15 @@ typedef NS_ENUM(NSInteger, KOOSPropertyType) {
  */
 typedef NS_ENUM(NSInteger, KORelationValue) {
     KORelationValueFriend = 0,
-    KORelationValueNotFriend,
-    KORelationValueNotAvailable
+    KORelationValueNotFriend = 1,
+    KORelationValueNotAvailable = 2
 };
 
 extern NSString* convertOSPropertyTypeString(KOOSPropertyType type);
 
 /*!
  @class KOFriend
- @discussion 카카오톡, 카카오스토리 친구 정보를 담는 구조체
+ @abstract 카카오톡, 카카오스토리 친구 정보를 담는 구조체
  @see KOTalkMessageSending 카카오톡 메시지를 전송하기 위해 구현해야 하는 프로토콜
  */
 @interface KOFriend : KOUserInfo
@@ -69,6 +74,12 @@ extern NSString* convertOSPropertyTypeString(KOOSPropertyType type);
  @abstract 친구의 썸네일 이미지
  */
 @property (nonatomic, readonly) NSString *thumbnailURL;
+
+/*!
+ @property favorite
+ @abstract 즐겨찾기 추가 여부
+ */
+@property (nonatomic, readonly) KOOptionalBoolean favorite;
 
 /*!
  @property talkOS
@@ -97,3 +108,5 @@ extern NSString* convertOSPropertyTypeString(KOOSPropertyType type);
 + (instancetype)responseWithDictionary:(NSDictionary *)dictionary;
 
 @end
+
+NS_ASSUME_NONNULL_END

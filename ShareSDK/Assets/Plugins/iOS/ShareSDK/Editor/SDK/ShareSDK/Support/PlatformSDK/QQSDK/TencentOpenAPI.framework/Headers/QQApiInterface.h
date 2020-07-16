@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "QQApiInterfaceObject.h"
 
+typedef void (^sendResultBlock)(NSDictionary *result);
+
 /**
  \brief 处理来至QQ的请求及响应的回调协议
  */
@@ -37,12 +39,20 @@
 @interface QQApiInterface : NSObject
 
 /**
- 处理由手Q唤起的跳转请求
+ 处理由手Q唤起的普通跳转请求
  \param url 待处理的url跳转请求
  \param delegate 第三方应用用于处理来至QQ请求及响应的委托对象
  \return 跳转请求处理结果，YES表示成功处理，NO表示不支持的请求协议或处理失败
  */
 + (BOOL)handleOpenURL:(NSURL *)url delegate:(id<QQApiInterfaceDelegate>)delegate;
+
+/**
+ 处理由手Q唤起的universallink跳转请求
+ \param universallink 待处理的universallink跳转请求
+ \param delegate 第三方应用用于处理来至QQ请求及响应的委托对象
+ \return 跳转请求处理结果，YES表示成功处理，NO表示不支持的请求协议或处理失败
+ */
++ (BOOL)handleOpenUniversallink:(NSURL*)universallink delegate:(id<QQApiInterfaceDelegate>)delegate;
 
 /**
  向手Q发起分享请求
@@ -51,6 +61,7 @@
  */
 + (QQApiSendResultCode)sendReq:(QQBaseReq *)req;
 
+
 /**
  向手Q QZone结合版发起分享请求
  \note H5分享只支持单张网络图片的传递
@@ -58,6 +69,20 @@
  \return 请求发送结果码
  */
 + (QQApiSendResultCode)SendReqToQZone:(QQBaseReq *)req;
+
+/**
+ 向手Q发起设置QQ头像
+ \param req 分享内容的请求
+ \return 请求发送结果码
+ */
++ (QQApiSendResultCode)sendMessageToQQAvatarWithReq:(QQBaseReq*)req;
+
+/**
+ 向手Q发起组图分享到表情收藏
+ \param req 分享内容的请求
+ \return 请求发送结果码
+ */
++ (QQApiSendResultCode)sendMessageToFaceCollectionWithReq:(QQBaseReq*)req;
 
 /**
  检测是否已安装QQ
@@ -89,7 +114,7 @@
  检测TIM是否支持API调用
  \return 如果当前安装TIM版本支持API调用则返回YES，否则返回NO
  */
-+ (BOOL)isTIMSupportApi;
++ (BOOL)isTIMSupportApi __attribute__((deprecated("已过期, 建议删除调用，调用地方用YES替代。")));
 
 /**
  检测是否支持分享
@@ -126,8 +151,24 @@
 /**
  获取TIM下载地址
  
- 如果App通过<code>QQApiInterface#isTIMInstalled</code>和<code>QQApiInterface#isTIMSupportApi</code>检测发现TIM没安装或当前版本TIM不支持API调用，可引导用户通过打开此链接下载最新版TIM。
+ 如果App通过<code>QQApiInterface#isTIMInstalled</code>检测发现TIM没安装或当前版本TIM不支持API调用，可引导用户通过打开此链接下载最新版TIM。
  \return iPhoneTIM下载地址
  */
 + (NSString *)getTIMInstallUrl;
+
+#pragma mark - Log
+/*! @brief 调用此函数可以导出QQSDK的Log到第三方中，用于定位问题
+ 
+    注意1:SDK会强引用这个block,注意不要导致内存泄漏,注意不要导致内存泄漏
+    注意2:调用过一次startLog by block之后，如果再调用一次任意方式的startLoad,会释放上一次logBlock，不再回调上一个logBlock
+ *
+ *  @param logBlock 打印log的回调block
+ */
++ (void)startLogWithBlock:(QQApiLogBolock)logBlock;
+///停止回调打印
++ (void)stopLog;
+///设置打印日志到文件开关on/off，如果不设置，默认不打印到文件
++ (void)setSwitchPrintLogToFile:(BOOL)on;
+///日志文件目录
++ (NSString*)getLogFilePath;
 @end
