@@ -91,7 +91,8 @@ public class Demo : MonoBehaviour {
             	content.SetHidePlatforms (platfsList);
 
             	content.SetText("this is a test string.");
-            	content.SetImageUrl("http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg");
+            	//content.SetImageUrl("http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg");
+				content.SetImageUrl("https://cdn.pixabay.com/photo/2019/08/08/11/33/stingray-4392776_960_720.jpg");
             	content.SetTitle("test title");
 
             //(Android only) 针对Android绕过审核的多图分享，传图片String数组 
@@ -139,7 +140,8 @@ public class Demo : MonoBehaviour {
 			content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
 			content.SetShareType(ContentType.Image);
 
-			ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
+			//ssdk.ShowShareContentEditor (PlatformType.SinaWeibo, content);
+			ssdk.ShowShareContentEditor (PlatformType.QQ, content);
 		}
 
 		btnTop += btnHeight + 20 * scale;
