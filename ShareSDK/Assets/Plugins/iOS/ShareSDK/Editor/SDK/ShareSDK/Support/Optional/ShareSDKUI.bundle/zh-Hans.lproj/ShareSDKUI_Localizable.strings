@@ -55,11 +55,11 @@
 "ShareType_54" = "美拍";
 "ShareType_55" = "中国移动";
 "ShareType_56" = "Reddit";
-"ShareType_57" = "天翼";
 "ShareType_58" = "FacebookAccount";
 "ShareType_59" = "抖音";
 "ShareType_60" = "企业微信";
 "ShareType_61" = "Apple";
+"ShareType_70" = "TikTok";
 
 "ShareType_64" = "绿洲";
 "ShareType_66" = "SnapChat";

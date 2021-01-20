@@ -25,21 +25,9 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypeSinaWeibo           = 1,
     /**
-     *  腾讯微博
-     */
-    SSDKPlatformTypeTencentWeibo        = 2,
-    /**
-     *  豆瓣
-     */
-    SSDKPlatformTypeDouBan              = 5,
-    /**
      *  QQ空间
      */
     SSDKPlatformSubTypeQZone            = 6,
-    /**
-     *  人人网
-     */
-    SSDKPlatformTypeRenren              = 7,
     /**
      *  开心网
      */
@@ -189,21 +177,9 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypeYouTube             = 53,
     /**
-     *  美拍
-     */
-    SSDKPlatformTypeMeiPai              = 54,
-    /**
-     *  中国移动
-     */
-    SSDKPlatformTypeCMCC                = 55,
-    /**
      * Reddit
      */
     SSDKPlatformTypeReddit              = 56,
-    /**
-     * 天翼
-     */
-    SSDKPlatformTypeESurfing            = 57,
     /**
      * Facebook账户系统
      */
@@ -225,7 +201,10 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypeAppleAccount        = 61,
    
-    
+    /**
+     * TikTok
+     */
+    SSDKPlatformTypeTikTok              = 70,
     /**
      * 绿洲
      */
@@ -308,13 +287,18 @@ typedef NS_ENUM(NSUInteger, SSDKResponseState){
     SSDKResponseStateFail       = 2,
     
     /**
-     *  取消
+     *  ShareSDK取消
      */
     SSDKResponseStateCancel     = 3,
     
     
     //视频文件上传
-    SSDKResponseStateUpload     = 4
+    SSDKResponseStateUpload     = 4,
+    
+    /**
+     *  平台取消
+     */
+    SSDKResponseStatePlatformCancel     = 5,
 };
 
 /**
@@ -372,7 +356,10 @@ typedef NS_ENUM(NSUInteger, SSDKContentType){
     SSDKContentTypeFBMessageVideo = 9,
     
     //3.6.3 小程序分享(暂时仅微信 QQ可用)
-    SSDKContentTypeMiniProgram  = 10
+    SSDKContentTypeMiniProgram  = 10,
+    
+    //快手-分享到私信
+    SSDKContentTypeMessage  = 11
 };
 
 /**

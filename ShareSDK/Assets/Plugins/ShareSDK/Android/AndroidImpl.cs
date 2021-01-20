@@ -140,6 +140,15 @@ namespace cn.sharesdk.unity3d
 				ssdk.Call("onekeyShare", reqID, (int)platform, content.GetShareParamsStr());
 			}
 		}
+
+		public override void setDisappearShareToast (Boolean isShow)
+		{
+			Debug.Log("AndroidImpl  ===>>>  setDisappearShareToast" );
+			if (ssdk != null)
+			{
+				ssdk.Call("setDisappearShareToast", isShow);
+			}
+		}
 		
 		public override void GetFriendList (int reqID, PlatformType platform, int count, int page) 
 		{

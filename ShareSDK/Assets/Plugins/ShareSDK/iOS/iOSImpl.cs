@@ -26,7 +26,10 @@ namespace cn.sharesdk.unity3d
 		
 		[DllImport("__Internal")]
 		private static extern void __iosShareSDKShare (int reqID, int platType, string content, string observer);
-		
+
+		[DllImport("__Internal")]
+		private static extern void __iosShareSDKShareWithActivity(int reqID, int platType, string content, string observer);
+
 		[DllImport("__Internal")]
 		private static extern void __iosShareSDKOneKeyShare (int reqID, string platTypes, string content, string observer);
 		
@@ -72,7 +75,10 @@ namespace cn.sharesdk.unity3d
         [DllImport("__Internal")]
         private static extern bool __iosShareSDKWXRefreshRequestToken(String observer);
 
-        private string _callbackObjectName = "Main Camera";
+		[DllImport("__Internal")]
+		private static extern void __iosShareSDKShareWithCommand(string customFields, string observer);
+
+		private string _callbackObjectName = "Main Camera";
 		private string _appKey;
 		public iOSImpl (GameObject go) 
 		{
@@ -146,7 +152,13 @@ namespace cn.sharesdk.unity3d
 			}
 			__iosShareSDKOneKeyShare (reqID, platTypesStr, content.GetShareParamsStr(), _callbackObjectName);
 		}
-		
+
+		public override void ShareContentWithActivity(int reqID, PlatformType platform, ShareContent content)
+		{
+
+			__iosShareSDKShareWithActivity(reqID, (int)platform, content.GetShareParamsStr(), _callbackObjectName);
+		}
+
 		public override void ShowPlatformList (int reqID, PlatformType[] platforms, ShareContent content, int x, int y) 
 		{
 			string platTypesStr = null;
@@ -256,7 +268,13 @@ namespace cn.sharesdk.unity3d
         {
             throw new NotImplementedException();
         }
-        
-    }
+
+		public override void shareSDKWithCommand(Hashtable content)
+		{
+			String customFieldsStr = MiniJSON.jsonEncode(content);
+			__iosShareSDKShareWithCommand(customFieldsStr, _callbackObjectName);
+		}
+
+	}
 #endif
 }

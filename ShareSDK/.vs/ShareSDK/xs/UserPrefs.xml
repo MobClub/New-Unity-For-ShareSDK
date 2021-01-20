@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Demo.cs">
+    <Files>
+      <File FileName="Assets/Plugins/iOS/ShareSDK/ShareSDKUnity3DBridge.m" Line="4349" Column="5" />
+      <File FileName="Assets/Demo.cs" Line="116" Column="1" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDKConfigEditor.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="34" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="049c8c21-5990-4694-9ad2-dc6a46d445f2" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

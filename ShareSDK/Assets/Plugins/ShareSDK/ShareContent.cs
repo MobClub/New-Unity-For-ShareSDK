@@ -57,7 +57,7 @@ namespace cn.sharesdk.unity3d
 			shareParams["imageUrl"] = imageUrl;
 		}
 
-		/*Android Only- 图片string数组（多图分享）*/
+		/*Android Only - 图片string数组（多图分享）*/
 		public void SetImageArray(String[] imageArray) {
 			shareParams["imageArray"] = String.Join(",", imageArray);
 		}
@@ -137,8 +137,15 @@ namespace cn.sharesdk.unity3d
 			#endif
 		}
 
-        //snapchat
-		public void setSnapStickerAnimated(bool stickerAnimated) {
+		//snapchat
+
+		/*iOS Only - SnapChat*/
+		public void SetSnapAttachmentUrl(String attachmentUrl)
+		{
+			shareParams["attachmentUrl"] = attachmentUrl;
+		}
+
+		public void setSnapStickerAnimated(int stickerAnimated) {
 #if UNITY_ANDROID
 			//shareParams["address"] = author;
 #elif UNITY_IPHONE
@@ -160,6 +167,37 @@ namespace cn.sharesdk.unity3d
 #elif UNITY_IPHONE
 			shareParams["stickerImage"] = image;
 #endif
+		}
+
+		/*iOS Only - 快手*/
+		public void SetLinkURL(String linkUrl)
+		{
+			shareParams["linkUrl"] = linkUrl;
+		}
+
+		public void SetOpenID(String openID)
+		{
+			shareParams["openID"] = openID;
+		}
+
+		public void SetReceiverOpenID(String receiverOpenID)
+		{
+			shareParams["receiverOpenID"] = receiverOpenID;
+		}
+
+		public void SetLocalIdentifier(String localIdentifier)
+		{
+			shareParams["localIdentifier"] = localIdentifier;
+		}
+
+		public void SetTagsArray(string[] tagsArray)
+		{
+			shareParams["tagsArray"] = tagsArray;
+		}
+
+		public void SetExtraInfo(string extraInfo)
+		{
+			shareParams["extraInfo"] = extraInfo;
 		}
 
 		/*iOS/Android - Flickr*/
@@ -271,12 +309,29 @@ namespace cn.sharesdk.unity3d
 			shareParams["assetLocalIds"] = assetLocalIds;
 		}
 
+		/*iOS Only - TikTok*/
+		public void SetAssetLocalIdsArray(String[] assetLocalIdsArray)
+		{
+			shareParams["asset_localIds"] = assetLocalIdsArray;
+		}
+
+		/*iOS Only - TikTok*/
+		public void SetTiktokHashtag(String tiktok_hashtag)
+		{
+			shareParams["tiktok_hashtag"] = tiktok_hashtag;
+		}
+
+		/*iOS Only - TikTok*/
+		public void SetTiktok_extraInfo(Dictionary<string,string> tiktok_extraInfo)
+		{
+			shareParams["tiktok_extraInfo"] = tiktok_extraInfo;
+		}
+
 		/*iOS Only - Wechat*/
 		public void SetSourceFilePath(String sourceFilePath){
 			shareParams["sourceFilePath"] = sourceFilePath;
 		}
 
-        
 
 		/*iOS Only - QQ/Wechat/Yixin*/
 		public void SetThumbImageUrl(String thumbImageUrl){
