@@ -86,6 +86,16 @@ extern "C" {
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKShare (int reqID, int platType, void *content, void *observer);
+
+    /**
+     *    @brief    系统分享内容
+     *
+     *  @param  reqID       流水号
+     *    @param     platType     平台类型
+     *    @param     content     分享内容
+     *  @param  observer    观察回调对象名称
+     */
+    extern void __iosShareSDKShareWithActivity (int reqID, int platType, void *content, void *observer);
     
     /**
      *    @brief    一键分享内容
@@ -96,6 +106,15 @@ extern "C" {
      *  @param  observer    观察回调对象名称
      */
     extern void __iosShareSDKOneKeyShare (int reqID, void *platTypes, void *content, void *observer);
+    
+    /**
+     *    @brief    口令分享
+     *
+     *    @param    content     分享内容
+     *    @param    observer    观察回调对象名称
+     */
+    extern void __iosShareSDKShareWithCommand (void *content, void *observer);
+
     
     /**
      *    @brief    显示分享菜单
@@ -259,6 +278,8 @@ extern "C" {
                 return SSDKContentTypeImage;
             case 10:
                 return SSDKContentTypeMiniProgram;
+            case 11:
+                return SSDKContentTypeMessage;
             default:
                 return SSDKContentTypeText;
         }
@@ -716,7 +737,7 @@ extern "C" {
                                             permission:permission.intValue
                                               sharable:enableShare
                                       androidExecParam:androidExecParam
-                                          iosExecParam:iphoneExecParams];
+                                          iosExecParam:iphoneExecParams type:type];
         }
         else
         {
@@ -780,6 +801,46 @@ extern "C" {
             else if([img isKindOfClass:[NSArray class]])
             {
                 NSArray *paths = [img copy];
+                for (NSString *path in paths)
+                {
+                    
+                    SSDKImage *image = nil;
+                    
+                    if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
+                                            options:MOBFRegexOptionsNoOptions
+                                            inRange:NSMakeRange(0, path.length)
+                                         withString:path])
+                    {
+                        image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
+                    }
+                    else
+                    {
+                        UIImage *localImg = [UIImage imageWithContentsOfFile:path];
+                        image = [[SSDKImage alloc] initWithImage:localImg
+                                                          format:SSDKImageFormatJpeg
+                                                        settings:nil];
+                    }
+                    
+                    if (image)
+                    {
+                        [imageArray addObject:path];
+                    }
+                    else
+                    {
+                        NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
+                    }
+                }
+            }
+            NSArray *imgArray = nil;
+            if ([[shareParamsDic objectForKey:@"imageArray"] isKindOfClass:[NSString class]])
+            {
+                NSString *imagesStr = shareParamsDic[@"imageArray"];
+                imgArray = [imagesStr componentsSeparatedByString:@","];
+            }
+            
+            if(imgArray && imgArray.count > 0)
+            {
+                NSArray *paths = [imgArray copy];
                 for (NSString *path in paths)
                 {
                     
@@ -943,148 +1004,8 @@ extern "C" {
                                                                type:type];
                     }
                 }
-                //腾讯微博
-                value  = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTencentWeibo]]];
-                if ([value isKindOfClass:[NSDictionary class]])
-                {
-                    NSString *text = nil;
-                    NSMutableArray *images = [NSMutableArray array];
-                    double lat;
-                    double lng;
-                    SSDKContentType type = SSDKContentTypeImage;
-                    
-                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
-                    {
-                        text = [value objectForKey:@"text"];
-                    }
-                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
-                    {
-                        NSString *imgPath =  [value objectForKey:@"imageUrl"];
-                        SSDKImage *image = nil;
-                        if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                options:MOBFRegexOptionsNoOptions
-                                                inRange:NSMakeRange(0, imgPath.length)
-                                             withString:imgPath])
-                        {
-                            image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:imgPath]];
-                        }
-                        else
-                        {
-                            UIImage *localImg = [UIImage imageWithContentsOfFile:imgPath];
-                            image = [[SSDKImage alloc]initWithImage:localImg
-                                                             format:SSDKImageFormatJpeg
-                                                           settings:nil];
-                        }
-                        
-                        if (image)
-                        {
-                            [images addObject:imgPath];
-                        }
-                        else
-                        {
-                            NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
-                        }
-                        
-                    }
-                    else if([[value objectForKey:@"imageUrl"] isKindOfClass:[NSArray class]])
-                    {
-                        
-                        NSArray *paths = [value objectForKey:@"imageUrl"];
-                        
-                        for (NSString *path in paths)
-                        {
-                            
-                            SSDKImage *image = nil;
-                            if ([MOBFRegex isMatchedByRegex:@"\\w://.*"
-                                                    options:MOBFRegexOptionsNoOptions
-                                                    inRange:NSMakeRange(0, path.length)
-                                                 withString:path])
-                            {
-                                image = [[SSDKImage alloc]initWithURL:[NSURL URLWithString:path]];
-                            }
-                            else
-                            {
-                                UIImage *localImg = [UIImage imageWithContentsOfFile:path];
-                                image = [[SSDKImage alloc] initWithImage:localImg
-                                                                  format:SSDKImageFormatJpeg
-                                                                settings:nil];
-                            }
-                            
-                            if (image)
-                            {
-                                [images addObject:path];
-                            }
-                            else
-                            {
-                                NSLog(@"#waring : 检测不到有效图片路径,请检查传入图片的路径的有效性");
-                            }
-                        }
-                    }
-                    
-                    if ([[value objectForKey:@"latitude"] isKindOfClass:[NSNumber class]])
-                    {
-                        lat = [[value objectForKey:@"latitude"] doubleValue];
-                    }
-                    if ([[value objectForKey:@"longitude"] isKindOfClass:[NSNumber class]])
-                    {
-                        lng = [[value objectForKey:@"longitude"] doubleValue];
-                    }
-                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
-                    {
-                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
-                    }
-                    
-                    
-                    [params SSDKSetupTencentWeiboShareParamsByText:text
-                                                            images:images
-                                                          latitude:lat
-                                                         longitude:lng
-                                                              type:type];
-                    
-                }
-                //豆瓣
-                value  = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeDouBan]]];
-                if ([value isKindOfClass:[NSDictionary class]])
-                {
-                    NSString *text = nil;
-                    NSString *image = nil;
-                    NSString *title = nil;
-                    NSString *url = nil;
-                    NSString *urlDesc = nil;
-                    SSDKContentType type = SSDKContentTypeText;
-                    
-                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
-                    {
-                        text = [value objectForKey:@"text"];
-                    }
-                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
-                    {
-                        image = [value objectForKey:@"imageUrl"];
-                    }
-                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
-                    {
-                        title = [value objectForKey:@"title"];
-                    }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
-                    {
-                        url = [value objectForKey:@"url"];
-                    }
-                    if ([[value objectForKey:@"urlDescription"] isKindOfClass:[NSString class]])
-                    {
-                        urlDesc = [value objectForKey:@"urlDescription"];
-                    }
-                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
-                    {
-                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
-                    }
-                    [params SSDKSetupDouBanParamsByText:text
-                                                  image:image
-                                                  title:title
-                                                    url:[NSURL URLWithString:url]
-                                                urlDesc:urlDesc
-                                                   type:type];
-                    
-                }
+                
+                
                 //QQ系列
                 value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformSubTypeQQFriend]]];
                 if ([value isKindOfClass:[NSDictionary class]])
@@ -1115,42 +1036,6 @@ extern "C" {
                     __setWechatParams(value,params,SSDKPlatformSubTypeWechatFav);
                 }
                 
-                //人人网
-                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeRenren]]];
-                if ([value isKindOfClass:[NSDictionary class]])
-                {
-                    NSString *text = nil;
-                    NSString *image = nil;
-                    NSString *url = nil;
-                    NSString *albumId = nil;
-                    SSDKContentType type = SSDKContentTypeImage;
-                    
-                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
-                    {
-                        text = [value objectForKey:@"text"];
-                    }
-                    if ([[value objectForKey:@"imageUrl"] isKindOfClass:[NSString class]])
-                    {
-                        image = [value objectForKey:@"imageUrl"];
-                    }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
-                    {
-                        url = [value objectForKey:@"url"];
-                    }
-                    if ([[value objectForKey:@"albumID"] isKindOfClass:[NSString class]])
-                    {
-                        albumId = [value objectForKey:@"albumID"];
-                    }
-                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
-                    {
-                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
-                    }
-                    [params SSDKSetupRenRenParamsByText:text
-                                                  image:image
-                                                    url:[NSURL URLWithString:url]
-                                                albumId:albumId
-                                                   type:type];
-                }
                 //开心网
                 value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKaixin]]];
                 if ([value isKindOfClass:[NSDictionary class]])
@@ -1174,6 +1059,54 @@ extern "C" {
                                                   image:image
                                                    type:type];
                 }
+                
+                //TikTok
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeTikTok]]];
+                if ([value isKindOfClass:[NSDictionary class]])
+                {
+                    NSString *tiktok_hashtag = nil;
+                    NSDictionary *tiktok_extraInfo = nil;
+                    NSArray *asset_localIdsArray = nil;
+                    NSArray *imageArray = nil;
+                    NSString *videoPath = nil;
+
+                    SSDKContentType type = SSDKContentTypeText;
+                    if ([[value objectForKey:@"imageArray"] isKindOfClass:[NSString class]])
+                    {
+                        NSString *paths = [value objectForKey:@"imageArray"];
+                        if (paths)
+                        {
+                            imageArray = [paths componentsSeparatedByString:@","];
+                        }
+                    }
+                    if ([[value objectForKey:@"asset_localIds"] isKindOfClass:[NSArray class]])
+                    {
+                        asset_localIdsArray = [value objectForKey:@"asset_localIds"];
+                    }
+                    if ([[value objectForKey:@"url"] isKindOfClass:[NSString class]])
+                    {
+                        videoPath = [value objectForKey:@"url"];
+                    }
+                    if ([[value objectForKey:@"tiktok_hashtag"] isKindOfClass:[NSString class]])
+                    {
+                        tiktok_hashtag = [value objectForKey:@"tiktok_hashtag"];
+                    }
+                    if ([[value objectForKey:@"tiktok_extraInfo"] isKindOfClass:[NSDictionary class]])
+                    {
+                        tiktok_extraInfo = [value objectForKey:@"tiktok_extraInfo"];
+                    }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
+                    {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+                    
+                    if(imageArray || url){
+                        [params SSDKSetupShareParamsByText:nil images:imageArray url:[NSURL URLWithString:url] title:nil type:type];
+                    }else if(asset_localIdsArray){
+                        [params SSDKSetupTikTokParamesByAssetLocalIds:asset_localIdsArray hashtag:tiktok_hashtag extraInfo:tiktok_extraInfo type:type];
+                    }
+                }
+                
                 //Facebook
                 value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeFacebook]]];
                 
@@ -2929,24 +2862,6 @@ extern "C" {
                    
                 }
                 
-                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeMeiPai]]];
-                if ([value isKindOfClass:[NSDictionary class]])
-                {
-                    
-                    NSString *videoPath = nil;
-                    SSDKContentType type = SSDKContentTypeVideo;
-                    if ([[value objectForKey:@"videoPath"] isKindOfClass:[NSString class]])
-                    {
-                        videoPath = [value objectForKey:@"videoPath"];
-                    }
-                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]])
-                    {
-                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
-                    }
-                    
-                    [params SSDKSetupMeiPaiParamsByUrl:[NSURL URLWithString:videoPath] contentType:type];
-                }
-                
                 value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeWework]]];
                 if ([value isKindOfClass:[NSDictionary class]])
                 {
@@ -3068,7 +2983,6 @@ extern "C" {
                 value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeSnapChat]]];
                 
                 if ([value isKindOfClass:[NSDictionary class]]) {
-                    NSString *text = nil;
                     NSMutableArray *images = [NSMutableArray array];
                     NSString *title = nil;
                     SSDKContentType type = SSDKContentTypeImage;
@@ -3079,11 +2993,6 @@ extern "C" {
                     NSNumber *stickerRotation = @0;
                     if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]]) {
                         type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
-                    }
-
-                    if ([[value objectForKey:@"text"] isKindOfClass:[NSString class]])
-                    {
-                        text = [value objectForKey:@"text"];
                     }
                     if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
                     {
@@ -3108,6 +3017,11 @@ extern "C" {
                         [images addObjectsFromArray:[imagesStr componentsSeparatedByString:@","]];
                     }
                    
+                    if ([[value objectForKey:@"attachmentUrl"] isKindOfClass:[NSString class]])
+                    {
+                        attachmentUrl = value[@"attachmentUrl"];
+                    }
+                    
                     if ([[value objectForKey:@"stickerImage"] isKindOfClass:[NSString class]])
                     {
                         sticker = value[@"stickerImage"];
@@ -3121,10 +3035,6 @@ extern "C" {
                    {
                        stickerAnimated = value[@"stickerAnimated"];
                    }
-                    if ([[value objectForKey:@"url"] isKindOfClass:[NSNumber class]])
-                    {
-                        stickerAnimated = value[@"url"];
-                    }
                     [params SSDKSetupSnapChatParamsByCaption:title
                                                attachmentUrl:attachmentUrl
                                                        image:images
@@ -3133,6 +3043,63 @@ extern "C" {
                                              stickerAnimated:stickerAnimated.boolValue stickerRotation:stickerRotation.floatValue
                                              cameraViewState:0
                                                         type:type];
+                }
+                //快手
+                value = [MOBFJson objectFromJSONString:[customizeShareParams objectForKey:[NSString stringWithFormat:@"%lu",(unsigned long)SSDKPlatformTypeKuaiShou]]];
+                
+                if ([value isKindOfClass:[NSDictionary class]]) {
+                    NSString *title = nil;
+                    NSString *desc = nil;
+                    NSString *linkURL = nil;
+                    NSString *thumbImage = nil;
+                    NSString *openID = nil;
+                    NSString *receiverOpenID = nil;
+                    NSString *localIdentifier = nil;
+                    NSArray *tags = nil;
+                    NSString *extraInfo = nil;
+                
+                    SSDKContentType type = SSDKContentTypeMessage;
+                    
+                    if ([[value objectForKey:@"title"] isKindOfClass:[NSString class]])
+                    {
+                        title = [value objectForKey:@"title"];
+                    }
+                    if ([[value objectForKey:@"desc"] isKindOfClass:[NSString class]])
+                    {
+                        desc = [value objectForKey:@"desc"];
+                    }
+                    if ([[value objectForKey:@"linkUrl"] isKindOfClass:[NSString class]])
+                    {
+                        linkURL = [value objectForKey:@"linkUrl"];
+                    }
+                    if ([[value objectForKey:@"thumbImageUrl"] isKindOfClass:[NSString class]])
+                    {
+                        thumbImage = [value objectForKey:@"thumbImageUrl"];
+                    }
+                    if ([[value objectForKey:@"openID"] isKindOfClass:[NSString class]])
+                    {
+                        openID = [value objectForKey:@"openID"];
+                    }
+                    if ([[value objectForKey:@"receiverOpenID"] isKindOfClass:[NSString class]])
+                    {
+                        receiverOpenID = [value objectForKey:@"receiverOpenID"];
+                    }
+                    if ([[value objectForKey:@"localIdentifier"] isKindOfClass:[NSString class]])
+                    {
+                        localIdentifier = [value objectForKey:@"localIdentifier"];
+                    }
+                    if ([[value objectForKey:@"tags"] isKindOfClass:[NSArray class]])
+                    {
+                        tags = [value objectForKey:@"tags"];
+                    }
+                    if ([[value objectForKey:@"extraInfo"] isKindOfClass:[NSString class]])
+                    {
+                        extraInfo = [value objectForKey:@"extraInfo"];
+                    }
+                    if ([[value objectForKey:@"shareType"] isKindOfClass:[NSNumber class]]) {
+                        type = __convertContentType([[value objectForKey:@"shareType"] integerValue]);
+                    }
+                    [params SSDKSetupKuaiShouShareParamsByTitle:title desc:desc linkURL:linkURL thumbImage:thumbImage openID:openID receiverOpenID:receiverOpenID localIdentifier:localIdentifier tags:tags extraInfo:extraInfo type:type];
                 }
             }
         }
@@ -3167,7 +3134,7 @@ extern "C" {
                 
                 if (type == SSDKPlatformTypeSinaWeibo)
                 {
-                    [platformsRegister setupSinaWeiboWithAppkey:platformInfo[@"app_key"] appSecret:platformInfo[@"app_secret"] redirectUrl:platformInfo[@"redirect_uri"]];
+                    [platformsRegister setupSinaWeiboWithAppkey:platformInfo[@"app_key"] appSecret:platformInfo[@"app_secret"] redirectUrl:platformInfo[@"redirect_uri"] universalLink:platformInfo[@"app_universalLink"]];
                 }
                 else if (type == SSDKPlatformTypeWechat ||
                     type == SSDKPlatformSubTypeWechatSession ||
@@ -3204,12 +3171,10 @@ extern "C" {
                 {
                     [platformsRegister setupAliSocialWithAppId:platformInfo[@"app_id"]];
                 }
-                else if  (type == SSDKPlatformTypeCMCC)
-                {
-                    [platformsRegister setupCMCCByAppId:platformInfo[@"app_id"] appKey:platformInfo[@"app_key"] displayUI:[platformInfo[@"displayUI"] boolValue]];
-                }
                 else if(type == SSDKPlatformTypeSnapChat){
                     [platformsRegister setSnapChatClientId:platformInfo[@"client_id"] clientSecret:@"" redirectUrl:platformInfo[@"redirect_uri"]];
+                }else if(type == SSDKPlatformTypeKuaiShou){
+                    [platformsRegister setupKuaiShouWithAppId:platformInfo[@"app_id"] appSecret:platformInfo[@"app_secret"] universalLink:platformInfo[@"app_universalLink"] delegate:[[UIApplication sharedApplication]delegate]];
                 }else
                 {
                     NSMutableDictionary *dic = platformsRegister.platformsInfo;
@@ -3430,10 +3395,106 @@ extern "C" {
          }];
         
     }
+
+    void __iosShareSDKShareWithActivity (int reqID, int platType, void *content, void *observer)
+    {
+        NSString *observerStr = nil;
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
+        
+        if (content)
+        {
+            NSString *contentStr = [NSString stringWithCString:content encoding:NSUTF8StringEncoding];
+            shareParams = __getShareParamsWithString(contentStr);
+        }
+        
+        [ShareSDK shareByActivityViewController:platType parameters:shareParams onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+             NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+             [resultDict setObject:[NSNumber numberWithInteger:9] forKey:@"action"];
+             [resultDict setObject:[NSNumber numberWithInteger:state] forKey:@"status"];
+             [resultDict setObject:[NSNumber numberWithInteger:platType] forKey:@"platform"];
+             [resultDict setObject:[NSNumber numberWithInteger:reqID] forKey:@"reqID"];
+             
+             if (state == SSDKResponseStateFail && error)
+             {
+                 NSMutableDictionary *errorDict = [NSMutableDictionary dictionary];
+                 [errorDict setObject:[NSNumber numberWithInteger:[error code]] forKey:@"error_code"];
+                 if ([[error userInfo] objectForKey:@"error_message"])
+                 {
+                     if ([[error userInfo] objectForKey:@"error_message"])
+                     {
+                         [errorDict setObject:[[error userInfo] objectForKey:@"error_message"]
+                                       forKey:@"error_msg"];
+                         
+                     }
+                 }
+                 else if ([[error userInfo] objectForKey:@"user_data"])
+                 {
+                     NSDictionary *error_data = [[error userInfo] objectForKey:@"user_data"];
+                     if ([error_data objectForKey:@"error"])
+                     {
+                         [errorDict setObject:[error_data objectForKey:@"error"] forKey:@"error_msg"];
+                     }
+                     if ([error_data objectForKey:@"error_code"])
+                     {
+                         [errorDict setObject:[NSNumber numberWithInteger:[[error_data objectForKey:@"error_code"] integerValue]]
+                                       forKey:@"error_code"];
+                     }
+                 }
+                 
+                 [resultDict setObject:errorDict forKey:@"res"];
+                 
+             }
+             
+             if (state == SSDKResponseStateSuccess)
+             {
+                 if ([contentEntity rawData])
+                 {
+                     [resultDict setObject:[contentEntity rawData]  forKey:@"res"];
+                 }
+             }
+             NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+             
+             UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+             
+         }];
+        
+    }
     
     void __iosShareSDKOneKeyShare (int reqID, void *platTypes, void *content, void *observer)
     {
         NSLog(@"OneKey share deprecate from v4.2.0");
+    }
+    
+    void __iosShareSDKShareWithCommand (void *content, void *observer)
+    {
+        NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
+        NSDictionary *customFields = nil;
+        
+        if (content)
+        {
+            customFields = __parseWithHashtable(content);
+        }
+        
+        [ShareSDK getCommandText:customFields withComplete:^(NSString * _Nullable text, NSError * _Nullable error, void (^ _Nullable complete)(NSString * _Nullable)) {
+            NSString *command = [NSString stringWithFormat:@"【复制本段内容%@打开👉页面关键字👈去粘贴给好友】",text];
+            if(!error){
+                complete(command);
+                
+                NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+                [resultDict setObject:[NSNumber numberWithInteger:11] forKey:@"action"];
+                [resultDict setObject:@{@"commandText":command} forKey:@"res"];
+                [resultDict setObject:@1 forKey:@"status"];
+                
+                NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+                UnitySendMessage([observerStr UTF8String], "_Callback", [resultStr UTF8String]);
+                if (_refView)
+                {
+                    //移除视图
+                    [_refView removeFromSuperview];
+                }
+            }
+        }];
     }
     
     void __iosShareSDKShowShareMenu (int reqID, void *platTypes, void *content, int x, int y, void *observer)
@@ -3743,11 +3804,6 @@ extern "C" {
         NSString *observerStr = [NSString stringWithCString:observer encoding:NSUTF8StringEncoding];
         SSDKUser *user = [[SSDKUser alloc]init];
         user.uid = [NSString stringWithCString:account encoding:NSUTF8StringEncoding];
-        if (shareType == SSDKPlatformTypeTencentWeibo)
-        {
-            user.uid = nil;
-            user.nickname = [NSString stringWithCString:account encoding:NSUTF8StringEncoding];
-        }
         
         [ShareSDK addFriend:shareType
                        user:user
@@ -4259,6 +4315,19 @@ extern "C" {
 }
 
 #pragma mark - ISSERestoreSceneDelegate
+- (void)ISSEWillAlertCommand:(NSDictionary *)parameters error:(NSError *)error
+{
+    if(parameters.count > 0){
+        
+        NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+        [resultDict setObject:parameters forKey:@"res"];
+        
+        NSString *resultStr = [MOBFJson jsonStringFromObject:resultDict];
+        UIPasteboard *board = [UIPasteboard generalPasteboard];
+        board.string = @"";
+        UnitySendMessage([@"ShareSDKRestoreScene" UTF8String], "_AnalysisCommandCallBack", [resultStr UTF8String]);
+    }
+}
 
 - (void)ISSEWillRestoreScene:(SSERestoreScene *)scene Restore:(void (^)(BOOL))restoreHandler
 {

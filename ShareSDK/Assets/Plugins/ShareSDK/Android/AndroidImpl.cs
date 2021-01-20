@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine; 
 
@@ -178,6 +178,16 @@ namespace cn.sharesdk.unity3d
 				ssdk.Call("disableSSOWhenAuthorize", disable);
 			}
 		}
+		
+		public override void setDisappearShareToast (Boolean isShow)
+		{
+			Debug.Log("AndroidImpl  ===>>>  setDisappearShareToast" );
+			if (ssdk != null)
+			{
+				ssdk.Call("setDisappearShareToast", isShow);
+			}
+		}
+		
 
 		public override void ShareWithContentName (int reqId, PlatformType platform, string contentName, Hashtable customFields)
 		{

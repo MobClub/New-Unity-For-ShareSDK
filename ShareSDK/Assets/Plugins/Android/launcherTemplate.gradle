@@ -127,6 +127,7 @@ MobSDK {
                 shareByAppClient true
                 enable true
             }
+  
 
             Twitter {
                 id 9
@@ -135,6 +136,7 @@ MobSDK {
                 appSecret "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey"
                 callbackUri "http://mob.com"
                 shareByAppClient true
+                bypassApproval true
                 enable true
             }
 
@@ -482,12 +484,16 @@ MobSDK {
                 enable true
             }
 
+//自己指定要跳转的ACTIVTY，用来接收回调
+// callbackAct "cn.sharesdk.demo.MainActivity"
             Douyin {
                 id 59
                 sortId 1
                 appKey "aw9ivykfjvi4hpwo"
                 appSecret "42b4caa6bda60bd49f05f06d0a4956e1"
-                callbackAct "cn.sharesdk.demo.MainActivity"
+                callbackAct "com.mob.tools.MobUIShell"
+                bypassApproval true
+                shareByAppClient true
                 enable true
             }
 
@@ -525,28 +531,41 @@ MobSDK {
             //     enable true
             // }
 
-            // SnapChat {
-            //     id 66
-            //     sortId 66
-            //     enabel true
-            // }
+            SnapChat {
+                id 66
+                sortId 66
+                enabel true
+            }
 
             // Littleredbook {
             //     id 67
             //     sortId
             // }
 
-            // Kuaishou {
-            //     id 68
-            //     sortId 68
-            //     enable true
-            // }
+            Kuaishou {
+                id 68
+                appId "ks697776468193437829"
+                appSecret "1dYU_9dTnMFKcm-BFARJkw"
+                bypassApproval false
+                sortId 68
+                enable true
+            }
 
             // Watermelonvideo {
             //     id 69
             //     sortId 69
             //     enable true
             // }
+
+            Tiktok {
+                id 70
+                sortId 70
+                appKey "awsxdh3k1fiojgnu"
+                shareByAppClient true
+                bypassApproval true
+                enable true
+            }
+            
 
         }
     }

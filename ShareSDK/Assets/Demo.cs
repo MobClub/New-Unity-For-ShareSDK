@@ -76,8 +76,11 @@ public class Demo : MonoBehaviour {
 		{
             //ssdk.GetUserInfo(PlatformType.Douyin);
 
-            //print("share result :" + ssdk.GetUserInfo(PlatformType.QQ));
-			print("share result : " + ssdk.GetUserInfo(PlatformType.GooglePlus));
+            //print("share result :" + ssdk.GetUserInfo(PlatformType.WeChat));
+			print("share result :" + ssdk.Authorize(PlatformType.WeChat));
+			
+			
+			//print("share result : " + ssdk.GetUserInfo(PlatformType.GooglePlus));
         }
 
 		btnTop += btnHeight + 20 * scale;
@@ -108,15 +111,74 @@ public class Demo : MonoBehaviour {
 
             content.SetShareType(ContentType.Image);
 
-                //不同平台分享不同内容
-            	//ShareContent customizeShareParams = new ShareContent();
-            	//customizeShareParams.SetText("Sina share content");
-            	//customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
-            	//customizeShareParams.SetShareType(ContentType.Text);
-            	//customizeShareParams.SetObjectID("SinaID");
-            	//content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
-                //优先客户端分享
-                content.SetEnableClientShare(true);
+			//不同平台分享不同内容
+			//ShareContent customizeShareParams = new ShareContent();
+			//customizeShareParams.SetText("Sina share content");
+			//customizeShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
+			//customizeShareParams.SetShareType(ContentType.Text);
+			//customizeShareParams.SetObjectID("SinaID");
+			//content.SetShareContentCustomize(PlatformType.SinaWeibo, customizeShareParams);
+
+			//KakaoTalk原生只支持分享链接
+			ShareContent kakaoTalkCustomizeShareParams = new ShareContent();
+			kakaoTalkCustomizeShareParams.SetUrl("http://www.mob.com");
+			kakaoTalkCustomizeShareParams.SetShareType(ContentType.Webpage);
+			kakaoTalkCustomizeShareParams.SetTemplateId("11820");
+			content.SetShareContentCustomize(PlatformType.KakaoTalk, kakaoTalkCustomizeShareParams);
+
+			//KakaoStory分享图片
+			ShareContent kakaoStoryCustomizeShareParams = new ShareContent();
+			kakaoStoryCustomizeShareParams.SetText("");
+			kakaoStoryCustomizeShareParams.SetTitle("http://www.mob.com");
+			kakaoStoryCustomizeShareParams.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
+			kakaoStoryCustomizeShareParams.SetUrl("");
+			kakaoStoryCustomizeShareParams.SetPermission("0");
+			kakaoStoryCustomizeShareParams.SetEnableShare(true);
+
+			Hashtable androidExecParams = new Hashtable();
+			androidExecParams["andParam1"] = "value1";
+			androidExecParams["andParam2"] = "value2";
+			kakaoStoryCustomizeShareParams.SetAndroidExecParam(androidExecParams);
+
+			Hashtable iOSExecParams = new Hashtable();
+			iOSExecParams["iosParam1"] = "value1";
+			iOSExecParams["iosParam2"] = "value2";
+			kakaoStoryCustomizeShareParams.SetIphoneExecParam(iOSExecParams);
+
+			kakaoStoryCustomizeShareParams.SetShareType(ContentType.Image);
+			content.SetShareContentCustomize(PlatformType.KakaoStory, kakaoStoryCustomizeShareParams);
+
+			//TikTok分享多图
+			String[] imageArray = { "http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg", "http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg" };
+			ShareContent tiktokCustomizeShareParams = new ShareContent();
+			tiktokCustomizeShareParams.SetImageArray(imageArray);
+			tiktokCustomizeShareParams.SetShareType(ContentType.Image);
+			content.SetShareContentCustomize(PlatformType.TikTok, tiktokCustomizeShareParams);
+
+			//SnapChat分享图片
+			ShareContent snapChatShareParams = new ShareContent();
+			snapChatShareParams.SetTitle("https://www.mobtech.com");
+			snapChatShareParams.SetSnapAttachmentUrl("http://m.93lj.com/sharelink");
+			snapChatShareParams.SetImageUrl("http://git.oschina.net/alexyu.yxj/MyTmpFiles/raw/master/kmk_pic_fld/small/107.JPG");
+			snapChatShareParams.setSnapStickerImage("http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg");
+			snapChatShareParams.setSnapStickerAnimated(0);
+			snapChatShareParams.setSnapStickerRotation(0);
+			snapChatShareParams.SetShareType(ContentType.Image);
+			content.SetShareContentCustomize(PlatformType.SnapChat, snapChatShareParams);
+
+            //快手SDK-分享私信
+            ShareContent ksShareParams = new ShareContent();
+            ksShareParams.SetTitle("title");
+            ksShareParams.SetDesc("desc");
+            ksShareParams.SetLinkURL("https://www.mob.com");
+            ksShareParams.SetThumbImageUrl("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
+            ksShareParams.SetExtraInfo("message");
+            ksShareParams.SetShareType(ContentType.Message);
+            content.SetShareContentCustomize(PlatformType.KuaiShou, ksShareParams);
+
+
+            //优先客户端分享
+            content.SetEnableClientShare(true);
                 
                 //使用微博API接口应用内分享 iOS only
                 //content.SetEnableSinaWeiboAPIShare(true);
@@ -146,39 +208,58 @@ public class Demo : MonoBehaviour {
 		btnTop += btnHeight + 20 * scale;
         if (GUI.Button(new Rect((Screen.width - btnWidth2) / 2, btnTop, btnWidth2, btnHeight), "Share Content"))
 		{
-            	ShareContent content = new ShareContent();
-            	content.SetText("this is a test string.");
-            	content.SetImageUrl("http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg");
-            	content.SetTitle("test title");
-            	//content.SetTitleUrl("http://www.mob.com");
-            	//content.SetSite("Mob-ShareSDK");
-            	//content.SetSiteUrl("http://www.mob.com");
-            	//content.SetUrl("http://qjsj.youzu.com/jycs/");
-            	//content.SetComment("test description");
-            	//content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
-                content.SetShareType(ContentType.Image);
-                ssdk.ShareContent (PlatformType.WeChat, content);
+            ShareContent content = new ShareContent();
+            content.SetTitle("Test title");
+            content.SetText("Test text");
+            content.SetImagePath("/storage/emulated/0/Pictures/Instagram/IMG_20201130_161102_590.jpg");
+            content.SetShareType(ContentType.Image);
+            ssdk.ShareContent(PlatformType.Douyin, content);
+
+            /*iOS Only*/
+
+            ////※单个平台的分享示例如下※：
+
+            ////调用公用参数构造方法的，通过如下方式，如TikTok分享多图
+            //String[] imageArray = { "http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg", "http://ww3.sinaimg.cn/mw690/be159dedgw1evgxdt9h3fj218g0xctod.jpg" };
+            //content.SetImageArray(imageArray);
+            //content.SetShareType(ContentType.Image);
+            //ssdk.ShareContent(PlatformType.TikTok, content);
 
 
-//            //  开发者要自己传入Activity 在9.0及其以上的系统
-//            //  AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-//            //  AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-//            //  content.SetActivity(jo);
-//            //  Debug.Log("QQQ 测试传入的activity  ==================>>> " + jo);
+            ////调用自定义的参数构造方法的，需要通过如下方式，如：KakaoTalk
+            //ShareContent customizeShareParams = new ShareContent();
+            //customizeShareParams.SetUrl("http://www.mob.com");
+            //customizeShareParams.SetShareType(ContentType.Webpage);
+            //customizeShareParams.SetTemplateId("11820");
+            //content.SetShareContentCustomize(PlatformType.KakaoTalk, customizeShareParams);
+            //ssdk.ShareContent(PlatformType.KakaoTalk, content);
 
-//                ShareContent content = new ShareContent();
-//                content.SetFilePath("/storage/emulated/0/douyin.mp4");
-//                content.SetShareType(ContentType.Video);
-//                ssdk.ShareContent (PlatformType.Douyin, content);
+            ////快手SDK-分享私信
+            //ShareContent ksShareParams = new ShareContent();
+            //ksShareParams.SetTitle("title");
+            //ksShareParams.SetDesc("desc");
+            //ksShareParams.SetLinkURL("https://www.mob.com");
+            //ksShareParams.SetThumbImageUrl("http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png");
+            //ksShareParams.SetExtraInfo("message");
+            //ksShareParams.SetShareType(ContentType.Message);
+            //content.SetShareContentCustomize(PlatformType.KuaiShou, ksShareParams);
+            //ssdk.ShareContent(PlatformType.KuaiShou, content);
+
+
+
+            // ShareContent content = new ShareContent();
+            // content.SetText("Test text");
+            // content.SetImageUrl("http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg");
+            // ssdk.ShareContent (PlatformType.Twitter, content);
 
         }
 
-        //if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
+		//if (GUI.Button(new Rect((Screen.width - btnGap) / 2 + btnGap, btnTop, btnWidth, btnHeight), "Get Friends SinaWeibo "))
 		//{
-			//获取新浪微博好友，第一页，每页15条数据
-			//print ("Click Btn Of Get Friends SinaWeibo");
-//			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
-			//ssdk.openMiniProgram("gh_afb25ac019c9","pages/index/index",0);
+		//获取新浪微博好友，第一页，每页15条数据
+		//print ("Click Btn Of Get Friends SinaWeibo");
+		//			ssdk.GetFriendList (PlatformType.SinaWeibo, 15, 0);
+		//ssdk.openMiniProgram("gh_afb25ac019c9","pages/index/index",0);
 		//}
 
 		btnTop += btnHeight + 20 * scale;

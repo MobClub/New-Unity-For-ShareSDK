@@ -52,9 +52,10 @@ namespace cn.sharesdk.unity3d
         public ESurfing eSurfing; //中国电信
         public FacebookAccount facebookAccount;//iOS端无需配置
         public Douyin douyin; //抖音
-        public WeWork wework; //企业微信
+		public WeWork wework; //企业微信
 		public Oasis oasis; //绿洲
-
+		public TikTok tiktok; //TikTok
+		public KuaiShou kuaishou;
 #if UNITY_ANDROID
 		public FourSquare fourSquare;
 		//安卓配置印象笔记国内与国际版直接在Evernote中配置
@@ -68,8 +69,8 @@ namespace cn.sharesdk.unity3d
         public SnapChat snapChat;
         public EvernoteInternational evernoteInternational;		//iOS配置印象笔记国内版在Evernote中配置;国际版在EvernoteInternational中配置
 		public Apple apple;//苹果
-		public KuaiShou kuaishou;
 		public WatermelonVideo watermelonVideo;
+		
 #endif
 
     }
@@ -80,26 +81,27 @@ namespace cn.sharesdk.unity3d
 		public bool Enable = true;
 	}
 
-	[Serializable]
-	public class SinaWeiboDevInfo : DevInfo 
+    [Serializable]
+    public class SinaWeiboDevInfo : DevInfo 
 	{
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		public const int type = (int) PlatformType.SinaWeibo;
 		public string SortId = "4";
 		public string AppKey = "568898243";
 		public string AppSecret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string RedirectUrl = "http://www.sharesdk.cn";
 		public bool ShareByAppClient = true;
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.SinaWeibo;
 		public string app_key = "568898243";
 		public string app_secret = "38a4f8204cc784f81f9f0daaf31e02e3";
 		public string redirect_uri = "http://www.sharesdk.cn";
+		public string app_universalLink = "https://bj2ks.share2dlink.com/";
 //		public string auth_type = "both";	//can pass "both","sso",or "web"  
-		#endif
+#endif
 	}
 
-    [Serializable]
+	[Serializable]
     public class TencentWeiboDevInfo : DevInfo 
 	{
 		#if UNITY_ANDROID
@@ -122,7 +124,7 @@ namespace cn.sharesdk.unity3d
 #if UNITY_ANDROID
 		public const int type = (int) PlatformType.QQ;
 		public string SortId = "2";
-		public string AppId = "100371282";
+		public string AppId = "1110451818";
 		public string AppKey = "aed9b0303e3ed1e27bae87c33761161d";
 		public bool ShareByAppClient = true;
 
@@ -140,24 +142,24 @@ namespace cn.sharesdk.unity3d
         //========================================================
 #elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQ;
-		public string app_id = "100371282";
+		public string app_id = "1110451818";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 //		public string auth_type = "both";  //can pass "both","sso",or "web" 
 #endif
-    }
+	}
 
-    [Serializable]
+	[Serializable]
 	public class QZone : DevInfo 
 	{
 		#if UNITY_ANDROID
 		public string SortId = "1";
 		public const int type = (int) PlatformType.QZone;
-		public string AppId = "100371282";
+		public string AppId = "1110451818";
 		public string AppKey = "ae36f4ee3946e1cbb98d6965b0b2ff5c";
 		public bool ShareByAppClient = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QZone;
-		public string app_id = "100371282";
+		public string app_id = "1110451818";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 //		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		#endif
@@ -174,8 +176,7 @@ namespace cn.sharesdk.unity3d
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
 		public string UserName = "gh_afb25ac019c9@app";
-		//public string Path = "/page/API/pages/share/share";
-		public string Path = "pages/index/index.html?id=1";
+		public string Path = "/page/API/pages/share/share";
 		public bool BypassApproval = false;
 		public bool WithShareTicket = true;
 		public string MiniprogramType = "0";
@@ -183,7 +184,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChat;
 		public string app_id = "wx617c77c82218ea2c";
         public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://ybpre.share2dlink.com/";
+        public string app_universalLink = "https://bj2ks.share2dlink.com/";
         #endif
     }
 
@@ -200,25 +201,25 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WeChatMoments;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://ybpre.share2dlink.com/";
+        public string app_universalLink = "https://bj2ks.share2dlink.com/";
         #endif
     }
 
 	[Serializable]
 	public class WeChatFavorites : DevInfo 
 	{
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		public string SortId = "7";
 		public const int type = (int) PlatformType.WeChatFavorites;
 		public string AppId = "wx4868b35061f87885";
 		public string AppSecret = "64020361b8ec4c99936c0e3999a9f249";
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.WeChatFavorites;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://ybpre.share2dlink.com/";
-        #endif
-    }
+        public string app_universalLink = "https://bj2ks.share2dlink.com/";
+#endif
+	}
 
 	[Serializable]
 	public class Facebook : DevInfo 
@@ -228,8 +229,9 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Facebook;
 		public string ConsumerKey = "1412473428822331";
 		public string ConsumerSecret = "a42f4f3f867dc947b9ed6020c2e93558";
-		public string RedirectUrl = "https://mob.com/";
-		public bool ShareByAppClient = false;
+		public string RedirectUrl = "https://www.baidu.com/";
+		public string ShareByAppClient = "true";
+				
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Facebook;
 		public string api_key = "1412473428822331";
@@ -618,35 +620,35 @@ namespace cn.sharesdk.unity3d
 	[Serializable]
 	public class KakaoTalk : DevInfo 
 	{
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		public string SortId = "31";
 		public const int type = (int) PlatformType.KakaoTalk;
 		public string AppKey = "48d3f524e4a636b08d81b3ceb50f1003";
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoTalk;
-		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
-		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string app_key = "9c17eb03317e0e627ec95a400f5785fb";
+		public string rest_api_key = "802e551a5048c3172fc1dedaaf40fcf1";
 		public string redirect_uri = "http://www.mob.com/oauth";
 //		public string auth_type = "both";   //can pass "both","sso",or "web" 
-		#endif
+#endif
 	}
-	
+
 	[Serializable]
 	public class KakaoStory : DevInfo 
 	{
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		public string SortId = "32";
 		public const int type = (int) PlatformType.KakaoStory;
 		public string AppKey = "48d3f524e4a636b08d81b3ceb50f1003";
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoStory;
-		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
-		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string app_key = "9c17eb03317e0e627ec95a400f5785fb";
+		public string rest_api_key = "802e551a5048c3172fc1dedaaf40fcf1";
 		public string redirect_uri = "http://www.mob.com/oauth";
 //		public string auth_type = "both";   //can pass "both","sso",or "web" 
-		#endif
+#endif
 	}
-	
+
 	[Serializable]
 	public class WhatsApp : DevInfo 
 	{
@@ -802,37 +804,37 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.WechatPlatform;
 		public string app_id = "wx617c77c82218ea2c";
 		public string app_secret = "c7253e5289986cf4c4c74d1ccc185fb1";
-        public string app_universalLink = "https://ybpre.share2dlink.com/";
+        public string app_universalLink = "https://bj2ks.share2dlink.com/";
 		#endif
 	}
 
 	[Serializable]
 	public class QQSeries : DevInfo 
-	{	
-		#if UNITY_ANDROID
+	{
+#if UNITY_ANDROID
 		//for android,please set the configuraion in class "QQ" and  class "QZone"
 		//对于安卓端，请在类QQ或QZone中配置相关信息↑	
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.QQPlatform;
-		public string app_id = "100371282";
+		public string app_id = "1110451818";
 		public string app_key = "aed9b0303e3ed1e27bae87c33761161d";
 //		public string auth_type = "both";  //can pass "both","sso",or "web" 
-		#endif
+#endif
 	}
 
 	[Serializable]
 	public class KakaoSeries : DevInfo 
 	{
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		//for android,please set the configuraion in class "KakaoTalk" and  class "KakaoStory"
 		//对于安卓端，请在类KakaoTalk或KakaoStory中配置相关信息
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.KakaoPlatform;
-		public string app_key = "48d3f524e4a636b08d81b3ceb50f1003";
-		public string rest_api_key = "ac360fa50b5002637590d24108e6cb10";
+		public string app_key = "9c17eb03317e0e627ec95a400f5785fb";
+		public string rest_api_key = "802e551a5048c3172fc1dedaaf40fcf1";
 		public string redirect_uri = "http://www.mob.com/oauth";
 //		public string auth_type = "both";   //can pass "both","sso",or "web" 
-		#endif
+#endif
 	}
 
 	[Serializable]
@@ -876,14 +878,14 @@ namespace cn.sharesdk.unity3d
         public string AppId = "300011860247";
         public string AppKey = "2D464D8BFCE73A44B4F9DF95A2FDBE1C";
 #elif UNITY_IPHONE
-        public string app_id = "300011862498";
-        public string app_key = "38D9CA1CC280C5F207E2C343745D4A4B";
+        public string app_id = "300011936870";
+        public string app_key = "610FC6F60177B9558C59B45C6FE47B9C";
         public int displayUI = 1; // 1 显示授权界面  0 不显示授权界面 
         public const int type = (int)PlatformType.CMCC;
 #endif
-    }
+	}
 
-    [Serializable]
+	[Serializable]
     public class Reddit : DevInfo
     {
 #if UNITY_ANDROID
@@ -924,15 +926,15 @@ namespace cn.sharesdk.unity3d
         public string RedirectUrl = "http://www.sharesdk.cn";
         public const int type = (int)PlatformType.ESurfing;
 #elif UNITY_IPHONE
-        public string app_key = "8148612606";
-        public string app_secret = "mCltrhUqwshFa86egDTs0491ibaAulKA";
-        public string app_name = "shareSDK";
+        public string app_key = "8252014408";
+        public string app_secret = "bkqJOALOPc2i6V6R5mEjqLyuzrxF8rWD";
+        public string app_name = "天天日记";
         public const int type = (int)PlatformType.ESurfing;
 #endif
-    }
+	}
 
 
-    [Serializable]
+	[Serializable]
     public class FacebookAccount : DevInfo
     {
 #if UNITY_ANDROID
@@ -959,14 +961,27 @@ namespace cn.sharesdk.unity3d
        public string AppKey = "aw9ivykfjvi4hpwo";
        public string AppSecret = "42b4caa6bda60bd49f05f06d0a4956e1";
 #elif UNITY_IPHONE
-        public string app_key = "aw9ivykfjvi4hpwo";
-        public string app_secret = "42b4caa6bda60bd49f05f06d0a4956e1";
+        public string app_key = "awycvl19mldccyso";
+        public string app_secret = "8793a4dfdc3636cbda0924a3cfbc8424";
         public const int type = (int)PlatformType.Douyin;
 #endif
 
-    }
+	}
 
-    [Serializable]
+	[Serializable]	
+	public class TikTok : DevInfo
+	{
+#if UNITY_ANDROID
+		public const int type = (int)PlatformType.TikTok;
+#elif UNITY_IPHONE
+        public string app_key = "aw3vqar8qg1oy91q";
+        public string app_secret = "18cf1714c53e9f9c64aec484ca4f2e29";
+        public const int type = (int)PlatformType.TikTok;
+#endif
+	}
+
+
+	[Serializable]
     public class WeWork : DevInfo
     {
 #if UNITY_ANDROID
@@ -1000,14 +1015,27 @@ namespace cn.sharesdk.unity3d
         public const int type = (int)PlatformType.Oasis;
 #endif
 	}
-	
+
+	[Serializable]
+	public class KuaiShou : DevInfo
+	{
+#if UNITY_ANDROID
+		public const int type = (int)PlatformType.KuaiShou;
+#elif UNITY_IPHONE
+		public const int type = (int)PlatformType.KuaiShou;
+		public string app_id = "ks705657770555308030";
+		public string app_secret = "RQ17enXUOioeoDMrwk3j2Q";
+		public string app_universalLink = "https://bj2ks.share2dlink.com/";
+#endif
+	}
+
 	[Serializable]
 	public class SnapChat : DevInfo
 	{
 #if UNITY_ANDROID
 		 
 #elif UNITY_IPHONE
-		public string client_id = "dc8e6068-0578-41b8-8392-4da009519725";
+		public string client_id = "dbe54b15-1939-4bfc-b6a0-c30a4af426a6";
 		public string redirect_uri = "ssdkmoba0b0c0d0://mob";
         public const int type = (int)PlatformType.SnapChat;
 #endif
@@ -1019,11 +1047,7 @@ namespace cn.sharesdk.unity3d
     {
 	    public const int type = (int) PlatformType.Apple;
     }
-	[Serializable]
-	public class KuaiShou : DevInfo
-	{
-		public const int type = (int)PlatformType.KuaiShou;
-	}
+	
 	[Serializable]
 	public class WatermelonVideo : DevInfo
 	{

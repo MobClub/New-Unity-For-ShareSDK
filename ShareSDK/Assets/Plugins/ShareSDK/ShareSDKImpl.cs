@@ -142,7 +142,21 @@ namespace cn.sharesdk.unity3d{
         public abstract void sendWXRefreshToken(String token);
 
         public abstract void sendWXRequestToken(String uid, String token);
+#if UNITY_ANDROID
+		public abstract void setDisappearShareToast (Boolean isShow);
 
-    }
+#elif UNITY_IPHONE
+
+		public abstract void shareSDKWithCommand(Hashtable content);
+
+		/// <summary>
+		/// Share the content to the specified platform with api.
+		/// </summary>
+		public abstract void ShareContentWithActivity (int reqID, PlatformType platform, ShareContent content);
+#endif
+
+
+
+	}
 }
 

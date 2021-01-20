@@ -69,6 +69,9 @@ namespace cn.sharesdk.unity3d
         Douyin = 59,            //抖音
         WeWork = 60,            //企业微信
         Oasis = 64,             //绿洲
+		KuaiShou = 68,         //快手
+		TikTok = 70,           //TikTok
+		
 #if UNITY_ANDROID
 		KakaoPlatform = 44,    
 		EvernoteInternational = 12,
@@ -80,7 +83,6 @@ namespace cn.sharesdk.unity3d
         //Reddit = 56,			//Reddit
         Apple = 61,            //苹果登录
         SnapChat = 66,         //Snapchat
-        KuaiShou = 68,         //快手
 		WatermelonVideo = 69,   //西瓜视频
 		YixinPlatform = 994,    //Yixin series
 		KakaoPlatform = 995,    //Kakao series

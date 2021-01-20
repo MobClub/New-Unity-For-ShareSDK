@@ -93,7 +93,7 @@ public class MOBPostProcessBuild
 
             AddFramework(pathModel.filePath, targetPath, xcodeTargetGuid, xcodeFrameworkTargetGuid, pathModel, xcodeProj, ref hasMobFramework, xcodeModel);
             AddStaticLibrary(pathModel.filePath, targetPath, xcodeFrameworkTargetGuid, pathModel, xcodeProj);
-            AddHeader(pathModel.filePath, targetPath, xcodeTargetGuid, pathModel, xcodeProj);
+            AddHeader(pathModel.filePath, targetPath, xcodeFrameworkTargetGuid, pathModel, xcodeProj);
             AddBundle(pathModel.filePath, targetPath, xcodeTargetGuid, pathModel, xcodeProj);
             AddOtherFile(pathModel.filePath, targetPath, xcodeTargetGuid, pathModel, xcodeProj, xcodeModel.fileFlags);
         }
@@ -381,6 +381,7 @@ public class MOBPostProcessBuild
             //将 framework copy到指定目录
             DirectoryInfo bundleInfo = new DirectoryInfo(lastFilePath);
             DirectoryInfo saveBundleInfo = new DirectoryInfo(savePath);
+            
             CopyAll(bundleInfo, saveBundleInfo);
             //将 framework 加入 proj中
 #if UNITY_2017_1_OR_NEWER

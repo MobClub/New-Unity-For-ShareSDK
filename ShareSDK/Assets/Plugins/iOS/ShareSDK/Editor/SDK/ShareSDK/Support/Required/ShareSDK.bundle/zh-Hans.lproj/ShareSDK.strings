@@ -14,6 +14,7 @@
 "ShareSDK_platformUninit" = "平台配置错误";
 "ShareSDK_unSupportContentType" = "不支持的contentType";
 "ShareSDK_PrivacyUnagreement" = "隐私协议未同意";
+"ShareSDK_AccessAlbum" = "请打开相册读写权限";
 "ShareSDK_unsetURLScheme" = "未配置urlScheme";
 "ShareSDK_paramsError" = "参数错误";
 "ShareSDK_paramsLack" = "缺少必要参数";
@@ -27,6 +28,7 @@
 "ShareSDK_Error_Facebook_ShareType" = "分享状态未知";
 "ShareSDK_Error_NetVideo" = "暂不支持网络视频";
 "ShareSDK_unsupportFeature" = "暂不支持此功能";
+"ShareSDK_pleaseSelectMoreImage" = "请选择多个图像!";
 
 "AUTH_VIEW_ALERT_TITLE" = "提示";
 "AUTH_VIEW_INPUT_ACCOUNT" = "请输入登录帐号!";

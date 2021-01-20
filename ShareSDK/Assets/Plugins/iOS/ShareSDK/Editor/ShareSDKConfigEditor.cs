@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace cn.sharesdk.unity3d
 {
-	#if UNITY_IOS	
+#if UNITY_IOS
 	[CustomEditor(typeof(ShareSDK))]
     [ExecuteInEditMode]
 	public class ShareSDKConfigEditor : Editor 
@@ -84,6 +84,9 @@ namespace cn.sharesdk.unity3d
             platformConfList.Add((int)PlatformType.WeWork, "app_key");
 			platformConfList.Add((int)PlatformType.Oasis, "app_key");
             platformConfList.Add((int)PlatformType.SnapChat, "client_id");
+            platformConfList.Add((int)PlatformType.TikTok, "app_key");
+            platformConfList.Add((int)PlatformType.KuaiShou, "app_id");
+
 
         }
 

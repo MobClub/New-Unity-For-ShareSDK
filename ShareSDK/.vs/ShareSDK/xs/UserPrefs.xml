@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{B13DFD76-F2C1-EE76-F4B1-80721D9FFF8F}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Plugins/ShareSDK/ContentType.cs">
+    <Files>
+      <File FileName="Assets/Demo.cs" Line="183" Column="27" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareContent.cs" Line="320" Column="4" />
+      <File FileName="../../../../sharesdk-for-unity/ShareSDK/Assets/Demo.cs" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/ShareSDK.mobpds" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/Platformpds/All.pltpds" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/Editor/Platformpds/KaKao.pltpds" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKDevInfo.cs" />
+      <File FileName="Assets/Plugins/iOS/ShareSDK/ShareSDKUnity3DBridge.m" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPathModel.cs" />
+      <File FileName="Assets/Plugins/iOS/MOBTool/iOS/MOBAutoPackage/Editor/MOBPostProcessBuild.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/iOS/iOSImpl.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDKImpl.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ShareSDK.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/PlatformType.cs" />
+      <File FileName="Assets/Plugins/ShareSDK/ContentType.cs" Line="11" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bf9319ff-7fda-43e6-a526-65fcacb71085" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

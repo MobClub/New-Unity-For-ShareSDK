@@ -14,6 +14,7 @@
 "ShareSDK_permissionDenied" = "Permission denied";
 "ShareSDK_platformUninit" = "Platform configuration error";
 "ShareSDK_PrivacyUnagreement" = "No privacy agreement was agreed";
+"ShareSDK_AccessAlbum" = "Please open the access to the album";
 "ShareSDK_unsetURLScheme" = "Not configured urlscheme";
 "ShareSDK_paramsError" = "Parameter error";
 "ShareSDK_paramsLack" = "Lack of necessary parameters";
@@ -27,6 +28,7 @@
 "ShareSDK_Error_Facebook_ShareType" = "The sharing status is unknown";
 "ShareSDK_Error_NetVideo" = "No support for online video";
 "ShareSDK_unsupportFeature" = "Unsupported Feature！";
+"ShareSDK_pleaseSelectMoreImage" = "please select more than one image!";
 
 "AUTH_VIEW_ALERT_TITLE" = "Tips";
 "AUTH_VIEW_INPUT_ACCOUNT" = "Input your account";

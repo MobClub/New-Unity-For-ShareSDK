@@ -30,8 +30,11 @@ namespace cn.sharesdk.unity3d
         public const int QQ_MINI_PROGRAM = 15;          //qq小程序
 #elif UNITY_IPHONE
 		public const int MiniProgram = 10;              //微信小程序 v3.6.3
+		public const int Message = 11;           //快手-分享到私信
+
 #endif
-        public const int OpenMiniProgram = 12;          //打开微信小程序 v3.6.3
+		public const int OpenMiniProgram = 12;          //打开微信小程序 v3.6.3
+
 	}
 
 }

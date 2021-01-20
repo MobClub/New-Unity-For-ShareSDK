@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sharesdk.demo">
 
-    <application>  
+    <application>
+		
     </application>
 
 </manifest>

@@ -1,0 +1,672 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 11
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 1
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
+    m_ExportTrainingData: 0
+  m_LightingDataAsset: {fileID: 0}
+  m_UseShadowmask: 1
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &2514470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2514476}
+  - component: {fileID: 2514475}
+  - component: {fileID: 2514474}
+  - component: {fileID: 2514473}
+  - component: {fileID: 2514472}
+  - component: {fileID: 2514471}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2514471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b31749cb9d3f49febfa51ef50a5b606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2514472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96253c5d46f644c4a76f41a43885015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appKey: 2c574691c6986
+  appSecret: 4b5cd595eb07b5cf17bb269f7a51391d
+  customAssociatedDomains: []
+  devInfo:
+    sinaweibo:
+      Enable: 1
+      app_key: 568898243
+      app_secret: 38a4f8204cc784f81f9f0daaf31e02e3
+      redirect_uri: http://www.sharesdk.cn
+      app_universalLink: https://bj2ks.share2dlink.com/
+    tencentweibo:
+      Enable: 1
+      app_key: 801307650
+      app_secret: ae36f4ee3946e1cbb98d6965b0b2ff5c
+      redirect_uri: http://sharesdk.cn
+    facebook:
+      Enable: 1
+      api_key: 1412473428822331
+      app_secret: 38053202e1a5fe26c80c753071f0b573
+      display_name: ShareSDK
+    twitter:
+      Enable: 1
+      consumer_key: viOnkeLpHBKs6KXV7MPpeGyzE
+      consumer_secret: NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey
+      redirect_uri: http://mob.com
+    email:
+      Enable: 1
+    shortMessage:
+      Enable: 1
+    douban:
+      Enable: 1
+      api_key: 02e2cbe5ca06de5908a863b15e149b0b
+      secret: 9f1e7b4f71304f2f
+      redirect_uri: http://www.sharesdk.cn
+    renren:
+      Enable: 1
+      app_id: 226427
+      app_key: fc5b8aed373c4c27a05b712acba0f8c3
+      secret_key: f29df781abdd4f49beca5a2194676ca4
+    googlePlus:
+      Enable: 1
+      client_id: 232554794995.apps.googleusercontent.com
+      client_secret: PEdFgtrMw97aCvf0joQj7EMk
+      redirect_uri: http://localhost
+    kaiXin:
+      Enable: 1
+      api_key: 358443394194887cee81ff5890870c7c
+      secret_key: da32179d859c016169f66d90b6db2a23
+      redirect_uri: http://www.sharesdk.cn
+    pocket:
+      Enable: 1
+      consumer_key: 11496-de7c8c5eb25b2c9fcdc2b627
+      redirect_uri: pocketapp1234
+    instagram:
+      Enable: 1
+      client_id: ff68e3216b4f4f989121aa1c2962d058
+      client_secret: 1b2e82f110264869b3505c3fe34e31a1
+      redirect_uri: http://sharesdk.cn
+    linkedIn:
+      Enable: 1
+      api_key: ejo5ibkye3vo
+      secret_key: cC7B2jpxITqPLZ5M
+      redirect_url: http://sharesdk.cn
+    tumblr:
+      Enable: 1
+      consumer_key: 2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM
+      consumer_secret: 3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo
+      callback_url: http://sharesdk.cn
+    youDao:
+      Enable: 1
+      consumer_key: dcde25dca105bcc36884ed4534dab940
+      consumer_secret: d98217b4020e7f1874263795f44838fe
+      oauth_callback: http://www.sharesdk.cn/
+    flickr:
+      Enable: 1
+      api_key: 33d833ee6b6fca49943363282dd313dd
+      api_secret: 3a2c5b42a8fbb8bb
+    evernote:
+      Enable: 1
+      consumer_key: sharesdk-7807
+      consumer_secret: d05bf86993836004
+      isSandBox: 1
+    whatsApp:
+      Enable: 1
+    line:
+      Enable: 1
+      channel_id: 1639219273
+      app_universalLink: https://ybpre.share2dlink.com/line-auth/
+    dropbox:
+      Enable: 1
+      app_key: i5vw2mex1zcgjcj
+      app_secret: 3i9xifsgb4omr0s
+      oauth_callback: https://www.sharesdk.cn
+    vkontakte:
+      Enable: 1
+      application_id: 3921561
+      secret_key: 6Qf883ukLDyz4OBepYF1
+    pinterest:
+      Enable: 1
+      client_id: 4797078908495202393
+    mingdao:
+      Enable: 1
+      app_key: EEEE9578D1D431D3215D8C21BF5357E3
+      app_secret: 5EDE59F37B3EFA8F65EEFB9976A4E933
+      redirect_uri: http://sharesdk.cn
+    kakaoTalk:
+      Enable: 1
+      app_key: 9c17eb03317e0e627ec95a400f5785fb
+      rest_api_key: 802e551a5048c3172fc1dedaaf40fcf1
+      redirect_uri: http://www.mob.com/oauth
+    kakaoStory:
+      Enable: 1
+      app_key: 9c17eb03317e0e627ec95a400f5785fb
+      rest_api_key: 802e551a5048c3172fc1dedaaf40fcf1
+      redirect_uri: http://www.mob.com/oauth
+    qq:
+      Enable: 1
+      app_id: 1110451818
+      app_key: aed9b0303e3ed1e27bae87c33761161d
+    qzone:
+      Enable: 1
+      app_id: 1110451818
+      app_key: aed9b0303e3ed1e27bae87c33761161d
+    wechat:
+      Enable: 1
+      app_id: wx617c77c82218ea2c
+      app_secret: c7253e5289986cf4c4c74d1ccc185fb1
+      app_universalLink: https://bj2ks.share2dlink.com/
+    wechatMoments:
+      Enable: 1
+      app_id: wx617c77c82218ea2c
+      app_secret: c7253e5289986cf4c4c74d1ccc185fb1
+      app_universalLink: https://bj2ks.share2dlink.com/
+    wechatFavorites:
+      Enable: 1
+      app_id: wx617c77c82218ea2c
+      app_secret: c7253e5289986cf4c4c74d1ccc185fb1
+      app_universalLink: https://bj2ks.share2dlink.com/
+    yixin:
+      Enable: 1
+      app_id: yx0d9a9f9088ea44d78680f3274da1765f
+      app_secret: 1a5bd421ae089c3
+      redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
+    yixinMoments:
+      Enable: 1
+      app_id: yx0d9a9f9088ea44d78680f3274da1765f
+      app_secret: 1a5bd421ae089c3
+      redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
+    facebookMessenger:
+      Enable: 1
+      api_key: 107704292745179
+    instapaper:
+      Enable: 1
+      consumer_key: 4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA
+      consumer_secret: GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe
+    aliSocial:
+      Enable: 1
+      app_id: 2015072400185895
+    aliSocialMoments:
+      Enable: 1
+      app_id: 2015072400185895
+    dingTalk:
+      Enable: 1
+      app_id: dingoanxyrpiscaovl4qlw
+    youtube:
+      Enable: 1
+      client_id: 906418427202-jinnbqal1niq4s8isbg2ofsqc5ddkcgr.apps.googleusercontent.com
+      client_secret: 
+      redirect_uri: http://localhost
+    meiPai:
+      Enable: 1
+      app_key: 1089867596
+    cmcc:
+      Enable: 1
+      app_id: 300011936870
+      app_key: 610FC6F60177B9558C59B45C6FE47B9C
+      displayUI: 1
+    reddit:
+      Enable: 1
+      app_key: ObzXn50T7Cg0Xw
+      redirect_uri: https://www.mob.com/reddit_callback
+    telegram:
+      Enable: 1
+      bot_token: 600852601:AAElp9J93JiYevLocDIEYPhEYulnMFuB_nQ
+      bot_domain: http://127.0.0.1
+    eSurfing:
+      Enable: 1
+      app_key: 8252014408
+      app_secret: bkqJOALOPc2i6V6R5mEjqLyuzrxF8rWD
+      app_name: "\u5929\u5929\u65E5\u8BB0"
+    facebookAccount:
+      Enable: 1
+      app_id: 1412473428822331
+      client_token: c30c08723aa8c48fbd5e01d1c3103891
+    douyin:
+      Enable: 1
+      app_key: awycvl19mldccyso
+      app_secret: 8793a4dfdc3636cbda0924a3cfbc8424
+    wework:
+      Enable: 1
+      corp_id: wwa21eaecf93f0e3ba
+      app_secret: dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s
+      agent_id: 1000012
+      app_key: wwautha21eaecf93f0e3ba000012
+    oasis:
+      Enable: 1
+      app_key: 568898243
+    tiktok:
+      Enable: 1
+      app_key: aw3vqar8qg1oy91q
+      app_secret: 18cf1714c53e9f9c64aec484ca4f2e29
+    kuaishou:
+      Enable: 1
+      app_id: ks705657770555308030
+      app_secret: RQ17enXUOioeoDMrwk3j2Q
+      app_universalLink: https://bj2ks.share2dlink.com/
+    copy:
+      Enable: 1
+    yixinFavorites:
+      Enable: 1
+      app_id: yx0d9a9f9088ea44d78680f3274da1765f
+      app_secret: 1a5bd421ae089c3
+      redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
+    yixinSeries:
+      Enable: 1
+      app_id: yx0d9a9f9088ea44d78680f3274da1765f
+      app_secret: 1a5bd421ae089c3
+      redirect_uri: https://open.yixin.im/resource/oauth2_callback.html
+    wechatSeries:
+      Enable: 1
+      app_id: wx617c77c82218ea2c
+      app_secret: c7253e5289986cf4c4c74d1ccc185fb1
+      app_universalLink: https://bj2ks.share2dlink.com/
+    qqSeries:
+      Enable: 1
+      app_id: 1110451818
+      app_key: aed9b0303e3ed1e27bae87c33761161d
+    kakaoSeries:
+      Enable: 1
+      app_key: 9c17eb03317e0e627ec95a400f5785fb
+      rest_api_key: 802e551a5048c3172fc1dedaaf40fcf1
+      redirect_uri: http://www.mob.com/oauth
+    snapChat:
+      Enable: 1
+      client_id: dbe54b15-1939-4bfc-b6a0-c30a4af426a6
+      redirect_uri: ssdkmoba0b0c0d0://mob
+    evernoteInternational:
+      Enable: 1
+      consumer_key: sharesdk-7807
+      consumer_secret: d05bf86993836004
+      isSandBox: 0
+    apple:
+      Enable: 1
+    watermelonVideo:
+      Enable: 1
+--- !u!114 &2514473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0deb2bb8310420fb286d59d3ed95e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  demoSkin: {fileID: 0}
+  ssdk: {fileID: 0}
+  mobsdk: {fileID: 0}
+--- !u!81 &2514474
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514470}
+  m_Enabled: 1
+--- !u!20 &2514475
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514470}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &2514476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2514470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &18616102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18616104}
+  - component: {fileID: 18616103}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &18616103
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18616102}
+  m_Enabled: 1
+  serializedVersion: 9
+  m_Type: 1
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &18616104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18616102}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &259345801
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1178127336096660, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_Name
+      value: ShareSDKRestoreScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.106746
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.16500872
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.09768422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359323452861472, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 86c30dad0e7d74cb080779437c42ab08, type: 3}
+--- !u!1 &259345802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1178127336096660, guid: 86c30dad0e7d74cb080779437c42ab08,
+    type: 3}
+  m_PrefabInstance: {fileID: 259345801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &259345803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259345802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d431aaa7cf6fc45e98535bc25a695975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restoreSceneConfig:
+    Enable: 1
+    capabilititesAssociatedDomain: applinks:ahmn.t4m.cn
+    capabilititesEntitlementsPathInXcode: Unity-iPhone/Base.entitlements
